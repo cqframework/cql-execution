@@ -1,169 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
 	name="CqlLogicalOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#logical-operators-3" version="1.0">
+	<capability code="logical-operators"/>
 	<group name="And" version="1.0">
+		<capability code="logical-operators"/>
 		<test name="TrueAndTrue" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>true and true</expression>
 			<output>true</output>
 		</test>
 		<test name="TrueAndFalse" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>true and false</expression>
 			<output>false</output>
 		</test>
 		<test name="TrueAndNull" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>true and null</expression>
 			<output>null</output>
 		</test>
 		<test name="FalseAndTrue" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>false and true</expression>
 			<output>false</output>
 		</test>
 		<test name="FalseAndFalse" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>false and false</expression>
 			<output>false</output>
 		</test>
 		<test name="FalseAndNull" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>false and null</expression>
 			<output>false</output>
 		</test>
 		<test name="NullAndTrue" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>null and true</expression>
 			<output>null</output>
 		</test>
 		<test name="NullAndFalse" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>null and false</expression>
 			<output>false</output>
 		</test>
 		<test name="NullAndNull" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>null and null</expression>
 			<output>null</output>
 		</test>
 	</group>
 	<group name="Implies" version="1.0">
+		<capability code="logical-operators"/>
 		<!-- TODO: make Translator resolve Implies operator signatures -->
 		<test name="TrueImpliesTrue" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>true implies true</expression>
 			<output>true</output>
 		</test>
 		<test name="TrueImpliesFalse" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>true implies false</expression>
 			<output>false</output>
 		</test>
 		<test name="TrueImpliesNull" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>true implies null</expression>
 			<output>null</output>
 		</test>
 		<test name="FalseImpliesTrue" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>false implies true</expression>
 			<output>true</output>
 		</test>
 		<test name="FalseImpliesFalse" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>false implies false</expression>
 			<output>true</output>
 		</test>
 		<test name="FalseImpliesNull" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>false implies null</expression>
 			<output>true</output>
 		</test>
 		<test name="NullImpliesTrue" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>null implies true</expression>
 			<output>true</output>
 		</test>
 		<test name="NullImpliesFalse" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>null implies false</expression>
 			<output>null</output>
 		</test>
 		<test name="NullImpliesNull" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>null implies null</expression>
 			<output>null</output>
 		</test>
 	</group>
 	<group name="Not" version="1.0">
+		<capability code="logical-operators"/>
 		<test name="NotTrue" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>not true</expression>
 			<output>false</output>
 		</test>
 		<test name="NotFalse" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>not false</expression>
 			<output>true</output>
 		</test>
 		<test name="NotNull" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>not null</expression>
 			<output>null</output>
 		</test>
 	</group>
 	<group name="Or" version="1.0">
+		<capability code="logical-operators"/>
 		<test name="TrueOrTrue" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>true or true</expression>
 			<output>true</output>
 		</test>
 		<test name="TrueOrFalse" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>true or false</expression>
 			<output>true</output>
 		</test>
 		<test name="TrueOrNull" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>true or null</expression>
 			<output>true</output>
 		</test>
 		<test name="FalseOrTrue" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>false or true</expression>
 			<output>true</output>
 		</test>
 		<test name="FalseOrFalse" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>false or false</expression>
 			<output>false</output>
 		</test>
 		<test name="FalseOrNull" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>false or null</expression>
 			<output>null</output>
 		</test>
 		<test name="NullOrTrue" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>null or true</expression>
 			<output>true</output>
 		</test>
 		<test name="NullOrFalse" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>null or false</expression>
 			<output>null</output>
 		</test>
 		<test name="NullOrNull" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>null or null</expression>
 			<output>null</output>
 		</test>
 	</group>
 	<group name="Xor" version="1.0">
+		<capability code="logical-operators"/>
 		<test name="TrueXorTrue" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>true xor true</expression>
 			<output>false</output>
 		</test>
 		<test name="TrueXorFalse" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>true xor false</expression>
 			<output>true</output>
 		</test>
 		<test name="TrueXorNull" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>true xor null</expression>
 			<output>null</output>
 		</test>
 		<test name="FalseXorTrue" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>false xor true</expression>
 			<output>true</output>
 		</test>
 		<test name="FalseXorFalse" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>false xor false</expression>
 			<output>false</output>
 		</test>
 		<test name="FalseXorNull" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>false xor null</expression>
 			<output>null</output>
 		</test>
 		<test name="NullXorTrue" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>null xor true</expression>
 			<output>null</output>
 		</test>
 		<test name="NullXorFalse" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>null xor false</expression>
 			<output>null</output>
 		</test>
 		<test name="NullXorNull" version="1.0">
+			<capability code="logical-operators"/>
 			<expression>null xor null</expression>
 			<output>null</output>
 		</test>

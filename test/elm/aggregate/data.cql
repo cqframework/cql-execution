@@ -17,14 +17,18 @@ define longs_at_min_value: Sum({-1L,-2L,-9223372036854775805L}) // -922337203685
 define longs_below_min_value: Sum({-1L,-2L,-9223372036854775806L}) //-9223372036854775809
 define decimals: Sum({1.1,2.2,3.3,4.4,5.5})
 define decimals_at_max_value: Sum({99999999999999999999.99999999})
-define decimals_above_max_value: Sum({99999999999999999999.99999999, 99999999999999999999.99999999})
+define decimals_above_max_value: Sum({99999999999999999999.99999999, 0.00000001})
 define decimals_at_min_value: Sum({-99999999999999999999.99999999})
-define decimals_below_min_value: Sum({-99999999999999999999.99999999, -99999999999999999999.99999999})
+define decimals_below_min_value: Sum({-99999999999999999999.99999999, -0.00000001})
 define quantities: Sum({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
-define quantities_at_max_value: Sum({99999999999999999999.99999999 'ml'})
-define quantities_above_max_value: Sum({99999999999999999999.99999999 'ml', 99999999999999999999.99999999 'ml'})
-define quantities_at_min_value: Sum({-99999999999999999999.99999999 'ml'})
-define quantities_below_min_value: Sum({-99999999999999999999.99999999 'ml', -99999999999999999999.99999999 'ml'})
+// Max/Min-valued quantities are described using the "maximum" and "minimum" operators
+// to avoid the translator rounding them to +/-1.0e20, which is not a legal Decimal
+define MaxValueMLQuantity: Quantity { value: maximum Decimal, unit: 'ml' }
+define MinValueMLQuantity: Quantity { value: minimum Decimal, unit: 'ml' }
+define quantities_at_max_value: Sum({MaxValueMLQuantity})
+define quantities_above_max_value: Sum({MaxValueMLQuantity, 0.00000001'ml' })
+define quantities_at_min_value: Sum({MinValueMLQuantity})
+define quantities_below_min_value: Sum({MinValueMLQuantity, -0.00000001'ml'})
 define has_null: Sum({1,null,null,null,2})
 define has_null_q: Sum({1 'ml',null,null,null,2 'ml'})
 define unmatched_units_q: Min({1 'ml',2 'm',3 'ml',4 'ml',5 'ml',0 'ml'})
@@ -80,6 +84,7 @@ define not_null_q: Avg({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define has_null_q: Avg({1 'ml',null,null,2 'ml'})
 define empty: Avg(List<Integer>{})
 define q_diff_units: Avg({1 'ml',0.002 'l',0.03 'dl',4 'ml',5 'ml'})
+define repeating_decimal: Avg({1.0, 2.0, 2.0})
 define NumbersAndQuantities: Avg({1 ,2 'ml',3 'ml',4 'ml',5 'ml',0 'ml'})
 define IncompatibleUnitsNull: Avg({1 'mg/d', 0.002 '/d'})
 
@@ -107,8 +112,12 @@ define has_null: Mode({1,null,null,2,2})
 define empty: Mode({})
 
 define bi_modal: Mode({1,2,2,2,3,3,3,4,5})
+define QuantitySingleMode: Mode({1.0 'g', 1.0 'g', 2.0 'g'})
+define QuantityBiModal: Mode({1.0 'g', 1.0 'g', 2.0 'g', 2.0 'g'})
 define NumbersAndQuantities: Mode({1 ,2 'ml',3 'ml',4 'ml',5 'ml',0 'ml'})
 define IncompatibleUnitsNull: Mode({1 'mg/d', 0.002 '/d'})
+define ModeDecimalsAcrossScales: Mode({1.0, 1.00, 2.0})
+define ModeDecimalQuantitiesAcrossScales: Mode({ Quantity { value: 1.0, unit: 'g' }, Quantity { value: 1.00, unit: 'g' }, Quantity { value: 2.0, unit: 'g' } })
 
 // @Test: Variance
 define v: Variance({1,2,3,4,5})
@@ -116,6 +125,7 @@ define v_q: Variance({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define q_diff_units: Variance({1.0 'ml',0.002 'l',0.003 'l',0.04 'dl',5.0 'ml'})
 define NumbersAndQuantities: Variance({1.0 ,2.0 ,3.0 ,4.0 'ml',5.0 'ml'})
 define IncompatibleUnitsNull: Variance({1 'mg/d', 0.002 '/d'})
+define single_value: Variance({2.0})
 
 // @Test: PopulationVariance
 define v: PopulationVariance({1.0,2.0,3.0,4.0,5.0})
@@ -123,6 +133,8 @@ define v_q: PopulationVariance({1.0 'ml',2.0 'ml',3.0 'ml',4.0 'ml',5.0 'ml'})
 define q_diff_units: PopulationVariance({1.0 'ml',0.002 'l',0.003 'l',0.04 'dl',5.0 'ml'})
 define NumbersAndQuantities: PopulationVariance({1.0 ,2.0 ,3.0 ,4.0 'ml',5.0 'ml'})
 define IncompatibleUnitsNull: PopulationVariance({1 'mg/d', 0.002 '/d'})
+define single_value: PopulationVariance({2.0})
+define single_value_q: PopulationVariance({2.0 'ml'})
 
 // @Test: StdDev
 define std: StdDev({1,2,3,4,5})
@@ -131,6 +143,7 @@ define q_diff_units: StdDev({1 'ml', 0.002 'l',3 'ml',4 'ml', 0.05 'dl'})
 define sq_throw1: StdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'm'})
 define NumbersAndQuantities: StdDev({1 ,2 ,3 ,4 'ml',5 })
 define IncompatibleUnitsNull: StdDev({1 'mg/d', 0.002 '/d'})
+define single_value: StdDev({2.0})
 
 // @Test: PopulationStdDev
 define dev: PopulationStdDev({1,2,3,4,5})
@@ -138,6 +151,8 @@ define dev_q: PopulationStdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define q_diff_units: PopulationStdDev({1 'ml', 0.002 'l',3 'ml',4 'ml', 0.05 'dl'})
 define NumbersAndQuantities: PopulationStdDev({1 ,2 ,3 ,4 'ml',5 })
 define IncompatibleUnitsNull: PopulationStdDev({1 'mg/d', 0.002 '/d'})
+define single_value: PopulationStdDev({2.0})
+define single_value_q: PopulationStdDev({2.0 'ml'})
 
 // @Test: Product
 define integer_product: Product({5, 4, 5})
@@ -156,10 +171,16 @@ define decimals_above_max_value_product: Product({99999999999999999999.99999999,
 define decimals_at_min_value_product: Product({-99999999999999999999.99999999, 1.0})
 define decimals_below_min_value_product: Product({-99999999999999999999.99999999, 2.0})
 define quantity_product: Product({1.0 'g', 2.0 'g', 3.0 'g', 4.0 'g'})
-define quantities_at_max_value_product: Product({99999999999999999999.99999999 'g', 1.0 'g'})
-define quantities_above_max_value_product: Product({99999999999999999999.99999999 'g', 2.0 'g'})
-define quantities_at_min_value_product: Product({-99999999999999999999.99999999 'g', 1.0 'g'})
-define quantities_below_min_value_product: Product({-99999999999999999999.99999999 'g', 2.0 'g'})
+// Max/Min-valued quantities are described using the "maximum" and "minimum" operators
+// to avoid them being represented in ELM as +/-1.0e20, which is not a legal Decimal
+// (Note that the ELM for Quantity literals uses a plain number for the value)
+// See https://jira.hl7.org/browse/FHIR-58825
+define MaxValueGramQuantity: Quantity { value: maximum Decimal, unit: 'g' }
+define MinValueGramQuantity: Quantity { value: minimum Decimal, unit: 'g' }
+define quantities_at_max_value_product: Product({MaxValueGramQuantity, 1.0 'g'})
+define quantities_above_max_value_product: Product({MaxValueGramQuantity, 2.0 'g'})
+define quantities_at_min_value_product: Product({MinValueGramQuantity, 1.0 'g'})
+define quantities_below_min_value_product: Product({MinValueGramQuantity, 2.0 'g'})
 define quantity_zero_product: Product({1.0 'g', 2.0 'g', 0 'g'})
 define zero_product: Product({0, 5, 10})
 define product_with_null: Product({5, 4, null})
@@ -175,6 +196,9 @@ define zero_geometric_mean: GeometricMean({2.0, 8.0, 0})
 define null_geometric_mean: GeometricMean({1, 2, null})
 define all_nulls: GeometricMean({null, null, null})
 define also_null_geometric_mean: GeometricMean(null as List<Decimal>)
+define negative_geometric_mean: GeometricMean({-1.0, 4.0})
+define GeometricMeanThreeIdenticalDecimals: GeometricMean({2.0, 2.0, 2.0})
+define GeometricMeanExactCubeRoot: GeometricMean({2.0, 4.0, 8.0})
 
 // @Test: AllTrue
 define at: AllTrue({true,true,true,true})

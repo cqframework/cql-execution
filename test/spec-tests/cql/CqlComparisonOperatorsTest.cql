@@ -46,6 +46,10 @@ define "Equal": Tuple{
     expression: 1 = 2,
     output: false
   },
+  "SimpleEqLong1Long2": Tuple{
+    expression: 1L = 2L,
+    output: false
+  },
   "SimpleEqStringAStringA": Tuple{
     expression: 'a' = 'a',
     output: true
@@ -60,6 +64,14 @@ define "Equal": Tuple{
   },
   "SimpleEqFloat1Float2": Tuple{
     expression: 1.0 = 2.0,
+    output: false
+  },
+  "SimpleEqFloat1Float1WithZ": Tuple{
+    expression: 1.0 = 1.00,
+    output: true
+  },
+  "SimpleEqFloat1Float1WithPrecisionAndZ": Tuple{
+    expression: 1.50 = 1.55,
     output: false
   },
   "SimpleEqFloat1Int1": Tuple{
@@ -82,6 +94,18 @@ define "Equal": Tuple{
     expression: 2.0'cm' = 2.00'cm',
     output: true
   },
+  "RatioEqual": Tuple{
+    expression: 1'cm':2'cm' = 1'cm':2'cm',
+    output: true
+  },
+  "RatioNotEqualDiffNumerator": Tuple{
+    expression: 1'cm':2'cm' = 1.1'cm':2'cm',
+    output: false
+  },
+  "RatioNotEqualDiffDenominator": Tuple{
+    expression: 1'cm':2'cm' = 1'cm':2.1'cm',
+    output: false
+  },
   "TupleEqJohnJohn": Tuple{
     expression: Tuple { Id : 1, Name : 'John' } = Tuple { Id : 1, Name : 'John' },
     output: true
@@ -99,9 +123,11 @@ define "Equal": Tuple{
     output: false
   },
   "TupleEqDifferentNamesWithOneNullId": Tuple{
+    skipped: 'Wrong output: Tuple equality with a known-unequal element should return false'
+    /*
     expression: Tuple { Id : null, Name : 'John' } = Tuple { Id : 1, Name : 'James' },
-    output: false
-  },
+    output: null
+    */  },
   "TupleEqJohn1John1WithBothNamesNull": Tuple{
     expression: Tuple { Id : 1, Name : null } = Tuple { Id : 1, Name : null },
     output: true
@@ -121,6 +147,10 @@ define "Equal": Tuple{
   "TupleEqDateTimeFalse": Tuple{
     expression: Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) } = Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 5, 0, 0, 0) },
     output: false
+  },
+  "TupleEqDateTimeTrue2": Tuple{
+    expression: Tuple { dateId: 12, Date: DateTime(2012, 1, 1) } = Tuple { dateId: 12, Date: DateTime(2012, 1, 1) },
+    output: true
   },
   "TupleEqTimeTrue": Tuple{
     expression: Tuple { timeId: 55, TheTime: @T05:15:15.541 } = Tuple { timeId: 55, TheTime: @T05:15:15.541 },
@@ -146,12 +176,20 @@ define "Equal": Tuple{
     expression: DateTime(2014, 1, 5, 5, 0, 0, 0, 0) = DateTime(2014, 7, 5, 5, 0, 0, 0, 0),
     output: false
   },
+  "DateTimeEqMissingArg": Tuple{
+    expression: DateTime(2015, 1, 5, 5, 0, 0) = DateTime(2015, 1, 5, 5, 0, 0),
+    output: true
+  },
   "DateTimeEqNull": Tuple{
     skipped: 'Wrong answer (true vs null - due to not evaluating DateTime(null) as null)'
     /*
     expression: DateTime(null) = DateTime(null),
     output: null
     */  },
+  "DateTimeEqTrue": Tuple{
+    expression: DateTime(2001, 1, 1, null) = DateTime(2001, 1, 1, null, null),
+    output: true
+  },
   "DateTimeUTC": Tuple{
     expression: @2014-01-25T14:30:14.559+01:00 = @2014-01-25T14:30:14.559+01:00,
     output: true
@@ -177,6 +215,10 @@ define "Greater": Tuple{
   },
   "GreaterZ1": Tuple{
     expression: 0 > 1,
+    output: false
+  },
+  "GreaterLong": Tuple{
+    expression: 0L > 10L,
     output: false
   },
   "GreaterZNeg1": Tuple{
@@ -280,6 +322,10 @@ define "Greater Or Equal": Tuple{
   },
   "GreaterOrEqualZ1": Tuple{
     expression: 0 >= 1,
+    output: false
+  },
+  "GreaterOrEqualZ1Long": Tuple{
+    expression: 0L >= 10L,
     output: false
   },
   "GreaterOrEqualZNeg1": Tuple{
@@ -393,6 +439,14 @@ define "Less": Tuple{
     expression: 0 < 1,
     output: true
   },
+  "LessLong": Tuple{
+    expression: 0L < 10L,
+    output: true
+  },
+  "LessLongNeg": Tuple{
+    expression: -30L < -20L,
+    output: true
+  },
   "LessZNeg1": Tuple{
     expression: 0 < -1,
     output: false
@@ -494,6 +548,10 @@ define "Less Or Equal": Tuple{
   },
   "LessOrEqualZ1": Tuple{
     expression: 0 <= 1,
+    output: true
+  },
+  "LessOrEqualZ1Long": Tuple{
+    expression: 0L <= 10L,
     output: true
   },
   "LessOrEqualZNeg1": Tuple{
@@ -643,6 +701,10 @@ define "Equivalent": Tuple{
     expression: 'a' ~ 'b',
     output: false
   },
+  "EquivStringIgnoreCase": Tuple{
+    expression: 'Abel' ~ 'abel',
+    output: true
+  },
   "EquivFloat1Float1": Tuple{
     expression: 1.0 ~ 1.0,
     output: true
@@ -650,6 +712,22 @@ define "Equivalent": Tuple{
   "EquivFloat1Float2": Tuple{
     expression: 1.0 ~ 2.0,
     output: false
+  },
+  "EquivFloat1Float1WithZ": Tuple{
+    expression: 1.0 ~ 1.00,
+    output: true
+  },
+  "EquivFloat1Float1WithPrecision": Tuple{
+    expression: 1.5 ~ 1.55,
+    output: false
+  },
+  "EquivFloat1Float1WithPrecisionAndZ": Tuple{
+    expression: 1.50 ~ 1.55,
+    output: false
+  },
+  "EquivFloatTrailingZero": Tuple{
+    expression: 1.001 ~ 1.000,
+    output: true
   },
   "EquivFloat1Int1": Tuple{
     expression: 1.0 ~ 1,
@@ -667,6 +745,18 @@ define "Equivalent": Tuple{
     expression: 1'cm' ~ 0.01'm',
     output: true
   },
+  "RatioEquivalent": Tuple{
+    expression: 1'cm':2'cm' ~ 1'cm':2'cm',
+    output: true
+  },
+  "RatioNotEquivalentDiffNumerator": Tuple{
+    expression: 1'cm':2'cm' ~ 3'cm':2'cm',
+    output: false
+  },
+  "RatioNotEquivalentDiffDenominator": Tuple{
+    expression: 1'cm':2'cm' ~ 1'cm':3'cm',
+    output: false
+  },
   "EquivTupleJohnJohn": Tuple{
     expression: Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 1, Name : 'John' },
     output: true
@@ -674,6 +764,14 @@ define "Equivalent": Tuple{
   "EquivTupleJohnJohnWithNulls": Tuple{
     expression: Tuple { Id : 1, Name : 'John', Position: null } ~ Tuple { Id : 1, Name : 'John', Position: null },
     output: true
+  },
+  "EquivTupleJohnJohnFalse": Tuple{
+    expression: Tuple { Id : 1, Name : 'John', Position: 'Shift Manager' } ~ Tuple { Id : 1, Name : 'John' },
+    invalid: true
+  },
+  "EquivTupleJohnJohnFalse2": Tuple{
+    expression: Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 1, Name : 'John', Position: 'Shift Manager' },
+    invalid: true
   },
   "EquivTupleJohnJane": Tuple{
     expression: Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 2, Name : 'Jane' },
@@ -738,6 +836,10 @@ define "Not Equal": Tuple{
     expression: 1 != 2,
     output: true
   },
+  "SimpleNotEqLong1Long2": Tuple{
+    expression: 1L != 2L,
+    output: true
+  },
   "SimpleNotEqStringAStringA": Tuple{
     expression: 'a' != 'a',
     output: false
@@ -787,9 +889,11 @@ define "Not Equal": Tuple{
     output: true
   },
   "TupleNotEqDifferingNamesWithOneNullId": Tuple{
+    skipped: 'Wrong output: Tuple inequality with a known-unequal element should return true'
+    /*
     expression: Tuple{ Id : null, Name : 'John' } != Tuple{ Id : 1, Name : 'Joe' },
-    output: true
-  },
+    output: null
+    */  },
   "TupleNotEqJohn1John1WithBothNamesNull": Tuple{
     expression: Tuple{ Id : 1, Name : null } != Tuple{ Id : 1, Name : null },
     output: false
@@ -816,6 +920,185 @@ define "Not Equal": Tuple{
   },
   "TimeNotEq10A10P": Tuple{
     expression: @T10:00:00.000 != @T22:00:00.000,
+    output: true
+  }
+}
+
+define "Unit Comparison": Tuple{
+  "TestQuantityMillisecondEqualMs": Tuple{
+    expression: 1 millisecond = 1 'ms',
+    output: true
+  },
+  "TestQuantityMillisecondEqualMilliseconds": Tuple{
+    expression: 1 millisecond = 1 milliseconds,
+    output: true
+  },
+  "TestQuantityMillisecondsEqualMs": Tuple{
+    expression: 1 milliseconds = 1 'ms',
+    output: true
+  },
+  "TestQuantitySecondEqualS": Tuple{
+    expression: 1 second = 1 's',
+    output: true
+  },
+  "TestQuantitySecondEqualSeconds": Tuple{
+    expression: 1 second = 1 seconds,
+    output: true
+  },
+  "TestQuantitySecondsEqualS": Tuple{
+    expression: 1 seconds = 1 's',
+    output: true
+  },
+  "TestQuantityMinuteEqualMin": Tuple{
+    expression: 1 minute = 1 'min',
+    output: true
+  },
+  "TestQuantityMinuteEqualMinutes": Tuple{
+    expression: 1 minute = 1 minutes,
+    output: true
+  },
+  "TestQuantityMinutesEqualMin": Tuple{
+    expression: 1 minutes = 1 'min',
+    output: true
+  },
+  "TestQuantityHourEqualH": Tuple{
+    expression: 1 hour = 1 'h',
+    output: true
+  },
+  "TestQuantityHourEqualHours": Tuple{
+    expression: 1 hour = 1 hours,
+    output: true
+  },
+  "TestQuantityHoursEqualH": Tuple{
+    expression: 1 hours = 1 'h',
+    output: true
+  },
+  "TestQuantityDayEqualD": Tuple{
+    expression: 1 day = 1 'd',
+    output: true
+  },
+  "TestQuantityDayEqualDays": Tuple{
+    expression: 1 day = 1 days,
+    output: true
+  },
+  "TestQuantityDaysEqualD": Tuple{
+    expression: 1 days = 1 'd',
+    output: true
+  },
+  "TestQuantityWeekEqualWk": Tuple{
+    expression: 1 week = 1 'wk',
+    output: true
+  },
+  "TestQuantityWeekEqualWeeks": Tuple{
+    expression: 1 week = 1 weeks,
+    output: true
+  },
+  "TestQuantityWeeksEqualWk": Tuple{
+    expression: 1 weeks = 1 'wk',
+    output: true
+  },
+  "TestQuantityMonthEqualMo": Tuple{
+    skipped: 'Wrong answer: Quantity =/~ should have special semantics for calendar-based units'
+    /*
+    expression: 1 month = 1 'mo',
+    output: null
+    */  },
+  "TestQuantityMonthNotEqualMo": Tuple{
+    skipped: 'Wrong answer: Quantity =/~ should have special semantics for calendar-based units'
+    /*
+    expression: 1 month != 1 'mo',
+    output: null
+    */  },
+  "TestQuantityMonthEquivalentMo": Tuple{
+    skipped: 'Wrong answer: Quantity =/~ should have special semantics for calendar-based units'
+    /*
+    expression: 1 month ~ 1 'mo',
+    output: true
+    */  },
+  "TestQuantityMonthEqualMonths": Tuple{
+    expression: 1 month = 1 months,
+    output: true
+  },
+  "TestQuantityMonthsNotEqualMo": Tuple{
+    skipped: 'Wrong answer: Quantity =/~ should have special semantics for calendar-based units'
+    /*
+    expression: 1 months != 1 'mo',
+    output: null
+    */  },
+  "TestQuantityMonthsEquivalentMo": Tuple{
+    skipped: 'Wrong answer: Quantity =/~ should have special semantics for calendar-based units'
+    /*
+    expression: 1 months ~ 1 'mo',
+    output: true
+    */  },
+  "TestQuantityYearEqualA": Tuple{
+    skipped: 'Wrong answer: Quantity =/~ should have special semantics for calendar-based units'
+    /*
+    expression: 1 year = 1 'a',
+    output: null
+    */  },
+  "TestQuantityYearNotEqualA": Tuple{
+    skipped: 'Wrong answer: Quantity =/~ should have special semantics for calendar-based units'
+    /*
+    expression: 1 year != 1 'a',
+    output: null
+    */  },
+  "TestQuantityYearEquivalentA": Tuple{
+    skipped: 'Wrong answer: Quantity =/~ should have special semantics for calendar-based units'
+    /*
+    expression: 1 year ~ 1 'a',
+    output: true
+    */  },
+  "TestQuantityYearsEqualYear": Tuple{
+    expression: 1 years = 1 year,
+    output: true
+  },
+  "TestQuantityYearsNotEqualA": Tuple{
+    skipped: 'Wrong answer: Quantity =/~ should have special semantics for calendar-based units'
+    /*
+    expression: 1 years != 1 'a',
+    output: null
+    */  },
+  "TestQuantityYearsEquivalentA": Tuple{
+    skipped: 'Wrong answer: Quantity =/~ should have special semantics for calendar-based units'
+    /*
+    expression: 1 years ~ 1 'a',
+    output: true
+    */  },
+  "TestYearEquivalentMonths": Tuple{
+    expression: 1 year ~ 12 months,
+    output: true
+  },
+  "TestYearEquivalentDays": Tuple{
+    skipped: 'Wrong answer: Quantity =/~ should have special semantics for calendar-based units'
+    /*
+    expression: 1 year ~ 365 days,
+    output: true
+    */  },
+  "TestMonthEquivalentDays": Tuple{
+    skipped: 'Wrong answer: Quantity =/~ should have special semantics for calendar-based units'
+    /*
+    expression: 1 month ~ 30 days,
+    output: true
+    */  },
+  "TestWeekEqualDays": Tuple{
+    expression: 1 week = 7 days,
+    output: true
+  },
+  "TestDayEqualHours": Tuple{
+    expression: 1 day = 24 hours,
+    output: true
+  },
+  "TestHourEqualMinutes": Tuple{
+    expression: 1 hour = 60 minutes,
+    output: true
+  },
+  "TestMinuteEqualSeconds": Tuple{
+    expression: 1 minute = 60 seconds,
+    output: true
+  },
+  "TestSecondEqualMilliseconds": Tuple{
+    expression: 1 second = 1000 milliseconds,
     output: true
   }
 }

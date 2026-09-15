@@ -8398,6 +8398,25 @@
                 }
               },
               {
+                "name": "SubstringEmptyAnd0",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
                 "name": "SubstringAB0To1",
                 "annotation": [],
                 "elementType": {
@@ -8680,6 +8699,25 @@
                         "elementType": {
                           "type": "NamedTypeSpecifier",
                           "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "SubstringEmptyAnd0",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "skipped",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -9241,6 +9279,40 @@
                       "value": {
                         "type": "Null",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SubstringEmptyAnd0",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "skipped",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: Substring(x, x.length) should be null'. Note similar test SubstringAB2. See https://github.com/cqframework/cql-tests/issues/149",
                         "annotation": []
                       }
                     }
@@ -10087,16 +10159,7 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
@@ -10227,16 +10290,7 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
@@ -10363,16 +10417,7 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
@@ -10384,28 +10429,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
-                      "value": {
-                        "type": "ToString",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": {
-                          "type": "Quantity",
-                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                          "value": 125,
-                          "unit": "cm",
-                          "annotation": []
-                        }
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "value": {
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "125 'cm'",
+                        "value": "Wrong output: Spec says Quantity and Decimal ToString must always contain a decimal point and at least 1 digit on each side. Note this requirement itself also causes issues by introducing precision in the string that may not exist in the original Decimal. Future spec changes may make this test's expected value correct.",
                         "annotation": []
                       }
                     }

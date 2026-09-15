@@ -7,6 +7,7 @@ import {
   ELM_STRING_TYPE
 } from '../util/elmTypes';
 import { Expression } from './expression';
+import { Decimal } from '../datatypes/decimal';
 
 export class Literal extends Expression {
   valueType: string;
@@ -96,7 +97,7 @@ export class LongLiteral extends Literal {
 export class DecimalLiteral extends Literal {
   constructor(json: any) {
     super(json);
-    this.value = parseFloat(this.value);
+    this.value = Decimal.from(this.value).normalized();
   }
 
   // Define a simple getter to allow type-checking of this class without instanceof

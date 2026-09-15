@@ -30,11 +30,19 @@ declare module '@lhncbc/ucum-lhc' {
 
   export interface ConversionResponse {
     status: 'succeeded' | 'failed' | 'error';
-    toVal: string;
+    toVal: number;
     msg: string[];
     suggestions?: ConversionSuggestion[];
     fromUnit: Unit;
     toUnit: Unit;
+  }
+
+  export interface BaseUnitConversionResponse {
+    status: 'succeeded' | 'invalid' | 'failed' | 'error';
+    msg: string[];
+    magnitude: number;
+    fromUnitIsSpecial?: boolean;
+    unitToExp: object; // a map of base units in fromUnit to their exponent
   }
 
   export class UcumLhcUtils {
@@ -42,5 +50,6 @@ declare module '@lhncbc/ucum-lhc' {
     validateUnitString(uStr: string, suggest?: boolean, valConv?: string): ValidationResponse;
     convertUnitTo(fromUnitCode: string, fromVal: number, toUnitCode: string): ConversionResponse;
     commensurablesList(fromName: string): [Unit[] | null, string[]];
+    convertToBaseUnits(fromUnit: string, fromVal: number): BaseUnitConversionResponse;
   }
 }

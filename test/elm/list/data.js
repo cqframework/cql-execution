@@ -6292,6 +6292,8 @@ define NestedToFifteen: {1, 2, 3} union {4, 5, 6} union {7 ,8 , 9} union {10, 11
 define NullUnion: null union {1, 2, 3}
 define UnionNull: {1, 2, 3} union null
 define nullUnionNull: (null as List<String>) union (null as List<String>)
+define UnionDecimalsAcrossScales: {1.0, 2.0} union {1.00, 3.0}
+define UnionDecimalsEquivalentNotEqual: {1.0, 2.0} union {1.04, 3.0}
 */
 
 module.exports['Union'] = {
@@ -6306,7 +6308,7 @@ module.exports['Union'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "455",
+        "r" : "509",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -8092,6 +8094,288 @@ module.exports['Union'] = {
             }
           } ]
         }
+      }, {
+        "localId" : "487",
+        "name" : "UnionDecimalsAcrossScales",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "487",
+            "s" : [ {
+              "value" : [ "", "define ", "UnionDecimalsAcrossScales", ": " ]
+            }, {
+              "r" : "498",
+              "s" : [ {
+                "r" : "488",
+                "s" : [ {
+                  "r" : "489",
+                  "value" : [ "{", "1.0", ", ", "2.0", "}" ]
+                } ]
+              }, {
+                "value" : [ " union " ]
+              }, {
+                "r" : "493",
+                "s" : [ {
+                  "r" : "494",
+                  "value" : [ "{", "1.00", ", ", "3.0", "}" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "localId" : "505",
+          "annotation" : [ ],
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "506",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }
+        },
+        "expression" : {
+          "type" : "Union",
+          "localId" : "498",
+          "annotation" : [ ],
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "localId" : "503",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "504",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          },
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "499",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "500",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "501",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "502",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "488",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "491",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "492",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "489",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.0",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "490",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.0",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "List",
+            "localId" : "493",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "496",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "497",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "494",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.00",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "495",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "3.0",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "509",
+        "name" : "UnionDecimalsEquivalentNotEqual",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "509",
+            "s" : [ {
+              "value" : [ "", "define ", "UnionDecimalsEquivalentNotEqual", ": " ]
+            }, {
+              "r" : "520",
+              "s" : [ {
+                "r" : "510",
+                "s" : [ {
+                  "r" : "511",
+                  "value" : [ "{", "1.0", ", ", "2.0", "}" ]
+                } ]
+              }, {
+                "value" : [ " union " ]
+              }, {
+                "r" : "515",
+                "s" : [ {
+                  "r" : "516",
+                  "value" : [ "{", "1.04", ", ", "3.0", "}" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "localId" : "527",
+          "annotation" : [ ],
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "528",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }
+        },
+        "expression" : {
+          "type" : "Union",
+          "localId" : "520",
+          "annotation" : [ ],
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "localId" : "525",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "526",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          },
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "521",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "522",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "523",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "524",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "510",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "513",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "514",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "511",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.0",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "512",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.0",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "List",
+            "localId" : "515",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "518",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "519",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "516",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.04",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "517",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "3.0",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
       } ]
     }
   }
@@ -8114,6 +8398,8 @@ define NothingExceptSomething: List<Integer>{} except {1, 2, 3, 4, 5}
 define ExceptTuples: {Tuple{a: 1}, Tuple{a: 2}, Tuple{a: 3}} except {Tuple{a: 2}}
 define ExceptNull: {1, 2, 3, 4, 5} except null
 define NullExcept: null except {1, 2, 3, 4, 5}
+define ExceptDecimalsAcrossScales: {1.0, 2.0} except {1.00, 3.0}
+define ExceptDecimalsEquivalentNotEqual: {1.0, 2.0} except {1.04, 3.0}
 */
 
 module.exports['Except'] = {
@@ -8128,7 +8414,7 @@ module.exports['Except'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "525",
+        "r" : "571",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -10369,6 +10655,288 @@ module.exports['Except'] = {
             } ]
           } ]
         }
+      }, {
+        "localId" : "549",
+        "name" : "ExceptDecimalsAcrossScales",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "549",
+            "s" : [ {
+              "value" : [ "", "define ", "ExceptDecimalsAcrossScales", ": " ]
+            }, {
+              "r" : "560",
+              "s" : [ {
+                "r" : "550",
+                "s" : [ {
+                  "r" : "551",
+                  "value" : [ "{", "1.0", ", ", "2.0", "}" ]
+                } ]
+              }, {
+                "value" : [ " except " ]
+              }, {
+                "r" : "555",
+                "s" : [ {
+                  "r" : "556",
+                  "value" : [ "{", "1.00", ", ", "3.0", "}" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "localId" : "567",
+          "annotation" : [ ],
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "568",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }
+        },
+        "expression" : {
+          "type" : "Except",
+          "localId" : "560",
+          "annotation" : [ ],
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "localId" : "565",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "566",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          },
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "561",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "562",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "563",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "564",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "550",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "553",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "554",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "551",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.0",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "552",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.0",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "List",
+            "localId" : "555",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "558",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "559",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "556",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.00",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "557",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "3.0",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "571",
+        "name" : "ExceptDecimalsEquivalentNotEqual",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "571",
+            "s" : [ {
+              "value" : [ "", "define ", "ExceptDecimalsEquivalentNotEqual", ": " ]
+            }, {
+              "r" : "582",
+              "s" : [ {
+                "r" : "572",
+                "s" : [ {
+                  "r" : "573",
+                  "value" : [ "{", "1.0", ", ", "2.0", "}" ]
+                } ]
+              }, {
+                "value" : [ " except " ]
+              }, {
+                "r" : "577",
+                "s" : [ {
+                  "r" : "578",
+                  "value" : [ "{", "1.04", ", ", "3.0", "}" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "localId" : "589",
+          "annotation" : [ ],
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "590",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }
+        },
+        "expression" : {
+          "type" : "Except",
+          "localId" : "582",
+          "annotation" : [ ],
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "localId" : "587",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "588",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          },
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "583",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "584",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "585",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "586",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "572",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "575",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "576",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "573",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.0",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "574",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.0",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "List",
+            "localId" : "577",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "580",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "581",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "578",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.04",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "579",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "3.0",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
       } ]
     }
   }
@@ -10389,6 +10957,8 @@ define IntersectTuples: {Tuple{a:1, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}
 define NullIntersect: null intersect {1, 2, 3}
 define IntersectNull: {1, 2, 3} intersect null
 define MultipleNullInListIntersect: {1, 2, 3, null} intersect {null, 3}
+define IntersectDecimalsAcrossScales: {1.0, 2.0} intersect {1.00, 3.0}
+define IntersectDecimalsEquivalentNotEqual: {1.0, 2.0} intersect {1.04, 3.0}
 */
 
 module.exports['Intersect'] = {
@@ -10403,7 +10973,7 @@ module.exports['Intersect'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "593",
+        "r" : "641",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -13130,6 +13700,288 @@ module.exports['Intersect'] = {
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "3",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "619",
+        "name" : "IntersectDecimalsAcrossScales",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "619",
+            "s" : [ {
+              "value" : [ "", "define ", "IntersectDecimalsAcrossScales", ": " ]
+            }, {
+              "r" : "630",
+              "s" : [ {
+                "r" : "620",
+                "s" : [ {
+                  "r" : "621",
+                  "value" : [ "{", "1.0", ", ", "2.0", "}" ]
+                } ]
+              }, {
+                "value" : [ " intersect " ]
+              }, {
+                "r" : "625",
+                "s" : [ {
+                  "r" : "626",
+                  "value" : [ "{", "1.00", ", ", "3.0", "}" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "localId" : "637",
+          "annotation" : [ ],
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "638",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }
+        },
+        "expression" : {
+          "type" : "Intersect",
+          "localId" : "630",
+          "annotation" : [ ],
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "localId" : "635",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "636",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          },
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "631",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "632",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "633",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "634",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "620",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "623",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "624",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "621",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.0",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "622",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.0",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "List",
+            "localId" : "625",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "628",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "629",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "626",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.00",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "627",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "3.0",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "641",
+        "name" : "IntersectDecimalsEquivalentNotEqual",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "641",
+            "s" : [ {
+              "value" : [ "", "define ", "IntersectDecimalsEquivalentNotEqual", ": " ]
+            }, {
+              "r" : "652",
+              "s" : [ {
+                "r" : "642",
+                "s" : [ {
+                  "r" : "643",
+                  "value" : [ "{", "1.0", ", ", "2.0", "}" ]
+                } ]
+              }, {
+                "value" : [ " intersect " ]
+              }, {
+                "r" : "647",
+                "s" : [ {
+                  "r" : "648",
+                  "value" : [ "{", "1.04", ", ", "3.0", "}" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "localId" : "659",
+          "annotation" : [ ],
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "660",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }
+        },
+        "expression" : {
+          "type" : "Intersect",
+          "localId" : "652",
+          "annotation" : [ ],
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "localId" : "657",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "658",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          },
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "653",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "654",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "655",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "656",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "642",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "645",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "646",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "643",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.0",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "644",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.0",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "List",
+            "localId" : "647",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "650",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "651",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "648",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.04",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "649",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "3.0",
               "annotation" : [ ]
             } ]
           } ]
@@ -37225,6 +38077,8 @@ define NoDups: distinct {2, 4, 6, 8, 10}
 define DupsTuples: distinct { Tuple{ hello: 'world' }, Tuple{ hello: 'cleveland' }, Tuple{ hello: 'world' }, Tuple{ hello: 'dolly' } }
 define NoDupsTuples: distinct { Tuple{ hello: 'world' }, Tuple{ hello: 'cleveland' } }
 define DuplicateNulls: distinct {null, 1, 2, null, 3, 4, 5, null}
+define DistinctDecimalsAcrossScales: distinct {1.0, 1.00, 2.0}
+define DistinctDecimalsEquivalentNotEqual: distinct {1.0, 1.04, 2.0}
 */
 
 module.exports['Distinct'] = {
@@ -37239,7 +38093,7 @@ module.exports['Distinct'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "374",
+        "r" : "414",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -38538,6 +39392,210 @@ module.exports['Distinct'] = {
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                 "annotation" : [ ]
               }
+            } ]
+          }
+        }
+      }, {
+        "localId" : "398",
+        "name" : "DistinctDecimalsAcrossScales",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "398",
+            "s" : [ {
+              "value" : [ "", "define ", "DistinctDecimalsAcrossScales", ": " ]
+            }, {
+              "r" : "399",
+              "s" : [ {
+                "value" : [ "distinct " ]
+              }, {
+                "r" : "400",
+                "s" : [ {
+                  "r" : "401",
+                  "value" : [ "{", "1.0", ", ", "1.00", ", ", "2.0", "}" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "localId" : "410",
+          "annotation" : [ ],
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "411",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }
+        },
+        "expression" : {
+          "type" : "Distinct",
+          "localId" : "399",
+          "annotation" : [ ],
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "localId" : "408",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "409",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          },
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "406",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "407",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : {
+            "type" : "List",
+            "localId" : "400",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "404",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "405",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "401",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.0",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "402",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.00",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "403",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.0",
+              "annotation" : [ ]
+            } ]
+          }
+        }
+      }, {
+        "localId" : "414",
+        "name" : "DistinctDecimalsEquivalentNotEqual",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "414",
+            "s" : [ {
+              "value" : [ "", "define ", "DistinctDecimalsEquivalentNotEqual", ": " ]
+            }, {
+              "r" : "415",
+              "s" : [ {
+                "value" : [ "distinct " ]
+              }, {
+                "r" : "416",
+                "s" : [ {
+                  "r" : "417",
+                  "value" : [ "{", "1.0", ", ", "1.04", ", ", "2.0", "}" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "localId" : "426",
+          "annotation" : [ ],
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "427",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }
+        },
+        "expression" : {
+          "type" : "Distinct",
+          "localId" : "415",
+          "annotation" : [ ],
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "localId" : "424",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "425",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          },
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "422",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "423",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : {
+            "type" : "List",
+            "localId" : "416",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "420",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "421",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "417",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.0",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "418",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.04",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "419",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.0",
+              "annotation" : [ ]
             } ]
           }
         }

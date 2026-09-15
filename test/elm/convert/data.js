@@ -3849,11 +3849,18 @@ context Patient
 define NoSign: ToDecimal('0.0')
 define PositiveSign: ToDecimal('+1.1')
 define NegativeSign: ToDecimal('-1.1')
-define TooPrecise: ToDecimal('.444444444')
+define TooPrecise: ToDecimal('0.444444444')
 define TooLargeDec: ToDecimal('444444444444444444444444444444')
 define TooSmallDec: ToDecimal('-444444444444444444444444444444')
 define NullDecimal: ToDecimal((null as String))
 define WrongFormat: ToDecimal('+.1')
+define ExponentNotation: ToDecimal('1e3')
+define ExponentNotationUpper: ToDecimal('1E-8')
+define TrailingDecimalPoint: ToDecimal('1.')
+define LeadingDecimalPoint: ToDecimal('.1')
+define IntegerFormat: ToDecimal('+1')
+define DecimalToString: ToString(1.0)
+define SmallDecimalToString: ToString(0.00000001)
 */
 
 module.exports['ToDecimal'] = {
@@ -3868,7 +3875,7 @@ module.exports['ToDecimal'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "285",
+        "r" : "354",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -4104,7 +4111,7 @@ module.exports['ToDecimal'] = {
               }, {
                 "r" : "245",
                 "s" : [ {
-                  "value" : [ "'.444444444'" ]
+                  "value" : [ "'0.444444444'" ]
                 } ]
               }, {
                 "value" : [ ")" ]
@@ -4128,7 +4135,7 @@ module.exports['ToDecimal'] = {
             "localId" : "245",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-            "value" : ".444444444",
+            "value" : "0.444444444",
             "annotation" : [ ]
           }
         }
@@ -4347,6 +4354,330 @@ module.exports['ToDecimal'] = {
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
             "value" : "+.1",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "295",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "ExponentNotation",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "295",
+            "s" : [ {
+              "value" : [ "", "define ", "ExponentNotation", ": " ]
+            }, {
+              "r" : "301",
+              "s" : [ {
+                "value" : [ "ToDecimal", "(" ]
+              }, {
+                "r" : "296",
+                "s" : [ {
+                  "value" : [ "'1e3'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToDecimal",
+          "localId" : "301",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "302",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "296",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "1e3",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "305",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "ExponentNotationUpper",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "305",
+            "s" : [ {
+              "value" : [ "", "define ", "ExponentNotationUpper", ": " ]
+            }, {
+              "r" : "311",
+              "s" : [ {
+                "value" : [ "ToDecimal", "(" ]
+              }, {
+                "r" : "306",
+                "s" : [ {
+                  "value" : [ "'1E-8'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToDecimal",
+          "localId" : "311",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "312",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "306",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "1E-8",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "315",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "TrailingDecimalPoint",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "315",
+            "s" : [ {
+              "value" : [ "", "define ", "TrailingDecimalPoint", ": " ]
+            }, {
+              "r" : "321",
+              "s" : [ {
+                "value" : [ "ToDecimal", "(" ]
+              }, {
+                "r" : "316",
+                "s" : [ {
+                  "value" : [ "'1.'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToDecimal",
+          "localId" : "321",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "322",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "316",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "1.",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "325",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "LeadingDecimalPoint",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "325",
+            "s" : [ {
+              "value" : [ "", "define ", "LeadingDecimalPoint", ": " ]
+            }, {
+              "r" : "331",
+              "s" : [ {
+                "value" : [ "ToDecimal", "(" ]
+              }, {
+                "r" : "326",
+                "s" : [ {
+                  "value" : [ "'.1'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToDecimal",
+          "localId" : "331",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "332",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "326",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ".1",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "335",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "IntegerFormat",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "335",
+            "s" : [ {
+              "value" : [ "", "define ", "IntegerFormat", ": " ]
+            }, {
+              "r" : "341",
+              "s" : [ {
+                "value" : [ "ToDecimal", "(" ]
+              }, {
+                "r" : "336",
+                "s" : [ {
+                  "value" : [ "'+1'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToDecimal",
+          "localId" : "341",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "342",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "336",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "+1",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "345",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+        "name" : "DecimalToString",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "345",
+            "s" : [ {
+              "value" : [ "", "define ", "DecimalToString", ": " ]
+            }, {
+              "r" : "350",
+              "s" : [ {
+                "r" : "346",
+                "value" : [ "ToString", "(", "1.0", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToString",
+          "localId" : "350",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "351",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "346",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.0",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "354",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+        "name" : "SmallDecimalToString",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "354",
+            "s" : [ {
+              "value" : [ "", "define ", "SmallDecimalToString", ": " ]
+            }, {
+              "r" : "359",
+              "s" : [ {
+                "r" : "355",
+                "value" : [ "ToString", "(", "0.00000001", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToString",
+          "localId" : "359",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "360",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "355",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.00000001",
             "annotation" : [ ]
           }
         }
@@ -10503,6 +10834,8 @@ context Patient
 define IsTrue: ConvertsToDecimal('0.1')
 define IsFalse: ConvertsToDecimal('foo')
 define IsNull: ConvertsToDecimal(null as Decimal)
+define ExponentNotation: ConvertsToDecimal('1e3')
+define DecimalFormat: ConvertsToDecimal('1.0')
 */
 
 module.exports['ConvertsToDecimal'] = {
@@ -10517,7 +10850,7 @@ module.exports['ConvertsToDecimal'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "234",
+        "r" : "255",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -10750,6 +11083,102 @@ module.exports['ConvertsToDecimal'] = {
               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ]
             }
+          }
+        }
+      }, {
+        "localId" : "245",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ExponentNotation",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "245",
+            "s" : [ {
+              "value" : [ "", "define ", "ExponentNotation", ": " ]
+            }, {
+              "r" : "251",
+              "s" : [ {
+                "value" : [ "ConvertsToDecimal", "(" ]
+              }, {
+                "r" : "246",
+                "s" : [ {
+                  "value" : [ "'1e3'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ConvertsToDecimal",
+          "localId" : "251",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "252",
+            "name" : "{urn:hl7-org:elm-types:r1}Any",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "246",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "1e3",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "255",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalFormat",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "255",
+            "s" : [ {
+              "value" : [ "", "define ", "DecimalFormat", ": " ]
+            }, {
+              "r" : "261",
+              "s" : [ {
+                "value" : [ "ConvertsToDecimal", "(" ]
+              }, {
+                "r" : "256",
+                "s" : [ {
+                  "value" : [ "'1.0'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ConvertsToDecimal",
+          "localId" : "261",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "262",
+            "name" : "{urn:hl7-org:elm-types:r1}Any",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "256",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "1.0",
+            "annotation" : [ ]
           }
         }
       } ]
@@ -13047,6 +13476,7 @@ context Patient
 define ConvertQuantityGood: ConvertQuantity(5 'mg', 'g')
 define ConvertSyntax: convert 5 'mg' to 'g'
 define ConvertQuantityToKg: ConvertQuantity(5000 'g', 'kg')
+define ConvertQuantityToC: ConvertQuantity(32 '[degF]', 'Cel')
 define ConvertQuantityToWeeks: ConvertQuantity(28 'days', 'weeks')
 define NullConvertQuantity: ConvertQuantity(5 'mg', 'fox')
 */
@@ -13063,7 +13493,7 @@ module.exports['ConvertQuantity'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "261",
+        "r" : "274",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -13332,7 +13762,7 @@ module.exports['ConvertQuantity'] = {
       }, {
         "localId" : "248",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "ConvertQuantityToWeeks",
+        "name" : "ConvertQuantityToC",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -13341,7 +13771,7 @@ module.exports['ConvertQuantity'] = {
           "s" : {
             "r" : "248",
             "s" : [ {
-              "value" : [ "", "define ", "ConvertQuantityToWeeks", ": " ]
+              "value" : [ "", "define ", "ConvertQuantityToC", ": " ]
             }, {
               "r" : "256",
               "s" : [ {
@@ -13349,14 +13779,14 @@ module.exports['ConvertQuantity'] = {
               }, {
                 "r" : "249",
                 "s" : [ {
-                  "value" : [ "28 ", "'days'" ]
+                  "value" : [ "32 ", "'[degF]'" ]
                 } ]
               }, {
                 "value" : [ ", " ]
               }, {
                 "r" : "250",
                 "s" : [ {
-                  "value" : [ "'weeks'" ]
+                  "value" : [ "'Cel'" ]
                 } ]
               }, {
                 "value" : [ ")" ]
@@ -13384,22 +13814,22 @@ module.exports['ConvertQuantity'] = {
             "type" : "Quantity",
             "localId" : "249",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "value" : 28,
-            "unit" : "days",
+            "value" : 32,
+            "unit" : "[degF]",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
             "localId" : "250",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-            "value" : "weeks",
+            "value" : "Cel",
             "annotation" : [ ]
           } ]
         }
       }, {
         "localId" : "261",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "NullConvertQuantity",
+        "name" : "ConvertQuantityToWeeks",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -13408,7 +13838,7 @@ module.exports['ConvertQuantity'] = {
           "s" : {
             "r" : "261",
             "s" : [ {
-              "value" : [ "", "define ", "NullConvertQuantity", ": " ]
+              "value" : [ "", "define ", "ConvertQuantityToWeeks", ": " ]
             }, {
               "r" : "269",
               "s" : [ {
@@ -13416,14 +13846,14 @@ module.exports['ConvertQuantity'] = {
               }, {
                 "r" : "262",
                 "s" : [ {
-                  "value" : [ "5 ", "'mg'" ]
+                  "value" : [ "28 ", "'days'" ]
                 } ]
               }, {
                 "value" : [ ", " ]
               }, {
                 "r" : "263",
                 "s" : [ {
-                  "value" : [ "'fox'" ]
+                  "value" : [ "'weeks'" ]
                 } ]
               }, {
                 "value" : [ ")" ]
@@ -13451,12 +13881,79 @@ module.exports['ConvertQuantity'] = {
             "type" : "Quantity",
             "localId" : "262",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 28,
+            "unit" : "days",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "263",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "weeks",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "274",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "NullConvertQuantity",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "274",
+            "s" : [ {
+              "value" : [ "", "define ", "NullConvertQuantity", ": " ]
+            }, {
+              "r" : "282",
+              "s" : [ {
+                "value" : [ "ConvertQuantity", "(" ]
+              }, {
+                "r" : "275",
+                "s" : [ {
+                  "value" : [ "5 ", "'mg'" ]
+                } ]
+              }, {
+                "value" : [ ", " ]
+              }, {
+                "r" : "276",
+                "s" : [ {
+                  "value" : [ "'fox'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ConvertQuantity",
+          "localId" : "282",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "283",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "284",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Quantity",
+            "localId" : "275",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 5,
             "unit" : "mg",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "263",
+            "localId" : "276",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
             "value" : "fox",

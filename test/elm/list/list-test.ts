@@ -1,6 +1,7 @@
 import should from 'should';
 import setup from '../../setup';
 import { getLocalIdByPath } from '../../testHelpers';
+import { Decimal } from '../../../src/datatypes/decimal';
 const data = require('./data');
 
 describe('List', () => {
@@ -203,6 +204,17 @@ describe('Union', () => {
   it('should return an empty list if both args are null but expected to be lists', async function () {
     (await this.nullUnionNull.exec(this.ctx)).should.be.eql([]);
   });
+
+  it('should use equality semantics for Decimal (ignores scale)', async function () {
+    const expected = ['1.0', '2.0', '3.0'].map(Decimal.from);
+    should(await this.unionDecimalsAcrossScales.exec(this.ctx)).be.eql(expected);
+  });
+
+  it('should use equality semantics for Decimal (not equivalence)', async function () {
+    // {1.0, 2.0} union {1.04, 3.0}
+    const expected = ['1.0', '2.0', '1.04', '3.0'].map(Decimal.from);
+    should(await this.unionDecimalsEquivalentNotEqual.exec(this.ctx)).be.eql(expected);
+  });
 });
 
 describe('Except', () => {
@@ -257,6 +269,16 @@ describe('Except', () => {
   it('should return first arg if second arg is null', async function () {
     (await this.exceptNull.exec(this.ctx)).should.eql([1, 2, 3, 4, 5]);
   });
+
+  it('should use equality semantics for Decimal (ignores scale)', async function () {
+    const expected = [Decimal.from('2.0')];
+    should(await this.exceptDecimalsAcrossScales.exec(this.ctx)).be.eql(expected);
+  });
+
+  it('should use equality semantics for Decimal (not equivalence)', async function () {
+    const expected = [Decimal.from('1.0'), Decimal.from('2.0')];
+    should(await this.exceptDecimalsEquivalentNotEqual.exec(this.ctx)).be.eql(expected);
+  });
 });
 
 describe('Intersect', () => {
@@ -306,6 +328,16 @@ describe('Intersect', () => {
 
   it('should intersect two lists that contain null', async function () {
     (await this.multipleNullInListIntersect.exec(this.ctx)).should.eql([3, null]);
+  });
+
+  it('should use equality semantics for Decimal (ignores scale)', async function () {
+    const expected = [Decimal.from('1.0')];
+    should(await this.intersectDecimalsAcrossScales.exec(this.ctx)).be.eql(expected);
+  });
+
+  it('should use equality semantics for Decimal (not equivalence)', async function () {
+    const expected: Array<Decimal> = [];
+    should(await this.intersectDecimalsEquivalentNotEqual.exec(this.ctx)).be.eql(expected);
   });
 });
 
@@ -846,6 +878,16 @@ describe('Distinct', () => {
   it('should remove duplicate null values', async function () {
     // define DuplicateNulls: distinct {null, 1, 2, null, 3, 4, 5, null}
     (await this.duplicateNulls.exec(this.ctx)).should.eql([null, 1, 2, 3, 4, 5]);
+  });
+
+  it('should use equality semantics for Decimal (ignores scale)', async function () {
+    const expected = [Decimal.from('1.0'), Decimal.from('2.0')];
+    should(await this.distinctDecimalsAcrossScales.exec(this.ctx)).be.eql(expected);
+  });
+
+  it('should use equality semantics for Decimal (not equivalence)', async function () {
+    const expected = [Decimal.from('1.0'), Decimal.from('1.04'), Decimal.from('2.0')];
+    should(await this.distinctDecimalsEquivalentNotEqual.exec(this.ctx)).be.eql(expected);
   });
 });
 

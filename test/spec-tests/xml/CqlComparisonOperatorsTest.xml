@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
 	name="CqlComparisonOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#comparison-operators-4" version="1.0">
+	<capability code="comparison-operators"/>
 	<group name="Between" version="1.0">
+		<capability code="comparison-operators"/>
 		<test name="BetweenIntTrue" version="1.0">
 			<expression>4 between 2 and 6</expression>
 			<output>true</output>
 		</test>
 	</group>
 	<group name="Equal" version="1.0">
+		<capability code="comparison-operators"/>
 		<test name="SimpleEqTrueTrue" version="1.0">
 			<expression>true = true</expression>
 			<output>true</output>
@@ -44,6 +47,11 @@
 			<expression>1 = 2</expression>
 			<output>false</output>
 		</test>
+		<test name="SimpleEqLong1Long2" version="1.5">
+			<capability code="system.long"/>
+			<expression>1L = 2L</expression>
+			<output>false</output>
+		</test>
 		<test name="SimpleEqStringAStringA" version="1.0">
 			<expression>'a' = 'a'</expression>
 			<output>true</output>
@@ -60,6 +68,14 @@
 			<expression>1.0 = 2.0</expression>
 			<output>false</output>
 		</test>
+		<test name="SimpleEqFloat1Float1WithZ" version="1.0">
+			<expression>1.0 = 1.00</expression>
+			<output>true</output>
+		</test>
+		<test name="SimpleEqFloat1Float1WithPrecisionAndZ" version="1.0">
+			<expression>1.50 = 1.55</expression>
+			<output>false</output>
+		</test>
 		<test name="SimpleEqFloat1Int1" version="1.0">
 			<expression>1.0 = 1</expression>
 			<output>true</output>
@@ -73,6 +89,7 @@
 			<output>true</output>
 		</test>
 		<test name="QuantityEqCM1M01" version="1.4">
+			<capability code="unit-conversion-support"/>
 			<expression>1'cm' = 0.01'm'</expression>
 			<output>true</output>
 		</test>
@@ -80,51 +97,80 @@
 			<expression>2.0'cm' = 2.00'cm'</expression>
 			<output>true</output>
 		</test>
+		<test name="RatioEqual" version="1.0">
+			<expression>1'cm':2'cm' = 1'cm':2'cm'</expression>
+			<output>true</output>
+		</test>
+		<test name="RatioNotEqualDiffNumerator" version="1.0">
+			<expression>1'cm':2'cm' = 1.1'cm':2'cm'</expression>
+			<output>false</output>
+		</test>
+		<test name="RatioNotEqualDiffDenominator" version="1.0">
+			<expression>1'cm':2'cm' = 1'cm':2.1'cm'</expression>
+			<output>false</output>
+		</test>
 		<test name="TupleEqJohnJohn" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple { Id : 1, Name : 'John' } = Tuple { Id : 1, Name : 'John' }</expression>
 			<output>true</output>
 		</test>
 		<test name="TupleEqJohnJane" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : 'Jane' }</expression>
 			<output>false</output>
 		</test>
 		<test name="TupleEqJohn1John2" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : 'John' }</expression>
 			<output>false</output>
 		</test>
 		<test name="TupleEqJohn1John2WithNullName" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : null }</expression>
 			<output>false</output>
 		</test>
 		<test name="TupleEqDifferentNamesWithOneNullId" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple { Id : null, Name : 'John' } = Tuple { Id : 1, Name : 'James' }</expression>
-			<output>false</output>
+			<output>null</output>
 		</test>
 		<test name="TupleEqJohn1John1WithBothNamesNull" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple { Id : 1, Name : null } = Tuple { Id : 1, Name : null }</expression>
 			<output>true</output>
 		</test>
 		<test name="TupleEqJohnJohnWithBothIdsNull" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple { Id : null, Name : 'John' } = Tuple { Id : null, Name : 'John' }</expression>
 			<output>true</output>
 		</test>
 		<test name="TupleEqJohn1John1WithNullName" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple { Id : 1, Name : 'John' } = Tuple { Id : 1, Name : null }</expression>
 			<output>null</output>
 		</test>
 		<test name="TupleEqDateTimeTrue" version="1.0">
+			<capability code="tuple"/>
 			<expression>Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) } = Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) }</expression>
 			<output>true</output>
 		</test>
 		<test name="TupleEqDateTimeFalse" version="1.0">
+			<capability code="tuple"/>
 			<expression>Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) } = Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 5, 0, 0, 0) }</expression>
 			<output>false</output>
 		</test>
+		<test name="TupleEqDateTimeTrue2" version="1.0">
+			<capability code="tuple"/>
+			<expression>Tuple { dateId: 12, Date: DateTime(2012, 1, 1) } = Tuple { dateId: 12, Date: DateTime(2012, 1, 1) }</expression>
+			<output>true</output>
+		</test>
 		<test name="TupleEqTimeTrue" version="1.0">
+			<capability code="tuple"/>
 			<expression>Tuple { timeId: 55, TheTime: @T05:15:15.541 } = Tuple { timeId: 55, TheTime: @T05:15:15.541 }</expression>
 			<output>true</output>
 		</test>
 		<test name="TupleEqTimeFalse" version="1.0">
+			<capability code="tuple"/>
 			<expression>Tuple { timeId: 55, TheTime: @T05:15:15.541 } = Tuple { timeId: 55, TheTime: @T05:15:15.540 }</expression>
 			<output>false</output>
 		</test>
@@ -144,9 +190,17 @@
 			<expression>DateTime(2014, 1, 5, 5, 0, 0, 0, 0) = DateTime(2014, 7, 5, 5, 0, 0, 0, 0)</expression>
 			<output>false</output>
 		</test>
+		<test name="DateTimeEqMissingArg" version="1.0">
+			<expression>DateTime(2015, 1, 5, 5, 0, 0) = DateTime(2015, 1, 5, 5, 0, 0)</expression>
+			<output>true</output>
+		</test>
 		<test name="DateTimeEqNull" version="1.0">
 			<expression>DateTime(null) = DateTime(null)</expression>
 			<output>null</output>
+		</test>
+		<test name="DateTimeEqTrue" version="1.0">
+			<expression>DateTime(2001, 1, 1, null) = DateTime(2001, 1, 1, null, null)</expression>
+			<output>true</output>
 		</test>
 		<test name="DateTimeUTC" version="1.0">
 			<expression>@2014-01-25T14:30:14.559+01:00 = @2014-01-25T14:30:14.559+01:00</expression>
@@ -166,12 +220,18 @@
 		</test>
 	</group>
 	<group name="Greater" version="1.0">
+		<capability code="comparison-operators"/>
 		<test name="GreaterZZ" version="1.0">
 			<expression>0 &gt; 0</expression>
 			<output>false</output>
 		</test>
 		<test name="GreaterZ1" version="1.0">
 			<expression>0 &gt; 1</expression>
+			<output>false</output>
+		</test>
+		<test name="GreaterLong" version="1.5">
+			<capability code="system.long"/>
+			<expression>0L &gt; 10L</expression>
 			<output>false</output>
 		</test>
 		<test name="GreaterZNeg1" version="1.0">
@@ -207,10 +267,12 @@
 			<output>true</output>
 		</test>
 		<test name="GreaterM1CM1" version="1.0">
+			<capability code="unit-conversion-support"/>
 			<expression>1'm' &gt; 1'cm'</expression>
 			<output>true</output>
 		</test>
 		<test name="GreaterM1CM10" version="1.0">
+			<capability code="unit-conversion-support"/>
 			<expression>1'm' &gt; 10'cm'</expression>
 			<output>true</output>
 		</test>
@@ -268,12 +330,18 @@
 		</test>
 	</group>
 	<group name="Greater Or Equal" version="1.0">
+		<capability code="comparison-operators"/>
 		<test name="GreaterOrEqualZZ" version="1.0">
 			<expression>0 &gt;= 0</expression>
 			<output>true</output>
 		</test>
 		<test name="GreaterOrEqualZ1" version="1.0">
 			<expression>0 &gt;= 1</expression>
+			<output>false</output>
+		</test>
+		<test name="GreaterOrEqualZ1Long" version="1.5">
+			<capability code="system.long"/>
+			<expression>0L &gt;= 10L</expression>
 			<output>false</output>
 		</test>
 		<test name="GreaterOrEqualZNeg1" version="1.0">
@@ -309,10 +377,12 @@
 			<output>true</output>
 		</test>
 		<test name="GreaterOrEqualM1CM1" version="1.0">
+			<capability code="unit-conversion-support"/>
 			<expression>1'm' &gt;= 1'cm'</expression>
 			<output>true</output>
 		</test>
 		<test name="GreaterOrEqualM1CM10" version="1.0">
+			<capability code="unit-conversion-support"/>
 			<expression>1'm' &gt;= 10'cm'</expression>
 			<output>true</output>
 		</test>
@@ -378,12 +448,23 @@
 		</test>
 	</group>
 	<group name="Less" version="1.0">
+		<capability code="comparison-operators"/>
 		<test name="LessZZ" version="1.0">
 			<expression>0 &lt; 0</expression>
 			<output>false</output>
 		</test>
 		<test name="LessZ1" version="1.0">
 			<expression>0 &lt; 1</expression>
+			<output>true</output>
+		</test>
+		<test name="LessLong" version="1.5">
+			<capability code="system.long"/>
+			<expression>0L &lt; 10L</expression>
+			<output>true</output>
+		</test>
+		<test name="LessLongNeg" version="1.5">
+			<capability code="system.long"/>
+			<expression>-30L &lt; -20L</expression>
 			<output>true</output>
 		</test>
 		<test name="LessZNeg1" version="1.0">
@@ -419,10 +500,12 @@
 			<output>false</output>
 		</test>
 		<test name="LessM1CM1" version="1.0">
+			<capability code="unit-conversion-support"/>
 			<expression>1'm' &lt; 1'cm'</expression>
 			<output>false</output>
 		</test>
 		<test name="LessM1CM10" version="1.0">
+			<capability code="unit-conversion-support"/>
 			<expression>1'm' &lt; 10'cm'</expression>
 			<output>false</output>
 		</test>
@@ -480,12 +563,18 @@
 		</test>
 	</group>
 	<group name="Less Or Equal" version="1.0">
+		<capability code="comparison-operators"/>
 		<test name="LessOrEqualZZ" version="1.0">
 			<expression>0 &lt;= 0</expression>
 			<output>true</output>
 		</test>
 		<test name="LessOrEqualZ1" version="1.0">
 			<expression>0 &lt;= 1</expression>
+			<output>true</output>
+		</test>
+		<test name="LessOrEqualZ1Long" version="1.5">
+			<capability code="system.long"/>
+			<expression>0L &lt;= 10L</expression>
 			<output>true</output>
 		</test>
 		<test name="LessOrEqualZNeg1" version="1.0">
@@ -521,10 +610,12 @@
 			<output>false</output>
 		</test>
 		<test name="LessOrEqualM1CM1" version="1.0">
+			<capability code="unit-conversion-support"/>
 			<expression>1'm' &lt;= 1'cm'</expression>
 			<output>false</output>
 		</test>
 		<test name="LessOrEqualM1CM10" version="1.0">
+			<capability code="unit-conversion-support"/>
 			<expression>1'm' &lt;= 10'cm'</expression>
 			<output>false</output>
 		</test>
@@ -590,6 +681,7 @@
 		</test>
 	</group>
 	<group name="Equivalent" version="1.0">
+		<capability code="comparison-operators"/>
 		<test name="EquivTrueTrue" version="1.0">
 			<expression>true ~ true</expression>
 			<output>true</output>
@@ -634,6 +726,10 @@
 			<expression>'a' ~ 'b'</expression>
 			<output>false</output>
 		</test>
+		<test name="EquivStringIgnoreCase" version="1.0">
+			<expression>'Abel' ~ 'abel'</expression>
+			<output>true</output>
+		</test>
 		<test name="EquivFloat1Float1" version="1.0">
 			<expression>1.0 ~ 1.0</expression>
 			<output>true</output>
@@ -641,6 +737,22 @@
 		<test name="EquivFloat1Float2" version="1.0">
 			<expression>1.0 ~ 2.0</expression>
 			<output>false</output>
+		</test>
+		<test name="EquivFloat1Float1WithZ" version="1.0">
+			<expression>1.0 ~ 1.00</expression>
+			<output>true</output>
+		</test>
+		<test name="EquivFloat1Float1WithPrecision" version="1.0">
+			<expression>1.5 ~ 1.55</expression>
+			<output>false</output>
+		</test>
+		<test name="EquivFloat1Float1WithPrecisionAndZ" version="1.0">
+			<expression>1.50 ~ 1.55</expression>
+			<output>false</output>
+		</test>
+		<test name="EquivFloatTrailingZero" version="1.0">
+			<expression>1.001 ~ 1.000</expression>
+			<output>true</output>
 		</test>
 		<test name="EquivFloat1Int1" version="1.0">
 			<expression>1.0 ~ 1</expression>
@@ -655,22 +767,49 @@
 			<output>true</output>
 		</test>
 		<test name="EquivEqCM1M01" version="1.0">
+			<capability code="unit-conversion-support"/>
 			<expression>1'cm' ~ 0.01'm'</expression>
 			<output>true</output>
 		</test>
+		<test name="RatioEquivalent" version="1.0">
+			<expression>1'cm':2'cm' ~ 1'cm':2'cm'</expression>
+			<output>true</output>
+		</test>
+		<test name="RatioNotEquivalentDiffNumerator" version="1.0">
+			<expression>1'cm':2'cm' ~ 3'cm':2'cm'</expression>
+			<output>false</output>
+		</test>
+		<test name="RatioNotEquivalentDiffDenominator" version="1.0">
+			<expression>1'cm':2'cm' ~ 1'cm':3'cm'</expression>
+			<output>false</output>
+		</test>
 		<test name="EquivTupleJohnJohn" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 1, Name : 'John' }</expression>
 			<output>true</output>
 		</test>
 		<test name="EquivTupleJohnJohnWithNulls" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple { Id : 1, Name : 'John', Position: null } ~ Tuple { Id : 1, Name : 'John', Position: null }</expression>
 			<output>true</output>
 		</test>
+		<test name="EquivTupleJohnJohnFalse" version="1.5">
+			<capability code="tuple"/>
+			<expression invalid="true">Tuple { Id : 1, Name : 'John', Position: 'Shift Manager' } ~ Tuple { Id : 1, Name : 'John' }</expression>
+			<!-- EXPECT: Could not resolve call to operator Equivalent with signature (tuple{Id:System.Integer,Name:System.String,Position:System.String},tuple{Id:System.Integer,Name:System.String}). -->
+		</test>
+		<test name="EquivTupleJohnJohnFalse2" version="1.5">
+			<capability code="tuple"/>
+			<expression invalid="true">Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 1, Name : 'John', Position: 'Shift Manager' }</expression>
+			<!-- EXPECT: Could not resolve call to operator Equivalent with signature (tuple{Id:System.Integer,Name:System.String},tuple{Id:System.Integer,Name:System.String,Position:System.String}). -->
+		</test>
 		<test name="EquivTupleJohnJane" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 2, Name : 'Jane' }</expression>
 			<output>false</output>
 		</test>
 		<test name="EquivTupleJohn1John2" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 2, Name : 'John' }</expression>
 			<output>false</output>
 		</test>
@@ -692,6 +831,7 @@
 		</test>
 	</group>
 	<group name="Not Equal" version="1.0">
+		<capability code="comparison-operators"/>
 		<test name="SimpleNotEqTrueTrue" version="1.0">
 			<expression>true != true</expression>
 			<output>false</output>
@@ -728,6 +868,11 @@
 			<expression>1 != 2</expression>
 			<output>true</output>
 		</test>
+		<test name="SimpleNotEqLong1Long2" version="1.5">
+			<capability code="system.long"/>
+			<expression>1L != 2L</expression>
+			<output>true</output>
+		</test>
 		<test name="SimpleNotEqStringAStringA" version="1.0">
 			<expression>'a' != 'a'</expression>
 			<output>false</output>
@@ -757,38 +902,47 @@
 			<output>false</output>
 		</test>
 		<test name="QuantityNotEqCM1M01" version="1.0">
+			<capability code="unit-conversion-support"/>
 			<expression>1'cm' != 0.01'm'</expression>
 			<output>false</output>
 		</test>
 		<test name="TupleNotEqJohnJohn" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 1, Name : 'John' }</expression>
 			<output>false</output>
 		</test>
 		<test name="TupleNotEqJohnJane" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 2, Name : 'Jane' }</expression>
 			<output>true</output>
 		</test>
 		<test name="TupleNotEqJohn1John2" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 2, Name : 'John' }</expression>
 			<output>true</output>
 		</test>
 		<test name="TupleNotEqJohn1John2WithNullName" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 2, Name : null }</expression>
 			<output>true</output>
 		</test>
 		<test name="TupleNotEqDifferingNamesWithOneNullId" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple{ Id : null, Name : 'John' } != Tuple{ Id : 1, Name : 'Joe' }</expression>
-			<output>true</output>
+			<output>null</output>
 		</test>
 		<test name="TupleNotEqJohn1John1WithBothNamesNull" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple{ Id : 1, Name : null } != Tuple{ Id : 1, Name : null }</expression>
 			<output>false</output>
 		</test>
 		<test name="TupleNotEqMatchingNamesWithNullIDs" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple{ Id : null, Name : 'John' } != Tuple{ Id : null, Name : 'John' }</expression>
 			<output>false</output>
 		</test>
 		<test name="TupleNotEqJohn1John1WithNullName" version="1.5">
+			<capability code="tuple"/>
 			<expression>Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 1, Name : null }</expression>
 			<output>null</output>
 		</test>
@@ -806,6 +960,166 @@
 		</test>
 		<test name="TimeNotEq10A10P" version="1.0">
 			<expression>@T10:00:00.000 != @T22:00:00.000</expression>
+			<output>true</output>
+		</test>
+	</group>
+	<group name="Unit Comparison" version="1.0">
+		<test name="TestQuantityMillisecondEqualMs" version="1.0">
+			<expression>1 millisecond = 1 'ms'</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityMillisecondEqualMilliseconds" version="1.0">
+			<expression>1 millisecond = 1 milliseconds</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityMillisecondsEqualMs" version="1.0">
+			<expression>1 milliseconds = 1 'ms'</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantitySecondEqualS" version="1.0">
+			<expression>1 second = 1 's'</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantitySecondEqualSeconds" version="1.0">
+			<expression>1 second = 1 seconds</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantitySecondsEqualS" version="1.0">
+			<expression>1 seconds = 1 's'</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityMinuteEqualMin" version="1.0">
+			<expression>1 minute = 1 'min'</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityMinuteEqualMinutes" version="1.0">
+			<expression>1 minute = 1 minutes</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityMinutesEqualMin" version="1.0">
+			<expression>1 minutes = 1 'min'</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityHourEqualH" version="1.0">
+			<expression>1 hour = 1 'h'</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityHourEqualHours" version="1.0">
+			<expression>1 hour = 1 hours</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityHoursEqualH" version="1.0">
+			<expression>1 hours = 1 'h'</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityDayEqualD" version="1.0">
+			<expression>1 day = 1 'd'</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityDayEqualDays" version="1.0">
+			<expression>1 day = 1 days</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityDaysEqualD" version="1.0">
+			<expression>1 days = 1 'd'</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityWeekEqualWk" version="1.0">
+			<expression>1 week = 1 'wk'</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityWeekEqualWeeks" version="1.0">
+			<expression>1 week = 1 weeks</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityWeeksEqualWk" version="1.0">
+			<expression>1 weeks = 1 'wk'</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityMonthEqualMo" version="1.0">
+			<expression>1 month = 1 'mo'</expression>
+			<output>null</output>
+			<!-- null (on the grounds that definite time and calendar units are not comparable) -->
+		</test>
+		<test name="TestQuantityMonthNotEqualMo" version="1.0">
+			<expression>1 month != 1 'mo'</expression>
+			<output>null</output>
+			<!-- null (on the grounds that definite time and calendar units are not comparable) -->
+		</test>
+		<test name="TestQuantityMonthEquivalentMo" version="1.0">
+			<expression>1 month ~ 1 'mo'</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityMonthEqualMonths" version="1.0">
+			<expression>1 month = 1 months</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityMonthsNotEqualMo" version="1.0">
+			<expression>1 months != 1 'mo'</expression>
+			<output>null</output>
+			<!-- null (on the grounds that definite time and calendar units are not comparable) -->
+		</test>
+		<test name="TestQuantityMonthsEquivalentMo" version="1.0">
+			<expression>1 months ~ 1 'mo'</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityYearEqualA" version="1.0">
+			<expression>1 year = 1 'a'</expression>
+			<output>null</output>
+			<!-- null (on the grounds that definite time and calendar units are not comparable) -->
+		</test>
+		<test name="TestQuantityYearNotEqualA" version="1.0">
+			<expression>1 year != 1 'a'</expression>
+			<output>null</output>
+			<!-- null (on the grounds that definite time and calendar units are not comparable) -->
+		</test>
+		<test name="TestQuantityYearEquivalentA" version="1.0">
+			<expression>1 year ~ 1 'a'</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityYearsEqualYear" version="1.0">
+			<expression>1 years = 1 year</expression>
+			<output>true</output>
+		</test>
+		<test name="TestQuantityYearsNotEqualA" version="1.0">
+			<expression>1 years != 1 'a'</expression>
+			<output>null</output>
+			<!-- null (on the grounds that definite time and calendar units are not comparable) -->
+		</test>
+		<test name="TestQuantityYearsEquivalentA" version="1.0">
+			<expression>1 years ~ 1 'a'</expression>
+			<output>true</output>
+		</test>
+		<test name="TestYearEquivalentMonths" version="1.0">
+			<expression>1 year ~ 12 months</expression>
+			<output>true</output>
+		</test>
+		<test name="TestYearEquivalentDays" version="1.0">
+			<expression>1 year ~ 365 days</expression>
+			<output>true</output>
+		</test>
+		<test name="TestMonthEquivalentDays" version="1.0">
+			<expression>1 month ~ 30 days</expression>
+			<output>true</output>
+		</test>
+		<test name="TestWeekEqualDays" version="1.0">
+			<expression>1 week = 7 days</expression>
+			<output>true</output>
+		</test>
+		<test name="TestDayEqualHours" version="1.0">
+			<expression>1 day = 24 hours</expression>
+			<output>true</output>
+		</test>
+		<test name="TestHourEqualMinutes" version="1.0">
+			<expression>1 hour = 60 minutes</expression>
+			<output>true</output>
+		</test>
+		<test name="TestMinuteEqualSeconds" version="1.0">
+			<expression>1 minute = 60 seconds</expression>
+			<output>true</output>
+		</test>
+		<test name="TestSecondEqualMilliseconds" version="1.0">
+			<expression>1 second = 1000 milliseconds</expression>
 			<output>true</output>
 		</test>
 	</group>

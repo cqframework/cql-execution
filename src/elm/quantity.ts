@@ -5,12 +5,12 @@ import { Context } from '../runtime/context';
 // Unit conversation is currently implemented on for time duration comparison operations
 // TODO: Implement unit conversation for time duration mathematical operations
 export class Quantity extends Expression {
-  value: number;
+  value: DT.Decimal;
   unit: any;
 
   constructor(json: any) {
     super(json);
-    this.value = parseFloat(json.value);
+    this.value = DT.Decimal.from(json.value);
     this.unit = json.unit;
   }
 

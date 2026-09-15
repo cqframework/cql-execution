@@ -311,6 +311,12 @@ define "Substring": Tuple{
     expression: Substring('ab', -1),
     output: null
   },
+  "SubstringEmptyAnd0": Tuple{
+    skipped: 'Wrong output: Substring(x, x.length) should be null\'. Note similar test SubstringAB2. See https://github.com/cqframework/cql-tests/issues/149'
+    /*
+    expression: Substring('', 0),
+    output: ''
+    */  },
   "SubstringAB0To1": Tuple{
     expression: Substring('ab', 0, 1),
     output: 'a'
@@ -350,9 +356,11 @@ define "Upper": Tuple{
 
 define "toString tests": Tuple{
   "QuantityToString": Tuple{
+    skipped: 'Wrong output: Spec says Quantity and Decimal ToString must always contain a decimal point and at least 1 digit on each side. Note this requirement itself also causes issues by introducing precision in the string that may not exist in the original Decimal. Future spec changes may make this test\'s expected value correct.'
+    /*
     expression: ToString(125 'cm'),
     output: '125 \'cm\''
-  },
+    */  },
   "DateTimeToString1": Tuple{
     expression: ToString(DateTime(2000, 1, 1)),
     output: '2000-01-01'

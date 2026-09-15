@@ -653,9 +653,9 @@ define NotMeetsIntIvl: Interval[1, 2] meets Interval[5, 10]
 define MeetsAfterLongIvl: Interval[11L, 15L] meets Interval[5L, 10L]
 define MeetsBeforeLongIvl: Interval[1L, 4L] meets Interval[5L, 10L]
 define NotMeetsLongIvl: Interval[1L, 2L] meets Interval[5L, 10L]
-define MeetsAfterRealIvl: Interval[1.50000001, 2.5] meets Interval[0.5, 1.5]
-define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets Interval[1.50000001, 2.5]
-define NotMeetsRealIvl: Interval[0.0, 1.0] meets Interval[1.1, 2.0]
+define MeetsAfterRealIvl: Interval[1.6, 2.5] meets Interval[0.5, 1.5]
+define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets Interval[1.6, 2.5]
+define NotMeetsRealIvl: Interval[0.0, 1.0] meets Interval[1.2, 2.0]
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
 define MeetsAfterDateIvl: Interval[DateTime(2012, 9, 1, 0, 0, 0, 0), DateTime(2012, 12, 1, 0, 0, 0, 0)) meets DateIvl
 define MeetsBeforeDateIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)) meets DateIvl
@@ -724,9 +724,9 @@ define NotMeetsIntIvl: Interval[1, 2] meets after Interval[5, 10]
 define MeetsAfterLongIvl: Interval[11L, 15L] meets after Interval[5L, 10L]
 define MeetsBeforeLongIvl: Interval[1L, 4L] meets after Interval[5L, 10L]
 define NotMeetsLongIvl: Interval[1L, 2L] meets after Interval[5L, 10L]
-define MeetsAfterRealIvl: Interval[1.50000001, 2.5] meets after Interval[0.5, 1.5]
-define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets after Interval[1.50000001, 2.5]
-define NotMeetsRealIvl: Interval[0.0, 1.0] meets after Interval[1.1, 2.0]
+define MeetsAfterRealIvl: Interval[1.6, 2.5] meets after Interval[0.5, 1.5]
+define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets after Interval[1.6, 2.5]
+define NotMeetsRealIvl: Interval[0.0, 1.0] meets after Interval[1.2, 2.0]
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
 define MeetsAfterDateIvl: Interval[DateTime(2012, 9, 1, 0, 0, 0, 0), DateTime(2012, 12, 1, 0, 0, 0, 0)) meets after DateIvl
 define MeetsBeforeDateIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)) meets after DateIvl
@@ -795,9 +795,9 @@ define NotMeetsIntIvl: Interval[1, 2] meets before Interval[5, 10]
 define MeetsAfterLongIvl: Interval[11L, 15L] meets before Interval[5L, 10L]
 define MeetsBeforeLongIvl: Interval[1L, 4L] meets before Interval[5L, 10L]
 define NotMeetsLongIvl: Interval[1L, 2L] meets before Interval[5L, 10L]
-define MeetsAfterRealIvl: Interval[1.50000001, 2.5] meets before Interval[0.5, 1.5]
-define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets before Interval[1.50000001, 2.5]
-define NotMeetsRealIvl: Interval[0.0, 1.0] meets before Interval[1.1, 2.0]
+define MeetsAfterRealIvl: Interval[1.6, 2.5] meets before Interval[0.5, 1.5]
+define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets before Interval[1.6, 2.5]
+define NotMeetsRealIvl: Interval[0.0, 1.0] meets before Interval[1.2, 2.0]
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
 define MeetsAfterDateIvl: Interval[DateTime(2012, 9, 1, 0, 0, 0, 0), DateTime(2012, 12, 1, 0, 0, 0, 0)) meets before DateIvl
 define MeetsBeforeDateIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)) meets before DateIvl
@@ -1633,6 +1633,7 @@ define LongNullBoth: expand { Interval[null, null] } per 1 '1'
 define LongBadPerMinute: expand { Interval(2L, 4L] } per 1 minute
 
 define LongPerDecimalMorePrecise: expand { Interval[10L, 10L] } per 0.1
+define ExpandLargePositiveLongInterval: expand Interval[9007199254740993L, 9007199254740995L]
 
 // @Test: DecimalIntervalExpand
 define ClosedSingle: expand { Interval[2, 5] } per 1.5 '1'
@@ -1656,6 +1657,7 @@ define NullOpen: expand { Interval[null, 4] } per 1.5 '1'
 define NullClose: expand { Interval[2, null] } per 1.5 '1'
 define NullBoth: expand { Interval[null, null] } per 1.5 '1'
 define BadPerMinute: expand { Interval(2.1, 4.1] } per 0.5 minute
+define ExpandLargeDecimalIntervalFractionalStep: expand Interval[9007199254740993.0, 9007199254740993.3] per 0.1
 
 // @Test: SameAs
 define NullBoth: Interval[null as DateTime, null as DateTime] same as Interval[null as DateTime, null as DateTime]

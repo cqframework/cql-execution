@@ -4,14 +4,12 @@ const data = require('./data');
 import { Interval } from '../../../src/datatypes/interval';
 import { DateTime, MIN_DATETIME_VALUE, MAX_DATETIME_VALUE } from '../../../src/datatypes/datetime';
 import { Uncertainty } from '../../../src/datatypes/uncertainty';
+import { MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../../../src/datatypes/decimal';
 import {
   MIN_INT_VALUE,
   MAX_INT_VALUE,
   MIN_LONG_VALUE,
-  MAX_LONG_VALUE,
-  MIN_FLOAT_VALUE,
-  MIN_FLOAT_PRECISION_VALUE,
-  MAX_FLOAT_VALUE
+  MAX_LONG_VALUE
 } from '../../../src/util/limits';
 
 describe('Interval', () => {
@@ -1620,9 +1618,10 @@ describe('Width', () => {
 
   it('should calculate the width of real intervals', async function () {
     // define RealWidth: width of Interval[1.23, 4.56]
-    (await this.realWidth.exec(this.ctx)).should.equal(3.33);
+    (await this.realWidth.exec(this.ctx)).should.equalDecimal(3.33);
     // define RealOpenWidth: width of Interval(1.23, 4.56)
-    (await this.realOpenWidth.exec(this.ctx)).should.equal(3.32999998);
+    // width of Interval(1.23, 4.56) = predecessor(4.56) - successor (1.23) = 4.55 - 1.24 = 3.31
+    (await this.realOpenWidth.exec(this.ctx)).should.equalDecimal(3.31);
   });
 
   it('should calculate the width of infinite intervals', async function () {
@@ -1646,7 +1645,7 @@ describe('Width', () => {
   it('should calculate the width of interval of quantities', async function () {
     // define WidthOfQuantityInterval: width of Interval[Quantity{value: 1, unit: 'mm'}, Quantity{value: 10, unit: 'mm'}]
     const width = await this.widthOfQuantityInterval.exec(this.ctx);
-    width.value.should.equal(9);
+    width.value.should.equalDecimal(9);
     width.unit.should.equal('mm');
   });
 
@@ -1687,9 +1686,10 @@ describe('Size', () => {
 
   it('should calculate the size of real intervals', async function () {
     // define RealSize: Size(Interval[1.23, 4.56])
-    (await this.realSize.exec(this.ctx)).should.equal(3.33 + MIN_FLOAT_PRECISION_VALUE);
+    (await this.realSize.exec(this.ctx)).should.equalDecimal('3.33000001');
     // define RealOpenSize: Size(Interval(1.23, 4.56))
-    (await this.realOpenSize.exec(this.ctx)).should.equal(3.32999998 + MIN_FLOAT_PRECISION_VALUE);
+    // (1.23, 4.56) --> [1.24, 4.55], 4.55 - 1.24 = 3.31
+    (await this.realOpenSize.exec(this.ctx)).should.equalDecimal('3.31000001');
   });
 
   it('should calculate the size of infinite intervals', async function () {
@@ -1723,7 +1723,7 @@ describe('Size', () => {
   it('should calculate size of interval of quantities', async function () {
     // define SizeOfQuantityInterval: Size(Interval[Quantity{value: 1, unit: 'mm'}, Quantity{value: 10, unit: 'mm'}])
     const size = await this.sizeOfQuantityInterval.exec(this.ctx);
-    size.value.should.equal(9.00000001);
+    size.value.should.equalDecimal(9.00000001);
     size.unit.should.equal('mm');
   });
 
@@ -1759,7 +1759,7 @@ describe('Start', () => {
   it('should return the minimum possible DateTime in timzoneOffset of context', async function () {
     // set execution timestamp to be +5
     this.ctx.executionDateTime = new DateTime(2019, 10, 1, 12, 31, 31, 2, 5);
-    (await this.closedNullDateTime.exec(this.ctx)).timezoneOffset.should.eql(5);
+    (await this.closedNullDateTime.exec(this.ctx)).timezoneOffset.should.equalDecimal(5);
   });
 
   it('should return the minimum possible Integer', async function () {
@@ -1771,7 +1771,7 @@ describe('Start', () => {
   });
 
   it('should return the minimum possible Decimal', async function () {
-    (await this.closedNullDecimal.exec(this.ctx)).should.eql(MIN_FLOAT_VALUE);
+    (await this.closedNullDecimal.exec(this.ctx)).should.eql(MIN_DECIMAL_VALUE);
   });
 
   it('should return null when the interval is null', async function () {
@@ -1809,7 +1809,7 @@ describe('End', () => {
   it('should return the maximum possible DateTime in timzoneOffset of context', async function () {
     // set execution timestamp to be +5
     this.ctx.executionDateTime = new DateTime(2019, 10, 1, 12, 31, 31, 2, 5);
-    (await this.closedNullDateTime.exec(this.ctx)).timezoneOffset.should.eql(5);
+    (await this.closedNullDateTime.exec(this.ctx)).timezoneOffset.should.equalDecimal(5);
   });
 
   it('should return the maximum possible Integer', async function () {
@@ -1821,7 +1821,7 @@ describe('End', () => {
   });
 
   it('should return the maximum possible Decimal', async function () {
-    (await this.closedNullDecimal.exec(this.ctx)).should.eql(MAX_FLOAT_VALUE);
+    (await this.closedNullDecimal.exec(this.ctx)).should.eql(MAX_DECIMAL_VALUE);
   });
 
   it('should return null when the interval is null', async function () {
@@ -3387,83 +3387,83 @@ describe('QuantityIntervalExpand', () => {
   it('expands single intervals', async function () {
     // define ClosedSingleGPerG: expand { Interval[2 'g', 4 'g'] } per 1 'g'
     let a = await this.closedSingleGPerG.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal("{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'] }");
 
     // define ClosedSingleGPerGDecimal: expand { Interval[2.1 'g', 4.1 'g'] } per 1 'g'
     a = await this.closedSingleGPerGDecimal.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal("{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'] }");
 
     // define ClosedSingleGPerMG: expand { Interval[2 'g', 2.003 'g'] } per 1 'mg'
     a = await this.closedSingleGPerMG.exec(this.ctx);
     prettyList(a).should.equal(
-      "{ [2000 'mg', 2000 'mg'], [2001 'mg', 2001 'mg'], [2002 'mg', 2002 'mg'], [2003 'mg', 2003 'mg'] }"
+      "{ [2000.0 'mg', 2000.0 'mg'], [2001.0 'mg', 2001.0 'mg'], [2002.0 'mg', 2002.0 'mg'], [2003.0 'mg', 2003.0 'mg'] }"
     );
 
     // define ClosedSingleMGPerGTrunc: expand { Interval[2999 'mg', 4200 'mg'] } per 1 'g'
     a = await this.closedSingleMGPerGTrunc.exec(this.ctx);
-    prettyList(a).should.equal("{ [2999 'mg', 3998 'mg'] }");
+    prettyList(a).should.equal("{ [2999.0 'mg', 3998.0 'mg'] }");
 
     // define ClosedSingleMGPerMGTrunc: expand { Interval[2000 'mg', 4500 'mg'] } per 800 'mg'
     a = await this.closedSingleMGPerMGTrunc.exec(this.ctx);
     prettyList(a).should.equal(
-      "{ [2000 'mg', 2799 'mg'], [2800 'mg', 3599 'mg'], [3600 'mg', 4399 'mg'] }"
+      "{ [2000.0 'mg', 2799.0 'mg'], [2800.0 'mg', 3599.0 'mg'], [3600.0 'mg', 4399.0 'mg'] }"
     );
 
     // define ClosedSingleMGPerMGDecimal: expand { Interval[2000.01 'mg', 4500 'mg'] } per 800 'mg'
     a = await this.closedSingleMGPerMGDecimal.exec(this.ctx);
     prettyList(a).should.equal(
-      "{ [2000 'mg', 2799 'mg'], [2800 'mg', 3599 'mg'], [3600 'mg', 4399 'mg'] }"
+      "{ [2000.0 'mg', 2799.0 'mg'], [2800.0 'mg', 3599.0 'mg'], [3600.0 'mg', 4399.0 'mg'] }"
     );
   });
 
   it('expands lists of multiple intervals', async function () {
     // define NullInList: expand { Interval[2 'g', 4 'g'], null } per 1 'g'
     let a = await this.nullInList.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal("{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'] }");
 
     // define Overlapping: expand { Interval[2 'g', 4 'g'], Interval[3 'g', 5 'g'] } per 1 'g'
     a = await this.overlapping.exec(this.ctx);
     prettyList(a).should.equal(
-      "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [5 'g', 5 'g'] }"
+      "{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'], [5.0 'g', 5.0 'g'] }"
     );
 
     // define NonOverlapping: expand { Interval[2 'g', 4 'g'], Interval[6 'g', 6 'g'] } per 1 'g'
     a = await this.nonOverlapping.exec(this.ctx);
     prettyList(a).should.equal(
-      "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [6 'g', 6 'g'] }"
+      "{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'], [6.0 'g', 6.0 'g'] }"
     );
   });
 
   it('expands interval using the first items units if no per provided', async function () {
     // define NoPerDefaultM: expand { Interval[2 'm', 400 'cm'] }
     let a = await this.noPerDefaultM.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'm', 2 'm'], [3 'm', 3 'm'], [4 'm', 4 'm'] }");
+    prettyList(a).should.equal("{ [2.0 'm', 2.0 'm'], [3.0 'm', 3.0 'm'], [4.0 'm', 4.0 'm'] }");
 
     // define NoPerDefaultG: expand { Interval[2 'g', 4 'g'] }
     a = await this.noPerDefaultG.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal("{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'] }");
   });
 
   it('expands interval with open ends', async function () {
     // define OpenStart: expand { Interval(2 'g', 4 'g'] } per 1 'g'
     let a = await this.openStart.exec(this.ctx);
-    prettyList(a).should.equal("{ [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal("{ [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'] }");
 
     // define OpenEnd: expand { Interval[2 'g', 4 'g') } per 1 'g'
     a = await this.openEnd.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'] }");
+    prettyList(a).should.equal("{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'] }");
 
     // define OpenBoth: expand { Interval(2 'g', 4 'g') } per 1 'g'
     a = await this.openBoth.exec(this.ctx);
-    prettyList(a).should.equal("{ [3 'g', 3 'g'] }");
+    prettyList(a).should.equal("{ [3.0 'g', 3.0 'g'] }");
 
     // define OpenBothDecimal: expand { Interval(2.1 'g', 4.1 'g') } per 1 'g'
     a = await this.openBothDecimal.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal("{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'] }");
 
     // define OpenBothDecimalTrunc: expand { Interval(2.1 'g', 4.101 'g') } per 1 'g'
     a = await this.openBothDecimalTrunc.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal("{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'] }");
   });
 
   it('returns an empty list if we get an empty list or if there are no results', async function () {
@@ -3592,13 +3592,22 @@ describe('IntegerIntervalExpand', () => {
     should.not.exist(a);
   });
 
-  it('produces a more precise value for output intervals', async function () {
+  it.skip('produces a more precise value for output intervals', async function () {
+    // This example from the spec is incorrect.
+    // Skip for now until we have more clarity on what the expected result should be
+    // https://jira.hl7.org/browse/FHIR-58705 and
+    // https://chat.fhir.org/#narrow/channel/179220-cql/topic/Interval.20Expand.20example/with/619051021
+    // There are two possible answers to consider:
+    // 1. { } (empty list) - I believe this is the correct answer per how the spec is currently written
+    // 2. { Interval[10.0, 10.0 ] } - this is the other possible answer, suggested in the Zulip thread.
+    //    This would be the correct answer if either:
+    //    - "intervals of size per" does not require the Size operator on the resulting intervals to = per
+    //    - the Size operator on an interval is based on the precision of its bounds, not Decimal point-size
+    //      (this one is likely the _intent_, but not how it is currently defined)
+
     // define PerDecimalMorePrecise: expand { Interval[10, 10] } per 0.1
     const a = await this.perDecimalMorePrecise.exec(this.ctx);
-    // JavaScript truncates 10.0 to 10.
-    prettyList(a).should.equal(
-      '{ [10, 10.09999999], [10.1, 10.19999999], [10.2, 10.29999999], [10.3, 10.39999999], [10.4, 10.49999999], [10.5, 10.59999999], [10.6, 10.69999999], [10.7, 10.79999999], [10.8, 10.89999999], [10.9, 10.99999999] }'
-    );
+    prettyList(a).should.equal('{  }');
   });
 });
 
@@ -3619,6 +3628,7 @@ describe('LongIntervalExpand', () => {
   it('expands lists of multiple intervals', async function () {
     let a = await this.longNullInList.exec(this.ctx);
     prettyList(a).should.equal('{ [2, 2], [3, 3], [4, 4] }');
+    // define LongOverlapping: expand { Interval[2L, 4L], Interval[3L, 5L] } per 1 '1'
     a = await this.longOverlapping.exec(this.ctx);
     prettyList(a).should.equal('{ [2, 2], [3, 3], [4, 4], [5, 5] }');
     a = await this.longNonOverlapping.exec(this.ctx);
@@ -3665,11 +3675,21 @@ describe('LongIntervalExpand', () => {
     should.not.exist(a);
   });
 
-  it('produces a more precise value for output intervals', async function () {
+  it.skip('produces a more precise value for output intervals', async function () {
+    // This example from the spec is incorrect.
+    // Skip for now until we have more clarity on what the expected result should be
+    // https://jira.hl7.org/browse/FHIR-58705 and
+    // https://chat.fhir.org/#narrow/channel/179220-cql/topic/Interval.20Expand.20example/with/619051021
+    // There are two possible answers to consider:
+    // 1. { } (empty list) - I believe this is the correct answer per how the spec is currently written
+    // 2. { Interval[10.0, 10.0 ] } - this is the other possible answer, suggested in the Zulip thread.
+    //    This would be the correct answer if either:
+    //    - "intervals of size per" does not require the Size operator on the resulting intervals to = per
+    //    - the Size operator on an interval is based on the precision of its bounds, not Decimal point-size
+    //      (this one is likely the _intent_, but not how it is currently defined)
+
     const a = await this.longPerDecimalMorePrecise.exec(this.ctx);
-    prettyList(a).should.equal(
-      '{ [10, 10.09999999], [10.1, 10.19999999], [10.2, 10.29999999], [10.3, 10.39999999], [10.4, 10.49999999], [10.5, 10.59999999], [10.6, 10.69999999], [10.7, 10.79999999], [10.8, 10.89999999], [10.9, 10.99999999] }'
-    );
+    prettyList(a).should.equal('{  }');
   });
 });
 
@@ -3681,7 +3701,7 @@ describe('DecimalIntervalExpand', () => {
   it('expands single intervals', async function () {
     // define ClosedSingle: expand { Interval[2, 5] } per 1.5 '1'
     let a = await this.closedSingle.exec(this.ctx);
-    prettyList(a).should.equal('{ [2, 3.49999999], [3.5, 4.99999999] }');
+    prettyList(a).should.equal('{ [2.0, 3.49999999], [3.5, 4.99999999] }');
 
     // define ClosedSingle1: expand { Interval[2.5, 10] } per 2 '1'
     a = await this.closedSingle1.exec(this.ctx);
@@ -3690,22 +3710,22 @@ describe('DecimalIntervalExpand', () => {
     // define ClosedSingle2: expand { Interval[2, 4.5] } per 0.5 '1'
     a = await this.closedSingle2.exec(this.ctx);
     prettyList(a).should.equal(
-      '{ [2, 2.49999999], [2.5, 2.99999999], [3, 3.49999999], [3.5, 3.99999999], [4, 4.49999999] }'
+      '{ [2.0, 2.49999999], [2.5, 2.99999999], [3.0, 3.49999999], [3.5, 3.99999999], [4.0, 4.49999999] }'
     );
   });
 
   it('expands lists of multiple intervals', async function () {
     // define NullInList: expand { Interval[2, 5], null } per 1.5 '1'
     let a = await this.nullInList.exec(this.ctx);
-    prettyList(a).should.equal('{ [2, 3.49999999], [3.5, 4.99999999] }');
+    prettyList(a).should.equal('{ [2.0, 3.49999999], [3.5, 4.99999999] }');
 
     // define Overlapping: expand { Interval[2, 5], Interval[4, 7] } per 1.5 '1'
     a = await this.overlapping.exec(this.ctx);
-    prettyList(a).should.equal('{ [2, 3.49999999], [3.5, 4.99999999], [5, 6.49999999] }');
+    prettyList(a).should.equal('{ [2.0, 3.49999999], [3.5, 4.99999999], [5.0, 6.49999999] }');
 
     // define NonOverlapping: expand { Interval[2, 4], Interval[6, 8] } per 1.5 '1'
     a = await this.nonOverlapping.exec(this.ctx);
-    prettyList(a).should.equal('{ [2, 3.49999999], [6, 7.49999999] }');
+    prettyList(a).should.equal('{ [2.0, 3.49999999], [6.0, 7.49999999] }');
   });
 
   it('expands interval using default per of 1', async function () {
@@ -3717,11 +3737,11 @@ describe('DecimalIntervalExpand', () => {
   it('expands interval with open ends', async function () {
     // define OpenStart: expand { Interval(2, 5] } per 1.5 '1'
     let a = await this.openStart.exec(this.ctx);
-    prettyList(a).should.equal('{ [3, 4.49999999] }');
+    prettyList(a).should.equal('{ [3.0, 4.49999999] }');
 
     // define OpenEnd: expand { Interval[2, 5) } per 1.5 '1'
     a = await this.openEnd.exec(this.ctx);
-    prettyList(a).should.equal('{ [2, 3.49999999] }');
+    prettyList(a).should.equal('{ [2.0, 3.49999999] }');
 
     // define OpenBoth: expand { Interval(2, 5) } per 1.5 '1'
     (await this.openBoth.exec(this.ctx)).should.be.empty();

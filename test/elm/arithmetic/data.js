@@ -5394,6 +5394,9 @@ define ThreeExpFourReverseMixed: 3L ^ 4
 define TenLongExpNegativeOneLong: 10L ^ -1L
 define TwoLongExpMaxLong: 2L ^ maximum Long
 define TwoLongExpMinLong: 2L ^ minimum Long
+define DecimalPowerNeedsNormalization: 1.23456789 ^ 2.0
+define NegativeFractionalPower: (-1.0) ^ 0.5
+define ZeroNegativePower: 0.0 ^ -1.0
 */
 
 module.exports['Power'] = {
@@ -5408,7 +5411,7 @@ module.exports['Power'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "281",
+        "r" : "308",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -5986,6 +5989,211 @@ module.exports['Power'] = {
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "290",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "DecimalPowerNeedsNormalization",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "290",
+            "s" : [ {
+              "value" : [ "", "define ", "DecimalPowerNeedsNormalization", ": " ]
+            }, {
+              "r" : "291",
+              "s" : [ {
+                "r" : "292",
+                "value" : [ "1.23456789", " ^ ", "2.0" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Power",
+          "localId" : "291",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "294",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "295",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "292",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.23456789",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "293",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "2.0",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "298",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "NegativeFractionalPower",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "298",
+            "s" : [ {
+              "value" : [ "", "define ", "NegativeFractionalPower", ": " ]
+            }, {
+              "r" : "299",
+              "s" : [ {
+                "r" : "300",
+                "s" : [ {
+                  "value" : [ "(" ]
+                }, {
+                  "r" : "300",
+                  "s" : [ {
+                    "r" : "301",
+                    "value" : [ "-", "1.0" ]
+                  } ]
+                }, {
+                  "value" : [ ")" ]
+                } ]
+              }, {
+                "r" : "303",
+                "value" : [ " ^ ", "0.5" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Power",
+          "localId" : "299",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "304",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "305",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Negate",
+            "localId" : "300",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "302",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            } ],
+            "operand" : {
+              "type" : "Literal",
+              "localId" : "301",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.0",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "303",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.5",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "308",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "ZeroNegativePower",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "308",
+            "s" : [ {
+              "value" : [ "", "define ", "ZeroNegativePower", ": " ]
+            }, {
+              "r" : "309",
+              "s" : [ {
+                "r" : "310",
+                "value" : [ "0.0", " ^ " ]
+              }, {
+                "r" : "311",
+                "s" : [ {
+                  "r" : "312",
+                  "value" : [ "-", "1.0" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Power",
+          "localId" : "309",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "314",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "315",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "310",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.0",
+            "annotation" : [ ]
+          }, {
+            "type" : "Negate",
+            "localId" : "311",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "313",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            } ],
+            "operand" : {
+              "type" : "Literal",
+              "localId" : "312",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.0",
+              "annotation" : [ ]
+            }
           } ]
         }
       } ]
@@ -6600,6 +6808,12 @@ define Even: 9 div 3
 define TenDivThreeLong: 10L div 3L
 define TenDivThreeMixed: 10 div 3L
 define TenDivThreeReverseMixed: 10L div 3
+define QuantityTruncatedDivide: 10.5 'g' div 2.0 'g'
+define TruncatedDivideLargePositiveDecimal: 9007199254740993.0 div 1.0
+define TruncatedDivideDecimalJustBelowOne: 1.99999999 div 2.0
+define TruncatedDivideDecimalJustAboveOne: 2.00000001 div 2.0
+define TruncatedDivideLargePositiveQuantity: Quantity { value: 9007199254740993.0, unit: 'g' } div Quantity { value: 1.0, unit: 'g' }
+define TruncatedDivideQuantityJustBelowOne: Quantity { value: 1.99999999, unit: 'g' } div Quantity { value: 2.0, unit: 'g' }
 */
 
 module.exports['TruncatedDivide'] = {
@@ -6614,7 +6828,7 @@ module.exports['TruncatedDivide'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "249",
+        "r" : "308",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -6976,6 +7190,509 @@ module.exports['TruncatedDivide'] = {
               "value" : "3",
               "annotation" : [ ]
             }
+          } ]
+        }
+      }, {
+        "localId" : "260",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "QuantityTruncatedDivide",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "260",
+            "s" : [ {
+              "value" : [ "", "define ", "QuantityTruncatedDivide", ": " ]
+            }, {
+              "r" : "261",
+              "s" : [ {
+                "r" : "262",
+                "s" : [ {
+                  "value" : [ "10.5 ", "'g'" ]
+                } ]
+              }, {
+                "value" : [ " div " ]
+              }, {
+                "r" : "263",
+                "s" : [ {
+                  "value" : [ "2.0 ", "'g'" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "TruncatedDivide",
+          "localId" : "261",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "264",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "265",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Quantity",
+            "localId" : "262",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 10.5,
+            "unit" : "g",
+            "annotation" : [ ]
+          }, {
+            "type" : "Quantity",
+            "localId" : "263",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 2.0,
+            "unit" : "g",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "268",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "TruncatedDivideLargePositiveDecimal",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "268",
+            "s" : [ {
+              "value" : [ "", "define ", "TruncatedDivideLargePositiveDecimal", ": " ]
+            }, {
+              "r" : "269",
+              "s" : [ {
+                "r" : "270",
+                "value" : [ "9007199254740993.0", " div ", "1.0" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "TruncatedDivide",
+          "localId" : "269",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "272",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "273",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "270",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "9007199254740993.0",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "271",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.0",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "276",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "TruncatedDivideDecimalJustBelowOne",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "276",
+            "s" : [ {
+              "value" : [ "", "define ", "TruncatedDivideDecimalJustBelowOne", ": " ]
+            }, {
+              "r" : "277",
+              "s" : [ {
+                "r" : "278",
+                "value" : [ "1.99999999", " div ", "2.0" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "TruncatedDivide",
+          "localId" : "277",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "280",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "281",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "278",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.99999999",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "279",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "2.0",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "284",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "TruncatedDivideDecimalJustAboveOne",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "284",
+            "s" : [ {
+              "value" : [ "", "define ", "TruncatedDivideDecimalJustAboveOne", ": " ]
+            }, {
+              "r" : "285",
+              "s" : [ {
+                "r" : "286",
+                "value" : [ "2.00000001", " div ", "2.0" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "TruncatedDivide",
+          "localId" : "285",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "288",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "289",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "286",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "2.00000001",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "287",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "2.0",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "292",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "TruncatedDivideLargePositiveQuantity",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "292",
+            "s" : [ {
+              "value" : [ "", "define ", "TruncatedDivideLargePositiveQuantity", ": " ]
+            }, {
+              "r" : "293",
+              "s" : [ {
+                "r" : "294",
+                "s" : [ {
+                  "value" : [ "Quantity", " { " ]
+                }, {
+                  "s" : [ {
+                    "r" : "296",
+                    "value" : [ "value", ": ", "9007199254740993.0" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "s" : [ {
+                    "value" : [ "unit", ": " ]
+                  }, {
+                    "r" : "297",
+                    "s" : [ {
+                      "value" : [ "'g'" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              }, {
+                "value" : [ " div " ]
+              }, {
+                "r" : "299",
+                "s" : [ {
+                  "value" : [ "Quantity", " { " ]
+                }, {
+                  "s" : [ {
+                    "r" : "301",
+                    "value" : [ "value", ": ", "1.0" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "s" : [ {
+                    "value" : [ "unit", ": " ]
+                  }, {
+                    "r" : "302",
+                    "s" : [ {
+                      "value" : [ "'g'" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "TruncatedDivide",
+          "localId" : "293",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "304",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "305",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Instance",
+            "localId" : "294",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ],
+            "element" : [ {
+              "name" : "value",
+              "value" : {
+                "type" : "Literal",
+                "localId" : "296",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "9007199254740993.0",
+                "annotation" : [ ]
+              }
+            }, {
+              "name" : "unit",
+              "value" : {
+                "type" : "Literal",
+                "localId" : "297",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "g",
+                "annotation" : [ ]
+              }
+            } ]
+          }, {
+            "type" : "Instance",
+            "localId" : "299",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ],
+            "element" : [ {
+              "name" : "value",
+              "value" : {
+                "type" : "Literal",
+                "localId" : "301",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "1.0",
+                "annotation" : [ ]
+              }
+            }, {
+              "name" : "unit",
+              "value" : {
+                "type" : "Literal",
+                "localId" : "302",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "g",
+                "annotation" : [ ]
+              }
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "308",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "TruncatedDivideQuantityJustBelowOne",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "308",
+            "s" : [ {
+              "value" : [ "", "define ", "TruncatedDivideQuantityJustBelowOne", ": " ]
+            }, {
+              "r" : "309",
+              "s" : [ {
+                "r" : "310",
+                "s" : [ {
+                  "value" : [ "Quantity", " { " ]
+                }, {
+                  "s" : [ {
+                    "r" : "312",
+                    "value" : [ "value", ": ", "1.99999999" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "s" : [ {
+                    "value" : [ "unit", ": " ]
+                  }, {
+                    "r" : "313",
+                    "s" : [ {
+                      "value" : [ "'g'" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              }, {
+                "value" : [ " div " ]
+              }, {
+                "r" : "315",
+                "s" : [ {
+                  "value" : [ "Quantity", " { " ]
+                }, {
+                  "s" : [ {
+                    "r" : "317",
+                    "value" : [ "value", ": ", "2.0" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "s" : [ {
+                    "value" : [ "unit", ": " ]
+                  }, {
+                    "r" : "318",
+                    "s" : [ {
+                      "value" : [ "'g'" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "TruncatedDivide",
+          "localId" : "309",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "320",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "321",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Instance",
+            "localId" : "310",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ],
+            "element" : [ {
+              "name" : "value",
+              "value" : {
+                "type" : "Literal",
+                "localId" : "312",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "1.99999999",
+                "annotation" : [ ]
+              }
+            }, {
+              "name" : "unit",
+              "value" : {
+                "type" : "Literal",
+                "localId" : "313",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "g",
+                "annotation" : [ ]
+              }
+            } ]
+          }, {
+            "type" : "Instance",
+            "localId" : "315",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ],
+            "element" : [ {
+              "name" : "value",
+              "value" : {
+                "type" : "Literal",
+                "localId" : "317",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "2.0",
+                "annotation" : [ ]
+              }
+            }, {
+              "name" : "unit",
+              "value" : {
+                "type" : "Literal",
+                "localId" : "318",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "g",
+                "annotation" : [ ]
+              }
+            } ]
           } ]
         }
       } ]
@@ -7492,6 +8209,7 @@ context Patient
 define Ceil: Ceiling(10.1)
 define Even: Ceiling(10)
 define CeilTenLong: Ceiling(10L)
+define CeilingOverflow: Ceiling(2147483647.1)
 */
 
 module.exports['Ceiling'] = {
@@ -7506,7 +8224,7 @@ module.exports['Ceiling'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "238",
+        "r" : "253",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -7726,6 +8444,48 @@ module.exports['Ceiling'] = {
             }
           }
         }
+      }, {
+        "localId" : "253",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "CeilingOverflow",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "253",
+            "s" : [ {
+              "value" : [ "", "define ", "CeilingOverflow", ": " ]
+            }, {
+              "r" : "258",
+              "s" : [ {
+                "r" : "254",
+                "value" : [ "Ceiling", "(", "2147483647.1", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Ceiling",
+          "localId" : "258",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "259",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "254",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "2147483647.1",
+            "annotation" : [ ]
+          }
+        }
       } ]
     }
   }
@@ -7738,6 +8498,7 @@ context Patient
 define flr: Floor(10.1)
 define Even: Floor(10)
 define FloorTenLong: Floor(10L)
+define FloorUnderflow: Floor(-2147483648.1)
 */
 
 module.exports['Floor'] = {
@@ -7752,7 +8513,7 @@ module.exports['Floor'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "238",
+        "r" : "253",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -7972,6 +8733,67 @@ module.exports['Floor'] = {
             }
           }
         }
+      }, {
+        "localId" : "253",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "FloorUnderflow",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "253",
+            "s" : [ {
+              "value" : [ "", "define ", "FloorUnderflow", ": " ]
+            }, {
+              "r" : "260",
+              "s" : [ {
+                "value" : [ "Floor", "(" ]
+              }, {
+                "r" : "254",
+                "s" : [ {
+                  "r" : "255",
+                  "value" : [ "-", "2147483648.1" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Floor",
+          "localId" : "260",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "261",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Negate",
+            "localId" : "254",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "256",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            } ],
+            "operand" : {
+              "type" : "Literal",
+              "localId" : "255",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2147483648.1",
+              "annotation" : [ ]
+            }
+          }
+        }
       } ]
     }
   }
@@ -7984,6 +8806,7 @@ context Patient
 define Trunc: Truncate(10.1)
 define Even: Truncate(10)
 define TruncTenLong: Truncate(10L)
+define TruncateOverflow: Truncate(2147483648.0)
 */
 
 module.exports['Truncate'] = {
@@ -7998,7 +8821,7 @@ module.exports['Truncate'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "238",
+        "r" : "253",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -8216,6 +9039,48 @@ module.exports['Truncate'] = {
               "value" : "10",
               "annotation" : [ ]
             }
+          }
+        }
+      }, {
+        "localId" : "253",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "TruncateOverflow",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "253",
+            "s" : [ {
+              "value" : [ "", "define ", "TruncateOverflow", ": " ]
+            }, {
+              "r" : "258",
+              "s" : [ {
+                "r" : "254",
+                "value" : [ "Truncate", "(", "2147483648.0", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Truncate",
+          "localId" : "258",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "259",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "254",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "2147483648.0",
+            "annotation" : [ ]
           }
         }
       } ]
@@ -8642,6 +9507,14 @@ define Up: Round(4.56)
 define Up_percent: Round(4.56,1)
 define Down: Round(4.49)
 define Down_percent: Round(4.43,1)
+define NegativeHalf: Round(-0.5)
+define NegativeOnePointFive: Round(-1.5)
+define RoundPositiveHalfOmittedPrecision: Round(1.5)
+define RoundPositiveHalfNullPrecision: Round(1.5, null as Integer)
+define RoundPositiveHalfZeroPrecision: Round(1.5, 0)
+define RoundNegativeHalfOmittedPrecision: Round(-1.5)
+define RoundNegativeHalfNullPrecision: Round(-1.5, null as Integer)
+define RoundNegativeHalfZeroPrecision: Round(-1.5, 0)
 */
 
 module.exports['Round'] = {
@@ -8656,7 +9529,7 @@ module.exports['Round'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "244",
+        "r" : "340",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -8919,6 +9792,542 @@ module.exports['Round'] = {
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "1",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "256",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "NegativeHalf",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "256",
+            "s" : [ {
+              "value" : [ "", "define ", "NegativeHalf", ": " ]
+            }, {
+              "r" : "263",
+              "s" : [ {
+                "value" : [ "Round", "(" ]
+              }, {
+                "r" : "257",
+                "s" : [ {
+                  "r" : "258",
+                  "value" : [ "-", "0.5" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Round",
+          "localId" : "263",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "264",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Negate",
+            "localId" : "257",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "259",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            } ],
+            "operand" : {
+              "type" : "Literal",
+              "localId" : "258",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "0.5",
+              "annotation" : [ ]
+            }
+          }
+        }
+      }, {
+        "localId" : "267",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "NegativeOnePointFive",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "267",
+            "s" : [ {
+              "value" : [ "", "define ", "NegativeOnePointFive", ": " ]
+            }, {
+              "r" : "274",
+              "s" : [ {
+                "value" : [ "Round", "(" ]
+              }, {
+                "r" : "268",
+                "s" : [ {
+                  "r" : "269",
+                  "value" : [ "-", "1.5" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Round",
+          "localId" : "274",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "275",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Negate",
+            "localId" : "268",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "270",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            } ],
+            "operand" : {
+              "type" : "Literal",
+              "localId" : "269",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.5",
+              "annotation" : [ ]
+            }
+          }
+        }
+      }, {
+        "localId" : "278",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "RoundPositiveHalfOmittedPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "278",
+            "s" : [ {
+              "value" : [ "", "define ", "RoundPositiveHalfOmittedPrecision", ": " ]
+            }, {
+              "r" : "283",
+              "s" : [ {
+                "r" : "279",
+                "value" : [ "Round", "(", "1.5", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Round",
+          "localId" : "283",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "284",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "279",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.5",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "287",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "RoundPositiveHalfNullPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "287",
+            "s" : [ {
+              "value" : [ "", "define ", "RoundPositiveHalfNullPrecision", ": " ]
+            }, {
+              "r" : "296",
+              "s" : [ {
+                "r" : "288",
+                "value" : [ "Round", "(", "1.5", ", " ]
+              }, {
+                "r" : "289",
+                "s" : [ {
+                  "r" : "290",
+                  "value" : [ "null", " as " ]
+                }, {
+                  "r" : "291",
+                  "s" : [ {
+                    "value" : [ "Integer" ]
+                  } ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Round",
+          "localId" : "296",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "297",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "298",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "288",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.5",
+            "annotation" : [ ]
+          },
+          "precision" : {
+            "type" : "As",
+            "localId" : "289",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "strict" : false,
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "290",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "291",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          }
+        }
+      }, {
+        "localId" : "301",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "RoundPositiveHalfZeroPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "301",
+            "s" : [ {
+              "value" : [ "", "define ", "RoundPositiveHalfZeroPrecision", ": " ]
+            }, {
+              "r" : "308",
+              "s" : [ {
+                "r" : "302",
+                "value" : [ "Round", "(", "1.5", ", ", "0", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Round",
+          "localId" : "308",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "309",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "310",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "302",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.5",
+            "annotation" : [ ]
+          },
+          "precision" : {
+            "type" : "Literal",
+            "localId" : "303",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "313",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "RoundNegativeHalfOmittedPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "313",
+            "s" : [ {
+              "value" : [ "", "define ", "RoundNegativeHalfOmittedPrecision", ": " ]
+            }, {
+              "r" : "320",
+              "s" : [ {
+                "value" : [ "Round", "(" ]
+              }, {
+                "r" : "314",
+                "s" : [ {
+                  "r" : "315",
+                  "value" : [ "-", "1.5" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Round",
+          "localId" : "320",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "321",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Negate",
+            "localId" : "314",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "316",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            } ],
+            "operand" : {
+              "type" : "Literal",
+              "localId" : "315",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.5",
+              "annotation" : [ ]
+            }
+          }
+        }
+      }, {
+        "localId" : "324",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "RoundNegativeHalfNullPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "324",
+            "s" : [ {
+              "value" : [ "", "define ", "RoundNegativeHalfNullPrecision", ": " ]
+            }, {
+              "r" : "335",
+              "s" : [ {
+                "value" : [ "Round", "(" ]
+              }, {
+                "r" : "325",
+                "s" : [ {
+                  "r" : "326",
+                  "value" : [ "-", "1.5" ]
+                } ]
+              }, {
+                "value" : [ ", " ]
+              }, {
+                "r" : "328",
+                "s" : [ {
+                  "r" : "329",
+                  "value" : [ "null", " as " ]
+                }, {
+                  "r" : "330",
+                  "s" : [ {
+                    "value" : [ "Integer" ]
+                  } ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Round",
+          "localId" : "335",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "336",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "337",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Negate",
+            "localId" : "325",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "327",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            } ],
+            "operand" : {
+              "type" : "Literal",
+              "localId" : "326",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.5",
+              "annotation" : [ ]
+            }
+          },
+          "precision" : {
+            "type" : "As",
+            "localId" : "328",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "strict" : false,
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "329",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "330",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          }
+        }
+      }, {
+        "localId" : "340",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "RoundNegativeHalfZeroPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "340",
+            "s" : [ {
+              "value" : [ "", "define ", "RoundNegativeHalfZeroPrecision", ": " ]
+            }, {
+              "r" : "349",
+              "s" : [ {
+                "value" : [ "Round", "(" ]
+              }, {
+                "r" : "341",
+                "s" : [ {
+                  "r" : "342",
+                  "value" : [ "-", "1.5" ]
+                } ]
+              }, {
+                "r" : "344",
+                "value" : [ ", ", "0", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Round",
+          "localId" : "349",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "350",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "351",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Negate",
+            "localId" : "341",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "343",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            } ],
+            "operand" : {
+              "type" : "Literal",
+              "localId" : "342",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.5",
+              "annotation" : [ ]
+            }
+          },
+          "precision" : {
+            "type" : "Literal",
+            "localId" : "344",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0",
             "annotation" : [ ]
           }
         }
@@ -13277,7 +14686,7 @@ define LongMultiplyNearUnderflow: minimum Long * 1L
 // NOTE: Long division results in decimal, so it must overflow/underflow decimal
 define LongDivideOverflow: maximum Long / 0.05
 define LongDivideUnderflow: minimum Long / 0.05
-define LongDivideNearOverflow: maximum Long / 1024L
+define LongDivideNearOverflow: maximum Long / 92737L
 define LongDivideNearUnderflow: minimum Long / 1024L
 define LongDivideByZero: 1L / 0L
 define LongPowerOverflow: (maximum Long)^3L
@@ -16148,7 +17557,7 @@ module.exports['OutOfBounds'] = {
                 } ]
               }, {
                 "r" : "600",
-                "value" : [ " / ", "1024L" ]
+                "value" : [ " / ", "92737L" ]
               } ]
             } ]
           }
@@ -16201,7 +17610,7 @@ module.exports['OutOfBounds'] = {
               "localId" : "600",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
               "valueType" : "{urn:hl7-org:elm-types:r1}Long",
-              "value" : "1024",
+              "value" : "92737",
               "annotation" : [ ]
             }
           } ]

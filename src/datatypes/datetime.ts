@@ -19,6 +19,8 @@ import {
   MIN_DATETIME_VALUE_STRING,
   MIN_TIME_VALUE_STRING
 } from '../util/limits';
+import { Decimal } from './decimal';
+import { equals } from '../util/comparison';
 
 // It's easiest and most performant to organize formats by length of the supported strings.
 // This way we can test strings only against the formats that have a chance of working.
@@ -529,7 +531,7 @@ export class DateTime extends AbstractDate {
   minute: number | null;
   second: number | null;
   millisecond: number | null;
-  timezoneOffset: number | null;
+  timezoneOffset: Decimal | null;
 
   static readonly Unit = {
     YEAR: 'year',
@@ -599,13 +601,19 @@ export class DateTime extends AbstractDate {
   }
 
   // TODO: Note: using the jsDate type causes issues, fix later
-  static fromJSDate(date: any, timezoneOffset?: any) {
+  static fromJSDate(date: any, timezoneOffset?: number | string | Decimal) {
     //This is from a JS Date, not a CQL Date
     if (date instanceof DateTime) {
       return date;
     }
     if (timezoneOffset != null) {
-      date = new jsDate(date.getTime() + timezoneOffset * 60 * 60 * 1000);
+      let tzOffset: number;
+      if (timezoneOffset instanceof Decimal) {
+        tzOffset = timezoneOffset.toNumber();
+      } else {
+        tzOffset = +timezoneOffset;
+      }
+      date = new jsDate(date.getTime() + tzOffset * 60 * 60 * 1000);
       return new DateTime(
         date.getUTCFullYear(),
         date.getUTCMonth() + 1,
@@ -614,7 +622,7 @@ export class DateTime extends AbstractDate {
         date.getUTCMinutes(),
         date.getUTCSeconds(),
         date.getUTCMilliseconds(),
-        timezoneOffset
+        tzOffset
       );
     } else {
       return new DateTime(
@@ -641,7 +649,7 @@ export class DateTime extends AbstractDate {
       luxonDT.minute,
       luxonDT.second,
       luxonDT.millisecond,
-      luxonDT.offset / 60
+      Decimal.from(luxonDT.offset / 60)
     );
   }
 
@@ -653,7 +661,7 @@ export class DateTime extends AbstractDate {
     minute: number | null = null,
     second: number | null = null,
     millisecond: number | null = null,
-    timezoneOffset?: number | null
+    timezoneOffset?: Decimal | number | null
   ) {
     // from the spec: If no timezone is specified, the timezone of the evaluation request timestamp is used.
     // NOTE: timezoneOffset will be explicitly null for the Time overload, whereas
@@ -664,9 +672,11 @@ export class DateTime extends AbstractDate {
     this.second = second;
     this.millisecond = millisecond;
     if (timezoneOffset === undefined) {
-      this.timezoneOffset = (new jsDate().getTimezoneOffset() / 60) * -1;
+      this.timezoneOffset = Decimal.from((new jsDate().getTimezoneOffset() / 60) * -1);
+    } else if (timezoneOffset === null) {
+      this.timezoneOffset = null;
     } else {
-      this.timezoneOffset = timezoneOffset;
+      this.timezoneOffset = Decimal.from(timezoneOffset);
     }
   }
 
@@ -819,7 +829,7 @@ export class DateTime extends AbstractDate {
 
   isUTC() {
     // A timezoneOffset of 0 indicates UTC time.
-    return !this.timezoneOffset;
+    return this.timezoneOffset?.equals(0);
   }
 
   getPrecision() {
@@ -869,7 +879,7 @@ export class DateTime extends AbstractDate {
   toLuxonDateTime() {
     const offsetMins =
       this.timezoneOffset != null
-        ? this.timezoneOffset * 60
+        ? this.timezoneOffset.toNumber() * 60
         : new jsDate().getTimezoneOffset() * -1;
     return LuxonDateTime.fromObject(
       {
@@ -958,10 +968,11 @@ export class DateTime extends AbstractDate {
     }
 
     if (str.indexOf('T') !== -1 && this.timezoneOffset != null) {
-      str += this.timezoneOffset < 0 ? '-' : '+';
-      const offsetHours = Math.floor(Math.abs(this.timezoneOffset));
+      const tzOffset = this.timezoneOffset.toNumber();
+      str += tzOffset < 0 ? '-' : '+';
+      const offsetHours = Math.floor(Math.abs(tzOffset));
       str += String(offsetHours).padStart(2, '0');
-      const offsetMin = (Math.abs(this.timezoneOffset) - offsetHours) * 60;
+      const offsetMin = (Math.abs(tzOffset) - offsetHours) * 60;
       str += ':' + String(offsetMin).padStart(2, '0');
     }
 
@@ -1202,7 +1213,7 @@ export class Date extends AbstractDate {
     return str;
   }
 
-  getDateTime(timeZoneOffset?: number | null) {
+  getDateTime(timeZoneOffset?: Decimal | number | null) {
     // from the spec: the result will be a DateTime with the time components unspecified,
     // except for the timezone offset, which will be set to the timezone offset of the evaluation
     // request timestamp. (this last part is achieved by passing in the timeZoneOffset from the context)
@@ -1264,7 +1275,11 @@ function compareWithDefaultResult(a: any, b: any, defaultResult: any) {
   }
 
   // make a copy of other in the correct timezone offset if they don't match.
-  if (a.timezoneOffset !== b.timezoneOffset) {
+  const differentTZ =
+    a.timeZoneOffset == null
+      ? b.timezoneOffset != null
+      : !a.timezoneOffset.equals(b.timezoneOffset);
+  if (differentTZ) {
     b = b.convertToTimezoneOffset(a.timezoneOffset);
   }
 
@@ -1286,7 +1301,7 @@ function compareWithDefaultResult(a: any, b: any, defaultResult: any) {
       }
 
       // if they are different then return with false
-      if (a[field] !== b[field]) {
+      if (!equals(a[field], b[field])) {
         return false;
       }
 
