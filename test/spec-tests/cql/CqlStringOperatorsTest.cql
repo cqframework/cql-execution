@@ -356,7 +356,7 @@ define "Upper": Tuple{
 
 define "toString tests": Tuple{
   "QuantityToString": Tuple{
-    skipped: 'Wrong output: Spec says Quantity and Decimal ToString must always contain a decimal point and at least 1 digit on each side'
+    skipped: 'Wrong output: Spec says Quantity and Decimal ToString must always contain a decimal point and at least 1 digit on each side. Note this requirement itself also causes issues by introducing precision in the string that may not exist in the original Decimal. Future spec changes may make this test\'s expected value correct.'
     /*
     expression: ToString(125 'cm'),
     output: '125 \'cm\''

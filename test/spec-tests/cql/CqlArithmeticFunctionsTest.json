@@ -19414,7 +19414,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong answer: Translator loses Decimal in ELM representation of Quantity literal.",
+                        "value": "Wrong answer: Translator loses Decimal precision (trailing zeros) in ELM representation of Quantity literal",
                         "annotation": []
                       }
                     }

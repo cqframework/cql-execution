@@ -15,14 +15,15 @@ CqlIntervalOperatorsTest.ProperIn.TimeProperInPrecisionFalse    Wrong output: Ac
 CqlIntervalOperatorsTest.ProperIn.TimeProperInFalse             Wrong output: According to spec, a contained point is properly in as long as the interval is not a unit interval
 CqlIntervalOperatorsTest.Expand.ExpandPer0D1                    Wrong output: Clarification still needed but provided answer is incorrect. See https://jira.hl7.org/browse/FHIR-58705
 CqlIntervalOperatorsTest.Expand.ExpandPer0D1IntervalOverload    Wrong output: Clarification still needed but provided answer is incorrect. See https://jira.hl7.org/browse/FHIR-58705
-CqlIntervalOperatorsTest.Except.DecimalIntervalExcept1to3       # Wrong output: Interval Except should be precision-aware (based on interval Start/End).
-CqlIntervalOperatorsTest.Except.QuantityIntervalExcept1to4      # Wrong output: Interval Except should be precision-aware (based on interval Start/End). Unrelated second issue: the ELM representation of Quantity is a plain number which does not preserve the value scale
+CqlIntervalOperatorsTest.Except.DecimalIntervalExcept1to3       # Wrong output: The expected value is a closed form of the correct open-endpoint Interval[1.0, 4.0) . Converting to closed-form produces different results for CQL 2.0.0+ due to Decimal precision-awareness. See https://jira.hl7.org/browse/FHIR-59229
+CqlIntervalOperatorsTest.Except.QuantityIntervalExcept1to4      # Wrong output: The expected value is a closed form of the correct open-endpoint Interval[1.0 'g', 5.0 'g'). Converting to closed-form produces different results for CQL 2.0.0+ due to Decimal precision-awareness. See https://jira.hl7.org/browse/FHIR-59229
+CqlIntervalOperatorsTest.Intersect.TestIntersectNull            Wrong output: Expected is Interval[5, null) but this example is in the spec, where the result "ends at some value between 5 and 10" meaning an uncertainty.
 
 CqlListOperatorsTest.Equal.EqualNullNull                        Wrong output: According to spec, if either list contains a null, the result is null
 CqlListOperatorsTest.Sort.simpleSortAsc                         Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 CqlListOperatorsTest.Sort.simpleSortDesc                        Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 CqlIntervalOperatorsTest.PointFrom.TestPointFromNull            Wrong output: Interval[null, null] is not a unit interval, nor is it null
-"CqlStringOperatorsTest.toString tests.QuantityToString"        Wrong output: Spec says Quantity and Decimal ToString must always contain a decimal point and at least 1 digit on each side
+"CqlStringOperatorsTest.toString tests.QuantityToString"        Wrong output: Spec says Quantity and Decimal ToString must always contain a decimal point and at least 1 digit on each side. Note this requirement itself also causes issues by introducing precision in the string that may not exist in the original Decimal. Future spec changes may make this test's expected value correct.
 CqlArithmeticFunctionsTest.Power.Power0To0                      Wrong output: As of CQL 2.0, Power always returns Decimal
 CqlArithmeticFunctionsTest.Power.Power2To2                      Wrong output: As of CQL 2.0, Power always returns Decimal
 CqlArithmeticFunctionsTest.Power.PowerNeg2To2                   Wrong output: As of CQL 2.0, Power always returns Decimal
@@ -39,6 +40,7 @@ ValueLiteralsAndSelectors.Integer.IntegerNeg2Pow31IntegerMinValue           Wron
 CqlComparisonOperatorsTest.Equal.TupleEqDifferentNamesWithOneNullId                 Wrong output: Tuple equality with a known-unequal element should return false
 "CqlComparisonOperatorsTest.Not Equal.TupleNotEqDifferingNamesWithOneNullId"        Wrong output: Tuple inequality with a known-unequal element should return true
 CqlStringOperatorsTest.Substring.SubstringEmptyAnd0                   Wrong output: Substring(x, x.length) should be null'. Note similar test SubstringAB2. See https://github.com/cqframework/cql-tests/issues/149
+"CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision2"      Wrong output: Comparing an imprecise time with a more precise time results in uncertainty
 
 # Potentially Incorrect Expected Output
 "CqlStringOperatorsTest.toString tests.DateTimeToString2"         Answer does not include timezone offset, but default offset depends on test environment
@@ -62,7 +64,6 @@ CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (tr
 
 CqlIntervalOperatorsTest.Collapse.TestCollapseNull              Wrong answer (Interval(null, null) vs null)
 CqlIntervalOperatorsTest.Expand.ExpandListWithNull                        Wrong answer (should be empty list due to removing nulls)
-CqlIntervalOperatorsTest.Intersect.TestIntersectNull            Wrong answer (Interval[5, 10] vs Interval[5, null))
 CqlTypeOperatorsTest.Convert.StringToDateTime                   Wrong answer (different offsets)
 CqlTypeOperatorsTest.ToDateTime.ToDateTime1                     Wrong answer (different offsets)
 CqlTypeOperatorsTest.ToDateTime.ToDateTime2                     Wrong answer (different offsets)
@@ -71,8 +72,7 @@ ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    
 ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number); intermediate value exceeds max Decimal
 
 "CqlDateTimeOperatorsTest.Uncertainty tests.DateTimeDurationBetweenUncertainInterval"   Wrong answer: [17, 44] vs [16, 44]
-"CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision2"      Wrong answer: 1 vs uncertainty [0, 1]
-CqlDateTimeOperatorsTest.Subtract.DateTimeSubtract1YearInSeconds                        Wrong answer: Date math evaluates to 2015-06 vs expected 2015-05
+CqlDateTimeOperatorsTest.Subtract.DateTimeSubtract1YearInSeconds                        Wrong answer: Date math evaluates to 2015-06 vs expected 2015-05, due to us using more-precise semantics for calendar-based units
 CqlTypesTest.DateTime.DateTimeNull                                                      Wrong answer: null vs DateTime with null components
 CqlTypesTest.Time.TimeMillisParsing                                                     Wrong answer: @T23:59:59.100 vs @T23:59:59.10000
 CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1QCMPrecision          Wrong answer: Translator loses Decimal precision (trailing zeros) in ELM representation of Quantity literal

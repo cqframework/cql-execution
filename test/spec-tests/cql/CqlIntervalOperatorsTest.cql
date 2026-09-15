@@ -544,7 +544,7 @@ define "Except": Tuple{
     output: null
   },
   "DecimalIntervalExcept1to3": Tuple{
-    skipped: '# Wrong output: Interval Except should be precision-aware (based on interval Start/End).'
+    skipped: '# Wrong output: The expected value is a closed form of the correct open-endpoint Interval[1.0, 4.0) . Converting to closed-form produces different results for CQL 2.0.0+ due to Decimal precision-awareness. See https://jira.hl7.org/browse/FHIR-59229'
     /*
     expression: Interval[1.0, 10.0] except Interval[4.0, 10.0],
     output: Interval [ 1.0, 3.99999999 ]
@@ -554,7 +554,7 @@ define "Except": Tuple{
     output: null
   },
   "QuantityIntervalExcept1to4": Tuple{
-    skipped: '# Wrong output: Interval Except should be precision-aware (based on interval Start/End). Unrelated second issue: the ELM representation of Quantity is a plain number which does not preserve the value scale'
+    skipped: '# Wrong output: The expected value is a closed form of the correct open-endpoint Interval[1.0 \'g\', 5.0 \'g\'). Converting to closed-form produces different results for CQL 2.0.0+ due to Decimal precision-awareness. See https://jira.hl7.org/browse/FHIR-59229'
     /*
     expression: Interval[1.0 'g', 10.0 'g'] except Interval[5.0 'g', 10.0 'g'],
     output: Interval [ 1.0 'g', 4.99999999 'g' ]
@@ -760,7 +760,7 @@ define "Included In": Tuple{
 
 define "Intersect": Tuple{
   "TestIntersectNull": Tuple{
-    skipped: 'Wrong answer (Interval[5, 10] vs Interval[5, null))'
+    skipped: 'Wrong output: Expected is Interval[5, null) but this example is in the spec, where the result "ends at some value between 5 and 10" meaning an uncertainty.'
     /*
     expression: Interval[1, 10] intersect Interval[5, null),
     output: Interval[5, null)

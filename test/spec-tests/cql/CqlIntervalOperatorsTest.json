@@ -30331,7 +30331,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "# Wrong output: Interval Except should be precision-aware (based on interval Start/End).",
+                        "value": "# Wrong output: The expected value is a closed form of the correct open-endpoint Interval[1.0, 4.0) . Converting to closed-form produces different results for CQL 2.0.0+ due to Decimal precision-awareness. See https://jira.hl7.org/browse/FHIR-59229",
                         "annotation": []
                       }
                     }
@@ -30487,7 +30487,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "# Wrong output: Interval Except should be precision-aware (based on interval Start/End). Unrelated second issue: the ELM representation of Quantity is a plain number which does not preserve the value scale",
+                        "value": "# Wrong output: The expected value is a closed form of the correct open-endpoint Interval[1.0 'g', 5.0 'g'). Converting to closed-form produces different results for CQL 2.0.0+ due to Decimal precision-awareness. See https://jira.hl7.org/browse/FHIR-59229",
                         "annotation": []
                       }
                     }
@@ -41377,7 +41377,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong answer (Interval[5, 10] vs Interval[5, null))",
+                        "value": "Wrong output: Expected is Interval[5, null) but this example is in the spec, where the result \"ends at some value between 5 and 10\" meaning an uncertainty.",
                         "annotation": []
                       }
                     }

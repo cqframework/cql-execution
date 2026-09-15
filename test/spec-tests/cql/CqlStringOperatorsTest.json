@@ -10434,7 +10434,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong output: Spec says Quantity and Decimal ToString must always contain a decimal point and at least 1 digit on each side",
+                        "value": "Wrong output: Spec says Quantity and Decimal ToString must always contain a decimal point and at least 1 digit on each side. Note this requirement itself also causes issues by introducing precision in the string that may not exist in the original Decimal. Future spec changes may make this test's expected value correct.",
                         "annotation": []
                       }
                     }

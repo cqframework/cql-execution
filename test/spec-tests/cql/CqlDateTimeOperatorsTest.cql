@@ -718,7 +718,7 @@ define "Uncertainty tests": Tuple{
     invalid: true
     */  },
   "TimeDurationBetweenHourDiffPrecision2": Tuple{
-    skipped: 'Wrong answer: 1 vs uncertainty [0, 1]'
+    skipped: 'Wrong output: Comparing an imprecise time with a more precise time results in uncertainty'
     /*
     expression: hours between @T06 and @T07:00:00,
     output: 1
@@ -1235,7 +1235,7 @@ define "Subtract": Tuple{
     output: @2005-05-10T05:05:05
   },
   "DateTimeSubtract1YearInSeconds": Tuple{
-    skipped: 'Wrong answer: Date math evaluates to 2015-06 vs expected 2015-05'
+    skipped: 'Wrong answer: Date math evaluates to 2015-06 vs expected 2015-05, due to us using more-precise semantics for calendar-based units'
     /*
     expression: DateTime(2016,5) - 31535999 seconds = DateTime(2015, 5),
     output: true

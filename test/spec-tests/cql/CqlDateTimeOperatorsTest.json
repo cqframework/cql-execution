@@ -30991,7 +30991,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong answer: 1 vs uncertainty [0, 1]",
+                        "value": "Wrong output: Comparing an imprecise time with a more precise time results in uncertainty",
                         "annotation": []
                       }
                     }
@@ -53863,7 +53863,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong answer: Date math evaluates to 2015-06 vs expected 2015-05",
+                        "value": "Wrong answer: Date math evaluates to 2015-06 vs expected 2015-05, due to us using more-precise semantics for calendar-based units",
                         "annotation": []
                       }
                     }

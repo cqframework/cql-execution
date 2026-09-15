@@ -720,7 +720,7 @@ define "Predecessor": Tuple{
     output: 0.99999999'cm'
     */  },
   "PredecessorOf1QCMPrecision": Tuple{
-    skipped: 'Wrong answer: Translator loses Decimal in ELM representation of Quantity literal.'
+    skipped: 'Wrong answer: Translator loses Decimal precision (trailing zeros) in ELM representation of Quantity literal'
     /*
     expression: predecessor of 1.0 'cm',
     output: 0.9'cm'
