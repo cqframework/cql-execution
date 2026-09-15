@@ -68,6 +68,9 @@ export class Decimal {
 
     const unscaledResult = new Decimal(operation.call(this.value, decimalOther.value));
 
+    // NOTE: As of 2.0.0, the CQL spec says that scale of a Decimal should be preserved,
+    // but does not describe how to propagate scale through arithmetic operations.
+    // Unless otherwise stated, all the scale logic in this class is a best-guess based on testing.
     if (scaleLogic) {
       const targetScale = scaleLogic.call(null, this.scale, decimalOther.scale);
       return unscaledResult.withScale(targetScale);
@@ -96,6 +99,8 @@ export class Decimal {
       throw new RangeError('Cannot divide a decimal by zero');
     }
     // division scaling is more complex, depends on whether the actual result can be represented exactly
+    // IMPORTANT: The details of how to propagate Decimal scale through math are not defined in the CQL spec.
+    // The notes below are a best-guess on how to get desirable results based on some examples.
     const unscaledResult = this.applyWrapper(this.value.dividedBy, decimalOther);
     const unscaledDecimalPlaces = unscaledResult.value.decimalPlaces();
     if (unscaledDecimalPlaces > CQL_IMPLICIT_SCALE) {
@@ -111,7 +116,7 @@ export class Decimal {
     const preferredScale = Math.max(this.scale - decimalOther.scale, 0);
 
     // examples:
-    // |               | Preferred |  Expected  |
+    // |               | Preferred |  Desired   |
     // | Expression    |  scale    |   result   |
     // | ------------- | --------: | ---------: |
     // | 4.0 / 2       |         1 |        2.0 |
