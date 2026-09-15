@@ -3,7 +3,6 @@ CqlTypesTest.Time.TimeUpperBoundHours       Intentional Translator error: Invali
 CqlTypesTest.Time.TimeUpperBoundMinutes     Translator error: Invalid time input[...]
 CqlTypesTest.Time.TimeUpperBoundSeconds     Translator error: Invalid time input[...]
 "CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision"       Translator error: Syntax error at Z
-CqlDateTimeOperatorsTest.DateTimeComponentFrom.DateTimeComponentFromTimezoneOffset      Translator error: Timezone keyword is only valid in 1.3 or lower
 
 # Invalid Translation (translates, but translates wrong)
 CqlAggregateTest.AggregateTests.RolledOutIntervals  CQL adds an integer to a date ("S + duration in days of X"). Should be "S + Quantity{ value: duration in days of X, unit: 'days' }". Translator translates it, but probably shouldn't.
@@ -23,15 +22,7 @@ CqlListOperatorsTest.Equal.EqualNullNull                        Wrong output: Ac
 CqlListOperatorsTest.Sort.simpleSortAsc                         Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 CqlListOperatorsTest.Sort.simpleSortDesc                        Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 CqlIntervalOperatorsTest.PointFrom.TestPointFromNull            Wrong output: Interval[null, null] is not a unit interval, nor is it null
-"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10d1ByNeg3D1Quantity"     Wrong output: The resulting Quantity should have an appropriate unit; 'g' / 'g' should be '1', not 'g'. See https://github.com/cqframework/cql-tests/pull/148
-"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10By5DQuantity"           Wrong output: The resulting Quantity should have an appropriate unit
-"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide414By206DQuantity"        Wrong output: The resulting Quantity should have an appropriate unit
 "CqlStringOperatorsTest.toString tests.QuantityToString"        Wrong output: Spec says Quantity and Decimal ToString must always contain a decimal point and at least 1 digit on each side
-CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1D          Wrong output: As of 2.0 Successor of Decimal should be precision-aware. See https://github.com/cqframework/cql-tests/pull/147
-CqlArithmeticFunctionsTest.Predecessor.PredecessorOf101D        Wrong output: As of 2.0 Successor of Decimal should be precision-aware
-CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1QCM        Wrong output: As of 2.0 Successor of Decimal should be precision-aware
-CqlArithmeticFunctionsTest.Successor.SuccessorOf1D              Wrong output: As of 2.0 Successor of Decimal should be precision-aware
-CqlArithmeticFunctionsTest.Successor.SuccessorOf101D            Wrong output: As of 2.0 Successor of Decimal should be precision-aware
 CqlArithmeticFunctionsTest.Power.Power0To0                      Wrong output: As of CQL 2.0, Power always returns Decimal
 CqlArithmeticFunctionsTest.Power.Power2To2                      Wrong output: As of CQL 2.0, Power always returns Decimal
 CqlArithmeticFunctionsTest.Power.PowerNeg2To2                   Wrong output: As of CQL 2.0, Power always returns Decimal
@@ -84,7 +75,7 @@ ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue 
 CqlDateTimeOperatorsTest.Subtract.DateTimeSubtract1YearInSeconds                        Wrong answer: Date math evaluates to 2015-06 vs expected 2015-05
 CqlTypesTest.DateTime.DateTimeNull                                                      Wrong answer: null vs DateTime with null components
 CqlTypesTest.Time.TimeMillisParsing                                                     Wrong answer: @T23:59:59.100 vs @T23:59:59.10000
-
+CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1QCMPrecision          Wrong answer: Translator loses Decimal precision (trailing zeros) in ELM representation of Quantity literal
 
 # Unimplemented
 CqlArithmeticFunctionsTest.HighBoundary                 HighBoundary not implemented
@@ -98,3 +89,11 @@ CqlArithmeticFunctionsTest.Modulo.Modulo10By3Quantity                 Modulo not
 
 # Unimplemented (New in CQL 2.0)
 CqlListOperatorsTest.Slice                              Slice not implemented
+
+# Legacy Behavior (Test targets an earlier version of CQL)
+CqlDateTimeOperatorsTest.DateTimeComponentFrom.DateTimeComponentFromTimezoneOffset      Translator error: Timezone keyword is only valid in 1.3 or lower
+CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1D          Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware.
+CqlArithmeticFunctionsTest.Predecessor.PredecessorOf101D        Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware
+CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1QCM        Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware
+CqlArithmeticFunctionsTest.Successor.SuccessorOf1D              Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware
+CqlArithmeticFunctionsTest.Successor.SuccessorOf101D            Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware

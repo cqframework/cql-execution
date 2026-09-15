@@ -18343,7 +18343,82 @@
                 }
               },
               {
+                "name": "PredecessorOf1DPrecision",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "PredecessorOf101DPrecision",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
                 "name": "PredecessorOf1QCM",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "PredecessorOf1QCMPrecision",
                 "annotation": [],
                 "elementType": {
                   "type": "TupleTypeSpecifier",
@@ -18633,7 +18708,82 @@
                   }
                 },
                 {
+                  "name": "PredecessorOf1DPrecision",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "PredecessorOf101DPrecision",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
                   "name": "PredecessorOf1QCM",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "skipped",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "PredecessorOf1QCMPrecision",
                   "annotation": [],
                   "elementType": {
                     "type": "TupleTypeSpecifier",
@@ -19044,7 +19194,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong output: As of 2.0 Successor of Decimal should be precision-aware. See https://github.com/cqframework/cql-tests/pull/147",
+                        "value": "Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware.",
                         "annotation": []
                       }
                     }
@@ -19078,7 +19228,125 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong output: As of 2.0 Successor of Decimal should be precision-aware",
+                        "value": "Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "PredecessorOf1DPrecision",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Predecessor",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "value": "1.0",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "value": "0.9",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "PredecessorOf101DPrecision",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Predecessor",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "value": "1.01",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "value": "1.00",
                         "annotation": []
                       }
                     }
@@ -19112,7 +19380,41 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong output: As of 2.0 Successor of Decimal should be precision-aware",
+                        "value": "Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "PredecessorOf1QCMPrecision",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "skipped",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer: Translator loses Decimal in ELM representation of Quantity literal.",
                         "annotation": []
                       }
                     }
@@ -23481,6 +23783,62 @@
                 }
               },
               {
+                "name": "SuccessorOf1DPrecision",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SuccessorOf101DPrecision",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
                 "name": "SuccessorOfJan12000",
                 "annotation": [],
                 "elementType": {
@@ -23745,6 +24103,62 @@
                         "elementType": {
                           "type": "NamedTypeSpecifier",
                           "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "SuccessorOf1DPrecision",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "SuccessorOf101DPrecision",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
                           "annotation": []
                         }
                       }
@@ -24138,7 +24552,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong output: As of 2.0 Successor of Decimal should be precision-aware",
+                        "value": "Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware",
                         "annotation": []
                       }
                     }
@@ -24172,7 +24586,125 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong output: As of 2.0 Successor of Decimal should be precision-aware",
+                        "value": "Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SuccessorOf1DPrecision",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Successor",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "value": "1.0",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "value": "1.1",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SuccessorOf101DPrecision",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Successor",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "value": "1.01",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "value": "1.02",
                         "annotation": []
                       }
                     }
@@ -26569,11 +27101,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Quantity",
                         "annotation": []
                       }
                     }
@@ -26588,11 +27129,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Quantity",
                         "annotation": []
                       }
                     }
@@ -26607,11 +27157,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Quantity",
                         "annotation": []
                       }
                     }
@@ -27167,11 +27726,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
                           "annotation": []
                         }
                       }
@@ -27186,11 +27754,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
                           "annotation": []
                         }
                       }
@@ -27205,11 +27782,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
                           "annotation": []
                         }
                       }
@@ -28608,11 +29194,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
                           "annotation": []
                         }
                       }
@@ -28620,13 +29215,50 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong output: The resulting Quantity should have an appropriate unit; 'g' / 'g' should be '1', not 'g'. See https://github.com/cqframework/cql-tests/pull/148",
-                        "annotation": []
+                        "type": "TruncatedDivide",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Quantity",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                            "value": 10.1,
+                            "unit": "cm",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Negate",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Quantity",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                              "value": 3.1,
+                              "unit": "cm",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Negate",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Quantity",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "value": 3,
+                          "unit": "1",
+                          "annotation": []
+                        }
                       }
                     }
                   ]
@@ -28642,11 +29274,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
                           "annotation": []
                         }
                       }
@@ -28654,12 +29295,37 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong output: The resulting Quantity should have an appropriate unit",
+                        "type": "TruncatedDivide",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Quantity",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                            "value": 10,
+                            "unit": "g",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Quantity",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                            "value": 5,
+                            "unit": "g",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Quantity",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "value": 2,
+                        "unit": "1",
                         "annotation": []
                       }
                     }
@@ -28676,11 +29342,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
                           "annotation": []
                         }
                       }
@@ -28688,12 +29363,37 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong output: The resulting Quantity should have an appropriate unit",
+                        "type": "TruncatedDivide",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Quantity",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                            "value": 4.14,
+                            "unit": "m",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Quantity",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                            "value": 2.06,
+                            "unit": "m",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Quantity",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "value": 2,
+                        "unit": "1",
                         "annotation": []
                       }
                     }

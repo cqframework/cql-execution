@@ -725,18 +725,31 @@
 			<expression>predecessor of 1L</expression>
 			<output>0L</output>
 		</test>
-		<test name="PredecessorOf1D" version="1.0">
+		<test name="PredecessorOf1D" version="1.0" versionTo="1.5.3">
 			<expression>predecessor of 1.0</expression>
 			<output>0.99999999</output>
 		</test>
-		<test name="PredecessorOf101D" version="1.0">
+		<test name="PredecessorOf101D" version="1.0" versionTo="1.5.3">
 			<expression>predecessor of 1.01</expression>
 			<output>1.00999999</output>
 		</test>
-		<test name="PredecessorOf1QCM" version="1.0">
+		<test name="PredecessorOf1DPrecision" version="2.0">
+			<expression>predecessor of 1.0</expression>
+			<output>0.9</output>
+		</test>
+		<test name="PredecessorOf101DPrecision" version="2.0">
+			<expression>predecessor of 1.01</expression>
+			<output>1.00</output>
+		</test>
+		<test name="PredecessorOf1QCM" version="1.0" versionTo="1.5.3">
 			<capability code="ucum-unit-conversion-support"/>
 			<expression>predecessor of 1.0 'cm'</expression>
 			<output>0.99999999'cm'</output>
+		</test>
+		<test name="PredecessorOf1QCMPrecision" version="2.0">
+			<capability code="ucum-unit-conversion-support"/>
+			<expression>predecessor of 1.0 'cm'</expression>
+			<output>0.9'cm'</output>
 		</test>
 		<test name="PredecessorOfJan12000" version="1.0">
 			<expression>predecessor of DateTime(2000,1,1)</expression>
@@ -916,13 +929,21 @@
 			<expression>successor of 1L</expression>
 			<output>2L</output>
 		</test>
-		<test name="SuccessorOf1D" version="1.0">
+		<test name="SuccessorOf1D" version="1.0" versionTo="1.5.3">
 			<expression>successor of 1.0</expression>
 			<output>1.00000001</output>
 		</test>
-		<test name="SuccessorOf101D" version="1.0">
+		<test name="SuccessorOf101D" version="1.0" versionTo="1.5.3">
 			<expression>successor of 1.01</expression>
 			<output>1.01000001</output>
+		</test>
+		<test name="SuccessorOf1DPrecision" version="2.0">
+			<expression>successor of 1.0</expression>
+			<output>1.1</output>
+		</test>
+		<test name="SuccessorOf101DPrecision" version="2.0">
+			<expression>successor of 1.01</expression>
+			<output>1.02</output>
 		</test>
 		<test name="SuccessorOfJan12000" version="1.0">
 			<expression>successor of DateTime(2000,1,1)</expression>
@@ -1071,17 +1092,17 @@
 		<test name="TruncatedDivide10d1ByNeg3D1Quantity" version="1.0">
 			<capability code="ucum-unit-conversion-support"/>
 			<expression>10.1 'cm' div -3.1 'cm'</expression>
-			<output>-3.0 'cm'</output>
+			<output>-3.0 '1'</output>
 		</test>
 		<test name="TruncatedDivide10By5DQuantity" version="1.0">
 			<capability code="ucum-unit-conversion-support"/>
 			<expression>10.0 'g' div 5.0 'g'</expression>
-			<output>2.0 'g'</output>
+			<output>2.0 '1'</output>
 		</test>
 		<test name="TruncatedDivide414By206DQuantity" version="1.0">
 			<capability code="ucum-unit-conversion-support"/>
 			<expression>4.14 'm' div 2.06 'm'</expression>
-			<output>2.0 'm'</output>
+			<output>2.0 '1'</output>
 		</test>
 		<test name="TruncatedDivide10By0DQuantity" version="1.0">
 			<capability code="ucum-unit-conversion-support"/>

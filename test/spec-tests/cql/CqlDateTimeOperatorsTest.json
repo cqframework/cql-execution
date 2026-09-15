@@ -25697,6 +25697,62 @@
                 }
               },
               {
+                "name": "YearsBetweenLeapYearDatesEquals2",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "YearsBetweenLeapYearDateTimesEquals2",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
                 "name": "DateTimeDurationBetweenMonth",
                 "annotation": [],
                 "elementType": {
@@ -25795,6 +25851,62 @@
                 },
                 {
                   "name": "DateTimeDurationBetweenYearOffset",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "YearsBetweenLeapYearDatesEquals2",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "YearsBetweenLeapYearDateTimesEquals2",
                   "annotation": [],
                   "elementType": {
                     "type": "TupleTypeSpecifier",
@@ -26076,6 +26188,248 @@
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                         "value": "4",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "YearsBetweenLeapYearDatesEquals2",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "DurationBetween",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "precision": "Year",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Date",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Date",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2012",
+                              "annotation": []
+                            },
+                            "month": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2",
+                              "annotation": []
+                            },
+                            "day": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "29",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Date",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Date",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2014",
+                              "annotation": []
+                            },
+                            "month": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2",
+                              "annotation": []
+                            },
+                            "day": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "28",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                        "value": "2",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "YearsBetweenLeapYearDateTimesEquals2",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "DurationBetween",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "precision": "Year",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "DateTime",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2012",
+                              "annotation": []
+                            },
+                            "month": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2",
+                              "annotation": []
+                            },
+                            "day": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "29",
+                              "annotation": []
+                            },
+                            "hour": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "12",
+                              "annotation": []
+                            },
+                            "minute": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "34",
+                              "annotation": []
+                            },
+                            "second": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "56",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "DateTime",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2014",
+                              "annotation": []
+                            },
+                            "month": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2",
+                              "annotation": []
+                            },
+                            "day": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "28",
+                              "annotation": []
+                            },
+                            "hour": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "12",
+                              "annotation": []
+                            },
+                            "minute": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "34",
+                              "annotation": []
+                            },
+                            "second": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "56",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                        "value": "2",
                         "annotation": []
                       }
                     }

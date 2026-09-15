@@ -694,22 +694,36 @@ define "Predecessor": Tuple{
     output: 0L
   },
   "PredecessorOf1D": Tuple{
-    skipped: 'Wrong output: As of 2.0 Successor of Decimal should be precision-aware. See https://github.com/cqframework/cql-tests/pull/147'
+    skipped: 'Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware.'
     /*
     expression: predecessor of 1.0,
     output: 0.99999999
     */  },
   "PredecessorOf101D": Tuple{
-    skipped: 'Wrong output: As of 2.0 Successor of Decimal should be precision-aware'
+    skipped: 'Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware'
     /*
     expression: predecessor of 1.01,
     output: 1.00999999
     */  },
+  "PredecessorOf1DPrecision": Tuple{
+    expression: predecessor of 1.0,
+    output: 0.9
+  },
+  "PredecessorOf101DPrecision": Tuple{
+    expression: predecessor of 1.01,
+    output: 1.00
+  },
   "PredecessorOf1QCM": Tuple{
-    skipped: 'Wrong output: As of 2.0 Successor of Decimal should be precision-aware'
+    skipped: 'Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware'
     /*
     expression: predecessor of 1.0 'cm',
     output: 0.99999999'cm'
+    */  },
+  "PredecessorOf1QCMPrecision": Tuple{
+    skipped: 'Wrong answer: Translator loses Decimal in ELM representation of Quantity literal.'
+    /*
+    expression: predecessor of 1.0 'cm',
+    output: 0.9'cm'
     */  },
   "PredecessorOfJan12000": Tuple{
     expression: predecessor of DateTime(2000,1,1),
@@ -896,17 +910,25 @@ define "Successor": Tuple{
     output: 2L
   },
   "SuccessorOf1D": Tuple{
-    skipped: 'Wrong output: As of 2.0 Successor of Decimal should be precision-aware'
+    skipped: 'Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware'
     /*
     expression: successor of 1.0,
     output: 1.00000001
     */  },
   "SuccessorOf101D": Tuple{
-    skipped: 'Wrong output: As of 2.0 Successor of Decimal should be precision-aware'
+    skipped: 'Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware'
     /*
     expression: successor of 1.01,
     output: 1.01000001
     */  },
+  "SuccessorOf1DPrecision": Tuple{
+    expression: successor of 1.0,
+    output: 1.1
+  },
+  "SuccessorOf101DPrecision": Tuple{
+    expression: successor of 1.01,
+    output: 1.02
+  },
   "SuccessorOfJan12000": Tuple{
     expression: successor of DateTime(2000,1,1),
     output: @2000-01-02T
@@ -1050,23 +1072,17 @@ define "Truncated Divide": Tuple{
     output: 2.0
   },
   "TruncatedDivide10d1ByNeg3D1Quantity": Tuple{
-    skipped: 'Wrong output: The resulting Quantity should have an appropriate unit; \'g\' / \'g\' should be \'1\', not \'g\'. See https://github.com/cqframework/cql-tests/pull/148'
-    /*
     expression: 10.1 'cm' div -3.1 'cm',
-    output: -3.0 'cm'
-    */  },
+    output: -3.0 '1'
+  },
   "TruncatedDivide10By5DQuantity": Tuple{
-    skipped: 'Wrong output: The resulting Quantity should have an appropriate unit'
-    /*
     expression: 10.0 'g' div 5.0 'g',
-    output: 2.0 'g'
-    */  },
+    output: 2.0 '1'
+  },
   "TruncatedDivide414By206DQuantity": Tuple{
-    skipped: 'Wrong output: The resulting Quantity should have an appropriate unit'
-    /*
     expression: 4.14 'm' div 2.06 'm',
-    output: 2.0 'm'
-    */  },
+    output: 2.0 '1'
+  },
   "TruncatedDivide10By0DQuantity": Tuple{
     expression: 10.0 'g' div 0.0 'g',
     output: null

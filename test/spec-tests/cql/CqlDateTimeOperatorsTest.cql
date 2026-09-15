@@ -606,6 +606,14 @@ define "Duration": Tuple{
     expression: years between DateTime(2005, 5) and DateTime(2010, 4),
     output: 4
   },
+  "YearsBetweenLeapYearDatesEquals2": Tuple{
+    expression: years between @2012-02-29 and @2014-02-28,
+    output: 2
+  },
+  "YearsBetweenLeapYearDateTimesEquals2": Tuple{
+    expression: years between @2012-02-29T12:34:56 and @2014-02-28T12:34:56,
+    output: 2
+  },
   "DateTimeDurationBetweenMonth": Tuple{
     expression: months between @2014-01-31 and @2014-02-01,
     output: 0
