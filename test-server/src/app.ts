@@ -20,13 +20,13 @@ app.post('/fhir/$cql', async (req: Request, res: Response) => {
     const parameters = await $cql(expression);
     res.json(parameters);
   } catch (err) {
+    logger.error(`Error handling /fhir/$cql:`, err);
     // Per the spec, $cql should return an OperationOutcome on error,
     // but cql-tests-runner just displays the raw result as text
     // so simpler error messages are probably good enough
     if (err instanceof TranslationError) {
       return res.status(400).json({ error: err.message });
     }
-    logger.error(`Error handling /fhir/$cql:`, err);
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 });
