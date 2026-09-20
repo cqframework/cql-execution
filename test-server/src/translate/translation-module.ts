@@ -28,9 +28,9 @@ function getLibraryManager() {
     const options = CqlCompilerOptions.defaultOptions();
     options.validateUnits = false;
     const nestedOptions = options.options.asJsSetView() as Set<any>;
-    nestedOptions.delete(CqlCompilerOptions.Options.valueOf('EnableAnnotations'));
     nestedOptions.delete(CqlCompilerOptions.Options.valueOf('EnableLocators'));
     nestedOptions.add(CqlCompilerOptions.Options.valueOf('EnableResultTypes'));
+    nestedOptions.add(CqlCompilerOptions.Options.valueOf('EnableDetailedErrors'));
     // the translator requires a UCUM service even if validation is off, so make a dummy one
     const nf = () => null;
     const ucumServiceJs = createUcumService(nf, nf, nf, nf);

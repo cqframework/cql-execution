@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express, { type Request, type Response } from 'express';
 import logger from './logger';
 import { $cql } from './operation';
+import { TranslationError } from './translate';
 
 const app = express();
 app.use(express.json({ type: ['application/json', 'application/fhir+json'] }));
@@ -19,6 +20,12 @@ app.post('/fhir/$cql', async (req: Request, res: Response) => {
     const parameters = await $cql(expression);
     res.json(parameters);
   } catch (err) {
+    // Per the spec, $cql should return an OperationOutcome on error,
+    // but cql-tests-runner just displays the raw result as text
+    // so simpler error messages are probably good enough
+    if (err instanceof TranslationError) {
+      return res.status(400).json({ error: err.message });
+    }
     logger.error(`Error handling /fhir/$cql:`, err);
     return res.status(500).json({ error: 'Internal Server Error' });
   }
