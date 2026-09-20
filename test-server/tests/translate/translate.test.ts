@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach, vi, MockInstance } from 'vitest';
 import { translate } from '@src/translate/translate';
 import * as translationModule from '@src/translate/translation-module';
 import * as translationService from '@src/translate/translation-service';
+import { TranslationError } from '@src/translate/translation-error';
 
 describe('translate', () => {
   // mock out the underlying translation modules, as they'll be tested independently
@@ -50,5 +51,13 @@ describe('translate', () => {
       mocked: true,
       library: { identifier: { id: 'TestCQL', version: '1.0.0' } }
     });
+  });
+
+  it('throws a TranslationError when the ELM contains translation errors', async () => {
+    moduleSpy.mockResolvedValueOnce({
+      library: { annotation: [{ errorSeverity: 'error', message: 'Invalid CQL' }] }
+    });
+
+    await expect(translate('invalid CQL')).rejects.toBeInstanceOf(TranslationError);
   });
 });
