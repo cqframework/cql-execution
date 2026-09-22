@@ -38,20 +38,20 @@ describe('DateComponentFrom', () => {
   });
 
   it('should return the year from the date', async function () {
-    (await this.year.exec(this.ctx)).should.equal(2000);
+    (await this.year.exec(this.ctx)).should.equalInteger(2000);
   });
 
   it('should return the month from the date', async function () {
-    (await this.month.exec(this.ctx)).should.equal(3);
+    (await this.month.exec(this.ctx)).should.equalInteger(3);
   });
 
   it('should return the day from the date', async function () {
-    (await this.day.exec(this.ctx)).should.equal(15);
+    (await this.day.exec(this.ctx)).should.equalInteger(15);
   });
 
   it('should return null for imprecise components', async function () {
     const result = await this.impreciseComponentTuple.exec(this.ctx);
-    result.should.eql({
+    result.should.equalCql({
       Year: 2000,
       Month: 3,
       Day: null
@@ -283,27 +283,27 @@ describe('DifferenceBetween', () => {
   });
 
   it('should properly execute years between', async function () {
-    (await this.yearsBetween.exec(this.ctx)).should.equal(1);
+    (await this.yearsBetween.exec(this.ctx)).should.equalInteger(1);
   });
 
   it('should properly execute months between', async function () {
-    (await this.monthsBetween.exec(this.ctx)).should.equal(12);
+    (await this.monthsBetween.exec(this.ctx)).should.equalInteger(12);
   });
 
   it('should properly execute weeks between', async function () {
-    (await this.weeksBetween.exec(this.ctx)).should.equal(52);
+    (await this.weeksBetween.exec(this.ctx)).should.equalInteger(52);
   });
 
   it('should properly execute days between', async function () {
-    (await this.daysBetween.exec(this.ctx)).should.equal(365);
+    (await this.daysBetween.exec(this.ctx)).should.equalInteger(365);
   });
 
   it('should properly execute years between with an uncertainty', async function () {
-    (await this.yearsBetweenUncertainty.exec(this.ctx)).should.equal(0);
+    (await this.yearsBetweenUncertainty.exec(this.ctx)).should.equalInteger(0);
   });
 
   it('should properly execute months between with an uncertainty', async function () {
-    (await this.monthsBetweenUncertainty.exec(this.ctx)).should.equal(0);
+    (await this.monthsBetweenUncertainty.exec(this.ctx)).should.equalInteger(0);
   });
 
   it('should properly execute weeks between with an uncertainty', async function () {
@@ -363,27 +363,27 @@ describe('DurationBetween', () => {
   });
 
   it('should properly execute years between', async function () {
-    (await this.yearsBetween.exec(this.ctx)).should.equal(1);
+    (await this.yearsBetween.exec(this.ctx)).should.equalInteger(1);
   });
 
   it('should properly execute months between', async function () {
-    (await this.monthsBetween.exec(this.ctx)).should.equal(12);
+    (await this.monthsBetween.exec(this.ctx)).should.equalInteger(12);
   });
 
   it('should properly execute days between', async function () {
-    (await this.daysBetween.exec(this.ctx)).should.equal(365 + 22);
+    (await this.daysBetween.exec(this.ctx)).should.equalInteger(365 + 22);
   });
 
   it('should properly execute weeks between', async function () {
-    (await this.weeksBetween.exec(this.ctx)).should.equal(55);
+    (await this.weeksBetween.exec(this.ctx)).should.equalInteger(55);
   });
 
   it('should properly execute years between with an uncertainty', async function () {
-    (await this.yearsBetweenUncertainty.exec(this.ctx)).should.equal(0);
+    (await this.yearsBetweenUncertainty.exec(this.ctx)).should.equalInteger(0);
   });
 
   it('should properly execute months between with an uncertainty', async function () {
-    (await this.monthsBetweenUncertainty.exec(this.ctx)).should.equal(0);
+    (await this.monthsBetweenUncertainty.exec(this.ctx)).should.equalInteger(0);
   });
 
   it('should properly execute weeks between with an uncertainty', async function () {

@@ -1,6 +1,6 @@
 import { Expression } from './expression';
 import { typeIsArray, allTrue, anyTrue, removeNulls } from '../util/util';
-import { Quantity } from '../datatypes/datatypes';
+import { Integer, Quantity } from '../datatypes/datatypes';
 import { Decimal } from '../datatypes/decimal';
 import { Context } from '../runtime/context';
 import { Exception } from '../datatypes/exception';
@@ -40,9 +40,9 @@ export class Count extends AggregateExpression {
   async exec(ctx: Context) {
     const items = await this.source.execute(ctx);
     if (typeIsArray(items)) {
-      return removeNulls(items).length;
+      return Integer.from(removeNulls(items).length);
     }
-    return 0;
+    return Integer.from(0);
   }
 }
 
@@ -73,11 +73,7 @@ export class Sum extends AggregateExpression {
       // to match the unit of the first item in the list
       sum = sumOfDecimals(items.map((q: Quantity) => q.value));
     } else {
-      if (hasDecimals(items)) {
-        sum = sumOfDecimals(items.map((x: any) => Decimal.from(x)));
-      } else {
-        sum = items.reduce((x: any, y: any) => x + y);
-      }
+      sum = items.reduce((x: any, y: any) => MathUtil.add(x, y));
     }
     return finalizeAggregateResult(sum, items[0]);
   }
@@ -390,10 +386,8 @@ export class Product extends AggregateExpression {
     let product;
     if (hasOnlyQuantities(items)) {
       product = productOfDecimals(getValuesFromQuantities(items));
-    } else if (hasDecimals(items)) {
-      product = productOfDecimals(items.map((x: any) => Decimal.from(x)));
     } else {
-      product = items.reduce((x: number, y: number) => x * y);
+      product = items.reduce((x: any, y: any) => MathUtil.multiply(x, y));
     }
 
     return finalizeAggregateResult(product, items[0]);
@@ -485,10 +479,6 @@ export class AnyTrue extends AggregateExpression {
     }
     return anyTrue(items);
   }
-}
-
-function hasDecimals(values: any[]) {
-  return values.some(value => value?.isDecimal);
 }
 
 function processQuantities(values: any[]) {

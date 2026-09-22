@@ -68,6 +68,6 @@ describe('Coalesce', () => {
   });
 
   it('should be able to handle Union as list', async function () {
-    (await this.unionAsList.exec(this.ctx)).should.equal(3);
+    (await this.unionAsList.exec(this.ctx)).should.equalInteger(3);
   });
 });

@@ -1,19 +1,15 @@
 import { Uncertainty } from '../datatypes/uncertainty';
-
-function areNumbers(a: any, b: any) {
-  return typeof a === 'number' && typeof b === 'number';
-}
-
-function areBigInts(a: any, b: any) {
-  return typeof a === 'bigint' && typeof b === 'bigint';
-}
+import { compareCqlNumeric, isCqlNumeric, normalizeNumericInput } from '../datatypes/numeric';
 
 function areStrings(a: any, b: any) {
   return typeof a === 'string' && typeof b === 'string';
 }
 
-function areDecimals(a: any, b: any) {
-  return a?.isDecimal && b?.isDecimal;
+function compareNumeric(a: any, b: any): number | null {
+  if (!isCqlNumeric(a) || !isCqlNumeric(b)) {
+    return null;
+  }
+  return compareCqlNumeric(a, b);
 }
 
 function areDateTimesOrQuantities(a: any, b: any) {
@@ -29,10 +25,13 @@ function isUncertainty(x: any) {
 }
 
 export function lessThan(a: any, b: any, precision?: any) {
-  if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
+  a = normalizeNumericInput(a);
+  b = normalizeNumericInput(b);
+  const numericComparison = compareNumeric(a, b);
+  if (numericComparison != null) {
+    return numericComparison < 0;
+  } else if (areStrings(a, b)) {
     return a < b;
-  } else if (areDecimals(a, b)) {
-    return a.lessThan(b);
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.before(b, precision);
   } else if (isUncertainty(a)) {
@@ -45,10 +44,13 @@ export function lessThan(a: any, b: any, precision?: any) {
 }
 
 export function lessThanOrEquals(a: any, b: any, precision?: any) {
-  if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
+  a = normalizeNumericInput(a);
+  b = normalizeNumericInput(b);
+  const numericComparison = compareNumeric(a, b);
+  if (numericComparison != null) {
+    return numericComparison <= 0;
+  } else if (areStrings(a, b)) {
     return a <= b;
-  } else if (areDecimals(a, b)) {
-    return a.lessThanOrEquals(b);
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.sameOrBefore(b, precision);
   } else if (isUncertainty(a)) {
@@ -61,10 +63,13 @@ export function lessThanOrEquals(a: any, b: any, precision?: any) {
 }
 
 export function greaterThan(a: any, b: any, precision?: any) {
-  if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
+  a = normalizeNumericInput(a);
+  b = normalizeNumericInput(b);
+  const numericComparison = compareNumeric(a, b);
+  if (numericComparison != null) {
+    return numericComparison > 0;
+  } else if (areStrings(a, b)) {
     return a > b;
-  } else if (areDecimals(a, b)) {
-    return a.greaterThan(b);
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.after(b, precision);
   } else if (isUncertainty(a)) {
@@ -77,10 +82,13 @@ export function greaterThan(a: any, b: any, precision?: any) {
 }
 
 export function greaterThanOrEquals(a: any, b: any, precision?: any) {
-  if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
+  a = normalizeNumericInput(a);
+  b = normalizeNumericInput(b);
+  const numericComparison = compareNumeric(a, b);
+  if (numericComparison != null) {
+    return numericComparison >= 0;
+  } else if (areStrings(a, b)) {
     return a >= b;
-  } else if (areDecimals(a, b)) {
-    return a.greaterThanOrEquals(b);
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.sameOrAfter(b, precision);
   } else if (isUncertainty(a)) {
@@ -97,6 +105,20 @@ export function equivalent(a: any, b: any) {
     return true;
   }
   if (a == null || b == null) {
+    return false;
+  }
+
+  a = normalizeNumericInput(a);
+  b = normalizeNumericInput(b);
+
+  if (a?.isDecimal === true && b?.isDecimal === true) {
+    return a.equivalent(b);
+  }
+  const numericComparison = compareNumeric(a, b);
+  if (numericComparison != null) {
+    return numericComparison === 0;
+  }
+  if ((isCqlNumeric(a) || isCqlNumeric(b)) && !isUncertainty(a) && !isUncertainty(b)) {
     return false;
   }
 
@@ -209,6 +231,17 @@ export function equals(a: any, b: any) {
     return null;
   }
 
+  a = normalizeNumericInput(a);
+  b = normalizeNumericInput(b);
+
+  const numericComparison = compareNumeric(a, b);
+  if (numericComparison != null) {
+    return numericComparison === 0;
+  }
+  if ((isCqlNumeric(a) || isCqlNumeric(b)) && !isUncertainty(a) && !isUncertainty(b)) {
+    return false;
+  }
+
   // If one is a Quantity, use the Quantity equals function
   if (a && a.isQuantity) {
     return a.equals(b);
@@ -231,7 +264,7 @@ export function equals(a: any, b: any) {
     return a.equals(b);
   }
 
-  // Return true of the objects are primitives and are strictly equal
+  // Return true if primitive values are strictly equal.
   if (
     (typeof a === typeof b && typeof a === 'string') ||
     typeof a === 'number' ||

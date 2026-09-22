@@ -1,6 +1,7 @@
 import { Set as ImmutableSet } from 'immutable';
 import { Context } from '../runtime/context';
 import { equals } from '../util/comparison';
+import { Integer } from '../datatypes/integer';
 import { NormalizedKey, toNormalizedKey } from '../util/immutableUtil';
 import { typeIsArray } from '../util/util';
 import { build } from './builder';
@@ -125,9 +126,9 @@ export class IndexOf extends Expression {
       }
     }
     if (index != null) {
-      return index;
+      return Integer.from(index);
     } else {
-      return -1;
+      return Integer.from(-1);
     }
   }
 }

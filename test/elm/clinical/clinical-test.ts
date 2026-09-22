@@ -406,34 +406,34 @@ describe('CalculateAge: Fully Specified Birth Date', () => {
   });
 
   it('should execute age in years', async function () {
-    (await this.years.exec(this.ctx)).should.equal(40);
+    (await this.years.exec(this.ctx)).should.equalInteger(40);
   });
 
   it('should execute age in months', async function () {
-    (await this.months.exec(this.ctx)).should.equal(483);
+    (await this.months.exec(this.ctx)).should.equalInteger(483);
   });
 
   it('should execute age in weeks', async function () {
-    (await this.weeks.exec(this.ctx)).should.equal(2102);
+    (await this.weeks.exec(this.ctx)).should.equalInteger(2102);
   });
 
   it('should execute age in days', async function () {
-    (await this.days.exec(this.ctx)).should.equal(14716);
+    (await this.days.exec(this.ctx)).should.equalInteger(14716);
   });
 
   it('should execute age in hours', async function () {
     // 14716 days * 24 hours + 3 hours
-    (await this.hours.exec(this.ctx)).should.equal(353187);
+    (await this.hours.exec(this.ctx)).should.equalInteger(353187);
   });
 
   it('should execute age in minutes', async function () {
     // 353187 hours * 60 minutes + 1 minute
-    (await this.minutes.exec(this.ctx)).should.equal(21191221);
+    (await this.minutes.exec(this.ctx)).should.equalInteger(21191221);
   });
 
   it('should execute age in seconds', async function () {
     // 21191221 minutes * 60 seconds + 2 seconds
-    (await this.seconds.exec(this.ctx)).should.equal(1271473262);
+    (await this.seconds.exec(this.ctx)).should.equalInteger(1271473262);
   });
 });
 
@@ -446,34 +446,34 @@ describe('CalculateAge: Fully Specified Birth Date on Today', () => {
   });
 
   it('should execute age in years', async function () {
-    (await this.years.exec(this.ctx)).should.equal(40);
+    (await this.years.exec(this.ctx)).should.equalInteger(40);
   });
 
   it('should execute age in months', async function () {
-    (await this.months.exec(this.ctx)).should.equal(480);
+    (await this.months.exec(this.ctx)).should.equalInteger(480);
   });
 
   it('should execute age in weeks', async function () {
-    (await this.weeks.exec(this.ctx)).should.equal(2087);
+    (await this.weeks.exec(this.ctx)).should.equalInteger(2087);
   });
 
   it('should execute age in days', async function () {
-    (await this.days.exec(this.ctx)).should.equal(14609);
+    (await this.days.exec(this.ctx)).should.equalInteger(14609);
   });
 
   it('should execute age in hours', async function () {
     // 14609 days * 24 hours + 22 hours
-    (await this.hours.exec(this.ctx)).should.equal(350638);
+    (await this.hours.exec(this.ctx)).should.equalInteger(350638);
   });
 
   it('should execute age in minutes', async function () {
     // 350638 hours * 60 minutes + 1 minute
-    (await this.minutes.exec(this.ctx)).should.equal(21038281);
+    (await this.minutes.exec(this.ctx)).should.equalInteger(21038281);
   });
 
   it('should execute age in seconds', async function () {
     // 21038281 minutes * 60 seconds + 2 seconds
-    (await this.seconds.exec(this.ctx)).should.equal(1262296862);
+    (await this.seconds.exec(this.ctx)).should.equalInteger(1262296862);
   });
 });
 
@@ -488,15 +488,15 @@ describe('CalculateAge: Date-Only Birth Date as DateTime', () => {
   });
 
   it('should execute age in years', async function () {
-    (await this.years.exec(this.ctx)).should.equal(40);
+    (await this.years.exec(this.ctx)).should.equalInteger(40);
   });
 
   it('should execute age in months', async function () {
-    (await this.months.exec(this.ctx)).should.equal(483);
+    (await this.months.exec(this.ctx)).should.equalInteger(483);
   });
 
   it('should execute age in weeks', async function () {
-    (await this.weeks.exec(this.ctx)).should.equal(2102);
+    (await this.weeks.exec(this.ctx)).should.equalInteger(2102);
   });
 
   it('should execute age in days', async function () {
@@ -533,15 +533,15 @@ describe('CalculateAge: Date-Only Birth Date as DateTime on Today', () => {
   });
 
   it('should execute age in years', async function () {
-    (await this.years.exec(this.ctx)).should.equal(40);
+    (await this.years.exec(this.ctx)).should.equalInteger(40);
   });
 
   it('should execute age in months', async function () {
-    (await this.months.exec(this.ctx)).should.equal(480);
+    (await this.months.exec(this.ctx)).should.equalInteger(480);
   });
 
   it('should execute age in weeks', async function () {
-    (await this.weeks.exec(this.ctx)).should.equal(2087);
+    (await this.weeks.exec(this.ctx)).should.equalInteger(2087);
   });
 
   it('should execute age in days', async function () {
@@ -578,15 +578,15 @@ describe('CalculateAge: Date-Only Birth Date as Date', () => {
   });
 
   it('should execute age in years', async function () {
-    (await this.years.exec(this.ctx)).should.equal(40);
+    (await this.years.exec(this.ctx)).should.equalInteger(40);
   });
 
   it('should execute age in months', async function () {
-    (await this.months.exec(this.ctx)).should.equal(483);
+    (await this.months.exec(this.ctx)).should.equalInteger(483);
   });
 
   it('should execute age in weeks', async function () {
-    (await this.weeks.exec(this.ctx)).should.equal(2102);
+    (await this.weeks.exec(this.ctx)).should.equalInteger(2102);
   });
 
   it('should execute age in days', async function () {
@@ -608,15 +608,15 @@ describe('CalculateAge: Date-Only Birth Date as Date on Today', () => {
   });
 
   it('should execute age in years', async function () {
-    (await this.years.exec(this.ctx)).should.equal(40);
+    (await this.years.exec(this.ctx)).should.equalInteger(40);
   });
 
   it('should execute age in months', async function () {
-    (await this.months.exec(this.ctx)).should.equal(480);
+    (await this.months.exec(this.ctx)).should.equalInteger(480);
   });
 
   it('should execute age in weeks', async function () {
-    (await this.weeks.exec(this.ctx)).should.equal(2087);
+    (await this.weeks.exec(this.ctx)).should.equalInteger(2087);
   });
 
   it('should execute age in days', async function () {
@@ -637,7 +637,7 @@ describe('CalculateAgeAt', () => {
   });
 
   it('should execute age at 19810216 as 0', async function () {
-    (await this.ageAt19810216.exec(this.ctx)).should.equal(0);
+    (await this.ageAt19810216.exec(this.ctx)).should.equalInteger(0);
   });
 
   it('should execute age at 1975 as -5 to -4 (since 1975 is not precise to days)', async function () {
@@ -656,7 +656,7 @@ describe('CalculateAgeAt', () => {
 
   it('should convert birthdate to date, give 18 (using AgeInYearsAt)', async function () {
     setup(this, data, [p3]);
-    (await this.ageInYearsDateArg.exec(this.ctx)).should.eql(18);
+    (await this.ageInYearsDateArg.exec(this.ctx)).should.equalInteger(18);
   });
 
   it('should convert date to DateTime, give uncertainty (using CalculateAgeInYearsAt)', async function () {
@@ -671,7 +671,7 @@ describe('CalculateAgeAt', () => {
     // Change it to the Date class
     this.ctx.patient.birthDate = new DT.Date(2005, 12, 31);
 
-    (await this.ageAtJanuary1DateTimeArg.exec(this.ctx)).should.equal(18);
+    (await this.ageAtJanuary1DateTimeArg.exec(this.ctx)).should.equalInteger(18);
   });
 
   it('should convert date to DateTime, give 18 since the timeZoneOffset on the parent is 0', async function () {
@@ -684,7 +684,7 @@ describe('CalculateAgeAt', () => {
     // Change it to the Date class
     this.ctx.patient.birthDate = new DT.Date(2005, 12, 31);
 
-    (await this.ageAtJanuary1DateTimeArg.exec(this.ctx)).should.equal(18);
+    (await this.ageAtJanuary1DateTimeArg.exec(this.ctx)).should.equalInteger(18);
   });
 
   it('should convert date to DateTime, but give an Uncertainty since the timeZoneOffset is not passed in and therefore equal to the timezone of the evaluation request timestamp', async function () {
@@ -700,7 +700,7 @@ describe('CalculateAgeAt', () => {
     // Execute these tests as if it is 2024-01-01 at 00:00:00.0000 GMT
     this.ctx.executionDateTime = new DT.DateTime(2024, 1, 1, 0, 0, 0, 0, 0);
 
-    (await this.ageAtJanuary1DateTimeArg.exec(this.ctx)).should.equal(18);
+    (await this.ageAtJanuary1DateTimeArg.exec(this.ctx)).should.equalInteger(18);
   });
 
   it('should give 18 since the timeZoneOffset is 0 and both birthDate and asOf are Dates', async function () {
@@ -710,6 +710,6 @@ describe('CalculateAgeAt', () => {
     // Change it to the Date class
     this.ctx.patient.birthDate = new DT.Date(2005, 12, 31);
 
-    (await this.ageAtJanuary1DateArg.exec(this.ctx)).should.equal(18);
+    (await this.ageAtJanuary1DateArg.exec(this.ctx)).should.equalInteger(18);
   });
 });

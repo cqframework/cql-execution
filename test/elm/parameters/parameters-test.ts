@@ -18,16 +18,18 @@ describe('ParameterDef', () => {
   });
 
   it('should execute to default value', async function () {
-    (await this.param.exec(this.ctx)).should.equal(2012);
+    (await this.param.exec(this.ctx)).should.equalInteger(2012);
   });
 
   it('should execute to provided value', async function () {
-    (await this.param.exec(this.ctx.withParameters({ MeasureYear: 2013 }))).should.equal(2013);
+    (await this.param.exec(this.ctx.withParameters({ MeasureYear: 2013 }))).should.equalInteger(
+      2013
+    );
   });
 
   it('should work with typed int parameters', async function () {
     const intParam = this.lib.parameters.IntParameter;
-    (await intParam.exec(this.ctx.withParameters({ IntParameter: 17 }))).should.equal(17);
+    (await intParam.exec(this.ctx.withParameters({ IntParameter: 17 }))).should.equalInteger(17);
   });
 
   it('should work with typed list parameters', async function () {
@@ -42,7 +44,7 @@ describe('ParameterDef', () => {
   it('should work with typed tuple parameters', async function () {
     const tupleParam = this.lib.parameters.TupleParameter;
     const v = { a: 1, b: 'bee', c: true, d: [10, 9, 8], e: { f: 'eff', g: false } };
-    (await tupleParam.exec(this.ctx.withParameters({ TupleParameter: v }))).should.eql(v);
+    (await tupleParam.exec(this.ctx.withParameters({ TupleParameter: v }))).should.equalCql(v);
   });
 });
 
@@ -130,7 +132,7 @@ describe('IntegerParameterTypes', () => {
   });
 
   it('should execute to provided valid value', async function () {
-    (await this.foo.exec(this.ctx.withParameters({ FooP: 3 }))).should.equal(3);
+    (await this.foo.exec(this.ctx.withParameters({ FooP: 3 }))).should.equalInteger(3);
   });
 
   it('should throw when provided value is wrong type', function () {
@@ -140,11 +142,11 @@ describe('IntegerParameterTypes', () => {
   });
 
   it('should execute to default value', async function () {
-    (await this.foo2.exec(this.ctx)).should.equal(2);
+    (await this.foo2.exec(this.ctx)).should.equalInteger(2);
   });
 
   it('should execute to overriding valid value', async function () {
-    (await this.foo2.exec(this.ctx.withParameters({ FooDP: 3 }))).should.equal(3);
+    (await this.foo2.exec(this.ctx.withParameters({ FooDP: 3 }))).should.equalInteger(3);
   });
 
   it('should throw when overriding value is wrong type', function () {
@@ -469,12 +471,12 @@ describe('TupleParameterTypes', () => {
 
   it('should execute to provided valid value', async function () {
     const t = { Hello: 'World', MeaningOfLife: 42 };
-    (await this.foo.exec(this.ctx.withParameters({ FooP: t }))).should.eql(t);
+    (await this.foo.exec(this.ctx.withParameters({ FooP: t }))).should.equalCql(t);
   });
 
   it('should allow missing tuple properties', async function () {
     const t = { MeaningOfLife: 42 };
-    (await this.foo.exec(this.ctx.withParameters({ FooP: t }))).should.eql(t);
+    (await this.foo.exec(this.ctx.withParameters({ FooP: t }))).should.equalCql(t);
   });
 
   it('should throw when provided value is not a tuple', async function () {
@@ -492,17 +494,17 @@ describe('TupleParameterTypes', () => {
   });
 
   it('should execute to default value', async function () {
-    (await this.foo2.exec(this.ctx)).should.eql({ Hello: 'Universe', MeaningOfLife: 24 });
+    (await this.foo2.exec(this.ctx)).should.equalCql({ Hello: 'Universe', MeaningOfLife: 24 });
   });
 
   it('should execute to overriding valid value', async function () {
     const t = { Hello: 'World', MeaningOfLife: 42 };
-    (await this.foo2.exec(this.ctx.withParameters({ FooDP: t }))).should.eql(t);
+    (await this.foo2.exec(this.ctx.withParameters({ FooDP: t }))).should.equalCql(t);
   });
 
   it('should allow missing tuple properties in overriding tuple', async function () {
     const t = { MeaningOfLife: 42 };
-    (await this.foo2.exec(this.ctx.withParameters({ FooDP: t }))).should.eql(t);
+    (await this.foo2.exec(this.ctx.withParameters({ FooDP: t }))).should.equalCql(t);
   });
 
   it('should throw when overriding value is not a tuple', async function () {
@@ -526,8 +528,8 @@ describe('DefaultAndNoDefault', () => {
   });
 
   it('should be able to retrieve a provided value and a default value', async function () {
-    (await this.foo.exec(this.ctx.withParameters({ FooWithNoDefault: 1 }))).should.eql(1);
-    (await this.foo2.exec(this.ctx.withParameters({ FooWithNoDefault: 1 }))).should.eql(5);
+    (await this.foo.exec(this.ctx.withParameters({ FooWithNoDefault: 1 }))).should.equalInteger(1);
+    (await this.foo2.exec(this.ctx.withParameters({ FooWithNoDefault: 1 }))).should.equalInteger(5);
   });
 });
 

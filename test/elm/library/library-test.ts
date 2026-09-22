@@ -46,8 +46,8 @@ describe('Using CommonLib', () => {
       .exec_patient_context(this.patientSource);
     this.results.patientResults['1'].ID.should.equal(false);
     this.results.patientResults['2'].ID.should.equal(true);
-    this.results.patientResults['2'].FuncTest.should.equal(7);
-    this.results.patientResults['1'].FuncTest.should.equal(7);
+    this.results.patientResults['2'].FuncTest.should.equalInteger(7);
+    this.results.patientResults['1'].FuncTest.should.equalInteger(7);
   });
 
   it('should find the code defined in the included library', async function () {
@@ -89,65 +89,67 @@ describe('Using CommonLib2', () => {
   });
 
   it('should execute expression from included library that uses parameter', async function () {
-    (await this.exprUsesParam.exec(this.ctx)).should.equal(17);
+    (await this.exprUsesParam.exec(this.ctx)).should.equalInteger(17);
   });
 
   it('should execute expression from included library that uses sent-in parameter', async function () {
-    (await this.exprUsesParam.exec(this.ctx.withParameters({ SomeNumber: 42 }))).should.equal(42);
+    (
+      await this.exprUsesParam.exec(this.ctx.withParameters({ SomeNumber: 42 }))
+    ).should.equalInteger(42);
   });
 
   it('should execute parameter from included library', async function () {
-    (await this.exprUsesParamDirectly.exec(this.ctx)).should.equal(17);
+    (await this.exprUsesParamDirectly.exec(this.ctx)).should.equalInteger(17);
   });
 
   it('should execute sent-in parameter from included library', async function () {
     (
       await this.exprUsesParamDirectly.exec(this.ctx.withParameters({ SomeNumber: 73 }))
-    ).should.equal(73);
+    ).should.equalInteger(73);
   });
 
   it('should execute expression from included library that uses parameter', async function () {
-    (await this.exprUsesAnotherParam.exec(this.ctx)).should.equal(50);
+    (await this.exprUsesAnotherParam.exec(this.ctx)).should.equalInteger(50);
   });
 
   it('should execute expression from included library that uses sent-in parameter', async function () {
     (
       await this.exprUsesAnotherParam.exec(this.ctx.withParameters({ AnotherNumber: 66 }))
-    ).should.equal(66);
+    ).should.equalInteger(66);
   });
 
   it('should execute parameter from included library', async function () {
-    (await this.exprUsesAnotherParamDirectly.exec(this.ctx)).should.equal(50);
+    (await this.exprUsesAnotherParamDirectly.exec(this.ctx)).should.equalInteger(50);
   });
 
   it('should execute sent-in parameter from included library', async function () {
     (
       await this.exprUsesAnotherParamDirectly.exec(this.ctx.withParameters({ AnotherNumber: 73 }))
-    ).should.equal(73);
+    ).should.equalInteger(73);
   });
 
   it('should execute function from included library that uses parameter', async function () {
-    (await this.funcUsesParam.exec(this.ctx)).should.equal(22);
+    (await this.funcUsesParam.exec(this.ctx)).should.equalInteger(22);
   });
 
   it('should execute expression from included library that calls function', async function () {
-    (await this.exprCallsFunc.exec(this.ctx)).should.equal(6);
+    (await this.exprCallsFunc.exec(this.ctx)).should.equalInteger(6);
   });
 
   it('should execute function from included library that calls function', async function () {
-    (await this.funcCallsFunc.exec(this.ctx)).should.equal(25);
+    (await this.funcCallsFunc.exec(this.ctx)).should.equalInteger(25);
   });
 
   it('should execute expression from included library that uses expression', async function () {
-    (await this.exprUsesExpr.exec(this.ctx)).should.equal(3);
+    (await this.exprUsesExpr.exec(this.ctx)).should.equalInteger(3);
   });
 
   it('should execute function from included library that uses expression', async function () {
-    (await this.funcUsesExpr.exec(this.ctx)).should.equal(7);
+    (await this.funcUsesExpr.exec(this.ctx)).should.equalInteger(7);
   });
 
   it('should execute function from included library that uses expression', async function () {
-    (await this.exprSortsOnFunc.exec(this.ctx)).should.eql([
+    (await this.exprSortsOnFunc.exec(this.ctx)).should.equalCql([
       { N: 1 },
       { N: 2 },
       { N: 3 },

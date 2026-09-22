@@ -1,4 +1,6 @@
 import { Decimal as DecimalJS } from 'decimal.js';
+import { Integer } from './integer';
+import { Long } from './long';
 
 // Use a clone rather than DecimalJS.set because decimal.js configuration is otherwise global.
 // This keeps our settings from changing the behavior of other decimal.js instances in
@@ -7,7 +9,7 @@ import { Decimal as DecimalJS } from 'decimal.js';
 // CQL's maximum Decimal value has 28 significant figures, 30 is just a cleaner number.
 const CQLDecimalJS = DecimalJS.clone({ precision: 30 });
 
-export type DecimalInput = Decimal | string | number | bigint;
+export type DecimalInput = Decimal | Integer | Long | string | number | bigint;
 
 export type DecimalRoundingMode = DecimalJS.Rounding;
 
@@ -42,11 +44,18 @@ export class Decimal {
       return value;
     }
 
+    if (value instanceof Integer || value instanceof Long) {
+      return new Decimal(value.toString());
+    }
     return new Decimal(value);
   }
 
   get isDecimal() {
     return true;
+  }
+
+  get numericKind(): 'Decimal' {
+    return 'Decimal';
   }
 
   normalized() {
@@ -148,10 +157,7 @@ export class Decimal {
   }
 
   compareTo(other: DecimalInput) {
-    if (other instanceof Decimal) {
-      return this.value.comparedTo(other.value);
-    }
-    return this.value.comparedTo(other);
+    return this.value.comparedTo(Decimal.from(other).value);
   }
 
   greaterThan(other: DecimalInput) {

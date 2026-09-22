@@ -14,16 +14,16 @@ describe('Count', () => {
   });
 
   it('should be able to count lists without nulls', async function () {
-    (await this.not_null.exec(this.ctx)).should.equal(5);
+    (await this.not_null.exec(this.ctx)).should.equalInteger(5);
   });
   it('should be able to count lists with nulls', async function () {
-    (await this.has_null.exec(this.ctx)).should.equal(2);
+    (await this.has_null.exec(this.ctx)).should.equalInteger(2);
   });
   it('should be able to count empty list', async function () {
-    (await this.empty.exec(this.ctx)).should.equal(0);
+    (await this.empty.exec(this.ctx)).should.equalInteger(0);
   });
   it('should be able to count null list', async function () {
-    (await this.is_null.exec(this.ctx)).should.equal(0);
+    (await this.is_null.exec(this.ctx)).should.equalInteger(0);
   });
 });
 
@@ -33,11 +33,11 @@ describe('Sum', () => {
   });
 
   it('should be able to sum lists with integers', async function () {
-    (await this.integers.exec(this.ctx)).should.equal(15);
+    (await this.integers.exec(this.ctx)).should.equalInteger(15);
   });
 
   it('should be able to sum integers up to max integer value', async function () {
-    (await this.integers_at_max_value.exec(this.ctx)).should.equal(2147483647);
+    (await this.integers_at_max_value.exec(this.ctx)).should.equalInteger(2147483647);
   });
 
   it('should return null when overflowing the max integer value', async function () {
@@ -45,7 +45,7 @@ describe('Sum', () => {
   });
 
   it('should be able to sum integers down to min integer value', async function () {
-    (await this.integers_at_min_value.exec(this.ctx)).should.equal(-2147483648);
+    (await this.integers_at_min_value.exec(this.ctx)).should.equalInteger(-2147483648);
   });
 
   it('should return null when underflowing the min integer value', async function () {
@@ -53,11 +53,11 @@ describe('Sum', () => {
   });
 
   it('should be able to sum lists with longs', async function () {
-    (await this.longs.exec(this.ctx)).should.equal(15n);
+    (await this.longs.exec(this.ctx)).should.equalLong(15n);
   });
 
   it('should be able to sum longs up to max long value', async function () {
-    (await this.longs_at_max_value.exec(this.ctx)).should.equal(9223372036854775807n);
+    (await this.longs_at_max_value.exec(this.ctx)).should.equalLong(9223372036854775807n);
   });
 
   it('should return null when overflowing the max long value', async function () {
@@ -65,7 +65,7 @@ describe('Sum', () => {
   });
 
   it('should be able to sum longs down to min long value', async function () {
-    (await this.longs_at_min_value.exec(this.ctx)).should.equal(-9223372036854775808n);
+    (await this.longs_at_min_value.exec(this.ctx)).should.equalLong(-9223372036854775808n);
   });
 
   it('should return null when underflowing the min long value', async function () {
@@ -114,7 +114,7 @@ describe('Sum', () => {
   });
 
   it('should be able to sum lists with nulls', async function () {
-    (await this.has_null.exec(this.ctx)).should.equal(3);
+    (await this.has_null.exec(this.ctx)).should.equalInteger(3);
   });
 
   it('should be able to sum empty list', async function () {
@@ -149,10 +149,10 @@ describe('Min', () => {
   });
 
   it('should be able to find min in lists without nulls', async function () {
-    (await this.not_null.exec(this.ctx)).should.equal(0);
+    (await this.not_null.exec(this.ctx)).should.equalInteger(0);
   });
   it('should be able to find min in lists with nulls', async function () {
-    (await this.has_null.exec(this.ctx)).should.equal(-1);
+    (await this.has_null.exec(this.ctx)).should.equalInteger(-1);
   });
   it('should return null for empty list', async function () {
     should(await this.empty.exec(this.ctx)).be.null();
@@ -168,11 +168,11 @@ describe('Min', () => {
   });
 
   it('list of Integers', async function () {
-    (await this.integerMin.exec(this.ctx)).should.equal(2);
+    (await this.integerMin.exec(this.ctx)).should.equalInteger(2);
   });
 
   it('list of Longs', async function () {
-    (await this.longMin.exec(this.ctx)).should.equal(2n);
+    (await this.longMin.exec(this.ctx)).should.equalLong(2n);
   });
 
   it('list of Decimals', async function () {
@@ -226,10 +226,10 @@ describe('Max', () => {
   });
 
   it('should be able to find max in lists without nulls', async function () {
-    (await this.not_null.exec(this.ctx)).should.equal(10);
+    (await this.not_null.exec(this.ctx)).should.equalInteger(10);
   });
   it('should be able to find max in lists with nulls', async function () {
-    (await this.has_null.exec(this.ctx)).should.equal(2);
+    (await this.has_null.exec(this.ctx)).should.equalInteger(2);
   });
   it('should return null for empty list', async function () {
     should(await this.empty.exec(this.ctx)).be.null();
@@ -245,11 +245,11 @@ describe('Max', () => {
   });
 
   it('list of Integers', async function () {
-    (await this.integerMax.exec(this.ctx)).should.equal(8);
+    (await this.integerMax.exec(this.ctx)).should.equalInteger(8);
   });
 
   it('list of Longs', async function () {
-    (await this.longMax.exec(this.ctx)).should.equal(8n);
+    (await this.longMax.exec(this.ctx)).should.equalLong(8n);
   });
 
   it('list of Decimals', async function () {
@@ -405,13 +405,13 @@ describe('Mode', () => {
     setup(this, data);
   });
   it('should be able to find mode of lists without nulls', async function () {
-    (await this.not_null.exec(this.ctx)).should.equal(2);
+    (await this.not_null.exec(this.ctx)).should.equalInteger(2);
   });
   it('should be able to find mode of list of longs', async function () {
-    (await this.longs.exec(this.ctx)).should.equal(2n);
+    (await this.longs.exec(this.ctx)).should.equalLong(2n);
   });
   it('should be able to find Mode lists with nulls', async function () {
-    (await this.has_null.exec(this.ctx)).should.equal(2);
+    (await this.has_null.exec(this.ctx)).should.equalInteger(2);
   });
   it('should return null for empty list', async function () {
     should(await this.empty.exec(this.ctx)).be.null();
@@ -420,7 +420,7 @@ describe('Mode', () => {
     // TODO: until https://jira.hl7.org/browse/FHIR-58745 is resolved,
     // only expect one value
     // (await this.bi_modal.exec(this.ctx)).should.eql([2, 3]);
-    (await this.bi_modal.exec(this.ctx)).should.eql(2);
+    (await this.bi_modal.exec(this.ctx)).should.equalInteger(2);
   });
 
   it('should preserve units for single and tied quantity modes', async function () {
@@ -560,11 +560,11 @@ describe('Product', () => {
   });
 
   it('should return a integer product', async function () {
-    (await this.integer_product.exec(this.ctx)).should.equal(100);
+    (await this.integer_product.exec(this.ctx)).should.equalInteger(100);
   });
 
   it('should return integer product up to max integer value', async function () {
-    (await this.integers_at_max_value_product.exec(this.ctx)).should.equal(2147483647);
+    (await this.integers_at_max_value_product.exec(this.ctx)).should.equalInteger(2147483647);
   });
 
   it('should return null when integer product overflows max integer value', async function () {
@@ -572,7 +572,7 @@ describe('Product', () => {
   });
 
   it('should return integer product down to min integer value', async function () {
-    (await this.integers_at_min_value_product.exec(this.ctx)).should.equal(-2147483648);
+    (await this.integers_at_min_value_product.exec(this.ctx)).should.equalInteger(-2147483648);
   });
 
   it('should return null when integer product underflows min integer value', async function () {
@@ -580,11 +580,11 @@ describe('Product', () => {
   });
 
   it('should return a long product', async function () {
-    (await this.long_product.exec(this.ctx)).should.equal(100n);
+    (await this.long_product.exec(this.ctx)).should.equalLong(100n);
   });
 
   it('should return long product up to max long value', async function () {
-    (await this.longs_at_max_value_product.exec(this.ctx)).should.equal(9223372036854775807n);
+    (await this.longs_at_max_value_product.exec(this.ctx)).should.equalLong(9223372036854775807n);
   });
 
   it('should return null when long product overflows max long value', async function () {
@@ -592,7 +592,7 @@ describe('Product', () => {
   });
 
   it('should return long product down to min long value', async function () {
-    (await this.longs_at_min_value_product.exec(this.ctx)).should.equal(-9223372036854775808n);
+    (await this.longs_at_min_value_product.exec(this.ctx)).should.equalLong(-9223372036854775808n);
   });
 
   it('should return null when long product underflows min long value', async function () {
@@ -620,7 +620,7 @@ describe('Product', () => {
   });
 
   it('should return product of non-null items', async function () {
-    (await this.product_with_null.exec(this.ctx)).should.equal(20);
+    (await this.product_with_null.exec(this.ctx)).should.equalInteger(20);
   });
 
   it('should return a quantity product', async function () {
@@ -657,7 +657,7 @@ describe('Product', () => {
   });
 
   it('should return 0', async function () {
-    (await this.zero_product.exec(this.ctx)).should.equal(0);
+    (await this.zero_product.exec(this.ctx)).should.equalInteger(0);
   });
 
   it('should return null when null list is passed in', async function () {

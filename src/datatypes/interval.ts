@@ -21,6 +21,7 @@ import {
   ELM_ANY_TYPE
 } from '../util/elmTypes';
 import { Quantity } from './quantity';
+import { normalizeNumericInput } from './numeric';
 
 export class Interval {
   constructor(
@@ -30,17 +31,21 @@ export class Interval {
     public highClosed?: boolean | null,
     public pointType: any = ELM_ANY_TYPE
   ) {
+    // Preserve the convenience of the former primitive representations at this
+    // public construction boundary while keeping interval operations wrapper-based.
+    this.low = normalizeNumericInput(this.low);
+    this.high = normalizeNumericInput(this.high);
     this.lowClosed = lowClosed != null ? lowClosed : true;
     this.highClosed = highClosed != null ? highClosed : true;
     if (this.pointType == null || this.pointType === ELM_ANY_TYPE) {
-      let point = low ?? high;
+      let point = this.low ?? this.high;
       if (point?.isUncertainty) {
         point = (point as Uncertainty).low ?? (point as Uncertainty).high;
       }
       if (point != null) {
-        if (typeof point === 'number') {
+        if (point.isInteger === true) {
           this.pointType = ELM_INTEGER_TYPE;
-        } else if (typeof point === 'bigint') {
+        } else if (point.isLong === true) {
           this.pointType = ELM_LONG_TYPE;
         } else if (point.isDecimal) {
           this.pointType = ELM_DECIMAL_TYPE;

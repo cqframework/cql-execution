@@ -1,12 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 import should from 'should';
+import '../should-extensions';
 import { PatientContext } from '../../src/runtime/context';
 import '../../src/elm/expressions'; // Needed for side-effect
 import { build } from '../../src/elm/builder';
 import { Library } from '../../src/elm/library';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
 import { Decimal } from '../../src/datatypes/decimal';
+import { Integer } from '../../src/datatypes/integer';
+import { Long } from '../../src/datatypes/long';
 
 describe('CQL Spec Tests (from XML)', () => {
   fs.readdirSync(path.join(__dirname, 'cql')).forEach(f => {
@@ -100,6 +103,10 @@ describe('CQL Spec Tests (from XML)', () => {
                 } catch {
                   should.fail(actual, expected, 'Lists are not equal');
                 }
+              } else if (expected instanceof Integer) {
+                actual.should.equalInteger(expected);
+              } else if (expected instanceof Long) {
+                actual.should.equalLong(expected);
               } else if (expected instanceof Decimal) {
                 // The tests are somewhat inconsistent w/ number of decimal places used.
                 // To get consistency (and avoid false negatives), always round to 8 places.

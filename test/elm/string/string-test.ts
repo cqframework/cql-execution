@@ -186,7 +186,7 @@ describe('Length', () => {
   });
 
   it('should count letters in string', async function () {
-    (await this.elevenLetters.exec(this.ctx)).should.equal(11);
+    (await this.elevenLetters.exec(this.ctx)).should.equalInteger(11);
   });
 
   it('should return null when string is null', async function () {
@@ -283,11 +283,11 @@ describe('PositionOf', () => {
   });
 
   it('should return 0-based position', async function () {
-    (await this.found.exec(this.ctx)).should.equal(2);
+    (await this.found.exec(this.ctx)).should.equalInteger(2);
   });
 
   it('should return -1 when not found', async function () {
-    (await this.notFound.exec(this.ctx)).should.equal(-1);
+    (await this.notFound.exec(this.ctx)).should.equalInteger(-1);
   });
 
   it('should return null when pattern is null', async function () {
@@ -309,11 +309,11 @@ describe('LastPositionOf', () => {
   });
 
   it('should return 0-based position', async function () {
-    (await this.found.exec(this.ctx)).should.equal(7);
+    (await this.found.exec(this.ctx)).should.equalInteger(7);
   });
 
   it('should return -1 when not found', async function () {
-    (await this.notFound.exec(this.ctx)).should.equal(-1);
+    (await this.notFound.exec(this.ctx)).should.equalInteger(-1);
   });
 
   it('should return null when pattern is null', async function () {

@@ -21,7 +21,69 @@ import {
   ELM_TIME_TYPE
 } from '../util/elmTypes';
 import { typeIsArray } from '../util/util';
+import { isCqlNumeric, normalizeNumericInput } from '../datatypes/numeric';
 import { MessageListener, NullMessageListener } from './messageListeners';
+
+function normalizeParameterValue(value: any, spec?: any, defaultValue?: any): any {
+  if (value == null) {
+    return value;
+  }
+  switch (spec?.type) {
+    case ELM_NAMED_TYPE_SPECIFIER:
+      if (spec.name === ELM_INTEGER_TYPE) {
+        return typeof value === 'number' && Number.isSafeInteger(value)
+          ? dt.Integer.from(value)
+          : value;
+      }
+      if (spec.name === ELM_LONG_TYPE) {
+        return typeof value === 'bigint' ||
+          (typeof value === 'number' && Number.isSafeInteger(value))
+          ? dt.Long.from(value)
+          : value;
+      }
+      return value;
+    case ELM_LIST_TYPE_SPECIFIER:
+      return typeIsArray(value)
+        ? value.map(item => normalizeParameterValue(item, spec.elementType))
+        : value;
+    case ELM_TUPLE_TYPE_SPECIFIER:
+      if (value.constructor !== Object) {
+        return value;
+      }
+      return Object.fromEntries(
+        Object.entries(value).map(([name, item]) => {
+          const element = spec.element.find((entry: any) => entry.name === name);
+          return [name, normalizeParameterValue(item, element?.elementType)];
+        })
+      );
+    case ELM_INTERVAL_TYPE_SPECIFIER:
+      if (!value?.isInterval) {
+        return value;
+      }
+      return new dt.Interval(
+        normalizeParameterValue(value.low, spec.pointType),
+        normalizeParameterValue(value.high, spec.pointType),
+        value.lowClosed,
+        value.highClosed,
+        value.pointType
+      );
+    default:
+      if (defaultValue?.isTuple && value.constructor === Object) {
+        return Object.fromEntries(
+          Object.entries(value).map(([name, item]) => {
+            const element = defaultValue.elements.find((entry: any) => entry.name === name);
+            return [name, normalizeParameterValue(item, undefined, element?.value)];
+          })
+        );
+      }
+      if (defaultValue?.isIntegerLiteral) {
+        return typeof value === 'number' && Number.isSafeInteger(value)
+          ? dt.Integer.from(value)
+          : value;
+      }
+      return normalizeNumericInput(value);
+  }
+}
 
 export class Context {
   // Public Constructor args
@@ -53,8 +115,9 @@ export class Context {
     this.localId_context = {};
     this.evaluatedRecords = [];
     // TODO: If there is an issue with number of parameters look into cql4browsers fix: 387ea77538182833283af65e6341e7a05192304c
-    this.checkParameters(_parameters ?? {}); // not crazy about possibly throwing an error in a constructor, but...
-    this._parameters = _parameters || {};
+    const parameters = this.normalizeParameters(_parameters ?? {});
+    this.checkParameters(parameters); // not crazy about possibly throwing an error in a constructor, but...
+    this._parameters = parameters;
     this.executionDateTime = executionDateTime;
     this.messageListener = messageListener;
   }
@@ -77,7 +140,9 @@ export class Context {
   }
 
   withParameters(params: Parameter) {
-    this.parameters = params || {};
+    const normalizedParameters = this.normalizeParameters(params || {});
+    this.checkParameters(normalizedParameters);
+    this.parameters = normalizedParameters;
     return this;
   }
 
@@ -278,6 +343,18 @@ export class Context {
     return true;
   }
 
+  private normalizeParameters(params: Parameter): Parameter {
+    return Object.fromEntries(
+      Object.entries(params).map(([name, value]) => {
+        const parameter = this.getParameter(name);
+        return [
+          name,
+          normalizeParameterValue(value, parameter?.parameterTypeSpecifier, parameter?.default)
+        ];
+      })
+    );
+  }
+
   matchesTypeSpecifier(val: any, spec: any) {
     switch (spec.type) {
       case ELM_NAMED_TYPE_SPECIFIER:
@@ -307,6 +384,7 @@ export class Context {
       val != null &&
       typeof val === 'object' &&
       !typeIsArray(val) &&
+      !isCqlNumeric(val) &&
       !val.isInterval &&
       !val.isConcept &&
       !val.isCode &&
@@ -343,9 +421,9 @@ export class Context {
       case ELM_DECIMAL_TYPE:
         return val && val.isDecimal;
       case ELM_INTEGER_TYPE:
-        return typeof val === 'number' && Number.isInteger(val);
+        return val?.isInteger === true;
       case ELM_LONG_TYPE:
-        return typeof val === 'bigint';
+        return val?.isLong === true;
       case ELM_STRING_TYPE:
         return typeof val === 'string';
       case ELM_CONCEPT_TYPE:
@@ -390,9 +468,9 @@ export class Context {
     } else if (inst.isDecimalLiteral) {
       return val && val.isDecimal;
     } else if (inst.isIntegerLiteral) {
-      return typeof val === 'number' && Number.isInteger(val);
+      return val?.isInteger === true;
     } else if (inst.isLongLiteral) {
-      return typeof val === 'bigint';
+      return val?.isLong === true;
     } else if (inst.isStringLiteral) {
       return typeof val === 'string';
     } else if (inst.isCode) {
@@ -427,6 +505,7 @@ export class Context {
     return (
       typeof val === 'object' &&
       !typeIsArray(val) &&
+      !isCqlNumeric(val) &&
       tpl.elements.every(
         (x: any) =>
           typeof val[x.name] === 'undefined' || this.matchesInstanceType(val[x.name], x.value)

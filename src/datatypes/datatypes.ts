@@ -1,4 +1,7 @@
 export * from './bigint';
+export * from './integer';
+export * from './long';
+export * from './numeric';
 export * from './decimal';
 export * from './logic';
 export * from './clinical';

@@ -1,5 +1,7 @@
 import { isValidDecimal, overflowsOrUnderflows } from '../util/math';
 import { Decimal } from './decimal';
+import { Integer } from './integer';
+import { Long } from './long';
 import {
   checkUnit,
   convertUnit,
@@ -12,7 +14,7 @@ export class Quantity {
   public readonly value: Decimal;
 
   constructor(
-    value?: Decimal | string | number | bigint,
+    value?: Decimal | Integer | Long | string | number | bigint,
     public unit?: any
   ) {
     if (value == null || (typeof value === 'number' && isNaN(value))) {

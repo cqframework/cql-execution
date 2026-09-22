@@ -4,7 +4,9 @@ import {
   Code,
   DateTime,
   Decimal,
+  Integer,
   Interval,
+  Long,
   Quantity,
   Ratio,
   Uncertainty
@@ -81,6 +83,12 @@ export const toNormalizedKey = (js: any): NormalizedKey => {
         value: js.withoutTrailingZeros().toString(),
         __instance: js.constructor
       });
+
+    case Integer:
+      return js.toNumber();
+
+    case Long:
+      return js.toBigInt();
 
     case Interval:
       return ImmutableSeq(js.toClosed())

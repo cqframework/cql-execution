@@ -6,6 +6,8 @@ import { Concept } from '../datatypes/clinical';
 import { Interval as dtInterval } from '../datatypes/interval';
 import { Quantity, parseQuantity } from '../datatypes/quantity';
 import { Decimal } from '../datatypes/decimal';
+import { Integer } from '../datatypes/integer';
+import { Long } from '../datatypes/long';
 import { isValidDecimal, isValidInteger, isValidLong } from '../util/math';
 import { normalizeMillisecondsField } from '../util/util';
 import { Ratio } from '../datatypes/ratio';
@@ -216,12 +218,21 @@ export class ToInteger extends Expression {
 
   async exec(ctx: Context) {
     const arg = await this.execArgs(ctx);
-    if (typeof arg === 'number') {
+    if (arg?.isInteger === true) {
       if (isValidInteger(arg)) {
         return arg;
       }
-    } else if (typeof arg === 'bigint') {
-      const integer = Number(arg);
+    } else if (arg?.isLong === true) {
+      try {
+        const integer = Integer.from(arg.toNumber());
+        if (isValidInteger(integer)) {
+          return integer;
+        }
+      } catch {
+        return null;
+      }
+    } else if (arg?.isDecimal) {
+      const integer = Integer.from(arg.truncate());
       if (isValidInteger(integer)) {
         return integer;
       }
@@ -231,12 +242,16 @@ export class ToInteger extends Expression {
         return null;
       }
       // note: invalid strings will result in NaN and fail isValidInteger
-      const integer = Number(arg);
-      if (isValidInteger(integer)) {
-        return integer;
+      try {
+        const integer = Integer.from(arg);
+        if (isValidInteger(integer)) {
+          return integer;
+        }
+      } catch {
+        return null;
       }
     } else if (typeof arg === 'boolean') {
-      return arg ? 1 : 0;
+      return Integer.from(arg ? 1 : 0);
     }
     return null;
   }
@@ -249,13 +264,13 @@ export class ToLong extends Expression {
 
   async exec(ctx: Context) {
     const arg = await this.execArgs(ctx);
-    if (typeof arg === 'bigint') {
+    if (arg?.isLong === true) {
       if (isValidLong(arg)) {
         return arg;
       }
-    } else if (typeof arg === 'number') {
+    } else if (arg?.isInteger === true) {
       try {
-        const long = BigInt(arg);
+        const long = Long.from(arg);
         if (isValidLong(long)) {
           return long;
         }
@@ -267,12 +282,12 @@ export class ToLong extends Expression {
       if (!/^[+-]?\d+$/.test(arg)) {
         return null;
       }
-      const long = BigInt(arg);
+      const long = Long.from(arg);
       if (isValidLong(long)) {
         return long;
       }
     } else if (typeof arg === 'boolean') {
-      return arg ? 1n : 0n;
+      return Long.from(arg ? 1n : 0n);
     }
     return null;
   }
@@ -290,7 +305,7 @@ export class ToQuantity extends Expression {
   convertValue(val: any): any {
     if (val == null) {
       return null;
-    } else if (typeof val === 'number' || typeof val === 'bigint' || val.isDecimal) {
+    } else if (val.isInteger === true || val.isLong === true || val.isDecimal === true) {
       return new Quantity(val, '1');
     } else if (val.isRatio) {
       // numerator and denominator are guaranteed non-null
@@ -758,11 +773,11 @@ function guessSpecifierType(val: any): any {
     return typeHierarchy[0];
   } else if (typeof val === 'boolean') {
     return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_BOOLEAN_TYPE };
-  } else if (typeof val === 'number') {
+  } else if (val.isInteger === true) {
     return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_INTEGER_TYPE };
   } else if (val.isDecimal) {
     return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_DECIMAL_TYPE };
-  } else if (typeof val === 'bigint') {
+  } else if (val.isLong === true) {
     return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_LONG_TYPE };
   } else if (typeof val === 'string') {
     return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_STRING_TYPE };

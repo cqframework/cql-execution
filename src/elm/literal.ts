@@ -8,6 +8,8 @@ import {
 } from '../util/elmTypes';
 import { Expression } from './expression';
 import { Decimal } from '../datatypes/decimal';
+import { Integer } from '../datatypes/integer';
+import { Long } from '../datatypes/long';
 
 export class Literal extends Expression {
   valueType: string;
@@ -63,7 +65,7 @@ export class BooleanLiteral extends Literal {
 export class IntegerLiteral extends Literal {
   constructor(json: any) {
     super(json);
-    this.value = parseInt(this.value, 10);
+    this.value = Integer.from(this.value);
   }
 
   // Define a simple getter to allow type-checking of this class without instanceof
@@ -80,7 +82,7 @@ export class IntegerLiteral extends Literal {
 export class LongLiteral extends Literal {
   constructor(json: any) {
     super(json);
-    this.value = BigInt(this.value);
+    this.value = Long.from(this.value);
   }
 
   // Define a simple getter to allow type-checking of this class without instanceof

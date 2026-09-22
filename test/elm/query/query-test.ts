@@ -253,12 +253,12 @@ describe('Sorting', () => {
 
   it('should be able to sort by number asc', async function () {
     const e = await this.numberAsc.exec(this.ctx);
-    e.should.eql([0, 3, 5, 6, 7, 8, 9]);
+    e.should.equalCql([0, 3, 5, 6, 7, 8, 9]);
   });
 
   it('should be able to sort by number desc', async function () {
     const e = await this.numberDesc.exec(this.ctx);
-    e.should.eql([9, 8, 7, 6, 5, 3, 0]);
+    e.should.equalCql([9, 8, 7, 6, 5, 3, 0]);
   });
 
   it('should be able to sort by string asc', async function () {
@@ -290,7 +290,7 @@ describe('Sorting', () => {
   });
 
   it('should be able to sort by an expression that uses another expression in the library', async function () {
-    (await this.sortByExpression.exec(this.ctx)).should.eql([
+    (await this.sortByExpression.exec(this.ctx)).should.equalCql([
       { N: 0 },
       { N: 3 },
       { N: 5 },
@@ -302,7 +302,7 @@ describe('Sorting', () => {
   });
 
   it('should be able to sort by an expression when some results are null', async function () {
-    (await this.sortByExpressionWithNullResults.exec(this.ctx)).should.eql([
+    (await this.sortByExpressionWithNullResults.exec(this.ctx)).should.equalCql([
       { N: null },
       { N: 7 },
       { N: 8 }
@@ -311,12 +311,12 @@ describe('Sorting', () => {
 
   it('should be able to sort using the ascending keyword', async function () {
     const e = await this.sortWithAscendingKeyword.exec(this.ctx);
-    e.should.eql([0, 3, 5, 6, 7, 8, 9]);
+    e.should.equalCql([0, 3, 5, 6, 7, 8, 9]);
   });
 
   it('should be able to sort using the descending keyword', async function () {
     const e = await this.sortWithDescendingKeyword.exec(this.ctx);
-    e.should.eql([9, 8, 7, 6, 5, 3, 0]);
+    e.should.equalCql([9, 8, 7, 6, 5, 3, 0]);
   });
 });
 
@@ -326,29 +326,29 @@ describe('Distinct', () => {
   });
 
   it('should return distinct by default', async function () {
-    (await this.defaultNumbers.exec(this.ctx)).should.eql([1, 2, 3, 4]);
+    (await this.defaultNumbers.exec(this.ctx)).should.equalCql([1, 2, 3, 4]);
     (await this.defaultStrings.exec(this.ctx)).should.eql(['foo', 'bar', 'baz']);
-    (await this.defaultTuples.exec(this.ctx)).should.eql([
+    (await this.defaultTuples.exec(this.ctx)).should.equalCql([
       { a: 1, b: 2 },
       { a: 2, b: 3 }
     ]);
   });
 
   it('should eliminate duplicates when returning distinct', async function () {
-    (await this.distinctNumbers.exec(this.ctx)).should.eql([1, 2, 3, 4]);
+    (await this.distinctNumbers.exec(this.ctx)).should.equalCql([1, 2, 3, 4]);
     (await this.distinctStrings.exec(this.ctx)).should.eql(['foo', 'bar', 'baz']);
-    (await this.distinctTuples.exec(this.ctx)).should.eql([
+    (await this.distinctTuples.exec(this.ctx)).should.equalCql([
       { a: 1, b: 2 },
       { a: 2, b: 3 }
     ]);
   });
 
   it('should not eliminate duplicates when returning all', async function () {
-    (await this.allNumbers.exec(this.ctx)).should.eql([
+    (await this.allNumbers.exec(this.ctx)).should.equalCql([
       1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 2, 2, 1
     ]);
     (await this.allStrings.exec(this.ctx)).should.eql(['foo', 'bar', 'baz', 'bar']);
-    (await this.allTuples.exec(this.ctx)).should.eql([
+    (await this.allTuples.exec(this.ctx)).should.equalCql([
       { a: 1, b: 2 },
       { a: 2, b: 3 },
       { a: 1, b: 2 }
@@ -392,7 +392,7 @@ describe('SingleObjectAlias', () => {
   });
 
   it('should be able to return different object ', async function () {
-    (await this.singleAliasReturnTuple.exec(this.ctx)).should.eql({ a: 1 });
+    (await this.singleAliasReturnTuple.exec(this.ctx)).should.equalCql({ a: 1 });
   });
 
   it('should be able to return different object that is a list', async function () {
@@ -424,7 +424,7 @@ describe('AggregateQuery', () => {
   });
 
   it('should aggregate without a starting value', async function () {
-    (await this.noStartingAggregation.exec(this.ctx)).should.eql(120);
+    (await this.noStartingAggregation.exec(this.ctx)).should.equalInteger(120);
   });
 
   it('should be able to aggregate with an expression as the starting value', async function () {
@@ -445,7 +445,7 @@ describe('AggregateQuery', () => {
   });
 
   it('should be able to aggregate over distinct values', async function () {
-    (await this.distinctAggregation.exec(this.ctx)).should.eql(15);
+    (await this.distinctAggregation.exec(this.ctx)).should.equalInteger(15);
     const literalLocalId = getLocalIdByPath(
       data,
       'AggregateQuery',
@@ -457,7 +457,7 @@ describe('AggregateQuery', () => {
   });
 
   it('should be able to aggregate over non-distinct values', async function () {
-    (await this.allAggregation.exec(this.ctx)).should.eql(30);
+    (await this.allAggregation.exec(this.ctx)).should.equalInteger(30);
     const literalLocalId = getLocalIdByPath(
       data,
       'AggregateQuery',

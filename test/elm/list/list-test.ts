@@ -10,11 +10,11 @@ describe('List', () => {
   });
 
   it('should execute to an array (ints)', async function () {
-    (await this.intList.exec(this.ctx)).should.eql([9, 7, 8]);
+    (await this.intList.exec(this.ctx)).should.equalCql([9, 7, 8]);
   });
 
   it('should execute to an array (longs)', async function () {
-    (await this.longList.exec(this.ctx)).should.eql([9n, 7n, 8n]);
+    (await this.longList.exec(this.ctx)).should.equalCql([9n, 7n, 8n]);
   });
 
   it('should execute to an array (strings)', async function () {
@@ -22,7 +22,7 @@ describe('List', () => {
   });
 
   it('should execute to an array (mixed)', async function () {
-    (await this.mixedList.exec(this.ctx)).should.eql([1, 'two', 3]);
+    (await this.mixedList.exec(this.ctx)).should.equalCql([1, 'two', 3]);
   });
 
   it('should execute to an empty array', async function () {
@@ -171,34 +171,34 @@ describe('Union', () => {
   });
 
   it('should union two lists to a single list', async function () {
-    (await this.oneToTen.exec(this.ctx)).should.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    (await this.oneToTen.exec(this.ctx)).should.equalCql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   });
 
   it('should remove duplicate elements (according to CQL 1.2 spec)', async function () {
-    (await this.oneToFiveOverlapped.exec(this.ctx)).should.eql([1, 2, 3, 4, 5]);
+    (await this.oneToFiveOverlapped.exec(this.ctx)).should.equalCql([1, 2, 3, 4, 5]);
   });
 
   it('should remove duplicate long elements (according to CQL 1.2 spec)', async function () {
-    (await this.oneToFiveLongOverlapped.exec(this.ctx)).should.eql([1n, 2n, 3n, 4n, 5n]);
+    (await this.oneToFiveLongOverlapped.exec(this.ctx)).should.equalCql([1n, 2n, 3n, 4n, 5n]);
   });
 
   it('should remove duplicate null elements', async function () {
-    (await this.oneToFiveOverlappedWithNulls.exec(this.ctx)).should.eql([1, null, 2, 3, 4, 5]);
+    (await this.oneToFiveOverlappedWithNulls.exec(this.ctx)).should.equalCql([1, null, 2, 3, 4, 5]);
   });
 
   it('should not fill in values in a disjoint union', async function () {
-    (await this.disjoint.exec(this.ctx)).should.eql([1, 2, 4, 5]);
+    (await this.disjoint.exec(this.ctx)).should.equalCql([1, 2, 4, 5]);
   });
 
   it('should return one list for multiple nested unions', async function () {
-    (await this.nestedToFifteen.exec(this.ctx)).should.eql([
+    (await this.nestedToFifteen.exec(this.ctx)).should.equalCql([
       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
     ]);
   });
 
   it('should return other list if either arg is null', async function () {
-    should(await this.unionNull.exec(this.ctx)).be.eql([1, 2, 3]);
-    should(await this.nullUnion.exec(this.ctx)).be.eql([1, 2, 3]);
+    should(await this.unionNull.exec(this.ctx)).be.equalCql([1, 2, 3]);
+    should(await this.nullUnion.exec(this.ctx)).be.equalCql([1, 2, 3]);
   });
 
   it('should return an empty list if both args are null but expected to be lists', async function () {
@@ -223,11 +223,11 @@ describe('Except', () => {
   });
 
   it('should remove items in second list', async function () {
-    (await this.exceptThreeFour.exec(this.ctx)).should.eql([1, 2, 5]);
+    (await this.exceptThreeFour.exec(this.ctx)).should.equalCql([1, 2, 5]);
   });
 
   it('should remove items in second list', async function () {
-    (await this.exceptThreeFourLong.exec(this.ctx)).should.eql([1n, 2n, 5n]);
+    (await this.exceptThreeFourLong.exec(this.ctx)).should.equalCql([1n, 2n, 5n]);
   });
 
   it('should not be commutative', async function () {
@@ -235,11 +235,11 @@ describe('Except', () => {
   });
 
   it('should remove items in second list regardless of order', async function () {
-    (await this.exceptFiveThree.exec(this.ctx)).should.eql([1, 2, 4]);
+    (await this.exceptFiveThree.exec(this.ctx)).should.equalCql([1, 2, 4]);
   });
 
   it('should be a no-op when lists have no common items', async function () {
-    (await this.exceptNoOp.exec(this.ctx)).should.eql([1, 2, 3, 4, 5]);
+    (await this.exceptNoOp.exec(this.ctx)).should.equalCql([1, 2, 3, 4, 5]);
   });
 
   it('should remove all items when lists are the same', async function () {
@@ -247,11 +247,11 @@ describe('Except', () => {
   });
 
   it('should return items in first list without 3 and null', async function () {
-    (await this.multipleNullExcept.exec(this.ctx)).should.eql([1, 5, 7]);
+    (await this.multipleNullExcept.exec(this.ctx)).should.equalCql([1, 5, 7]);
   });
 
   it('should be a no-op when second list is empty', async function () {
-    (await this.somethingExceptNothing.exec(this.ctx)).should.eql([1, 2, 3, 4, 5]);
+    (await this.somethingExceptNothing.exec(this.ctx)).should.equalCql([1, 2, 3, 4, 5]);
   });
 
   it('should be a no-op when first list is already empty', async function () {
@@ -259,7 +259,7 @@ describe('Except', () => {
   });
 
   it('should except lists of tuples', async function () {
-    (await this.exceptTuples.exec(this.ctx)).should.eql([{ a: 1 }, { a: 3 }]);
+    (await this.exceptTuples.exec(this.ctx)).should.equalCql([{ a: 1 }, { a: 3 }]);
   });
 
   it('should return null if first arg is null', async function () {
@@ -267,7 +267,7 @@ describe('Except', () => {
   });
 
   it('should return first arg if second arg is null', async function () {
-    (await this.exceptNull.exec(this.ctx)).should.eql([1, 2, 3, 4, 5]);
+    (await this.exceptNull.exec(this.ctx)).should.equalCql([1, 2, 3, 4, 5]);
   });
 
   it('should use equality semantics for Decimal (ignores scale)', async function () {
@@ -291,31 +291,31 @@ describe('Intersect', () => {
   });
 
   it('should intersect two lists with a single common element', async function () {
-    (await this.intersectOnFive.exec(this.ctx)).should.eql([5]);
+    (await this.intersectOnFive.exec(this.ctx)).should.equalCql([5]);
   });
 
   it('should intersect two lists with a single common long element', async function () {
-    (await this.intersectOnFiveLong.exec(this.ctx)).should.eql([5n]);
+    (await this.intersectOnFiveLong.exec(this.ctx)).should.equalCql([5n]);
   });
 
   it('should intersect two lists with a single common element even with duplicates', async function () {
-    (await this.intersectionOnFourDuplicates.exec(this.ctx)).should.eql([4]);
+    (await this.intersectionOnFourDuplicates.exec(this.ctx)).should.equalCql([4]);
   });
 
   it('should intersect two lists with several common elements', async function () {
-    (await this.intersectOnEvens.exec(this.ctx)).should.eql([2, 4, 6, 8, 10]);
+    (await this.intersectOnEvens.exec(this.ctx)).should.equalCql([2, 4, 6, 8, 10]);
   });
 
   it('should intersect two identical lists to the same list', async function () {
-    (await this.intersectOnAll.exec(this.ctx)).should.eql([1, 2, 3, 4, 5]);
+    (await this.intersectOnAll.exec(this.ctx)).should.equalCql([1, 2, 3, 4, 5]);
   });
 
   it('should intersect multiple lists to only those elements common across all', async function () {
-    (await this.nestedIntersects.exec(this.ctx)).should.eql([4, 5]);
+    (await this.nestedIntersects.exec(this.ctx)).should.equalCql([4, 5]);
   });
 
   it('should intersect lists of tuples', async function () {
-    (await this.intersectTuples.exec(this.ctx)).should.eql([
+    (await this.intersectTuples.exec(this.ctx)).should.equalCql([
       { a: 1, b: 'c' },
       { a: 2, b: 'c' }
     ]);
@@ -327,7 +327,7 @@ describe('Intersect', () => {
   });
 
   it('should intersect two lists that contain null', async function () {
-    (await this.multipleNullInListIntersect.exec(this.ctx)).should.eql([3, null]);
+    (await this.multipleNullInListIntersect.exec(this.ctx)).should.equalCql([3, null]);
   });
 
   it('should use equality semantics for Decimal (ignores scale)', async function () {
@@ -347,25 +347,25 @@ describe('IndexOf', () => {
   });
 
   it('should return the correct 0-based index when an item is in the list', async function () {
-    (await this.indexOfSecond.exec(this.ctx)).should.equal(1);
+    (await this.indexOfSecond.exec(this.ctx)).should.equalInteger(1);
     this.ctx.rootContext().localId_context[this.indexOfSecond.source.localId].should.not.be.null();
     this.ctx.rootContext().localId_context[this.indexOfSecond.element.localId].should.not.be.null();
   });
 
   it('should return the correct 0-based index when a long item is in the list', async function () {
-    (await this.indexOfSecondLong.exec(this.ctx)).should.equal(1);
+    (await this.indexOfSecondLong.exec(this.ctx)).should.equalInteger(1);
   });
 
   it('should work with complex types like tuples', async function () {
-    (await this.indexOfThirdTuple.exec(this.ctx)).should.equal(2);
+    (await this.indexOfThirdTuple.exec(this.ctx)).should.equalInteger(2);
   });
 
   it('should return the first index when there are multiple matches', async function () {
-    (await this.multipleMatches.exec(this.ctx)).should.equal(3);
+    (await this.multipleMatches.exec(this.ctx)).should.equalInteger(3);
   });
 
   it('should return -1 when the item is not in the list', async function () {
-    (await this.itemNotFound.exec(this.ctx)).should.equal(-1);
+    (await this.itemNotFound.exec(this.ctx)).should.equalInteger(-1);
   });
 
   it('should return null if either arg is null', async function () {
@@ -375,19 +375,19 @@ describe('IndexOf', () => {
 
   describe('should use equality to determine presence in List', () => {
     it('when code is in list but have undefined displays', async function () {
-      (await this.listCodeUndefined.exec(this.ctx)).should.equal(0);
+      (await this.listCodeUndefined.exec(this.ctx)).should.equalInteger(0);
     });
 
     it('when code is in list', async function () {
-      (await this.listCode.exec(this.ctx)).should.equal(0);
+      (await this.listCode.exec(this.ctx)).should.equalInteger(0);
     });
 
     it('when code is not in list', async function () {
-      (await this.listWrongCode.exec(this.ctx)).should.equal(-1);
+      (await this.listWrongCode.exec(this.ctx)).should.equalInteger(-1);
     });
 
     it('when code system is not in list', async function () {
-      (await this.listWrongCodeSystem.exec(this.ctx)).should.equal(-1);
+      (await this.listWrongCodeSystem.exec(this.ctx)).should.equalInteger(-1);
     });
   });
 });
@@ -402,7 +402,7 @@ describe('Indexer', () => {
   });
 
   it('should return the correct long item based on the 0-based index', async function () {
-    (await this.secondItemLong.exec(this.ctx)).should.equal(34n);
+    (await this.secondItemLong.exec(this.ctx)).should.equalLong(34n);
   });
 
   it('should NOT return null when accessing index 0', async function () {
@@ -833,7 +833,7 @@ describe('Flatten', () => {
   });
 
   it('should flatten a list of lists', async function () {
-    (await this.listOfLists.exec(this.ctx)).should.eql([
+    (await this.listOfLists.exec(this.ctx)).should.equalCql([
       1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1
     ]);
   });
@@ -849,15 +849,15 @@ describe('Distinct', () => {
   });
 
   it('should remove duplicates', async function () {
-    (await this.lotsOfDups.exec(this.ctx)).should.eql([1, 2, 3, 4, 5]);
+    (await this.lotsOfDups.exec(this.ctx)).should.equalCql([1, 2, 3, 4, 5]);
   });
 
   it('should remove long duplicates', async function () {
-    (await this.lotsOfLongDups.exec(this.ctx)).should.eql([1n, 2n, 3n, 4n, 5n]);
+    (await this.lotsOfLongDups.exec(this.ctx)).should.equalCql([1n, 2n, 3n, 4n, 5n]);
   });
 
   it('should do nothing to an already distinct array', async function () {
-    (await this.noDups.exec(this.ctx)).should.eql([2, 4, 6, 8, 10]);
+    (await this.noDups.exec(this.ctx)).should.equalCql([2, 4, 6, 8, 10]);
   });
 
   it('should remove duplicate tuples', async function () {
@@ -877,7 +877,7 @@ describe('Distinct', () => {
 
   it('should remove duplicate null values', async function () {
     // define DuplicateNulls: distinct {null, 1, 2, null, 3, 4, 5, null}
-    (await this.duplicateNulls.exec(this.ctx)).should.eql([null, 1, 2, 3, 4, 5]);
+    (await this.duplicateNulls.exec(this.ctx)).should.equalCql([null, 1, 2, 3, 4, 5]);
   });
 
   it('should use equality semantics for Decimal (ignores scale)', async function () {
@@ -897,13 +897,13 @@ describe('First', () => {
   });
 
   it('should get first of a list of numbers and the localId should exist on the root context', async function () {
-    (await this.numbers.exec(this.ctx)).should.equal(1);
+    (await this.numbers.exec(this.ctx)).should.equalInteger(1);
     const listLocalId = getLocalIdByPath(data, 'First', 'Numbers', 'source');
     should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should get first of a list of longs and the localId should exist on the root context', async function () {
-    (await this.longs.exec(this.ctx)).should.equal(1n);
+    (await this.longs.exec(this.ctx)).should.equalLong(1n);
     const listLocalId = getLocalIdByPath(data, 'First', 'Longs', 'source');
     should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
@@ -921,13 +921,13 @@ describe('First', () => {
   });
 
   it('should get first of a list of tuples and the localId should exist on the root context', async function () {
-    (await this.tuples.exec(this.ctx)).should.eql({ a: 1, b: 2, c: 3 });
+    (await this.tuples.exec(this.ctx)).should.equalCql({ a: 1, b: 2, c: 3 });
     const listLocalId = getLocalIdByPath(data, 'First', 'Tuples', 'source');
     should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should get first of a list of unordered numbers and the localId should exist on the root context', async function () {
-    (await this.unordered.exec(this.ctx)).should.equal(3);
+    (await this.unordered.exec(this.ctx)).should.equalInteger(3);
     const listLocalId = getLocalIdByPath(data, 'First', 'Unordered', 'source');
     should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
@@ -951,13 +951,13 @@ describe('Last', () => {
   });
 
   it('should get last of a list of numbers and the localId should exist on the root context', async function () {
-    (await this.numbers.exec(this.ctx)).should.equal(4);
+    (await this.numbers.exec(this.ctx)).should.equalInteger(4);
     const listLocalId = getLocalIdByPath(data, 'Last', 'Numbers', 'source');
     should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should get last of a list of longs and the localId should exist on the root context', async function () {
-    (await this.longs.exec(this.ctx)).should.equal(4n);
+    (await this.longs.exec(this.ctx)).should.equalLong(4n);
     const listLocalId = getLocalIdByPath(data, 'Last', 'Longs', 'source');
     should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
@@ -975,13 +975,13 @@ describe('Last', () => {
   });
 
   it('should get last of a list of tuples and the localId should exist on the root context', async function () {
-    (await this.tuples.exec(this.ctx)).should.eql({ a: 24, b: 25, c: 26 });
+    (await this.tuples.exec(this.ctx)).should.equalCql({ a: 24, b: 25, c: 26 });
     const listLocalId = getLocalIdByPath(data, 'Last', 'Tuples', 'source');
     should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should get last of a list of unordered numbers and the localId should exist on the root context', async function () {
-    (await this.unordered.exec(this.ctx)).should.equal(2);
+    (await this.unordered.exec(this.ctx)).should.equalInteger(2);
     const listLocalId = getLocalIdByPath(data, 'Last', 'Unordered', 'source');
     should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
@@ -1005,27 +1005,27 @@ describe('Length', () => {
   });
 
   it('should get length of a list of numbers', async function () {
-    (await this.numbers.exec(this.ctx)).should.equal(5);
+    (await this.numbers.exec(this.ctx)).should.equalInteger(5);
   });
 
   it('should get length of a list of longs', async function () {
-    (await this.longs.exec(this.ctx)).should.equal(5);
+    (await this.longs.exec(this.ctx)).should.equalInteger(5);
   });
 
   it('should get length of a list of lists', async function () {
-    (await this.lists.exec(this.ctx)).should.equal(4);
+    (await this.lists.exec(this.ctx)).should.equalInteger(4);
   });
 
   it('should get length of a list of tuples', async function () {
-    (await this.tuples.exec(this.ctx)).should.equal(2);
+    (await this.tuples.exec(this.ctx)).should.equalInteger(2);
   });
 
   it('should get length of an empty list', async function () {
-    (await this.empty.exec(this.ctx)).should.equal(0);
+    (await this.empty.exec(this.ctx)).should.equalInteger(0);
   });
 
   it('should return zero for a null list', async function () {
-    (await this.nullValue.exec(this.ctx)).should.equal(0);
+    (await this.nullValue.exec(this.ctx)).should.equalInteger(0);
   });
 });
 
@@ -1043,7 +1043,7 @@ describe('ToList', () => {
   });
 
   it('should make null into an empty list', async function () {
-    (await this.lengthOfNull.exec(this.ctx)).should.equal(0);
+    (await this.lengthOfNull.exec(this.ctx)).should.equalInteger(0);
   });
 });
 
@@ -1053,7 +1053,7 @@ describe('Skip', () => {
   });
 
   it('should skip two elements and the localId of the source and the startIndex should exist on the root context', async function () {
-    (await this.skip2.exec(this.ctx)).should.eql([3, 4, 5]);
+    (await this.skip2.exec(this.ctx)).should.equalCql([3, 4, 5]);
     const listLocalId = getLocalIdByPath(data, 'Skip', 'Skip2', 'source');
     should(this.ctx.localId_context[listLocalId]).not.be.undefined();
     const literalLocalId = getLocalIdByPath(data, 'Skip', 'Skip2', 'startIndex');
@@ -1061,7 +1061,7 @@ describe('Skip', () => {
   });
 
   it('should not skip when using null and the localId of the source should exist on the root context', async function () {
-    (await this.skipNull.exec(this.ctx)).should.eql([1, 3, 5]);
+    (await this.skipNull.exec(this.ctx)).should.equalCql([1, 3, 5]);
     const listLocalId = getLocalIdByPath(data, 'Skip', 'SkipNull', 'source');
     should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
@@ -1085,7 +1085,7 @@ describe('Tail', () => {
   });
 
   it('should get tail of list and the localId of the source should exist on the root context', async function () {
-    (await this.tail234.exec(this.ctx)).should.eql([2, 3, 4]);
+    (await this.tail234.exec(this.ctx)).should.equalCql([2, 3, 4]);
     const listLocalId = getLocalIdByPath(data, 'Tail', 'Tail234', 'source');
     should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
@@ -1107,13 +1107,13 @@ describe('Take', () => {
   });
 
   it('should take two elements and the localId of the source should exist on the root context', async function () {
-    (await this.take2.exec(this.ctx)).should.eql([1, 2]);
+    (await this.take2.exec(this.ctx)).should.equalCql([1, 2]);
     const listLocalId = getLocalIdByPath(data, 'Take', 'Take2', 'source');
     should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should return full list when asked for too many elements and the localId of the source should exist on the root context', async function () {
-    (await this.takeTooMany.exec(this.ctx)).should.eql([1, 2]);
+    (await this.takeTooMany.exec(this.ctx)).should.equalCql([1, 2]);
     const listLocalId = getLocalIdByPath(data, 'Take', 'TakeTooMany', 'source');
     should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });

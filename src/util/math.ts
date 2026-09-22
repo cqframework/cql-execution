@@ -10,6 +10,9 @@ import {
 } from '../datatypes/datetime';
 
 import { Decimal, MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../datatypes/decimal';
+import { Integer } from '../datatypes/integer';
+import { Long } from '../datatypes/long';
+import { binaryNumericOperation, isCqlNumeric, normalizeNumericInput } from '../datatypes/numeric';
 
 import { Uncertainty } from '../datatypes/uncertainty';
 import {
@@ -53,11 +56,11 @@ export function overflowsOrUnderflows(value: any): boolean {
     if (value.before(MIN_DATE_VALUE)) {
       return true;
     }
-  } else if (typeof value === 'bigint') {
+  } else if (value.isLong === true) {
     if (!isValidLong(value)) {
       return true;
     }
-  } else if (typeof value === 'number') {
+  } else if (value.isInteger === true) {
     if (!isValidInteger(value)) {
       return true;
     }
@@ -72,26 +75,26 @@ export function overflowsOrUnderflows(value: any): boolean {
 }
 
 export function isValidInteger(integer: any) {
-  if (!Number.isInteger(integer)) {
+  if (integer?.isInteger !== true) {
     return false;
   }
-  if (integer > MAX_INT_VALUE) {
+  if (integer.toNumber() > MAX_INT_VALUE) {
     return false;
   }
-  if (integer < MIN_INT_VALUE) {
+  if (integer.toNumber() < MIN_INT_VALUE) {
     return false;
   }
   return true;
 }
 
 export function isValidLong(long: any) {
-  if (typeof long !== 'bigint') {
+  if (long?.isLong !== true) {
     return false;
   }
-  if (long > MAX_LONG_VALUE) {
+  if (long.toBigInt() > MAX_LONG_VALUE) {
     return false;
   }
-  if (long < MIN_LONG_VALUE) {
+  if (long.toBigInt() < MIN_LONG_VALUE) {
     return false;
   }
   return true;
@@ -111,6 +114,8 @@ export function isValidDecimal(decimal: any) {
 }
 
 export function add(a: any, b: any): any {
+  a = normalizeNumericInput(a);
+  b = normalizeNumericInput(b);
   if (a == null || b == null) {
     return null;
   }
@@ -124,16 +129,8 @@ export function add(a: any, b: any): any {
     return low == null || high == null ? null : new Uncertainty(low, high);
   }
 
-  if (a.isDecimal || b.isDecimal) {
-    const sum = Decimal.from(a).add(Decimal.from(b));
-    return overflowsOrUnderflows(sum) ? null : sum;
-  }
-  if (typeof a === 'bigint' || typeof b === 'bigint') {
-    const sum = BigInt(a) + BigInt(b);
-    return overflowsOrUnderflows(sum) ? null : sum;
-  }
-  if (typeof a === 'number' && typeof b === 'number') {
-    const sum = a + b;
+  if (isCqlNumeric(a) && isCqlNumeric(b)) {
+    const sum = binaryNumericOperation(a, b, 'add');
     return overflowsOrUnderflows(sum) ? null : sum;
   }
   if (a?.isQuantity && b?.isQuantity) {
@@ -159,6 +156,8 @@ export function add(a: any, b: any): any {
 }
 
 export function subtract(a: any, b: any): any {
+  a = normalizeNumericInput(a);
+  b = normalizeNumericInput(b);
   if (a == null || b == null) {
     return null;
   }
@@ -171,11 +170,9 @@ export function subtract(a: any, b: any): any {
     const high = subtract(aHigh, bLow);
     return low == null || high == null ? null : new Uncertainty(low, high);
   }
-  if (typeof b === 'number' || typeof b === 'bigint') {
-    return add(a, -b);
-  }
-  if (b?.isDecimal) {
-    return add(a, (b as Decimal).negate());
+  if (isCqlNumeric(a) && isCqlNumeric(b)) {
+    const difference = binaryNumericOperation(a, b, 'subtract');
+    return overflowsOrUnderflows(difference) ? null : difference;
   }
   if (b?.isQuantity) {
     // Note - this path uses a fake Quantity object to defer validation of the unit
@@ -186,16 +183,10 @@ export function subtract(a: any, b: any): any {
 }
 
 export function multiply(a: any, b: any) {
-  if (a.isDecimal || b.isDecimal) {
-    const product = Decimal.from(a).multiplyBy(b);
-    return overflowsOrUnderflows(product) ? null : product;
-  }
-  if (typeof a === 'bigint' || typeof b === 'bigint') {
-    const product = BigInt(a) * BigInt(b);
-    return overflowsOrUnderflows(product) ? null : product;
-  }
-  if (typeof a === 'number' && typeof b === 'number') {
-    const product = a * b;
+  a = normalizeNumericInput(a);
+  b = normalizeNumericInput(b);
+  if (isCqlNumeric(a) && isCqlNumeric(b)) {
+    const product = binaryNumericOperation(a, b, 'multiply');
     return overflowsOrUnderflows(product) ? null : product;
   }
 
@@ -203,49 +194,48 @@ export function multiply(a: any, b: any) {
 }
 
 export function divide(a: any, b: any, truncated?: boolean) {
-  if (a.isDecimal || b.isDecimal) {
-    const bDecimal = Decimal.from(b);
-    if (bDecimal.equals(0)) {
+  a = normalizeNumericInput(a);
+  b = normalizeNumericInput(b);
+  if (isCqlNumeric(a) && isCqlNumeric(b)) {
+    try {
+      const quotient = binaryNumericOperation(a, b, truncated ? 'truncatedDivide' : 'divide');
+      return overflowsOrUnderflows(quotient) ? null : quotient;
+    } catch {
       return null;
     }
-    const aDecimal = Decimal.from(a);
-    const quotient = truncated ? aDecimal.truncatedDivideBy(b) : aDecimal.divideBy(b);
-    return overflowsOrUnderflows(quotient) ? null : quotient;
-  }
-  if (typeof a === 'bigint' || typeof b === 'bigint') {
-    if (b === 0 || b === 0n) {
-      return null;
-    }
-    // BigInt division is inherently truncated, eg 10n / 3n = 3n
-    const quotient = BigInt(a) / BigInt(b);
-    return overflowsOrUnderflows(quotient) ? null : quotient;
-  }
-  if (typeof a === 'number' && typeof b === 'number') {
-    if (b === 0) {
-      return null;
-    }
-    // here we need to truncate manually to ensure the value is an integer
-    const quotient = Math.trunc(a / b);
-    return overflowsOrUnderflows(quotient) ? null : quotient;
   }
 
   throw new Error('Unsupported argument types.');
 }
 
+export function modulo(a: any, b: any) {
+  a = normalizeNumericInput(a);
+  b = normalizeNumericInput(b);
+  if (!isCqlNumeric(a) || !isCqlNumeric(b)) {
+    throw new Error('Unsupported argument types.');
+  }
+  try {
+    const result = binaryNumericOperation(a, b, 'modulo');
+    return overflowsOrUnderflows(result) ? null : result;
+  } catch {
+    return null;
+  }
+}
+
 export class OverFlowException extends Exception {}
 
 export function successor(val: any, precision?: string): any {
-  if (typeof val === 'number') {
-    if (val >= MAX_INT_VALUE) {
+  if (val?.isInteger === true) {
+    if (val.toNumber() >= MAX_INT_VALUE) {
       throw new OverFlowException();
     } else {
-      return val + 1;
+      return val.successor();
     }
-  } else if (typeof val === 'bigint') {
-    if (val >= MAX_LONG_VALUE) {
+  } else if (val?.isLong === true) {
+    if (val.toBigInt() >= MAX_LONG_VALUE) {
       throw new OverFlowException();
     } else {
-      return val + 1n;
+      return val.successor();
     }
   } else if (val && val.isDecimal) {
     if (val.greaterThanOrEquals(MAX_DECIMAL_VALUE)) {
@@ -275,12 +265,12 @@ export function successor(val: any, precision?: string): any {
     // For uncertainties, if the high is the max val, don't increment it
     const high = (() => {
       try {
-        return successor(val.high, precision);
+        return successor(val.high, precision) ?? val.high;
       } catch {
         return val.high;
       }
     })();
-    return new Uncertainty(successor(val.low, precision), high);
+    return new Uncertainty(successor(val.low, precision) ?? val.low, high);
   } else if (val && val.isQuantity) {
     const succ = val.clone();
     succ.value = successor(val.value);
@@ -291,17 +281,17 @@ export function successor(val: any, precision?: string): any {
 }
 
 export function predecessor(val: any, precision?: string): any {
-  if (typeof val === 'number') {
-    if (val <= MIN_INT_VALUE) {
+  if (val?.isInteger === true) {
+    if (val.toNumber() <= MIN_INT_VALUE) {
       throw new OverFlowException();
     } else {
-      return val - 1;
+      return val.predecessor();
     }
-  } else if (typeof val === 'bigint') {
-    if (val <= MIN_LONG_VALUE) {
+  } else if (val?.isLong === true) {
+    if (val.toBigInt() <= MIN_LONG_VALUE) {
       throw new OverFlowException();
     } else {
-      return val - 1n;
+      return val.predecessor();
     }
   } else if (val && val.isDecimal) {
     if (val.lessThanOrEquals(MIN_DECIMAL_VALUE)) {
@@ -331,12 +321,12 @@ export function predecessor(val: any, precision?: string): any {
     // For uncertainties, if the low is the min val, don't decrement it
     const low = ((): any => {
       try {
-        return predecessor(val.low, precision);
+        return predecessor(val.low, precision) ?? val.low;
       } catch {
         return val.low;
       }
     })();
-    return new Uncertainty(low, predecessor(val.high, precision));
+    return new Uncertainty(low, predecessor(val.high, precision) ?? val.high);
   } else if (val && val.isQuantity) {
     const pred = val.clone();
     pred.value = predecessor(val.value);
@@ -349,9 +339,9 @@ export function predecessor(val: any, precision?: string): any {
 export function maxValueForType(type: string, quantityInstance?: Quantity) {
   switch (type) {
     case ELM_INTEGER_TYPE:
-      return MAX_INT_VALUE;
+      return Integer.from(MAX_INT_VALUE);
     case ELM_LONG_TYPE:
-      return MAX_LONG_VALUE;
+      return Long.from(MAX_LONG_VALUE);
     case ELM_DECIMAL_TYPE:
       return MAX_DECIMAL_VALUE;
     case ELM_DATETIME_TYPE:
@@ -374,9 +364,9 @@ export function maxValueForType(type: string, quantityInstance?: Quantity) {
 export function minValueForType(type: string, quantityInstance?: Quantity) {
   switch (type) {
     case ELM_INTEGER_TYPE:
-      return MIN_INT_VALUE;
+      return Integer.from(MIN_INT_VALUE);
     case ELM_LONG_TYPE:
-      return MIN_LONG_VALUE;
+      return Long.from(MIN_LONG_VALUE);
     case ELM_DECIMAL_TYPE:
       return MIN_DECIMAL_VALUE;
     case ELM_DATETIME_TYPE:

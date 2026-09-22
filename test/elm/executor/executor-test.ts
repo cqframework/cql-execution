@@ -63,8 +63,8 @@ describe('Age', () => {
 
   it('should have correct patient results with sync patient source', async function () {
     const results = await this.executor.withLibrary(this.lib).exec(this.patientSource);
-    should(results.patientResults['1'].Age).equal(32);
-    should(results.patientResults['2'].Age).equal(5);
+    should(results.patientResults['1'].Age).equalInteger(32);
+    should(results.patientResults['2'].Age).equalInteger(5);
   });
 
   it('should have correct patient results with async patient source', async function () {
@@ -77,8 +77,8 @@ describe('Age', () => {
     should(asyncPatientSource.heldResolvesCount).equal(0);
 
     const results = await resultPromise;
-    should(results.patientResults['1'].Age).equal(32);
-    should(results.patientResults['2'].Age).equal(5);
+    should(results.patientResults['1'].Age).equalInteger(32);
+    should(results.patientResults['2'].Age).equalInteger(5);
   });
 
   it('should have correct patientEvaluatedRecords for each patient', async function () {
@@ -94,20 +94,20 @@ describe('Age', () => {
 
   it('should have the correct unfiltered results', async function () {
     this.results = await this.executor.withLibrary(this.lib).exec(this.patientSource);
-    should(this.results.unfilteredResults.AgeSum).equal(37);
+    should(this.results.unfilteredResults.AgeSum).equalInteger(37);
   });
 
   it('should be able to reference other unfiltered context expressions', async function () {
     this.results = await this.executor.withLibrary(this.lib).exec(this.patientSource);
-    this.results.unfilteredResults.AgeSumRef.should.equal(37);
+    this.results.unfilteredResults.AgeSumRef.should.equalInteger(37);
   });
 
   it('should have correct patient results when executing a single expression with sync patient source', async function () {
     const results = await this.executor
       .withLibrary(this.lib)
       .exec_expression('Age', this.patientSource, new DateTime(2024, 12, 31));
-    should(results.patientResults['1'].Age).equal(32);
-    should(results.patientResults['2'].Age).equal(5);
+    should(results.patientResults['1'].Age).equalInteger(32);
+    should(results.patientResults['2'].Age).equalInteger(5);
   });
 
   it('should have correct patient results when executing a single expression with async patient source', async function () {
@@ -120,7 +120,7 @@ describe('Age', () => {
     should(asyncPatientSource.heldResolvesCount).equal(0);
 
     const results = await resultPromise;
-    should(results.patientResults['1'].Age).equal(32);
-    should(results.patientResults['2'].Age).equal(5);
+    should(results.patientResults['1'].Age).equalInteger(32);
+    should(results.patientResults['2'].Age).equalInteger(5);
   });
 });

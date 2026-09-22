@@ -11,6 +11,8 @@ import { IntervalTypeSpecifier, NamedTypeSpecifier } from '../types/type-specifi
 import { ELM_ANY_TYPE, ELM_NAMED_TYPE_SPECIFIER } from '../util/elmTypes';
 import { Decimal, TRUNCATE_TO_PRECISION } from '../datatypes/decimal';
 import { MAX_INT_VALUE, MIN_INT_VALUE } from '../util/limits';
+import { Integer } from '../datatypes/integer';
+import { Long } from '../datatypes/long';
 
 export class Interval extends Expression {
   lowClosed: boolean;
@@ -404,7 +406,7 @@ function intervalListType(intervals: any) {
       } else {
         return 'mismatch';
       }
-    } else if (typeof low === 'bigint' && typeof high === 'bigint') {
+    } else if (low.isLong === true && high.isLong === true) {
       if (type == null) {
         type = 'long';
       } else if (type === 'long') {
@@ -412,7 +414,7 @@ function intervalListType(intervals: any) {
       } else {
         return 'mismatch';
       }
-    } else if (typeof low === 'number' && typeof high === 'number') {
+    } else if (low.isInteger === true && high.isInteger === true) {
       if (type == null) {
         type = 'integer';
       } else if (type === 'integer') {
@@ -649,15 +651,15 @@ export class Expand extends Expression {
       return [];
     }
 
-    let convertBound: (d: Decimal) => Decimal | number | bigint;
+    let convertBound: (d: Decimal) => Decimal | Integer | Long;
     if (!perIsIntegral) {
       // If per is not an integer value, then regardless of the original point types, the values will be Decimals
       convertBound = d => d;
-    } else if (typeof lowValue === 'bigint' || typeof highValue === 'bigint') {
+    } else if (lowValue.isLong === true || highValue.isLong === true) {
       // the bounds were integral and the per was integral, so there should be no risk of non-integral values
-      convertBound = d => d.truncateToBigInt();
-    } else if (typeof lowValue === 'number' || typeof highValue === 'number') {
-      convertBound = d => d.truncate();
+      convertBound = d => Long.from(d.truncateToBigInt());
+    } else if (lowValue.isInteger === true || highValue.isInteger === true) {
+      convertBound = d => Integer.from(d.truncate());
     } else {
       // per is integral but the original bounds of the interval were Decimal.
       // Make the resulting intervals either Long or Integer based on the original bounds.
@@ -670,9 +672,9 @@ export class Expand extends Expression {
         high.lessThan(MIN_INT_VALUE) ||
         high.greaterThan(MAX_INT_VALUE)
       ) {
-        convertBound = d => d.truncateToBigInt();
+        convertBound = d => Long.from(d.truncateToBigInt());
       } else {
-        convertBound = d => d.truncate();
+        convertBound = d => Integer.from(d.truncate());
       }
     }
 

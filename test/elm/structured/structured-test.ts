@@ -10,8 +10,8 @@ describe('Tuple', () => {
 
   it('should be able to define a tuple', async function () {
     const e = await this.tup.exec(this.ctx);
-    should(e['a']).equal(1);
-    should(e['b']).equal(2);
+    should(e['a']).equalInteger(1);
+    should(e['b']).equalInteger(2);
   });
 
   it('should be able to define an empty tuple', async function () {

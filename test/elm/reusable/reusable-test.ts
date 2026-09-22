@@ -34,7 +34,7 @@ describe('ExpressionRef', () => {
   });
 
   it('should execute to expression value', async function () {
-    (await this.foo.exec(this.ctx)).should.equal(42);
+    (await this.foo.exec(this.ctx)).should.equalInteger(42);
   });
 
   it('should execute an expensive ExpressionDef once when referenced more than once', async function () {
@@ -51,7 +51,7 @@ describe('FunctionDefinitions', () => {
 
   it('should be able to define and use a simple function', async function () {
     const e = await this.testValue.exec(this.ctx);
-    e.should.equal(3);
+    e.should.equalInteger(3);
   });
 });
 
@@ -62,7 +62,7 @@ describe('FunctionOverloadsWithSingleArgument', async function () {
 
   it('should be able to invoke the correct function based on argument type', async function () {
     let e = await this.testValue1.exec(this.ctx);
-    e.should.equal(2);
+    e.should.equalInteger(2);
     e = await this.testValue2.exec(this.ctx);
     e.should.equal('Hello World');
   });
@@ -75,7 +75,7 @@ describe('FunctionOverloadsWithMultipleArguments', async function () {
 
   it('should be able to invoke the correct function based on argument type', async function () {
     let e = await this.testValue1.exec(this.ctx);
-    e.should.equal(0);
+    e.should.equalInteger(0);
     e = await this.testValue2.exec(this.ctx);
     e.should.equal('Goodbye World');
   });
@@ -121,7 +121,7 @@ describe('FluentFunctions', () => {
 
   it('should be able to invoke a fluent function with one extra argument', async function () {
     const e = await this.testValue2.exec(this.ctx);
-    e.should.equal(3);
+    e.should.equalInteger(3);
   });
 });
 

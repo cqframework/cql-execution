@@ -102,9 +102,9 @@ describe('AsSystemType', () => {
   });
 
   it('should return back matching types', async function () {
-    (await this.fiveAsInteger.exec(this.ctx)).should.equal(5);
+    (await this.fiveAsInteger.exec(this.ctx)).should.equalInteger(5);
     (await this.stringFiveAsString.exec(this.ctx)).should.equal('5');
-    (await this.castFiveAsInteger.exec(this.ctx)).should.equal(5);
+    (await this.castFiveAsInteger.exec(this.ctx)).should.equalInteger(5);
     (await this.castStringFiveAsString.exec(this.ctx)).should.equal('5');
   });
 
@@ -151,8 +151,8 @@ describe('AsListType', () => {
   });
 
   it('should return back matching types', async function () {
-    (await this.listOfIntegersAsListOfIntegers.exec(this.ctx)).should.eql([1, 2, 3, 4, 5]);
-    (await this.castListOfIntegersAsListOfIntegers.exec(this.ctx)).should.eql([1, 2, 3, 4, 5]);
+    (await this.listOfIntegersAsListOfIntegers.exec(this.ctx)).should.equalCql([1, 2, 3, 4, 5]);
+    (await this.castListOfIntegersAsListOfIntegers.exec(this.ctx)).should.equalCql([1, 2, 3, 4, 5]);
   });
 
   it('should return null on non-matching types for non-strict cast', async function () {
@@ -244,11 +244,11 @@ describe('AsTupleType', () => {
   });
 
   it('should return back matching types', async function () {
-    (await this.tupleOfAIntegerBStringAsTupleOfAIntegerBString.exec(this.ctx)).should.eql({
+    (await this.tupleOfAIntegerBStringAsTupleOfAIntegerBString.exec(this.ctx)).should.equalCql({
       A: 1,
       B: '2'
     });
-    (await this.castTupleOfAIntegerBStringAsTupleOfAIntegerBString.exec(this.ctx)).should.eql({
+    (await this.castTupleOfAIntegerBStringAsTupleOfAIntegerBString.exec(this.ctx)).should.equalCql({
       A: 1,
       B: '2'
     });
@@ -291,8 +291,8 @@ describe('AsChoiceType', () => {
   });
 
   it('should return back matching types', async function () {
-    (await this.integerAsChoiceOfIntegersAndStrings.exec(this.ctx)).should.eql(5);
-    (await this.castIntegerAsChoiceOfIntegersAndStrings.exec(this.ctx)).should.eql(5);
+    (await this.integerAsChoiceOfIntegersAndStrings.exec(this.ctx)).should.equalInteger(5);
+    (await this.castIntegerAsChoiceOfIntegersAndStrings.exec(this.ctx)).should.equalInteger(5);
     (await this.stringAsChoiceOfIntegersAndStrings.exec(this.ctx)).should.eql('Foo');
     (await this.castStringAsChoiceOfIntegersAndStrings.exec(this.ctx)).should.eql('Foo');
   });

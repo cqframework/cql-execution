@@ -3,6 +3,7 @@ import { allTrue, asyncMergeSort, Direction, typeIsArray } from '../util/util';
 import { build } from './builder';
 import { Expression, UnimplementedExpression } from './expression';
 import { toDistinctList } from './list';
+import { lessThan } from '../util/comparison';
 
 export class AliasedQuerySource {
   alias: any;
@@ -84,7 +85,7 @@ export class ByDirection extends Expression {
       } else {
         return this.high_order;
       }
-    } else if (a < b) {
+    } else if (lessThan(a, b) ?? a < b) {
       return this.low_order;
     } else {
       return this.high_order;
@@ -120,7 +121,7 @@ export class ByExpression extends Expression {
     } else if (a_val.isQuantity && b_val.isQuantity) {
       return a_val.before(b_val) ? this.low_order : this.high_order;
     } else {
-      return a_val < b_val ? this.low_order : this.high_order;
+      return (lessThan(a_val, b_val) ?? a_val < b_val) ? this.low_order : this.high_order;
     }
   }
 }

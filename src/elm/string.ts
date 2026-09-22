@@ -1,4 +1,5 @@
 import { Expression } from './expression';
+import { Integer } from '../datatypes/integer';
 import { Context } from '../runtime/context';
 import { build } from './builder';
 
@@ -133,7 +134,7 @@ export class PositionOf extends Expression {
     if (pattern == null || string == null) {
       return null;
     } else {
-      return string.indexOf(pattern);
+      return Integer.from(string.indexOf(pattern));
     }
   }
 }
@@ -154,7 +155,7 @@ export class LastPositionOf extends Expression {
     if (pattern == null || string == null) {
       return null;
     } else {
-      return string.lastIndexOf(pattern);
+      return Integer.from(string.lastIndexOf(pattern));
     }
   }
 }

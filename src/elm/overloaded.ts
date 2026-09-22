@@ -1,4 +1,5 @@
 import { Expression } from './expression';
+import { Integer } from '../datatypes/integer';
 import { ThreeValuedLogic } from '../datatypes/logic';
 import { DateTime } from '../datatypes/datetime';
 import { resolveValueSet, typeIsArray } from '../util/util';
@@ -318,9 +319,9 @@ export class Length extends Expression {
   async exec(ctx: Context) {
     const arg = await this.execArgs(ctx);
     if (arg != null) {
-      return arg.length;
+      return Integer.from(arg.length);
     } else if ((this.arg as any).asTypeSpecifier.type === ELM_LIST_TYPE_SPECIFIER) {
-      return 0;
+      return Integer.from(0);
     } else {
       return null;
     }
@@ -435,6 +436,6 @@ export class Precision extends Expression {
       throw new Error(`Unimplemented Expression: Precision`);
     }
 
-    return arg.getPrecisionValue();
+    return Integer.from(arg.getPrecisionValue());
   }
 }

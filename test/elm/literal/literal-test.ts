@@ -24,19 +24,19 @@ describe('Literal', () => {
   });
 
   it('should convert 1 to int 1', function () {
-    this.intOne.value.should.equal(1);
+    this.intOne.value.should.equalInteger(1);
   });
 
   it('should execute 1 as 1', async function () {
-    (await this.intOne.exec(this.ctx)).should.equal(1);
+    (await this.intOne.exec(this.ctx)).should.equalInteger(1);
   });
 
   it('should convert 1L to 1n', function () {
-    this.longOne.value.should.equal(1n);
+    this.longOne.value.should.equalLong(1n);
   });
 
   it('should execute 1L as 1n', async function () {
-    (await this.longOne.exec(this.ctx)).should.equal(1n);
+    (await this.longOne.exec(this.ctx)).should.equalLong(1n);
   });
 
   it('should convert .1 to decimal .1', function () {

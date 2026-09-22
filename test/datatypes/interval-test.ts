@@ -62,16 +62,16 @@ describe('Interval', () => {
 
   it('should properly set all properties when constructed as integer interval', () => {
     const i = new Interval(12, 36, true, false);
-    i.low.should.equal(12);
-    i.high.should.equal(36);
+    i.low.should.equalInteger(12);
+    i.high.should.equalInteger(36);
     i.lowClosed.should.be.true();
     i.highClosed.should.be.false();
   });
 
   it('should properly set all properties when constructed as long interval', () => {
     const i = new Interval(12n, 36n, true, false);
-    i.low.should.equal(12n);
-    i.high.should.equal(36n);
+    i.low.should.equalLong(12n);
+    i.high.should.equalLong(36n);
     i.lowClosed.should.be.true();
     i.highClosed.should.be.false();
   });
@@ -124,11 +124,11 @@ describe('Interval', () => {
     });
 
     it('should return the point size for Integer intervals', () => {
-      new Interval(0, 100).getPointSize().should.equal(1);
+      new Interval(0, 100).getPointSize().should.equalInteger(1);
     });
 
     it('should return the point size for Long intervals', () => {
-      new Interval(0n, 100n).getPointSize().should.equal(1n);
+      new Interval(0n, 100n).getPointSize().should.equalLong(1n);
     });
 
     it('should return the point size for Decimal intervals', () => {
@@ -155,9 +155,9 @@ describe('Interval', () => {
     });
 
     it('should return low for intervals with closed low', () => {
-      d.zeroToHundred.closed.start().should.equal(0);
+      d.zeroToHundred.closed.start().should.equalInteger(0);
       d.zeroPointFiveToNinePointFive.closed.start().should.equalDecimal(0.5);
-      d.zeroToHundredLong.closed.start().should.equal(0n);
+      d.zeroToHundredLong.closed.start().should.equalLong(0n);
       d.zeroToHundredMg.closed.start().should.eql(new Quantity('0.0', 'mg'));
       d.all2012date.closed.start().should.eql(Date.parse('2012-01-01'));
       d.all2012.closed.start().should.eql(DateTime.parse('2012-01-01T00:00:00.0'));
@@ -165,9 +165,9 @@ describe('Interval', () => {
     });
 
     it('should return successor of low for intervals with open low', () => {
-      d.zeroToHundred.openClosed.start().should.equal(1);
+      d.zeroToHundred.openClosed.start().should.equalInteger(1);
       d.zeroPointFiveToNinePointFive.openClosed.start().should.equalDecimal('0.6');
-      d.zeroToHundredLong.openClosed.start().should.equal(1n);
+      d.zeroToHundredLong.openClosed.start().should.equalLong(1n);
       d.zeroToHundredMg.openClosed.start().should.eql(new Quantity('0.1', 'mg'));
       d.all2012date.openClosed.start().should.eql(Date.parse('2012-01-02'));
       d.all2012.openClosed.start().should.eql(DateTime.parse('2012-01-01T00:00:00.001'));
@@ -177,8 +177,8 @@ describe('Interval', () => {
     });
 
     it('should return type minimum for closed null low endpoints', () => {
-      d.zeroToHundred.withNullStart.closed.start().should.equal(MIN_INT_VALUE);
-      d.zeroToHundredLong.withNullStart.closed.start().should.equal(MIN_LONG_VALUE);
+      d.zeroToHundred.withNullStart.closed.start().should.equalInteger(MIN_INT_VALUE);
+      d.zeroToHundredLong.withNullStart.closed.start().should.equalLong(MIN_LONG_VALUE);
       d.zeroPointFiveToNinePointFive.withNullStart.closed
         .start()
         .should.equalDecimal(MIN_DECIMAL_VALUE);
@@ -255,8 +255,10 @@ describe('Interval', () => {
     });
 
     it('should use default point type when both endpoints are null', () => {
-      new Interval(null, null, true, true, ELM_INTEGER_TYPE).start().should.equal(MIN_INT_VALUE);
-      new Interval(null, null, true, true, ELM_LONG_TYPE).start().should.equal(MIN_LONG_VALUE);
+      new Interval(null, null, true, true, ELM_INTEGER_TYPE)
+        .start()
+        .should.equalInteger(MIN_INT_VALUE);
+      new Interval(null, null, true, true, ELM_LONG_TYPE).start().should.equalLong(MIN_LONG_VALUE);
       new Interval(null, null, true, true, ELM_DECIMAL_TYPE).start().should.eql(MIN_DECIMAL_VALUE);
       new Interval(null, null, true, true, ELM_QUANTITY_TYPE)
         .start()
@@ -302,9 +304,9 @@ describe('Interval', () => {
     });
 
     it('should return high for intervals with closed high', () => {
-      d.zeroToHundred.closed.end().should.equal(100);
+      d.zeroToHundred.closed.end().should.equalInteger(100);
       d.zeroPointFiveToNinePointFive.closed.end().should.equalDecimal('9.5');
-      d.zeroToHundredLong.closed.end().should.equal(100n);
+      d.zeroToHundredLong.closed.end().should.equalLong(100n);
       d.zeroToHundredMg.closed.end().should.eql(new Quantity('100.0', 'mg'));
       d.all2012date.closed.end().should.eql(Date.parse('2012-12-31'));
       d.all2012.closed.end().should.eql(DateTime.parse('2012-12-31T23:59:59.999'));
@@ -312,9 +314,9 @@ describe('Interval', () => {
     });
 
     it('should return predecessor of high for intervals with open high', () => {
-      d.zeroToHundred.closedOpen.end().should.equal(99);
+      d.zeroToHundred.closedOpen.end().should.equalInteger(99);
       d.zeroPointFiveToNinePointFive.closedOpen.end().should.equalDecimal('9.4');
-      d.zeroToHundredLong.closedOpen.end().should.equal(99n);
+      d.zeroToHundredLong.closedOpen.end().should.equalLong(99n);
       d.zeroToHundredMg.closedOpen.end().should.eql(new Quantity('99.9', 'mg'));
       d.all2012date.closedOpen.end().should.eql(Date.parse('2012-12-30'));
       d.all2012.closedOpen.end().should.eql(DateTime.parse('2012-12-31T23:59:59.998'));
@@ -322,8 +324,8 @@ describe('Interval', () => {
     });
 
     it('should return type maximum for closed null high endpoints', () => {
-      d.zeroToHundred.withNullEnd.closed.end().should.equal(MAX_INT_VALUE);
-      d.zeroToHundredLong.withNullEnd.closed.end().should.equal(MAX_LONG_VALUE);
+      d.zeroToHundred.withNullEnd.closed.end().should.equalInteger(MAX_INT_VALUE);
+      d.zeroToHundredLong.withNullEnd.closed.end().should.equalLong(MAX_LONG_VALUE);
       d.zeroPointFiveToNinePointFive.withNullEnd.closed.end().should.eql(MAX_DECIMAL_VALUE);
       d.zeroToHundredMg.withNullEnd.closed.end().should.eql(new Quantity(MAX_DECIMAL_VALUE, 'mg'));
       d.all2012date.withNullEnd.closed.end().should.eql(MAX_DATE_VALUE);
@@ -392,8 +394,10 @@ describe('Interval', () => {
     });
 
     it('should use default point type when both endpoints are null', () => {
-      new Interval(null, null, true, true, ELM_INTEGER_TYPE).end().should.equal(MAX_INT_VALUE);
-      new Interval(null, null, true, true, ELM_LONG_TYPE).end().should.equal(MAX_LONG_VALUE);
+      new Interval(null, null, true, true, ELM_INTEGER_TYPE)
+        .end()
+        .should.equalInteger(MAX_INT_VALUE);
+      new Interval(null, null, true, true, ELM_LONG_TYPE).end().should.equalLong(MAX_LONG_VALUE);
       new Interval(null, null, true, true, ELM_DECIMAL_TYPE).end().should.eql(MAX_DECIMAL_VALUE);
       new Interval(null, null, true, true, ELM_QUANTITY_TYPE)
         .end()
@@ -3860,16 +3864,16 @@ describe('IntegerInterval', () => {
 
       ivl = new Interval(8, 17);
       let i = ivl.union(uIvl);
-      i.low.low.should.equal(5);
-      i.low.high.should.equal(8);
-      i.high.low.should.equal(17);
-      i.high.high.should.equal(20);
+      i.low.low.should.equalInteger(5);
+      i.low.high.should.equalInteger(8);
+      i.high.low.should.equalInteger(17);
+      i.high.high.should.equalInteger(20);
 
       i = uIvl.union(ivl);
-      i.low.low.should.equal(5);
-      i.low.high.should.equal(8);
-      i.high.low.should.equal(17);
-      i.high.high.should.equal(20);
+      i.low.low.should.equalInteger(5);
+      i.low.high.should.equalInteger(8);
+      i.high.low.should.equalInteger(17);
+      i.high.high.should.equalInteger(20);
 
       ivl = new Interval(10, 15);
       i = ivl.union(uIvl);
@@ -4910,7 +4914,7 @@ describe('IntegerInterval', () => {
   describe('pointFrom', () => {
     it('should return the point value for a unit interval', () => {
       const ivl = new Interval(0, 0);
-      ivl.pointFrom().should.eql(0);
+      ivl.pointFrom().should.equalInteger(0);
     });
 
     it('should throw on pointFrom call if not a unit interval', () => {
@@ -4920,7 +4924,7 @@ describe('IntegerInterval', () => {
 
     it('should return the point value for a unit interval', () => {
       const ivl = new Interval(12, 12);
-      ivl.pointFrom().should.eql(12);
+      ivl.pointFrom().should.equalInteger(12);
     });
 
     it('should throw on pointFrom call if not a unit interval', () => {
@@ -4930,7 +4934,7 @@ describe('IntegerInterval', () => {
 
     it('should return the point from an interval with an open high bound', async function () {
       const ivl = new Interval(100, 101, true, false);
-      ivl.pointFrom().should.eql(100);
+      ivl.pointFrom().should.equalInteger(100);
     });
 
     it('should throw for an interval with null high bound', function () {
@@ -5909,16 +5913,16 @@ describe('LongInterval', () => {
 
       ivl = new Interval(8n, 17n);
       let i = ivl.union(uIvl);
-      i.low.low.should.equal(5n);
-      i.low.high.should.equal(8n);
-      i.high.low.should.equal(17n);
-      i.high.high.should.equal(20n);
+      i.low.low.should.equalLong(5n);
+      i.low.high.should.equalLong(8n);
+      i.high.low.should.equalLong(17n);
+      i.high.high.should.equalLong(20n);
 
       i = uIvl.union(ivl);
-      i.low.low.should.equal(5n);
-      i.low.high.should.equal(8n);
-      i.high.low.should.equal(17n);
-      i.high.high.should.equal(20n);
+      i.low.low.should.equalLong(5n);
+      i.low.high.should.equalLong(8n);
+      i.high.low.should.equalLong(17n);
+      i.high.high.should.equalLong(20n);
 
       ivl = new Interval(10n, 15n);
       i = ivl.union(uIvl);
@@ -6984,7 +6988,7 @@ describe('LongInterval', () => {
   describe('pointFrom', () => {
     it('should return the point value for a unit interval', () => {
       const ivl = new Interval(10n, 10n);
-      ivl.pointFrom().should.eql(10n);
+      ivl.pointFrom().should.equalLong(10n);
     });
 
     it('should throw on pointFrom call if not a unit interval', () => {
@@ -6994,7 +6998,7 @@ describe('LongInterval', () => {
 
     it('should return the point from an interval with an open high bound', async function () {
       const ivl = new Interval(5n, 6n, true, false);
-      ivl.pointFrom().should.eql(5n);
+      ivl.pointFrom().should.equalLong(5n);
     });
 
     it('should throw for an interval with null high bound', function () {

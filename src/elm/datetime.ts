@@ -43,7 +43,9 @@ export class DateTime extends Expression {
       // @ts-ignore
       DateTime.PROPERTIES.map(async p => (this[p] != null ? this[p].execute(ctx) : undefined))
     );
-    return new DT.DateTime(...args);
+    return new DT.DateTime(
+      ...args.map((arg: any) => (arg?.isInteger === true ? arg.toNumber() : arg))
+    );
   }
 }
 
@@ -68,7 +70,7 @@ export class Date extends Expression {
       // @ts-ignore
       Date.PROPERTIES.map(async p => (this[p] != null ? this[p].execute(ctx) : undefined))
     );
-    return new DT.Date(...args);
+    return new DT.Date(...args.map((arg: any) => (arg?.isInteger === true ? arg.toNumber() : arg)));
   }
 }
 
@@ -89,7 +91,12 @@ export class Time extends Expression {
       // @ts-ignore
       Time.PROPERTIES.map(async p => (this[p] != null ? this[p].execute(ctx) : undefined))
     );
-    return new DT.DateTime(0, 1, 1, ...args).getTime();
+    return new DT.DateTime(
+      0,
+      1,
+      1,
+      ...args.map((arg: any) => (arg?.isInteger === true ? arg.toNumber() : arg))
+    ).getTime();
   }
 }
 
@@ -134,7 +141,8 @@ export class DateTimeComponentFrom extends Expression {
   async exec(ctx: Context) {
     const arg = await this.execArgs(ctx);
     if (arg != null) {
-      return arg[this.precision.toLowerCase()];
+      const value = arg[this.precision.toLowerCase()];
+      return typeof value === 'number' ? DT.Integer.from(value) : value;
     } else {
       return null;
     }

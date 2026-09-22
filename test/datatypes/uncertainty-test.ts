@@ -7,27 +7,27 @@ import { equals } from '../../src/util/comparison';
 describe('Uncertainty', () => {
   it('should contruct uncertainties with correct properties', () => {
     const oneToFive = new Uncertainty(1, 5);
-    oneToFive.low.should.equal(1);
-    oneToFive.high.should.equal(5);
+    oneToFive.low.should.equalInteger(1);
+    oneToFive.high.should.equalInteger(5);
 
     const oneToPInf = new Uncertainty(1, null);
-    oneToPInf.low.should.equal(1);
+    oneToPInf.low.should.equalInteger(1);
     should(oneToPInf.high).be.null();
 
     const nInfToFive = new Uncertainty(null, 5);
     should(nInfToFive.low).be.null();
-    nInfToFive.high.should.equal(5);
+    nInfToFive.high.should.equalInteger(5);
 
     const two = new Uncertainty(2);
-    two.low.should.equal(2);
-    two.high.should.equal(2);
+    two.low.should.equalInteger(2);
+    two.high.should.equalInteger(2);
 
     const everything = new Uncertainty();
     should(everything.low).be.null();
     should(everything.high).be.null();
 
     const differentTypes = new Uncertainty(1, '1');
-    differentTypes.low.should.eql(1);
+    differentTypes.low.should.equalInteger(1);
     differentTypes.high.should.eql('1');
   });
 
@@ -62,20 +62,20 @@ describe('Uncertainty', () => {
 
   it('should set high to low when high is undefined', () => {
     const fiveToOne = new Uncertainty(5, undefined);
-    fiveToOne.low.should.equal(5);
-    fiveToOne.high.should.equal(5);
+    fiveToOne.low.should.equalInteger(5);
+    fiveToOne.high.should.equalInteger(5);
   });
 
   it('should swap low and high when constructed in wrong order', () => {
     const fiveToOne = new Uncertainty(5, 1);
-    fiveToOne.low.should.equal(1);
-    fiveToOne.high.should.equal(5);
+    fiveToOne.low.should.equalInteger(1);
+    fiveToOne.high.should.equalInteger(5);
   });
 
   it('should contruct uncertainties with correct properties 2', () => {
     const oneToFive = new Uncertainty(1, 5);
-    oneToFive.low.should.equal(1);
-    oneToFive.high.should.equal(5);
+    oneToFive.low.should.equalInteger(1);
+    oneToFive.high.should.equalInteger(5);
   });
 
   it('should detect zero-width intervals as points', () => {

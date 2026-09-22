@@ -1,5 +1,6 @@
 import { equals } from '../util/comparison';
 import { ThreeValuedLogic } from './logic';
+import { normalizeNumericInput } from './numeric';
 
 export class Uncertainty {
   static from(obj: any) {
@@ -14,6 +15,10 @@ export class Uncertainty {
     public low: any = null,
     public high?: any
   ) {
+    this.low = normalizeNumericInput(this.low);
+    if (typeof this.high !== 'undefined') {
+      this.high = normalizeNumericInput(this.high);
+    }
     const gt = (a: any, b: any) => {
       if (typeof a !== typeof b || a?.constructor !== b?.constructor) {
         // TODO: This should probably throw rather than return false.
@@ -97,6 +102,7 @@ export class Uncertainty {
   }
 
   sameAs(other: any, precision?: any) {
+    other = normalizeNumericInput(other);
     // if this is a point, and other is not an uncertainty or a point, then we can compare directly
     if (this.isPoint()) {
       const sameFn = (a: any, b: any) => {
@@ -127,6 +133,7 @@ export class Uncertainty {
   }
 
   equals(other: any) {
+    other = normalizeNumericInput(other);
     // if this is a point, and other is not an uncertainty or a point, then we can compare directly
     if (this.isPoint()) {
       if (!(other instanceof Uncertainty)) {
@@ -143,6 +150,7 @@ export class Uncertainty {
   }
 
   lessThan(other: any, precision?: any) {
+    other = normalizeNumericInput(other);
     const lt = (a: any, b: any) => {
       if (typeof a !== typeof b || a?.constructor !== b?.constructor) {
         return null;

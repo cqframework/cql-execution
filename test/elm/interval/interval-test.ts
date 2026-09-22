@@ -48,13 +48,13 @@ describe('Interval', () => {
   it('should properly represent long intervals', async function () {
     this.longOpen.lowClosed.should.be.false();
     this.longOpen.highClosed.should.be.false();
-    (await this.longOpen.low.exec(this.ctx)).should.eql(1n);
-    (await this.longOpen.high.exec(this.ctx)).should.eql(3n);
+    (await this.longOpen.low.exec(this.ctx)).should.equalLong(1n);
+    (await this.longOpen.high.exec(this.ctx)).should.equalLong(3n);
 
     this.longClosed.lowClosed.should.be.true();
     this.longClosed.highClosed.should.be.true();
-    (await this.longClosed.low.exec(this.ctx)).should.eql(1n);
-    (await this.longClosed.high.exec(this.ctx)).should.eql(3n);
+    (await this.longClosed.low.exec(this.ctx)).should.equalLong(1n);
+    (await this.longClosed.high.exec(this.ctx)).should.equalLong(3n);
   });
 
   it('should exec to native Interval datatype', async function () {
@@ -1604,16 +1604,16 @@ describe('Width', () => {
 
   it('should calculate the width of integer intervals', async function () {
     // define IntWidth: width of Interval[-2, 5]
-    (await this.intWidth.exec(this.ctx)).should.equal(7);
+    (await this.intWidth.exec(this.ctx)).should.equalInteger(7);
     // define IntOpenWidth: width of Interval(-2, 5)
-    (await this.intOpenWidth.exec(this.ctx)).should.equal(5);
+    (await this.intOpenWidth.exec(this.ctx)).should.equalInteger(5);
   });
 
   it('should calculate the width of long intervals', async function () {
     // define LongWidth: width of Interval[1L, 8L]
-    (await this.longWidth.exec(this.ctx)).should.equal(7n);
+    (await this.longWidth.exec(this.ctx)).should.equalLong(7n);
     // define LongOpenWidth: width of Interval(1L, 8L)
-    (await this.longOpenWidth.exec(this.ctx)).should.equal(5n);
+    (await this.longOpenWidth.exec(this.ctx)).should.equalLong(5n);
   });
 
   it('should calculate the width of real intervals', async function () {
@@ -1626,7 +1626,7 @@ describe('Width', () => {
 
   it('should calculate the width of infinite intervals', async function () {
     // define IntWidthThreeToMax: width of Interval[3, null]
-    (await this.intWidthThreeToMax.exec(this.ctx)).should.equal(Math.pow(2, 31) - 4);
+    (await this.intWidthThreeToMax.exec(this.ctx)).should.equalInteger(Math.pow(2, 31) - 4);
     // define IntWidthMinToThree: width of Interval[null, 3]
     // returns null because width overflows max integer
     should(await this.intWidthMinToThree.exec(this.ctx)).be.null();
@@ -1672,16 +1672,16 @@ describe('Size', () => {
 
   it('should calculate the size of integer intervals', async function () {
     // define IntSize: Size(Interval[-2, 5])
-    (await this.intSize.exec(this.ctx)).should.equal(8);
+    (await this.intSize.exec(this.ctx)).should.equalInteger(8);
     // define IntOpenSize: Size(Interval(-2, 5))
-    (await this.intOpenSize.exec(this.ctx)).should.equal(6);
+    (await this.intOpenSize.exec(this.ctx)).should.equalInteger(6);
   });
 
   it('should calculate the size of long intervals', async function () {
     // define LongSize: Size(Interval[1L, 8L])
-    (await this.longSize.exec(this.ctx)).should.equal(8n);
+    (await this.longSize.exec(this.ctx)).should.equalLong(8n);
     // define LongOpenSize: Size(Interval(1L, 8L))
-    (await this.longOpenSize.exec(this.ctx)).should.equal(6n);
+    (await this.longOpenSize.exec(this.ctx)).should.equalLong(6n);
   });
 
   it('should calculate the size of real intervals', async function () {
@@ -1694,7 +1694,7 @@ describe('Size', () => {
 
   it('should calculate the size of infinite intervals', async function () {
     // define IntSizeThreeToMax: Size(Interval[3, null])
-    (await this.intSizeThreeToMax.exec(this.ctx)).should.equal(Math.pow(2, 31) - 4 + 1);
+    (await this.intSizeThreeToMax.exec(this.ctx)).should.equalInteger(Math.pow(2, 31) - 4 + 1);
     // define IntSizeMinToThree: Size(Interval[null, 3])
     // returns null because width overflows max integer
     should(await this.intSizeMinToThree.exec(this.ctx)).be.null();
@@ -1763,11 +1763,11 @@ describe('Start', () => {
   });
 
   it('should return the minimum possible Integer', async function () {
-    (await this.closedNullInteger.exec(this.ctx)).should.eql(MIN_INT_VALUE);
+    (await this.closedNullInteger.exec(this.ctx)).should.equalInteger(MIN_INT_VALUE);
   });
 
   it('should return the minimum possible Long', async function () {
-    (await this.closedNullLong.exec(this.ctx)).should.eql(MIN_LONG_VALUE);
+    (await this.closedNullLong.exec(this.ctx)).should.equalLong(MIN_LONG_VALUE);
   });
 
   it('should return the minimum possible Decimal', async function () {
@@ -1783,7 +1783,7 @@ describe('Start', () => {
   });
 
   it('should return successor of long low when the interval is open', async function () {
-    (await this.openLongNotNull.exec(this.ctx)).should.eql(2n);
+    (await this.openLongNotNull.exec(this.ctx)).should.equalLong(2n);
   });
 
   it('should return uncertainty for open interval with null low value', async function () {
@@ -1813,11 +1813,11 @@ describe('End', () => {
   });
 
   it('should return the maximum possible Integer', async function () {
-    (await this.closedNullInteger.exec(this.ctx)).should.eql(MAX_INT_VALUE);
+    (await this.closedNullInteger.exec(this.ctx)).should.equalInteger(MAX_INT_VALUE);
   });
 
   it('should return the maximum possible Long', async function () {
-    (await this.closedNullLong.exec(this.ctx)).should.eql(MAX_LONG_VALUE);
+    (await this.closedNullLong.exec(this.ctx)).should.equalLong(MAX_LONG_VALUE);
   });
 
   it('should return the maximum possible Decimal', async function () {
@@ -1833,7 +1833,7 @@ describe('End', () => {
   });
 
   it('should return predecessor of long high when the interval is open', async function () {
-    (await this.openLongNotNull.exec(this.ctx)).should.eql(2n);
+    (await this.openLongNotNull.exec(this.ctx)).should.equalLong(2n);
   });
 
   it('should return uncertainty for open interval with null high value', async function () {
@@ -1849,15 +1849,15 @@ describe('PointFrom', () => {
   });
 
   it('should return the point from a unit interval', async function () {
-    (await this.integerPoint.exec(this.ctx)).should.equal(4);
+    (await this.integerPoint.exec(this.ctx)).should.equalInteger(4);
   });
 
   it('should return the point from an interval with an open high bound', async function () {
-    (await this.integerOpenHighPoint.exec(this.ctx)).should.equal(4);
+    (await this.integerOpenHighPoint.exec(this.ctx)).should.equalInteger(4);
   });
 
   it('should return the point from a unit interval of type Long', async function () {
-    (await this.longPoint.exec(this.ctx)).should.equal(4294967296n);
+    (await this.longPoint.exec(this.ctx)).should.equalLong(4294967296n);
   });
 
   it('should return the point from a unit interval of type DateTime', async function () {

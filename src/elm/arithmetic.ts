@@ -14,6 +14,9 @@ import {
   MIN_TIME_VALUE
 } from '../datatypes/datetime';
 import { Decimal, MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../datatypes/decimal';
+import { Integer } from '../datatypes/integer';
+import { Long } from '../datatypes/long';
+import { isCqlNumeric } from '../datatypes/numeric';
 import {
   ELM_DECIMAL_TYPE,
   ELM_DATETIME_TYPE,
@@ -184,16 +187,12 @@ export class Modulo extends Expression {
       return null;
     }
 
-    let modulo: number | bigint | Decimal;
     const [x, y] = args;
     try {
-      modulo = x.isDecimal || y.isDecimal ? Decimal.from(x).modulo(y) : x % y;
+      return finalizeArithmeticResult(MathUtil.modulo(x, y));
     } catch {
-      // modulo divide by zero results in null according to specification
       return null;
     }
-
-    return finalizeArithmeticResult(modulo);
   }
 }
 
@@ -208,7 +207,7 @@ export class Ceiling extends Expression {
       return null;
     }
 
-    const ceiling = arg.isDecimal ? arg.ceil() : Math.ceil(arg);
+    const ceiling = arg.isDecimal ? Integer.from(arg.ceil()) : arg;
     return MathUtil.isValidInteger(ceiling) ? ceiling : null;
   }
 }
@@ -224,7 +223,7 @@ export class Floor extends Expression {
       return null;
     }
 
-    const floor = arg.isDecimal ? arg.floor() : Math.floor(arg);
+    const floor = arg.isDecimal ? Integer.from(arg.floor()) : arg;
     return MathUtil.isValidInteger(floor) ? floor : null;
   }
 }
@@ -245,11 +244,15 @@ export class Truncate extends Expression {
       // Note that the CQL spec defines Truncate as returning an Integer,
       // but the Decimal bounds are greater than allowed for Integer.
       // If the spec changes, add another case here for truncating to Long.
-      truncated = arg.truncate();
-    } else if (arg >= 0) {
-      truncated = Math.floor(arg);
-    } else {
-      truncated = Math.ceil(arg);
+      truncated = Integer.from(arg.truncate());
+    } else if (arg.isInteger === true) {
+      truncated = arg;
+    } else if (
+      arg.isLong === true &&
+      arg.toBigInt() >= MIN_INT_VALUE &&
+      arg.toBigInt() <= MAX_INT_VALUE
+    ) {
+      truncated = Integer.from(arg.toNumber());
     }
     return MathUtil.isValidInteger(truncated) ? truncated : null;
   }
@@ -264,17 +267,10 @@ export class Abs extends Expression {
     if (arg == null) {
       return null;
     }
-    let absoluteValue;
     if (arg.isQuantity) {
-      absoluteValue = new Quantity(arg.value.abs(), arg.unit);
-    } else if (typeof arg === 'bigint') {
-      absoluteValue = arg < 0n ? -arg : arg;
-    } else if (arg.isDecimal) {
-      absoluteValue = arg.abs();
-    } else {
-      absoluteValue = Math.abs(arg);
+      return finalizeArithmeticResult(new Quantity(arg.value.abs(), arg.unit));
     }
-    return finalizeArithmeticResult(absoluteValue);
+    return isCqlNumeric(arg) ? finalizeArithmeticResult(arg.abs()) : null;
   }
 }
 
@@ -288,17 +284,10 @@ export class Negate extends Expression {
     if (arg == null) {
       return null;
     }
-    let negatedValue;
     if (arg.isQuantity) {
-      negatedValue = new Quantity(arg.value.negate(), arg.unit);
-    } else if (typeof arg === 'bigint') {
-      negatedValue = arg * -1n;
-    } else if (arg.isDecimal) {
-      negatedValue = arg.negate();
-    } else {
-      negatedValue = arg * -1;
+      return finalizeArithmeticResult(new Quantity(arg.value.negate(), arg.unit));
     }
-    return finalizeArithmeticResult(negatedValue);
+    return isCqlNumeric(arg) ? finalizeArithmeticResult(arg.negate()) : null;
   }
 }
 
@@ -316,7 +305,8 @@ export class Round extends Expression {
       return null;
     }
 
-    const dec = this.precision != null ? await this.precision.execute(ctx) : 0;
+    const precision = this.precision != null ? await this.precision.execute(ctx) : null;
+    const dec = precision?.isInteger === true ? precision.toNumber() : precision;
     return Decimal.from(arg).round(dec);
   }
 }
@@ -407,8 +397,8 @@ export class Power extends Expression {
 
 export class MinValue extends Expression {
   static readonly MIN_VALUES = {
-    [ELM_INTEGER_TYPE]: MIN_INT_VALUE,
-    [ELM_LONG_TYPE]: MIN_LONG_VALUE,
+    [ELM_INTEGER_TYPE]: Integer.from(MIN_INT_VALUE),
+    [ELM_LONG_TYPE]: Long.from(MIN_LONG_VALUE),
     [ELM_DECIMAL_TYPE]: MIN_DECIMAL_VALUE,
     [ELM_DATETIME_TYPE]: MIN_DATETIME_VALUE,
     [ELM_DATE_TYPE]: MIN_DATE_VALUE,
@@ -439,8 +429,8 @@ export class MinValue extends Expression {
 
 export class MaxValue extends Expression {
   static readonly MAX_VALUES = {
-    [ELM_INTEGER_TYPE]: MAX_INT_VALUE,
-    [ELM_LONG_TYPE]: MAX_LONG_VALUE,
+    [ELM_INTEGER_TYPE]: Integer.from(MAX_INT_VALUE),
+    [ELM_LONG_TYPE]: Long.from(MAX_LONG_VALUE),
     [ELM_DECIMAL_TYPE]: MAX_DECIMAL_VALUE,
     [ELM_DATETIME_TYPE]: MAX_DATETIME_VALUE,
     [ELM_DATE_TYPE]: MAX_DATE_VALUE,
