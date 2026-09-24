@@ -10447,6 +10447,1766 @@ module.exports['NotEqual'] = {
   }
 }
 
+/* DatetimeMillisecondBoundary
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define EqualDates: @2025-01-15T08:00:00.000 = @2025-01-15T08:00:00
+define UnequalMilliseconds: @2025-01-15T08:00:00.001 = @2025-01-15T08:00:00
+define DirectOnOrBefore: @2025-01-15T08:00:00.000 before or on @2025-01-15T08:00:00
+define ClosedUpperContains: Interval[@2025-01-08T08:00:00, @2025-01-15T08:00:00] contains @2025-01-15T08:00:00.000
+define BeyondClosedUpper: Interval[@2025-01-08T08:00:00, @2025-01-15T08:00:00] contains @2025-01-15T08:00:00.001
+define RelativeTiming: @2025-01-15T08:00:00.000 42 weeks or less before or on @2025-01-15T08:00:00
+define InteriorContains: Interval[@2025-01-08T08:00:00, @2025-01-16T08:00:00] contains @2025-01-15T08:00:00.000
+define MatchedPrecisionContains: Interval[@2025-01-08T08:00:00, @2025-01-15T08:00:00.000] contains @2025-01-15T08:00:00.000
+*/
+
+module.exports['DatetimeMillisecondBoundary'] = {
+  "library" : {
+    "localId" : "0",
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorVersion" : "4.2.0",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+      "signatureLevel" : "All"
+    }, {
+      "type" : "Annotation",
+      "t" : [ ],
+      "s" : {
+        "r" : "409",
+        "s" : [ {
+          "value" : [ "", "library TestSnippet version '1'" ]
+        } ]
+      }
+    } ],
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1",
+        "annotation" : [ ]
+      }, {
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "206",
+            "s" : [ {
+              "value" : [ "", "using " ]
+            }, {
+              "s" : [ {
+                "value" : [ "Simple" ]
+              } ]
+            }, {
+              "value" : [ " version '1.0.0'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "211",
+        "name" : "Patient",
+        "annotation" : [ ]
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "localId" : "209",
+        "name" : "Patient",
+        "context" : "Patient",
+        "annotation" : [ ],
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "210",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "208",
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+            "annotation" : [ ],
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ]
+          }
+        }
+      }, {
+        "localId" : "214",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "EqualDates",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "214",
+            "s" : [ {
+              "value" : [ "", "define ", "EqualDates", ": " ]
+            }, {
+              "r" : "215",
+              "s" : [ {
+                "r" : "216",
+                "value" : [ "@2025-01-15T08:00:00.000", " ", "=", " ", "@2025-01-15T08:00:00" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Equal",
+          "localId" : "215",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "231",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "232",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "216",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "217",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2025",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "218",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "219",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "15",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "220",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "221",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "second" : {
+              "type" : "Literal",
+              "localId" : "222",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "localId" : "223",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "DateTime",
+            "localId" : "224",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "225",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2025",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "226",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "227",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "15",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "228",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "229",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "second" : {
+              "type" : "Literal",
+              "localId" : "230",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      }, {
+        "localId" : "235",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "UnequalMilliseconds",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "235",
+            "s" : [ {
+              "value" : [ "", "define ", "UnequalMilliseconds", ": " ]
+            }, {
+              "r" : "236",
+              "s" : [ {
+                "r" : "237",
+                "value" : [ "@2025-01-15T08:00:00.001", " ", "=", " ", "@2025-01-15T08:00:00" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Equal",
+          "localId" : "236",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "252",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "253",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "237",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "238",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2025",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "239",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "240",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "15",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "241",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "242",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "second" : {
+              "type" : "Literal",
+              "localId" : "243",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "localId" : "244",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "DateTime",
+            "localId" : "245",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "246",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2025",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "247",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "248",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "15",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "249",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "250",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "second" : {
+              "type" : "Literal",
+              "localId" : "251",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      }, {
+        "localId" : "256",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DirectOnOrBefore",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "256",
+            "s" : [ {
+              "value" : [ "", "define ", "DirectOnOrBefore", ": " ]
+            }, {
+              "r" : "272",
+              "s" : [ {
+                "r" : "257",
+                "value" : [ "@2025-01-15T08:00:00.000", " ", "before or on", " ", "@2025-01-15T08:00:00" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "SameOrBefore",
+          "localId" : "272",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "273",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "274",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "257",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "258",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2025",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "259",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "260",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "15",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "261",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "262",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "second" : {
+              "type" : "Literal",
+              "localId" : "263",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "localId" : "264",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "DateTime",
+            "localId" : "265",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "266",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2025",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "267",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "268",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "15",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "269",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "270",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "second" : {
+              "type" : "Literal",
+              "localId" : "271",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      }, {
+        "localId" : "277",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ClosedUpperContains",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "277",
+            "s" : [ {
+              "value" : [ "", "define ", "ClosedUpperContains", ": " ]
+            }, {
+              "r" : "303",
+              "s" : [ {
+                "r" : "292",
+                "s" : [ {
+                  "r" : "278",
+                  "value" : [ "Interval[", "@2025-01-08T08:00:00", ", ", "@2025-01-15T08:00:00", "]" ]
+                } ]
+              }, {
+                "r" : "295",
+                "value" : [ " contains ", "@2025-01-15T08:00:00.000" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Contains",
+          "localId" : "303",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "304",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "305",
+              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "306",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Interval",
+            "localId" : "292",
+            "lowClosed" : true,
+            "highClosed" : true,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "293",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "294",
+                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "DateTime",
+              "localId" : "278",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "year" : {
+                "type" : "Literal",
+                "localId" : "279",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2025",
+                "annotation" : [ ]
+              },
+              "month" : {
+                "type" : "Literal",
+                "localId" : "280",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              },
+              "day" : {
+                "type" : "Literal",
+                "localId" : "281",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "8",
+                "annotation" : [ ]
+              },
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "282",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "8",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "283",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "284",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              }
+            },
+            "high" : {
+              "type" : "DateTime",
+              "localId" : "285",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "year" : {
+                "type" : "Literal",
+                "localId" : "286",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2025",
+                "annotation" : [ ]
+              },
+              "month" : {
+                "type" : "Literal",
+                "localId" : "287",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              },
+              "day" : {
+                "type" : "Literal",
+                "localId" : "288",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "15",
+                "annotation" : [ ]
+              },
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "289",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "8",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "290",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "291",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              }
+            }
+          }, {
+            "type" : "DateTime",
+            "localId" : "295",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "296",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2025",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "297",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "298",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "15",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "299",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "300",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "second" : {
+              "type" : "Literal",
+              "localId" : "301",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "localId" : "302",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      }, {
+        "localId" : "309",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "BeyondClosedUpper",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "309",
+            "s" : [ {
+              "value" : [ "", "define ", "BeyondClosedUpper", ": " ]
+            }, {
+              "r" : "335",
+              "s" : [ {
+                "r" : "324",
+                "s" : [ {
+                  "r" : "310",
+                  "value" : [ "Interval[", "@2025-01-08T08:00:00", ", ", "@2025-01-15T08:00:00", "]" ]
+                } ]
+              }, {
+                "r" : "327",
+                "value" : [ " contains ", "@2025-01-15T08:00:00.001" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Contains",
+          "localId" : "335",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "336",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "337",
+              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "338",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Interval",
+            "localId" : "324",
+            "lowClosed" : true,
+            "highClosed" : true,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "325",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "326",
+                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "DateTime",
+              "localId" : "310",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "year" : {
+                "type" : "Literal",
+                "localId" : "311",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2025",
+                "annotation" : [ ]
+              },
+              "month" : {
+                "type" : "Literal",
+                "localId" : "312",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              },
+              "day" : {
+                "type" : "Literal",
+                "localId" : "313",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "8",
+                "annotation" : [ ]
+              },
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "314",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "8",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "315",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "316",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              }
+            },
+            "high" : {
+              "type" : "DateTime",
+              "localId" : "317",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "year" : {
+                "type" : "Literal",
+                "localId" : "318",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2025",
+                "annotation" : [ ]
+              },
+              "month" : {
+                "type" : "Literal",
+                "localId" : "319",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              },
+              "day" : {
+                "type" : "Literal",
+                "localId" : "320",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "15",
+                "annotation" : [ ]
+              },
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "321",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "8",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "322",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "323",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              }
+            }
+          }, {
+            "type" : "DateTime",
+            "localId" : "327",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "328",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2025",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "329",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "330",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "15",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "331",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "332",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "second" : {
+              "type" : "Literal",
+              "localId" : "333",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "localId" : "334",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      }, {
+        "localId" : "341",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "RelativeTiming",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "341",
+            "s" : [ {
+              "value" : [ "", "define ", "RelativeTiming", ": " ]
+            }, {
+              "r" : "372",
+              "s" : [ {
+                "r" : "342",
+                "value" : [ "@2025-01-15T08:00:00.000", " " ]
+              }, {
+                "r" : "372",
+                "s" : [ {
+                  "r" : "357",
+                  "s" : [ {
+                    "value" : [ "42 ", "weeks" ]
+                  } ]
+                }, {
+                  "value" : [ " or less before or on" ]
+                } ]
+              }, {
+                "r" : "350",
+                "value" : [ " ", "@2025-01-15T08:00:00" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "And",
+          "localId" : "372",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "373",
+            "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "374",
+            "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "In",
+            "localId" : "364",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "365",
+              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ]
+            }, {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "366",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "367",
+                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                "annotation" : [ ]
+              }
+            } ],
+            "operand" : [ {
+              "type" : "DateTime",
+              "localId" : "342",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "year" : {
+                "type" : "Literal",
+                "localId" : "343",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2025",
+                "annotation" : [ ]
+              },
+              "month" : {
+                "type" : "Literal",
+                "localId" : "344",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              },
+              "day" : {
+                "type" : "Literal",
+                "localId" : "345",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "15",
+                "annotation" : [ ]
+              },
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "346",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "8",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "347",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "348",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "millisecond" : {
+                "type" : "Literal",
+                "localId" : "349",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              }
+            }, {
+              "type" : "Interval",
+              "localId" : "361",
+              "lowClosed" : true,
+              "highClosed" : true,
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "IntervalTypeSpecifier",
+                "localId" : "362",
+                "annotation" : [ ],
+                "pointType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "363",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "annotation" : [ ]
+                }
+              },
+              "low" : {
+                "type" : "Subtract",
+                "localId" : "358",
+                "annotation" : [ ],
+                "signature" : [ {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "359",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "annotation" : [ ]
+                }, {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "360",
+                  "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "annotation" : [ ]
+                } ],
+                "operand" : [ {
+                  "type" : "DateTime",
+                  "localId" : "350",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "annotation" : [ ],
+                  "signature" : [ ],
+                  "year" : {
+                    "type" : "Literal",
+                    "localId" : "351",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "value" : "2025",
+                    "annotation" : [ ]
+                  },
+                  "month" : {
+                    "type" : "Literal",
+                    "localId" : "352",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "value" : "1",
+                    "annotation" : [ ]
+                  },
+                  "day" : {
+                    "type" : "Literal",
+                    "localId" : "353",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "value" : "15",
+                    "annotation" : [ ]
+                  },
+                  "hour" : {
+                    "type" : "Literal",
+                    "localId" : "354",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "value" : "8",
+                    "annotation" : [ ]
+                  },
+                  "minute" : {
+                    "type" : "Literal",
+                    "localId" : "355",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "value" : "0",
+                    "annotation" : [ ]
+                  },
+                  "second" : {
+                    "type" : "Literal",
+                    "localId" : "356",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "value" : "0",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "type" : "Quantity",
+                  "localId" : "357",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "value" : 42,
+                  "unit" : "weeks",
+                  "annotation" : [ ]
+                } ]
+              },
+              "high" : {
+                "type" : "DateTime",
+                "localId" : "350",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                "annotation" : [ ],
+                "signature" : [ ],
+                "year" : {
+                  "type" : "Literal",
+                  "localId" : "351",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2025",
+                  "annotation" : [ ]
+                },
+                "month" : {
+                  "type" : "Literal",
+                  "localId" : "352",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "annotation" : [ ]
+                },
+                "day" : {
+                  "type" : "Literal",
+                  "localId" : "353",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "15",
+                  "annotation" : [ ]
+                },
+                "hour" : {
+                  "type" : "Literal",
+                  "localId" : "354",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "8",
+                  "annotation" : [ ]
+                },
+                "minute" : {
+                  "type" : "Literal",
+                  "localId" : "355",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "annotation" : [ ]
+                },
+                "second" : {
+                  "type" : "Literal",
+                  "localId" : "356",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "annotation" : [ ]
+                }
+              }
+            } ]
+          }, {
+            "type" : "Not",
+            "localId" : "370",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "371",
+              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+              "annotation" : [ ]
+            } ],
+            "operand" : {
+              "type" : "IsNull",
+              "localId" : "368",
+              "annotation" : [ ],
+              "signature" : [ {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "369",
+                "name" : "{urn:hl7-org:elm-types:r1}Any",
+                "annotation" : [ ]
+              } ],
+              "operand" : {
+                "type" : "DateTime",
+                "localId" : "350",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                "annotation" : [ ],
+                "signature" : [ ],
+                "year" : {
+                  "type" : "Literal",
+                  "localId" : "351",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2025",
+                  "annotation" : [ ]
+                },
+                "month" : {
+                  "type" : "Literal",
+                  "localId" : "352",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "annotation" : [ ]
+                },
+                "day" : {
+                  "type" : "Literal",
+                  "localId" : "353",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "15",
+                  "annotation" : [ ]
+                },
+                "hour" : {
+                  "type" : "Literal",
+                  "localId" : "354",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "8",
+                  "annotation" : [ ]
+                },
+                "minute" : {
+                  "type" : "Literal",
+                  "localId" : "355",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "annotation" : [ ]
+                },
+                "second" : {
+                  "type" : "Literal",
+                  "localId" : "356",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "annotation" : [ ]
+                }
+              }
+            }
+          } ]
+        }
+      }, {
+        "localId" : "377",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "InteriorContains",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "377",
+            "s" : [ {
+              "value" : [ "", "define ", "InteriorContains", ": " ]
+            }, {
+              "r" : "403",
+              "s" : [ {
+                "r" : "392",
+                "s" : [ {
+                  "r" : "378",
+                  "value" : [ "Interval[", "@2025-01-08T08:00:00", ", ", "@2025-01-16T08:00:00", "]" ]
+                } ]
+              }, {
+                "r" : "395",
+                "value" : [ " contains ", "@2025-01-15T08:00:00.000" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Contains",
+          "localId" : "403",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "404",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "405",
+              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "406",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Interval",
+            "localId" : "392",
+            "lowClosed" : true,
+            "highClosed" : true,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "393",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "394",
+                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "DateTime",
+              "localId" : "378",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "year" : {
+                "type" : "Literal",
+                "localId" : "379",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2025",
+                "annotation" : [ ]
+              },
+              "month" : {
+                "type" : "Literal",
+                "localId" : "380",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              },
+              "day" : {
+                "type" : "Literal",
+                "localId" : "381",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "8",
+                "annotation" : [ ]
+              },
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "382",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "8",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "383",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "384",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              }
+            },
+            "high" : {
+              "type" : "DateTime",
+              "localId" : "385",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "year" : {
+                "type" : "Literal",
+                "localId" : "386",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2025",
+                "annotation" : [ ]
+              },
+              "month" : {
+                "type" : "Literal",
+                "localId" : "387",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              },
+              "day" : {
+                "type" : "Literal",
+                "localId" : "388",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "16",
+                "annotation" : [ ]
+              },
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "389",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "8",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "390",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "391",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              }
+            }
+          }, {
+            "type" : "DateTime",
+            "localId" : "395",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "396",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2025",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "397",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "398",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "15",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "399",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "400",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "second" : {
+              "type" : "Literal",
+              "localId" : "401",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "localId" : "402",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      }, {
+        "localId" : "409",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MatchedPrecisionContains",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "409",
+            "s" : [ {
+              "value" : [ "", "define ", "MatchedPrecisionContains", ": " ]
+            }, {
+              "r" : "436",
+              "s" : [ {
+                "r" : "425",
+                "s" : [ {
+                  "r" : "410",
+                  "value" : [ "Interval[", "@2025-01-08T08:00:00", ", ", "@2025-01-15T08:00:00.000", "]" ]
+                } ]
+              }, {
+                "r" : "428",
+                "value" : [ " contains ", "@2025-01-15T08:00:00.000" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Contains",
+          "localId" : "436",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "437",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "438",
+              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "439",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Interval",
+            "localId" : "425",
+            "lowClosed" : true,
+            "highClosed" : true,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "426",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "427",
+                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "DateTime",
+              "localId" : "410",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "year" : {
+                "type" : "Literal",
+                "localId" : "411",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2025",
+                "annotation" : [ ]
+              },
+              "month" : {
+                "type" : "Literal",
+                "localId" : "412",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              },
+              "day" : {
+                "type" : "Literal",
+                "localId" : "413",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "8",
+                "annotation" : [ ]
+              },
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "414",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "8",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "415",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "416",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              }
+            },
+            "high" : {
+              "type" : "DateTime",
+              "localId" : "417",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "year" : {
+                "type" : "Literal",
+                "localId" : "418",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2025",
+                "annotation" : [ ]
+              },
+              "month" : {
+                "type" : "Literal",
+                "localId" : "419",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              },
+              "day" : {
+                "type" : "Literal",
+                "localId" : "420",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "15",
+                "annotation" : [ ]
+              },
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "421",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "8",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "422",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "423",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "millisecond" : {
+                "type" : "Literal",
+                "localId" : "424",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              }
+            }
+          }, {
+            "type" : "DateTime",
+            "localId" : "428",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "429",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2025",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "430",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "431",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "15",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "432",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "433",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "second" : {
+              "type" : "Literal",
+              "localId" : "434",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "localId" : "435",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      } ]
+    }
+  }
+}
+
 /* Contains
 library TestSnippet version '1'
 using Simple version '1.0.0'
@@ -70193,7 +71953,8 @@ define ProperContainsDateHighEdgeClosed: DateIvlHighClosed properly includes Dat
 define ProperContainsTime: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T12:00:00.001
 define ProperContainsTimeLowEdge: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T12:00:00.000
 define NotProperContainsTime: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T22:00:00.000
-define MayProperContainsTime: Interval[@T12:00:00.001, @T21:59:59.999] properly includes @T12:00:00
+define ProperContainsTimeAboveMillisecondBound: Interval[@T12:00:00.001, @T21:59:59.999] properly includes @T12:00:00.002
+define NotProperContainsSecondPrecisionTime: Interval[@T12:00:00.001, @T21:59:59.999] properly includes @T12:00:00
 define ProperContainsSecondOfTime: Interval[@T12:00:00.000, @T21:59:59.999] properly includes second of @T12:00:01
 define NotProperContainsSecondOfTime: Interval[@T12:00:00.001, @T12:00:00.001] properly includes second of @T12:00:00
 define MayProperContainsMillisecondOfTime: Interval[@T12:00:00.001, @T21:59:59.999] properly includes millisecond of @T12:00:00
@@ -70212,7 +71973,7 @@ module.exports['ProperContains'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "735",
+        "r" : "761",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -72705,7 +74466,7 @@ module.exports['ProperContains'] = {
       }, {
         "localId" : "635",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-        "name" : "MayProperContainsTime",
+        "name" : "ProperContainsTimeAboveMillisecondBound",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -72714,9 +74475,9 @@ module.exports['ProperContains'] = {
           "s" : {
             "r" : "635",
             "s" : [ {
-              "value" : [ "", "define ", "MayProperContainsTime", ": " ]
+              "value" : [ "", "define ", "ProperContainsTimeAboveMillisecondBound", ": " ]
             }, {
-              "r" : "654",
+              "r" : "655",
               "s" : [ {
                 "r" : "646",
                 "s" : [ {
@@ -72724,30 +74485,30 @@ module.exports['ProperContains'] = {
                   "value" : [ "Interval[", "@T12:00:00.001", ", ", "@T21:59:59.999", "]" ]
                 } ]
               }, {
-                "r" : "654",
-                "value" : [ " ", "properly includes", " ", "@T12:00:00" ]
+                "r" : "655",
+                "value" : [ " ", "properly includes", " ", "@T12:00:00.002" ]
               } ]
             } ]
           }
         } ],
         "expression" : {
           "type" : "ProperContains",
-          "localId" : "654",
+          "localId" : "655",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "655",
+            "localId" : "656",
             "annotation" : [ ],
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "656",
+              "localId" : "657",
               "name" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ]
             }
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "657",
+            "localId" : "658",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           } ],
@@ -72864,11 +74625,183 @@ module.exports['ProperContains'] = {
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "0",
               "annotation" : [ ]
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "localId" : "653",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2",
+              "annotation" : [ ]
             }
           } ]
         }
       }, {
-        "localId" : "660",
+        "localId" : "661",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "NotProperContainsSecondPrecisionTime",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "661",
+            "s" : [ {
+              "value" : [ "", "define ", "NotProperContainsSecondPrecisionTime", ": " ]
+            }, {
+              "r" : "680",
+              "s" : [ {
+                "r" : "672",
+                "s" : [ {
+                  "r" : "662",
+                  "value" : [ "Interval[", "@T12:00:00.001", ", ", "@T21:59:59.999", "]" ]
+                } ]
+              }, {
+                "r" : "680",
+                "value" : [ " ", "properly includes", " ", "@T12:00:00" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperContains",
+          "localId" : "680",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "681",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "682",
+              "name" : "{urn:hl7-org:elm-types:r1}Time",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "683",
+            "name" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Interval",
+            "localId" : "672",
+            "lowClosed" : true,
+            "highClosed" : true,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "673",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "674",
+                "name" : "{urn:hl7-org:elm-types:r1}Time",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "Time",
+              "localId" : "662",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "663",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "12",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "664",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "665",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "millisecond" : {
+                "type" : "Literal",
+                "localId" : "666",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              }
+            },
+            "high" : {
+              "type" : "Time",
+              "localId" : "667",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "668",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "21",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "669",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "59",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "670",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "59",
+                "annotation" : [ ]
+              },
+              "millisecond" : {
+                "type" : "Literal",
+                "localId" : "671",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "999",
+                "annotation" : [ ]
+              }
+            }
+          }, {
+            "type" : "Time",
+            "localId" : "675",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "676",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "12",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "677",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "second" : {
+              "type" : "Literal",
+              "localId" : "678",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      }, {
+        "localId" : "686",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
         "name" : "ProperContainsSecondOfTime",
         "context" : "Patient",
@@ -72877,19 +74810,19 @@ module.exports['ProperContains'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "660",
+            "r" : "686",
             "s" : [ {
               "value" : [ "", "define ", "ProperContainsSecondOfTime", ": " ]
             }, {
-              "r" : "679",
+              "r" : "705",
               "s" : [ {
-                "r" : "671",
+                "r" : "697",
                 "s" : [ {
-                  "r" : "661",
+                  "r" : "687",
                   "value" : [ "Interval[", "@T12:00:00.000", ", ", "@T21:59:59.999", "]" ]
                 } ]
               }, {
-                "r" : "679",
+                "r" : "705",
                 "value" : [ " ", "properly includes second of", " ", "@T12:00:01" ]
               } ]
             } ]
@@ -72897,73 +74830,73 @@ module.exports['ProperContains'] = {
         } ],
         "expression" : {
           "type" : "ProperContains",
-          "localId" : "679",
+          "localId" : "705",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
           "precision" : "Second",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "680",
+            "localId" : "706",
             "annotation" : [ ],
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "681",
+              "localId" : "707",
               "name" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ]
             }
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "682",
+            "localId" : "708",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "Interval",
-            "localId" : "671",
+            "localId" : "697",
             "lowClosed" : true,
             "highClosed" : true,
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "IntervalTypeSpecifier",
-              "localId" : "672",
+              "localId" : "698",
               "annotation" : [ ],
               "pointType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "673",
+                "localId" : "699",
                 "name" : "{urn:hl7-org:elm-types:r1}Time",
                 "annotation" : [ ]
               }
             },
             "low" : {
               "type" : "Time",
-              "localId" : "661",
+              "localId" : "687",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ],
               "signature" : [ ],
               "hour" : {
                 "type" : "Literal",
-                "localId" : "662",
+                "localId" : "688",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "12",
                 "annotation" : [ ]
               },
               "minute" : {
                 "type" : "Literal",
-                "localId" : "663",
+                "localId" : "689",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "0",
                 "annotation" : [ ]
               },
               "second" : {
                 "type" : "Literal",
-                "localId" : "664",
+                "localId" : "690",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "0",
                 "annotation" : [ ]
               },
               "millisecond" : {
                 "type" : "Literal",
-                "localId" : "665",
+                "localId" : "691",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "0",
                 "annotation" : [ ]
@@ -72971,34 +74904,34 @@ module.exports['ProperContains'] = {
             },
             "high" : {
               "type" : "Time",
-              "localId" : "666",
+              "localId" : "692",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ],
               "signature" : [ ],
               "hour" : {
                 "type" : "Literal",
-                "localId" : "667",
+                "localId" : "693",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "21",
                 "annotation" : [ ]
               },
               "minute" : {
                 "type" : "Literal",
-                "localId" : "668",
+                "localId" : "694",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "59",
                 "annotation" : [ ]
               },
               "second" : {
                 "type" : "Literal",
-                "localId" : "669",
+                "localId" : "695",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "59",
                 "annotation" : [ ]
               },
               "millisecond" : {
                 "type" : "Literal",
-                "localId" : "670",
+                "localId" : "696",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "999",
                 "annotation" : [ ]
@@ -73006,27 +74939,27 @@ module.exports['ProperContains'] = {
             }
           }, {
             "type" : "Time",
-            "localId" : "674",
+            "localId" : "700",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ],
             "signature" : [ ],
             "hour" : {
               "type" : "Literal",
-              "localId" : "675",
+              "localId" : "701",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "12",
               "annotation" : [ ]
             },
             "minute" : {
               "type" : "Literal",
-              "localId" : "676",
+              "localId" : "702",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "0",
               "annotation" : [ ]
             },
             "second" : {
               "type" : "Literal",
-              "localId" : "677",
+              "localId" : "703",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "1",
               "annotation" : [ ]
@@ -73034,7 +74967,7 @@ module.exports['ProperContains'] = {
           } ]
         }
       }, {
-        "localId" : "685",
+        "localId" : "711",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
         "name" : "NotProperContainsSecondOfTime",
         "context" : "Patient",
@@ -73043,19 +74976,19 @@ module.exports['ProperContains'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "685",
+            "r" : "711",
             "s" : [ {
               "value" : [ "", "define ", "NotProperContainsSecondOfTime", ": " ]
             }, {
-              "r" : "704",
+              "r" : "730",
               "s" : [ {
-                "r" : "696",
+                "r" : "722",
                 "s" : [ {
-                  "r" : "686",
+                  "r" : "712",
                   "value" : [ "Interval[", "@T12:00:00.001", ", ", "@T12:00:00.001", "]" ]
                 } ]
               }, {
-                "r" : "704",
+                "r" : "730",
                 "value" : [ " ", "properly includes second of", " ", "@T12:00:00" ]
               } ]
             } ]
@@ -73063,73 +74996,73 @@ module.exports['ProperContains'] = {
         } ],
         "expression" : {
           "type" : "ProperContains",
-          "localId" : "704",
+          "localId" : "730",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
           "precision" : "Second",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "705",
+            "localId" : "731",
             "annotation" : [ ],
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "706",
+              "localId" : "732",
               "name" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ]
             }
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "707",
+            "localId" : "733",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "Interval",
-            "localId" : "696",
+            "localId" : "722",
             "lowClosed" : true,
             "highClosed" : true,
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "IntervalTypeSpecifier",
-              "localId" : "697",
+              "localId" : "723",
               "annotation" : [ ],
               "pointType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "698",
+                "localId" : "724",
                 "name" : "{urn:hl7-org:elm-types:r1}Time",
                 "annotation" : [ ]
               }
             },
             "low" : {
               "type" : "Time",
-              "localId" : "686",
+              "localId" : "712",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ],
               "signature" : [ ],
               "hour" : {
                 "type" : "Literal",
-                "localId" : "687",
+                "localId" : "713",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "12",
                 "annotation" : [ ]
               },
               "minute" : {
                 "type" : "Literal",
-                "localId" : "688",
+                "localId" : "714",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "0",
                 "annotation" : [ ]
               },
               "second" : {
                 "type" : "Literal",
-                "localId" : "689",
+                "localId" : "715",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "0",
                 "annotation" : [ ]
               },
               "millisecond" : {
                 "type" : "Literal",
-                "localId" : "690",
+                "localId" : "716",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "1",
                 "annotation" : [ ]
@@ -73137,34 +75070,34 @@ module.exports['ProperContains'] = {
             },
             "high" : {
               "type" : "Time",
-              "localId" : "691",
+              "localId" : "717",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ],
               "signature" : [ ],
               "hour" : {
                 "type" : "Literal",
-                "localId" : "692",
+                "localId" : "718",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "12",
                 "annotation" : [ ]
               },
               "minute" : {
                 "type" : "Literal",
-                "localId" : "693",
+                "localId" : "719",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "0",
                 "annotation" : [ ]
               },
               "second" : {
                 "type" : "Literal",
-                "localId" : "694",
+                "localId" : "720",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "0",
                 "annotation" : [ ]
               },
               "millisecond" : {
                 "type" : "Literal",
-                "localId" : "695",
+                "localId" : "721",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "1",
                 "annotation" : [ ]
@@ -73172,27 +75105,27 @@ module.exports['ProperContains'] = {
             }
           }, {
             "type" : "Time",
-            "localId" : "699",
+            "localId" : "725",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ],
             "signature" : [ ],
             "hour" : {
               "type" : "Literal",
-              "localId" : "700",
+              "localId" : "726",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "12",
               "annotation" : [ ]
             },
             "minute" : {
               "type" : "Literal",
-              "localId" : "701",
+              "localId" : "727",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "0",
               "annotation" : [ ]
             },
             "second" : {
               "type" : "Literal",
-              "localId" : "702",
+              "localId" : "728",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "0",
               "annotation" : [ ]
@@ -73200,7 +75133,7 @@ module.exports['ProperContains'] = {
           } ]
         }
       }, {
-        "localId" : "710",
+        "localId" : "736",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
         "name" : "MayProperContainsMillisecondOfTime",
         "context" : "Patient",
@@ -73209,19 +75142,19 @@ module.exports['ProperContains'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "710",
+            "r" : "736",
             "s" : [ {
               "value" : [ "", "define ", "MayProperContainsMillisecondOfTime", ": " ]
             }, {
-              "r" : "729",
+              "r" : "755",
               "s" : [ {
-                "r" : "721",
+                "r" : "747",
                 "s" : [ {
-                  "r" : "711",
+                  "r" : "737",
                   "value" : [ "Interval[", "@T12:00:00.001", ", ", "@T21:59:59.999", "]" ]
                 } ]
               }, {
-                "r" : "729",
+                "r" : "755",
                 "value" : [ " ", "properly includes millisecond of", " ", "@T12:00:00" ]
               } ]
             } ]
@@ -73229,73 +75162,73 @@ module.exports['ProperContains'] = {
         } ],
         "expression" : {
           "type" : "ProperContains",
-          "localId" : "729",
+          "localId" : "755",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
           "precision" : "Millisecond",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "730",
+            "localId" : "756",
             "annotation" : [ ],
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "731",
+              "localId" : "757",
               "name" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ]
             }
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "732",
+            "localId" : "758",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "Interval",
-            "localId" : "721",
+            "localId" : "747",
             "lowClosed" : true,
             "highClosed" : true,
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "IntervalTypeSpecifier",
-              "localId" : "722",
+              "localId" : "748",
               "annotation" : [ ],
               "pointType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "723",
+                "localId" : "749",
                 "name" : "{urn:hl7-org:elm-types:r1}Time",
                 "annotation" : [ ]
               }
             },
             "low" : {
               "type" : "Time",
-              "localId" : "711",
+              "localId" : "737",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ],
               "signature" : [ ],
               "hour" : {
                 "type" : "Literal",
-                "localId" : "712",
+                "localId" : "738",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "12",
                 "annotation" : [ ]
               },
               "minute" : {
                 "type" : "Literal",
-                "localId" : "713",
+                "localId" : "739",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "0",
                 "annotation" : [ ]
               },
               "second" : {
                 "type" : "Literal",
-                "localId" : "714",
+                "localId" : "740",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "0",
                 "annotation" : [ ]
               },
               "millisecond" : {
                 "type" : "Literal",
-                "localId" : "715",
+                "localId" : "741",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "1",
                 "annotation" : [ ]
@@ -73303,34 +75236,34 @@ module.exports['ProperContains'] = {
             },
             "high" : {
               "type" : "Time",
-              "localId" : "716",
+              "localId" : "742",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ],
               "signature" : [ ],
               "hour" : {
                 "type" : "Literal",
-                "localId" : "717",
+                "localId" : "743",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "21",
                 "annotation" : [ ]
               },
               "minute" : {
                 "type" : "Literal",
-                "localId" : "718",
+                "localId" : "744",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "59",
                 "annotation" : [ ]
               },
               "second" : {
                 "type" : "Literal",
-                "localId" : "719",
+                "localId" : "745",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "59",
                 "annotation" : [ ]
               },
               "millisecond" : {
                 "type" : "Literal",
-                "localId" : "720",
+                "localId" : "746",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "999",
                 "annotation" : [ ]
@@ -73338,27 +75271,27 @@ module.exports['ProperContains'] = {
             }
           }, {
             "type" : "Time",
-            "localId" : "724",
+            "localId" : "750",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ],
             "signature" : [ ],
             "hour" : {
               "type" : "Literal",
-              "localId" : "725",
+              "localId" : "751",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "12",
               "annotation" : [ ]
             },
             "minute" : {
               "type" : "Literal",
-              "localId" : "726",
+              "localId" : "752",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "0",
               "annotation" : [ ]
             },
             "second" : {
               "type" : "Literal",
-              "localId" : "727",
+              "localId" : "753",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "0",
               "annotation" : [ ]
@@ -73366,7 +75299,7 @@ module.exports['ProperContains'] = {
           } ]
         }
       }, {
-        "localId" : "735",
+        "localId" : "761",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
         "name" : "ProperContainsNull",
         "context" : "Patient",
@@ -73375,19 +75308,19 @@ module.exports['ProperContains'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "735",
+            "r" : "761",
             "s" : [ {
               "value" : [ "", "define ", "ProperContainsNull", ": " ]
             }, {
-              "r" : "750",
+              "r" : "776",
               "s" : [ {
-                "r" : "738",
+                "r" : "764",
                 "s" : [ {
-                  "r" : "736",
+                  "r" : "762",
                   "value" : [ "Interval[", "1", ", ", "5", "]" ]
                 } ]
               }, {
-                "r" : "750",
+                "r" : "776",
                 "value" : [ " ", "properly includes", " ", "null" ]
               } ]
             } ]
@@ -73395,45 +75328,45 @@ module.exports['ProperContains'] = {
         } ],
         "expression" : {
           "type" : "ProperContains",
-          "localId" : "750",
+          "localId" : "776",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "752",
+            "localId" : "778",
             "annotation" : [ ],
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "753",
+              "localId" : "779",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "754",
+            "localId" : "780",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "Interval",
-            "localId" : "738",
+            "localId" : "764",
             "lowClosed" : true,
             "highClosed" : true,
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "IntervalTypeSpecifier",
-              "localId" : "739",
+              "localId" : "765",
               "annotation" : [ ],
               "pointType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "740",
+                "localId" : "766",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               }
             },
             "low" : {
               "type" : "Literal",
-              "localId" : "736",
+              "localId" : "762",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "1",
@@ -73441,7 +75374,7 @@ module.exports['ProperContains'] = {
             },
             "high" : {
               "type" : "Literal",
-              "localId" : "737",
+              "localId" : "763",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "5",
@@ -73449,13 +75382,13 @@ module.exports['ProperContains'] = {
             }
           }, {
             "type" : "As",
-            "localId" : "751",
+            "localId" : "777",
             "asType" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ],
             "signature" : [ ],
             "operand" : {
               "type" : "Null",
-              "localId" : "741",
+              "localId" : "767",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
               "annotation" : [ ]
             }
@@ -73487,7 +75420,8 @@ define ProperInDateHighEdgeClosed: DateTime(2012, 9, 1, 0, 0, 0, 0) properly inc
 define ProperInTime: @T12:00:00.001 properly included in Interval[@T12:00:00.000, @T21:59:59.999]
 define ProperInTimeLowEdge: @T12:00:00.000 properly included in Interval[@T12:00:00.000, @T21:59:59.999]
 define NotProperInTime: @T22:00:00.000 properly included in Interval[@T12:00:00.000, @T21:59:59.999]
-define MayProperInTime: @T12:00:00 properly included in Interval[@T12:00:00.001, @T21:59:59.999]
+define ProperInTimeAboveMillisecondBound: @T12:00:00.002 properly included in Interval[@T12:00:00.001, @T21:59:59.999]
+define NotProperInSecondPrecisionTime: @T12:00:00 properly included in Interval[@T12:00:00.001, @T21:59:59.999]
 define ProperInSecondOfTime: @T12:00:01 properly included in second of Interval[@T12:00:00.000, @T21:59:59.999]
 define NotProperInSecondOfTime: @T12:00:00 properly included in second of Interval[@T12:00:00.000, @T12:00:00.000]
 define MayProperInMillisecondOfTime: @T12:00:00 properly included in millisecond of Interval[@T12:00:00.001, @T21:59:59.999]
@@ -73506,7 +75440,7 @@ module.exports['ProperIn'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "735",
+        "r" : "761",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -75999,7 +77933,7 @@ module.exports['ProperIn'] = {
       }, {
         "localId" : "635",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-        "name" : "MayProperInTime",
+        "name" : "ProperInTimeAboveMillisecondBound",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -76008,16 +77942,16 @@ module.exports['ProperIn'] = {
           "s" : {
             "r" : "635",
             "s" : [ {
-              "value" : [ "", "define ", "MayProperInTime", ": " ]
+              "value" : [ "", "define ", "ProperInTimeAboveMillisecondBound", ": " ]
             }, {
-              "r" : "654",
+              "r" : "655",
               "s" : [ {
                 "r" : "636",
-                "value" : [ "@T12:00:00", " ", "properly included in", " " ]
+                "value" : [ "@T12:00:00.002", " ", "properly included in", " " ]
               }, {
-                "r" : "650",
+                "r" : "651",
                 "s" : [ {
-                  "r" : "640",
+                  "r" : "641",
                   "value" : [ "Interval[", "@T12:00:00.001", ", ", "@T21:59:59.999", "]" ]
                 } ]
               } ]
@@ -76026,21 +77960,21 @@ module.exports['ProperIn'] = {
         } ],
         "expression" : {
           "type" : "ProperIn",
-          "localId" : "654",
+          "localId" : "655",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "655",
+            "localId" : "656",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "656",
+            "localId" : "657",
             "annotation" : [ ],
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "657",
+              "localId" : "658",
               "name" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ]
             }
@@ -76071,54 +78005,61 @@ module.exports['ProperIn'] = {
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "0",
               "annotation" : [ ]
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "localId" : "640",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2",
+              "annotation" : [ ]
             }
           }, {
             "type" : "Interval",
-            "localId" : "650",
+            "localId" : "651",
             "lowClosed" : true,
             "highClosed" : true,
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "IntervalTypeSpecifier",
-              "localId" : "651",
+              "localId" : "652",
               "annotation" : [ ],
               "pointType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "652",
+                "localId" : "653",
                 "name" : "{urn:hl7-org:elm-types:r1}Time",
                 "annotation" : [ ]
               }
             },
             "low" : {
               "type" : "Time",
-              "localId" : "640",
+              "localId" : "641",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ],
               "signature" : [ ],
               "hour" : {
                 "type" : "Literal",
-                "localId" : "641",
+                "localId" : "642",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "12",
                 "annotation" : [ ]
               },
               "minute" : {
                 "type" : "Literal",
-                "localId" : "642",
+                "localId" : "643",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "0",
                 "annotation" : [ ]
               },
               "second" : {
                 "type" : "Literal",
-                "localId" : "643",
+                "localId" : "644",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "0",
                 "annotation" : [ ]
               },
               "millisecond" : {
                 "type" : "Literal",
-                "localId" : "644",
+                "localId" : "645",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "1",
                 "annotation" : [ ]
@@ -76126,200 +78067,34 @@ module.exports['ProperIn'] = {
             },
             "high" : {
               "type" : "Time",
-              "localId" : "645",
+              "localId" : "646",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ],
               "signature" : [ ],
               "hour" : {
                 "type" : "Literal",
-                "localId" : "646",
+                "localId" : "647",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "21",
                 "annotation" : [ ]
               },
               "minute" : {
-                "type" : "Literal",
-                "localId" : "647",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "59",
-                "annotation" : [ ]
-              },
-              "second" : {
                 "type" : "Literal",
                 "localId" : "648",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "59",
                 "annotation" : [ ]
               },
-              "millisecond" : {
+              "second" : {
                 "type" : "Literal",
                 "localId" : "649",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "999",
-                "annotation" : [ ]
-              }
-            }
-          } ]
-        }
-      }, {
-        "localId" : "660",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-        "name" : "ProperInSecondOfTime",
-        "context" : "Patient",
-        "accessLevel" : "Public",
-        "annotation" : [ {
-          "type" : "Annotation",
-          "t" : [ ],
-          "s" : {
-            "r" : "660",
-            "s" : [ {
-              "value" : [ "", "define ", "ProperInSecondOfTime", ": " ]
-            }, {
-              "r" : "679",
-              "s" : [ {
-                "r" : "661",
-                "value" : [ "@T12:00:01", " ", "properly included in second of", " " ]
-              }, {
-                "r" : "675",
-                "s" : [ {
-                  "r" : "665",
-                  "value" : [ "Interval[", "@T12:00:00.000", ", ", "@T21:59:59.999", "]" ]
-                } ]
-              } ]
-            } ]
-          }
-        } ],
-        "expression" : {
-          "type" : "ProperIn",
-          "localId" : "679",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-          "precision" : "Second",
-          "annotation" : [ ],
-          "signature" : [ {
-            "type" : "NamedTypeSpecifier",
-            "localId" : "680",
-            "name" : "{urn:hl7-org:elm-types:r1}Time",
-            "annotation" : [ ]
-          }, {
-            "type" : "IntervalTypeSpecifier",
-            "localId" : "681",
-            "annotation" : [ ],
-            "pointType" : {
-              "type" : "NamedTypeSpecifier",
-              "localId" : "682",
-              "name" : "{urn:hl7-org:elm-types:r1}Time",
-              "annotation" : [ ]
-            }
-          } ],
-          "operand" : [ {
-            "type" : "Time",
-            "localId" : "661",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
-            "annotation" : [ ],
-            "signature" : [ ],
-            "hour" : {
-              "type" : "Literal",
-              "localId" : "662",
-              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-              "value" : "12",
-              "annotation" : [ ]
-            },
-            "minute" : {
-              "type" : "Literal",
-              "localId" : "663",
-              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-              "value" : "0",
-              "annotation" : [ ]
-            },
-            "second" : {
-              "type" : "Literal",
-              "localId" : "664",
-              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-              "value" : "1",
-              "annotation" : [ ]
-            }
-          }, {
-            "type" : "Interval",
-            "localId" : "675",
-            "lowClosed" : true,
-            "highClosed" : true,
-            "annotation" : [ ],
-            "resultTypeSpecifier" : {
-              "type" : "IntervalTypeSpecifier",
-              "localId" : "676",
-              "annotation" : [ ],
-              "pointType" : {
-                "type" : "NamedTypeSpecifier",
-                "localId" : "677",
-                "name" : "{urn:hl7-org:elm-types:r1}Time",
-                "annotation" : [ ]
-              }
-            },
-            "low" : {
-              "type" : "Time",
-              "localId" : "665",
-              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
-              "annotation" : [ ],
-              "signature" : [ ],
-              "hour" : {
-                "type" : "Literal",
-                "localId" : "666",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "12",
-                "annotation" : [ ]
-              },
-              "minute" : {
-                "type" : "Literal",
-                "localId" : "667",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "0",
-                "annotation" : [ ]
-              },
-              "second" : {
-                "type" : "Literal",
-                "localId" : "668",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "0",
-                "annotation" : [ ]
-              },
-              "millisecond" : {
-                "type" : "Literal",
-                "localId" : "669",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "0",
-                "annotation" : [ ]
-              }
-            },
-            "high" : {
-              "type" : "Time",
-              "localId" : "670",
-              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
-              "annotation" : [ ],
-              "signature" : [ ],
-              "hour" : {
-                "type" : "Literal",
-                "localId" : "671",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "21",
-                "annotation" : [ ]
-              },
-              "minute" : {
-                "type" : "Literal",
-                "localId" : "672",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "59",
-                "annotation" : [ ]
-              },
-              "second" : {
-                "type" : "Literal",
-                "localId" : "673",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "59",
                 "annotation" : [ ]
               },
               "millisecond" : {
                 "type" : "Literal",
-                "localId" : "674",
+                "localId" : "650",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "999",
                 "annotation" : [ ]
@@ -76328,193 +78103,27 @@ module.exports['ProperIn'] = {
           } ]
         }
       }, {
-        "localId" : "685",
+        "localId" : "661",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-        "name" : "NotProperInSecondOfTime",
+        "name" : "NotProperInSecondPrecisionTime",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "685",
+            "r" : "661",
             "s" : [ {
-              "value" : [ "", "define ", "NotProperInSecondOfTime", ": " ]
+              "value" : [ "", "define ", "NotProperInSecondPrecisionTime", ": " ]
             }, {
-              "r" : "704",
+              "r" : "680",
               "s" : [ {
-                "r" : "686",
-                "value" : [ "@T12:00:00", " ", "properly included in second of", " " ]
+                "r" : "662",
+                "value" : [ "@T12:00:00", " ", "properly included in", " " ]
               }, {
-                "r" : "700",
+                "r" : "676",
                 "s" : [ {
-                  "r" : "690",
-                  "value" : [ "Interval[", "@T12:00:00.000", ", ", "@T12:00:00.000", "]" ]
-                } ]
-              } ]
-            } ]
-          }
-        } ],
-        "expression" : {
-          "type" : "ProperIn",
-          "localId" : "704",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-          "precision" : "Second",
-          "annotation" : [ ],
-          "signature" : [ {
-            "type" : "NamedTypeSpecifier",
-            "localId" : "705",
-            "name" : "{urn:hl7-org:elm-types:r1}Time",
-            "annotation" : [ ]
-          }, {
-            "type" : "IntervalTypeSpecifier",
-            "localId" : "706",
-            "annotation" : [ ],
-            "pointType" : {
-              "type" : "NamedTypeSpecifier",
-              "localId" : "707",
-              "name" : "{urn:hl7-org:elm-types:r1}Time",
-              "annotation" : [ ]
-            }
-          } ],
-          "operand" : [ {
-            "type" : "Time",
-            "localId" : "686",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
-            "annotation" : [ ],
-            "signature" : [ ],
-            "hour" : {
-              "type" : "Literal",
-              "localId" : "687",
-              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-              "value" : "12",
-              "annotation" : [ ]
-            },
-            "minute" : {
-              "type" : "Literal",
-              "localId" : "688",
-              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-              "value" : "0",
-              "annotation" : [ ]
-            },
-            "second" : {
-              "type" : "Literal",
-              "localId" : "689",
-              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-              "value" : "0",
-              "annotation" : [ ]
-            }
-          }, {
-            "type" : "Interval",
-            "localId" : "700",
-            "lowClosed" : true,
-            "highClosed" : true,
-            "annotation" : [ ],
-            "resultTypeSpecifier" : {
-              "type" : "IntervalTypeSpecifier",
-              "localId" : "701",
-              "annotation" : [ ],
-              "pointType" : {
-                "type" : "NamedTypeSpecifier",
-                "localId" : "702",
-                "name" : "{urn:hl7-org:elm-types:r1}Time",
-                "annotation" : [ ]
-              }
-            },
-            "low" : {
-              "type" : "Time",
-              "localId" : "690",
-              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
-              "annotation" : [ ],
-              "signature" : [ ],
-              "hour" : {
-                "type" : "Literal",
-                "localId" : "691",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "12",
-                "annotation" : [ ]
-              },
-              "minute" : {
-                "type" : "Literal",
-                "localId" : "692",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "0",
-                "annotation" : [ ]
-              },
-              "second" : {
-                "type" : "Literal",
-                "localId" : "693",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "0",
-                "annotation" : [ ]
-              },
-              "millisecond" : {
-                "type" : "Literal",
-                "localId" : "694",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "0",
-                "annotation" : [ ]
-              }
-            },
-            "high" : {
-              "type" : "Time",
-              "localId" : "695",
-              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
-              "annotation" : [ ],
-              "signature" : [ ],
-              "hour" : {
-                "type" : "Literal",
-                "localId" : "696",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "12",
-                "annotation" : [ ]
-              },
-              "minute" : {
-                "type" : "Literal",
-                "localId" : "697",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "0",
-                "annotation" : [ ]
-              },
-              "second" : {
-                "type" : "Literal",
-                "localId" : "698",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "0",
-                "annotation" : [ ]
-              },
-              "millisecond" : {
-                "type" : "Literal",
-                "localId" : "699",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "0",
-                "annotation" : [ ]
-              }
-            }
-          } ]
-        }
-      }, {
-        "localId" : "710",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-        "name" : "MayProperInMillisecondOfTime",
-        "context" : "Patient",
-        "accessLevel" : "Public",
-        "annotation" : [ {
-          "type" : "Annotation",
-          "t" : [ ],
-          "s" : {
-            "r" : "710",
-            "s" : [ {
-              "value" : [ "", "define ", "MayProperInMillisecondOfTime", ": " ]
-            }, {
-              "r" : "729",
-              "s" : [ {
-                "r" : "711",
-                "value" : [ "@T12:00:00", " ", "properly included in millisecond of", " " ]
-              }, {
-                "r" : "725",
-                "s" : [ {
-                  "r" : "715",
+                  "r" : "666",
                   "value" : [ "Interval[", "@T12:00:00.001", ", ", "@T21:59:59.999", "]" ]
                 } ]
               } ]
@@ -76523,100 +78132,99 @@ module.exports['ProperIn'] = {
         } ],
         "expression" : {
           "type" : "ProperIn",
-          "localId" : "729",
+          "localId" : "680",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-          "precision" : "Millisecond",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "730",
+            "localId" : "681",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "731",
+            "localId" : "682",
             "annotation" : [ ],
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "732",
+              "localId" : "683",
               "name" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ]
             }
           } ],
           "operand" : [ {
             "type" : "Time",
-            "localId" : "711",
+            "localId" : "662",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ],
             "signature" : [ ],
             "hour" : {
               "type" : "Literal",
-              "localId" : "712",
+              "localId" : "663",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "12",
               "annotation" : [ ]
             },
             "minute" : {
               "type" : "Literal",
-              "localId" : "713",
+              "localId" : "664",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "0",
               "annotation" : [ ]
             },
             "second" : {
               "type" : "Literal",
-              "localId" : "714",
+              "localId" : "665",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "0",
               "annotation" : [ ]
             }
           }, {
             "type" : "Interval",
-            "localId" : "725",
+            "localId" : "676",
             "lowClosed" : true,
             "highClosed" : true,
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "IntervalTypeSpecifier",
-              "localId" : "726",
+              "localId" : "677",
               "annotation" : [ ],
               "pointType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "727",
+                "localId" : "678",
                 "name" : "{urn:hl7-org:elm-types:r1}Time",
                 "annotation" : [ ]
               }
             },
             "low" : {
               "type" : "Time",
-              "localId" : "715",
+              "localId" : "666",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ],
               "signature" : [ ],
               "hour" : {
                 "type" : "Literal",
-                "localId" : "716",
+                "localId" : "667",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "12",
                 "annotation" : [ ]
               },
               "minute" : {
                 "type" : "Literal",
-                "localId" : "717",
+                "localId" : "668",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "0",
                 "annotation" : [ ]
               },
               "second" : {
                 "type" : "Literal",
-                "localId" : "718",
+                "localId" : "669",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "0",
                 "annotation" : [ ]
               },
               "millisecond" : {
                 "type" : "Literal",
-                "localId" : "719",
+                "localId" : "670",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "1",
                 "annotation" : [ ]
@@ -76624,34 +78232,34 @@ module.exports['ProperIn'] = {
             },
             "high" : {
               "type" : "Time",
-              "localId" : "720",
+              "localId" : "671",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ],
               "signature" : [ ],
               "hour" : {
                 "type" : "Literal",
-                "localId" : "721",
+                "localId" : "672",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "21",
                 "annotation" : [ ]
               },
               "minute" : {
                 "type" : "Literal",
-                "localId" : "722",
+                "localId" : "673",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "59",
                 "annotation" : [ ]
               },
               "second" : {
                 "type" : "Literal",
-                "localId" : "723",
+                "localId" : "674",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "59",
                 "annotation" : [ ]
               },
               "millisecond" : {
                 "type" : "Literal",
-                "localId" : "724",
+                "localId" : "675",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "999",
                 "annotation" : [ ]
@@ -76660,7 +78268,505 @@ module.exports['ProperIn'] = {
           } ]
         }
       }, {
-        "localId" : "735",
+        "localId" : "686",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ProperInSecondOfTime",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "686",
+            "s" : [ {
+              "value" : [ "", "define ", "ProperInSecondOfTime", ": " ]
+            }, {
+              "r" : "705",
+              "s" : [ {
+                "r" : "687",
+                "value" : [ "@T12:00:01", " ", "properly included in second of", " " ]
+              }, {
+                "r" : "701",
+                "s" : [ {
+                  "r" : "691",
+                  "value" : [ "Interval[", "@T12:00:00.000", ", ", "@T21:59:59.999", "]" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperIn",
+          "localId" : "705",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "precision" : "Second",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "706",
+            "name" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ]
+          }, {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "707",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "708",
+              "name" : "{urn:hl7-org:elm-types:r1}Time",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Time",
+            "localId" : "687",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "688",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "12",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "689",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "second" : {
+              "type" : "Literal",
+              "localId" : "690",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Interval",
+            "localId" : "701",
+            "lowClosed" : true,
+            "highClosed" : true,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "702",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "703",
+                "name" : "{urn:hl7-org:elm-types:r1}Time",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "Time",
+              "localId" : "691",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "692",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "12",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "693",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "694",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "millisecond" : {
+                "type" : "Literal",
+                "localId" : "695",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              }
+            },
+            "high" : {
+              "type" : "Time",
+              "localId" : "696",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "697",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "21",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "698",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "59",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "699",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "59",
+                "annotation" : [ ]
+              },
+              "millisecond" : {
+                "type" : "Literal",
+                "localId" : "700",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "999",
+                "annotation" : [ ]
+              }
+            }
+          } ]
+        }
+      }, {
+        "localId" : "711",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "NotProperInSecondOfTime",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "711",
+            "s" : [ {
+              "value" : [ "", "define ", "NotProperInSecondOfTime", ": " ]
+            }, {
+              "r" : "730",
+              "s" : [ {
+                "r" : "712",
+                "value" : [ "@T12:00:00", " ", "properly included in second of", " " ]
+              }, {
+                "r" : "726",
+                "s" : [ {
+                  "r" : "716",
+                  "value" : [ "Interval[", "@T12:00:00.000", ", ", "@T12:00:00.000", "]" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperIn",
+          "localId" : "730",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "precision" : "Second",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "731",
+            "name" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ]
+          }, {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "732",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "733",
+              "name" : "{urn:hl7-org:elm-types:r1}Time",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Time",
+            "localId" : "712",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "713",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "12",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "714",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "second" : {
+              "type" : "Literal",
+              "localId" : "715",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Interval",
+            "localId" : "726",
+            "lowClosed" : true,
+            "highClosed" : true,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "727",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "728",
+                "name" : "{urn:hl7-org:elm-types:r1}Time",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "Time",
+              "localId" : "716",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "717",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "12",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "718",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "719",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "millisecond" : {
+                "type" : "Literal",
+                "localId" : "720",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              }
+            },
+            "high" : {
+              "type" : "Time",
+              "localId" : "721",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "722",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "12",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "723",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "724",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "millisecond" : {
+                "type" : "Literal",
+                "localId" : "725",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              }
+            }
+          } ]
+        }
+      }, {
+        "localId" : "736",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MayProperInMillisecondOfTime",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "736",
+            "s" : [ {
+              "value" : [ "", "define ", "MayProperInMillisecondOfTime", ": " ]
+            }, {
+              "r" : "755",
+              "s" : [ {
+                "r" : "737",
+                "value" : [ "@T12:00:00", " ", "properly included in millisecond of", " " ]
+              }, {
+                "r" : "751",
+                "s" : [ {
+                  "r" : "741",
+                  "value" : [ "Interval[", "@T12:00:00.001", ", ", "@T21:59:59.999", "]" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperIn",
+          "localId" : "755",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "precision" : "Millisecond",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "756",
+            "name" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ]
+          }, {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "757",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "758",
+              "name" : "{urn:hl7-org:elm-types:r1}Time",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Time",
+            "localId" : "737",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "738",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "12",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "739",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "second" : {
+              "type" : "Literal",
+              "localId" : "740",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Interval",
+            "localId" : "751",
+            "lowClosed" : true,
+            "highClosed" : true,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "752",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "753",
+                "name" : "{urn:hl7-org:elm-types:r1}Time",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "Time",
+              "localId" : "741",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "742",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "12",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "743",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "744",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "0",
+                "annotation" : [ ]
+              },
+              "millisecond" : {
+                "type" : "Literal",
+                "localId" : "745",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              }
+            },
+            "high" : {
+              "type" : "Time",
+              "localId" : "746",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "hour" : {
+                "type" : "Literal",
+                "localId" : "747",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "21",
+                "annotation" : [ ]
+              },
+              "minute" : {
+                "type" : "Literal",
+                "localId" : "748",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "59",
+                "annotation" : [ ]
+              },
+              "second" : {
+                "type" : "Literal",
+                "localId" : "749",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "59",
+                "annotation" : [ ]
+              },
+              "millisecond" : {
+                "type" : "Literal",
+                "localId" : "750",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "999",
+                "annotation" : [ ]
+              }
+            }
+          } ]
+        }
+      }, {
+        "localId" : "761",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
         "name" : "ProperInNull",
         "context" : "Patient",
@@ -76669,18 +78775,18 @@ module.exports['ProperIn'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "735",
+            "r" : "761",
             "s" : [ {
               "value" : [ "", "define ", "ProperInNull", ": " ]
             }, {
-              "r" : "750",
+              "r" : "776",
               "s" : [ {
-                "r" : "736",
+                "r" : "762",
                 "value" : [ "null", " ", "properly included in", " " ]
               }, {
-                "r" : "739",
+                "r" : "765",
                 "s" : [ {
-                  "r" : "737",
+                  "r" : "763",
                   "value" : [ "Interval[", "1", ", ", "5", "]" ]
                 } ]
               } ]
@@ -76689,57 +78795,57 @@ module.exports['ProperIn'] = {
         } ],
         "expression" : {
           "type" : "ProperIn",
-          "localId" : "750",
+          "localId" : "776",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "752",
+            "localId" : "778",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }, {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "753",
+            "localId" : "779",
             "annotation" : [ ],
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "754",
+              "localId" : "780",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }
           } ],
           "operand" : [ {
             "type" : "As",
-            "localId" : "751",
+            "localId" : "777",
             "asType" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ],
             "signature" : [ ],
             "operand" : {
               "type" : "Null",
-              "localId" : "736",
+              "localId" : "762",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
               "annotation" : [ ]
             }
           }, {
             "type" : "Interval",
-            "localId" : "739",
+            "localId" : "765",
             "lowClosed" : true,
             "highClosed" : true,
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "IntervalTypeSpecifier",
-              "localId" : "740",
+              "localId" : "766",
               "annotation" : [ ],
               "pointType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "741",
+                "localId" : "767",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               }
             },
             "low" : {
               "type" : "Literal",
-              "localId" : "737",
+              "localId" : "763",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "1",
@@ -76747,7 +78853,7 @@ module.exports['ProperIn'] = {
             },
             "high" : {
               "type" : "Literal",
-              "localId" : "738",
+              "localId" : "764",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "5",

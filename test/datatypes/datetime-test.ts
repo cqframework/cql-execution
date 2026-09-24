@@ -1642,9 +1642,12 @@ describe('DateTime.sameAs', () => {
   });
 
   it('should handle imprecision correctly with missing milliseconds', () => {
-    should.not.exist(
-      DateTime.parse('2000-05-15T12:35:45.123').sameAs(DateTime.parse('2000-05-15T12:35:45'))
-    );
+    DateTime.parse('2000-05-15T12:35:45.123')
+      .sameAs(DateTime.parse('2000-05-15T12:35:45'))
+      .should.be.false();
+    DateTime.parse('2000-05-15T12:35:45.000')
+      .sameAs(DateTime.parse('2000-05-15T12:35:45'))
+      .should.be.true();
     should.not.exist(
       DateTime.parse('2000-05-15T12:35:45.123').sameAs(
         DateTime.parse('2000-05-15T12:35:45'),
@@ -1669,9 +1672,13 @@ describe('DateTime.sameAs', () => {
     DateTime.parse('2000-05-15T12:35:45.123')
       .sameAs(DateTime.parse('2000-05-15T12:35:45'), DateTime.Unit.YEAR)
       .should.be.true();
-    should.not.exist(
-      DateTime.parse('2000-05-15T12:35:45').sameAs(DateTime.parse('2000-05-15T12:35:45.123'))
-    );
+
+    DateTime.parse('2000-05-15T12:35:45')
+      .sameAs(DateTime.parse('2000-05-15T12:35:45.123'))
+      .should.be.false();
+    DateTime.parse('2000-05-15T12:35:45')
+      .sameAs(DateTime.parse('2000-05-15T12:35:45.000'))
+      .should.be.true();
     should.not.exist(
       DateTime.parse('2000-05-15T12:35:45').sameAs(
         DateTime.parse('2000-05-15T12:35:45.123'),
@@ -2734,8 +2741,17 @@ describe('DateTime.before', () => {
   });
 
   it('should return null in cases where a has unknown values that prevent deterministic result', () => {
+    DateTime.parse('2000-01-01T00:00:00')
+      .before(DateTime.parse('2000-01-01T00:00:00.999'))
+      .should.be.true();
+    DateTime.parse('2000-01-01T00:00:00')
+      .before(DateTime.parse('2000-01-01T00:00:00.000'))
+      .should.be.false();
     should.not.exist(
-      DateTime.parse('2000-01-01T00:00:00').before(DateTime.parse('2000-01-01T00:00:00.999'))
+      DateTime.parse('2000-01-01T00:00:00').before(
+        DateTime.parse('2000-01-01T00:00:00.999'),
+        DateTime.Unit.MILLISECOND
+      )
     );
     should.not.exist(
       DateTime.parse('2000-01-01T00:00').before(DateTime.parse('2000-01-01T00:00:00.999'))
@@ -2751,8 +2767,14 @@ describe('DateTime.before', () => {
   });
 
   it('should return null in cases where b has unknown values that prevent deterministic result', () => {
+    DateTime.parse('2000-01-01T00:00:00.001')
+      .before(DateTime.parse('2000-01-01T00:00:00'))
+      .should.be.false();
     should.not.exist(
-      DateTime.parse('2000-01-01T00:00:00.001').before(DateTime.parse('2000-01-01T00:00:00'))
+      DateTime.parse('2000-01-01T00:00:00.001').before(
+        DateTime.parse('2000-01-01T00:00:00'),
+        DateTime.Unit.MILLISECOND
+      )
     );
     should.not.exist(
       DateTime.parse('2000-01-01T00:00:00.001').before(DateTime.parse('2000-01-01T00:00'))
@@ -2842,6 +2864,18 @@ describe('DateTime.before', () => {
 });
 
 describe('DateTime.sameOrBefore', () => {
+  it('treats an omitted millisecond component as zero at second precision', () => {
+    should(
+      DateTime.parse('2025-01-15T08:00:00.000').sameOrBefore(DateTime.parse('2025-01-15T08:00:00'))
+    ).be.true();
+  });
+
+  it('orders a nonzero millisecond after an omitted millisecond component', () => {
+    should(
+      DateTime.parse('2025-01-15T08:00:00.001').sameOrBefore(DateTime.parse('2025-01-15T08:00:00'))
+    ).be.false();
+  });
+
   it('should accept cases where a is before b', () => {
     DateTime.parse('2000-12-31T23:59:59.998')
       .sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999'))
@@ -3007,9 +3041,18 @@ describe('DateTime.sameOrBefore', () => {
     DateTime.parse('2000').sameOrBefore(DateTime.parse('2000')).should.be.true();
   });
 
-  it('should return null in cases where a has unknown values that prevent deterministic result', () => {
+  it('should handle missing milliseconds in a and return null for other unknown values', () => {
+    DateTime.parse('2000-01-01T00:00:00')
+      .sameOrBefore(DateTime.parse('2000-01-01T00:00:00.998'))
+      .should.be.true();
+    DateTime.parse('2000-01-01T00:00:01')
+      .sameOrBefore(DateTime.parse('2000-01-01T00:00:00.998'))
+      .should.be.false();
     should.not.exist(
-      DateTime.parse('2000-01-01T00:00:00').sameOrBefore(DateTime.parse('2000-01-01T00:00:00.998'))
+      DateTime.parse('2000-01-01T00:00:00').sameOrBefore(
+        DateTime.parse('2000-01-01T00:00:00.998'),
+        DateTime.Unit.MILLISECOND
+      )
     );
     should.not.exist(
       DateTime.parse('2000-01-01T00:00').sameOrBefore(DateTime.parse('2000-01-01T00:00:59.998'))
@@ -3028,9 +3071,18 @@ describe('DateTime.sameOrBefore', () => {
     );
   });
 
-  it('should return null in cases where b has unknown values that prevent deterministic result', () => {
+  it('should handle missing milliseconds in b and return null for other unknown values', () => {
+    DateTime.parse('2000-01-01T00:00:00.001')
+      .sameOrBefore(DateTime.parse('2000-01-01T00:00:00'))
+      .should.be.false();
+    DateTime.parse('2000-01-01T00:00:00.000')
+      .sameOrBefore(DateTime.parse('2000-01-01T00:00:00'))
+      .should.be.true();
     should.not.exist(
-      DateTime.parse('2000-01-01T00:00:00.001').sameOrBefore(DateTime.parse('2000-01-01T00:00:00'))
+      DateTime.parse('2000-01-01T00:00:00.001').sameOrBefore(
+        DateTime.parse('2000-01-01T00:00:00'),
+        DateTime.Unit.MILLISECOND
+      )
     );
     should.not.exist(
       DateTime.parse('2000-01-01T00:00:00.001').sameOrBefore(DateTime.parse('2000-01-01T00:00'))
@@ -3068,9 +3120,18 @@ describe('DateTime.sameOrBefore', () => {
     DateTime.parse('2000').sameOrBefore(DateTime.parse('2001-01-01T00:00:00.0')).should.be.true();
   });
 
-  it('should return null for cases where a has less precision than b with all overlapping precision fields matching', () => {
+  it('should compare missing milliseconds in a and return null for other missing fields', () => {
+    DateTime.parse('2000-01-01T00:00:00')
+      .sameOrBefore(DateTime.parse('2000-01-01T00:00:00.999'))
+      .should.be.true();
+    DateTime.parse('2000-01-01T00:00:01')
+      .sameOrBefore(DateTime.parse('2000-01-01T00:00:00.999'))
+      .should.be.false();
     should.not.exist(
-      DateTime.parse('2000-01-01T00:00:00').sameOrBefore(DateTime.parse('2000-01-01T00:00:00.999'))
+      DateTime.parse('2000-01-01T00:00:00').sameOrBefore(
+        DateTime.parse('2000-01-01T00:00:00.999'),
+        DateTime.Unit.MILLISECOND
+      )
     );
     should.not.exist(
       DateTime.parse('2000-01-01T00:00').sameOrBefore(DateTime.parse('2000-01-01T00:00:59.999'))
@@ -3108,9 +3169,18 @@ describe('DateTime.sameOrBefore', () => {
     DateTime.parse('2000-12-31T23:59:59.999').sameOrBefore(DateTime.parse('2001')).should.be.true();
   });
 
-  it('should return null for cases where b has less precision than a with all overlapping precision fields matching', () => {
+  it('should compare missing milliseconds in b and return null for other missing fields', () => {
+    DateTime.parse('2000-01-01T00:00:00.0')
+      .sameOrBefore(DateTime.parse('2000-01-01T00:00:00'))
+      .should.be.true();
+    DateTime.parse('2000-01-01T00:00:00.001')
+      .sameOrBefore(DateTime.parse('2000-01-01T00:00:00'))
+      .should.be.false();
     should.not.exist(
-      DateTime.parse('2000-01-01T00:00:00.0').sameOrBefore(DateTime.parse('2000-01-01T00:00:00'))
+      DateTime.parse('2000-01-01T00:00:00.0').sameOrBefore(
+        DateTime.parse('2000-01-01T00:00:00'),
+        DateTime.Unit.MILLISECOND
+      )
     );
     should.not.exist(
       DateTime.parse('2000-01-01T00:00:00.0').sameOrBefore(DateTime.parse('2000-01-01T00:00'))
@@ -3337,9 +3407,18 @@ describe('DateTime.after', () => {
     DateTime.parse('2000').after(DateTime.parse('2000')).should.be.false();
   });
 
-  it('should return null in cases where a has unknown values that prevent deterministic result', () => {
+  it('should handle missing milliseconds in a and return null for other unknown values', () => {
+    DateTime.parse('2000-01-01T00:00:00')
+      .after(DateTime.parse('2000-01-01T00:00:00.0'))
+      .should.be.false();
+    DateTime.parse('2000-01-01T00:00:01')
+      .after(DateTime.parse('2000-01-01T00:00:00.999'))
+      .should.be.true();
     should.not.exist(
-      DateTime.parse('2000-01-01T00:00:00').after(DateTime.parse('2000-01-01T00:00:00.0'))
+      DateTime.parse('2000-01-01T00:00:00').after(
+        DateTime.parse('2000-01-01T00:00:00.0'),
+        DateTime.Unit.MILLISECOND
+      )
     );
     should.not.exist(
       DateTime.parse('2000-01-01T00:00').after(DateTime.parse('2000-01-01T00:00:00.0'))
@@ -3352,9 +3431,18 @@ describe('DateTime.after', () => {
     should.not.exist(DateTime.parse('2000').after(DateTime.parse('2000-01-01T00:00:00.0')));
   });
 
-  it('should return null in cases where b has unknown values that prevent deterministic result', () => {
+  it('should handle missing milliseconds in b and return null for other unknown values', () => {
+    DateTime.parse('2000-01-01T00:00:00.001')
+      .after(DateTime.parse('2000-01-01T00:00:00'))
+      .should.be.true();
+    DateTime.parse('2000-01-01T00:00:00.000')
+      .after(DateTime.parse('2000-01-01T00:00:00'))
+      .should.be.false();
     should.not.exist(
-      DateTime.parse('2000-01-01T00:00:00.001').after(DateTime.parse('2000-01-01T00:00:00'))
+      DateTime.parse('2000-01-01T00:00:00.001').after(
+        DateTime.parse('2000-01-01T00:00:00'),
+        DateTime.Unit.MILLISECOND
+      )
     );
     should.not.exist(
       DateTime.parse('2000-01-01T00:00:00.001').after(DateTime.parse('2000-01-01T00:00'))
@@ -3603,9 +3691,18 @@ describe('DateTime.sameOrAfter', () => {
     DateTime.parse('2000').sameOrAfter(DateTime.parse('2000')).should.be.true();
   });
 
-  it('should return null in cases where a has unknown values that prevent deterministic result', () => {
+  it('should handle missing milliseconds in a and return null for other unknown values', () => {
+    DateTime.parse('2000-01-01T00:00:00')
+      .sameOrAfter(DateTime.parse('2000-01-01T00:00:00.999'))
+      .should.be.false();
+    DateTime.parse('2000-01-01T00:00:00')
+      .sameOrAfter(DateTime.parse('2000-01-01T00:00:00.000'))
+      .should.be.true();
     should.not.exist(
-      DateTime.parse('2000-01-01T00:00:00').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.999'))
+      DateTime.parse('2000-01-01T00:00:00').sameOrAfter(
+        DateTime.parse('2000-01-01T00:00:00.999'),
+        DateTime.Unit.MILLISECOND
+      )
     );
     should.not.exist(
       DateTime.parse('2000-01-01T00:00').sameOrAfter(DateTime.parse('2000-01-01T00:00:59.999'))
@@ -3622,9 +3719,18 @@ describe('DateTime.sameOrAfter', () => {
     should.not.exist(DateTime.parse('2000').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')));
   });
 
-  it('should return null in cases where b has unknown values that prevent deterministic result', () => {
+  it('should handle missing milliseconds in b and return null for other unknown values', () => {
+    DateTime.parse('2000-01-01T00:00:00.001')
+      .sameOrAfter(DateTime.parse('2000-01-01T00:00:00'))
+      .should.be.true();
+    DateTime.parse('2000-01-01T00:00:00.999')
+      .sameOrAfter(DateTime.parse('2000-01-01T00:00:01'))
+      .should.be.false();
     should.not.exist(
-      DateTime.parse('2000-01-01T00:00:00.001').sameOrAfter(DateTime.parse('2000-01-01T00:00:00'))
+      DateTime.parse('2000-01-01T00:00:00.001').sameOrAfter(
+        DateTime.parse('2000-01-01T00:00:00'),
+        DateTime.Unit.MILLISECOND
+      )
     );
     should.not.exist(
       DateTime.parse('2000-01-01T00:00:00.001').sameOrAfter(DateTime.parse('2000-01-01T00:00'))
@@ -3660,9 +3766,18 @@ describe('DateTime.sameOrAfter', () => {
     DateTime.parse('2001').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')).should.be.true();
   });
 
-  it('should return null for cases where a has less precision than b with all overlapping precision fields matching', () => {
+  it('should compare missing milliseconds in a and return null for other missing fields', () => {
+    DateTime.parse('2000-01-01T00:00:01')
+      .sameOrAfter(DateTime.parse('2000-01-01T00:00:01.0'))
+      .should.be.true();
+    DateTime.parse('2000-01-01T00:00:01')
+      .sameOrAfter(DateTime.parse('2000-01-01T00:00:01.001'))
+      .should.be.false();
     should.not.exist(
-      DateTime.parse('2000-01-01T00:00:01').sameOrAfter(DateTime.parse('2000-01-01T00:00:01.0'))
+      DateTime.parse('2000-01-01T00:00:01').sameOrAfter(
+        DateTime.parse('2000-01-01T00:00:01.0'),
+        DateTime.Unit.MILLISECOND
+      )
     );
     should.not.exist(
       DateTime.parse('2000-01-01T00:01').sameOrAfter(DateTime.parse('2000-01-01T00:01:00.0'))
@@ -3696,9 +3811,18 @@ describe('DateTime.sameOrAfter', () => {
     DateTime.parse('2001-01-01T00:00:00.0').sameOrAfter(DateTime.parse('2000')).should.be.true();
   });
 
-  it('should return null for cases where b has less precision than a with all overlapping precision fields matching', () => {
+  it('should compare missing milliseconds in b and return null for other missing fields', () => {
+    DateTime.parse('2000-01-01T00:00:00.999')
+      .sameOrAfter(DateTime.parse('2000-01-01T00:00:00'))
+      .should.be.true();
+    DateTime.parse('2000-01-01T00:00:00.999')
+      .sameOrAfter(DateTime.parse('2000-01-01T00:00:01'))
+      .should.be.false();
     should.not.exist(
-      DateTime.parse('2000-01-01T00:00:00.999').sameOrAfter(DateTime.parse('2000-01-01T00:00:00'))
+      DateTime.parse('2000-01-01T00:00:00.999').sameOrAfter(
+        DateTime.parse('2000-01-01T00:00:00'),
+        DateTime.Unit.MILLISECOND
+      )
     );
     should.not.exist(
       DateTime.parse('2000-01-01T00:00:59.999').sameOrAfter(DateTime.parse('2000-01-01T00:00'))

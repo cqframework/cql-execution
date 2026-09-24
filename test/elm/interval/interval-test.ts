@@ -67,6 +67,44 @@ describe('Interval', () => {
   });
 });
 
+describe('DatetimeMillisecondBoundary', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('treats an omitted millisecond component as zero for equality', async function () {
+    should(await this.equalDates.exec(this.ctx)).be.true();
+  });
+
+  it('distinguishes a nonzero millisecond in equality', async function () {
+    should(await this.unequalMilliseconds.exec(this.ctx)).be.false();
+  });
+
+  it('treats an omitted millisecond component as zero for before or on', async function () {
+    should(await this.directOnOrBefore.exec(this.ctx)).be.true();
+  });
+
+  it('contains a matching closed upper endpoint', async function () {
+    should(await this.closedUpperContains.exec(this.ctx)).be.true();
+  });
+
+  it('excludes a point one millisecond beyond the closed upper endpoint', async function () {
+    should(await this.beyondClosedUpper.exec(this.ctx)).be.false();
+  });
+
+  it('includes the endpoint in a relative timing phrase', async function () {
+    should(await this.relativeTiming.exec(this.ctx)).be.true();
+  });
+
+  it('contains a point strictly inside the interval', async function () {
+    should(await this.interiorContains.exec(this.ctx)).be.true();
+  });
+
+  it('contains a closed endpoint when both values specify milliseconds', async function () {
+    should(await this.matchedPrecisionContains.exec(this.ctx)).be.true();
+  });
+});
+
 describe('Equal', () => {
   beforeEach(function () {
     setup(this, data);
@@ -648,7 +686,8 @@ describe('ProperContains', () => {
   it('should correctly compare using the requested precision', async function () {
     (await this.properContainsSecondOfTime.exec(this.ctx)).should.be.true();
     (await this.notProperContainsSecondOfTime.exec(this.ctx)).should.be.false();
-    should(await this.mayProperContainsTime.exec(this.ctx)).be.null();
+    (await this.properContainsTimeAboveMillisecondBound.exec(this.ctx)).should.be.true();
+    (await this.notProperContainsSecondPrecisionTime.exec(this.ctx)).should.be.false();
     should(await this.mayProperContainsMillisecondOfTime.exec(this.ctx)).be.null();
   });
 
@@ -686,7 +725,8 @@ describe('ProperIn', () => {
   it('should correctly compare using the requested precision', async function () {
     (await this.properInSecondOfTime.exec(this.ctx)).should.be.true();
     (await this.notProperInSecondOfTime.exec(this.ctx)).should.be.false();
-    should(await this.mayProperInTime.exec(this.ctx)).be.null();
+    (await this.properInTimeAboveMillisecondBound.exec(this.ctx)).should.be.true();
+    (await this.notProperInSecondPrecisionTime.exec(this.ctx)).should.be.false();
     should(await this.mayProperInMillisecondOfTime.exec(this.ctx)).be.null();
   });
 

@@ -444,6 +444,24 @@ describe('DateInterval', () => {
 
 describe('DateTimeInterval', () => {
   describe('contains', () => {
+    it('contains a closed DateTime endpoint with an omitted zero millisecond component', () => {
+      const point = DateTime.parse('2025-01-15T08:00:00.000');
+      const interval = new Interval(
+        DateTime.parse('2025-01-08T08:00:00'),
+        DateTime.parse('2025-01-15T08:00:00')
+      );
+      should(interval.contains(point)).be.true();
+    });
+
+    it('excludes a DateTime one millisecond after the closed endpoint', () => {
+      const point = DateTime.parse('2025-01-15T08:00:00.001');
+      const interval = new Interval(
+        DateTime.parse('2025-01-08T08:00:00'),
+        DateTime.parse('2025-01-15T08:00:00')
+      );
+      should(interval.contains(point)).be.false();
+    });
+
     let d: any;
     beforeEach(() => {
       d = data();
