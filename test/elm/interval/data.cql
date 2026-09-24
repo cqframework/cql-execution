@@ -56,6 +56,16 @@ define SameDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) != Interva
 define DifferentDays: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)) != Interval[DateTime(2012, 1, 1), DateTime(2012, 7, 1))
 define DifferingPrecision: Interval[DateTime(2012, 1, 1, 12, 30, 21), DateTime(2013, 1, 1, 12, 30, 21)] != Interval[DateTime(2012, 1, 1, 12, 30), DateTime(2013, 1, 1, 12, 30)]
 
+// @Test: DatetimeMillisecondBoundary
+define EqualDates: @2025-01-15T08:00:00.000 = @2025-01-15T08:00:00
+define UnequalMilliseconds: @2025-01-15T08:00:00.001 = @2025-01-15T08:00:00
+define DirectOnOrBefore: @2025-01-15T08:00:00.000 before or on @2025-01-15T08:00:00
+define ClosedUpperContains: Interval[@2025-01-08T08:00:00, @2025-01-15T08:00:00] contains @2025-01-15T08:00:00.000
+define BeyondClosedUpper: Interval[@2025-01-08T08:00:00, @2025-01-15T08:00:00] contains @2025-01-15T08:00:00.001
+define RelativeTiming: @2025-01-15T08:00:00.000 42 weeks or less before or on @2025-01-15T08:00:00
+define InteriorContains: Interval[@2025-01-08T08:00:00, @2025-01-16T08:00:00] contains @2025-01-15T08:00:00.000
+define MatchedPrecisionContains: Interval[@2025-01-08T08:00:00, @2025-01-15T08:00:00.000] contains @2025-01-15T08:00:00.000
+
 // @Test: Contains
 define ContainsInt: Interval[1, 5] contains 3
 define NotContainsInt: Interval(1, 5] contains 1

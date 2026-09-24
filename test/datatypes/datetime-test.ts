@@ -2842,6 +2842,18 @@ describe('DateTime.before', () => {
 });
 
 describe('DateTime.sameOrBefore', () => {
+  it('treats an omitted millisecond component as zero at second precision', () => {
+    should(
+      DateTime.parse('2025-01-15T08:00:00.000').sameOrBefore(DateTime.parse('2025-01-15T08:00:00'))
+    ).be.true();
+  });
+
+  it('orders a nonzero millisecond after an omitted millisecond component', () => {
+    should(
+      DateTime.parse('2025-01-15T08:00:00.001').sameOrBefore(DateTime.parse('2025-01-15T08:00:00'))
+    ).be.false();
+  });
+
   it('should accept cases where a is before b', () => {
     DateTime.parse('2000-12-31T23:59:59.998')
       .sameOrBefore(DateTime.parse('2000-12-31T23:59:59.999'))
