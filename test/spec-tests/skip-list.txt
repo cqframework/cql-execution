@@ -18,6 +18,9 @@ CqlIntervalOperatorsTest.Expand.ExpandPer0D1IntervalOverload    Wrong output: Cl
 CqlIntervalOperatorsTest.Except.DecimalIntervalExcept1to3       # Wrong output: The expected value is a closed form of the correct open-endpoint Interval[1.0, 4.0) . Converting to closed-form produces different results for CQL 2.0.0+ due to Decimal precision-awareness. See https://jira.hl7.org/browse/FHIR-59229
 CqlIntervalOperatorsTest.Except.QuantityIntervalExcept1to4      # Wrong output: The expected value is a closed form of the correct open-endpoint Interval[1.0 'g', 5.0 'g'). Converting to closed-form produces different results for CQL 2.0.0+ due to Decimal precision-awareness. See https://jira.hl7.org/browse/FHIR-59229
 CqlIntervalOperatorsTest.Intersect.TestIntersectNull            Wrong output: Expected is Interval[5, null) but this example is in the spec, where the result "ends at some value between 5 and 10" meaning an uncertainty.
+"CqlIntervalOperatorsTest.Included In.DateTimeIncludedInNull"               Wrong output: @2017-09-01T00:00:00 is equal to the lower bound @2017-09-01T00:00:00.000 since missing milliseconds compare as 0, so the interval is included; expected true, not null.
+CqlIntervalOperatorsTest.ProperContains.TimeProperContainsNull              Wrong output: @T12:00:00 is before the lower bound @T12:00:00.001 since missing milliseconds compare as 0; expected false, not null.
+CqlIntervalOperatorsTest.ProperIn.TimeProperInNull                          Wrong output: @T12:00:00 is before the lower bound @T12:00:00.001 since missing milliseconds compare as 0; expected false, not null.
 
 CqlListOperatorsTest.Equal.EqualNullNull                        Wrong output: According to spec, if either list contains a null, the result is null
 CqlListOperatorsTest.Sort.simpleSortAsc                         Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates

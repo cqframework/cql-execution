@@ -415,7 +415,8 @@ define ProperContainsDateHighEdgeClosed: DateIvlHighClosed properly includes Dat
 define ProperContainsTime: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T12:00:00.001
 define ProperContainsTimeLowEdge: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T12:00:00.000
 define NotProperContainsTime: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T22:00:00.000
-define MayProperContainsTime: Interval[@T12:00:00.001, @T21:59:59.999] properly includes @T12:00:00
+define ProperContainsTimeAboveMillisecondBound: Interval[@T12:00:00.001, @T21:59:59.999] properly includes @T12:00:00.002
+define NotProperContainsSecondPrecisionTime: Interval[@T12:00:00.001, @T21:59:59.999] properly includes @T12:00:00
 define ProperContainsSecondOfTime: Interval[@T12:00:00.000, @T21:59:59.999] properly includes second of @T12:00:01
 define NotProperContainsSecondOfTime: Interval[@T12:00:00.001, @T12:00:00.001] properly includes second of @T12:00:00
 define MayProperContainsMillisecondOfTime: Interval[@T12:00:00.001, @T21:59:59.999] properly includes millisecond of @T12:00:00
@@ -440,7 +441,8 @@ define ProperInDateHighEdgeClosed: DateTime(2012, 9, 1, 0, 0, 0, 0) properly inc
 define ProperInTime: @T12:00:00.001 properly included in Interval[@T12:00:00.000, @T21:59:59.999]
 define ProperInTimeLowEdge: @T12:00:00.000 properly included in Interval[@T12:00:00.000, @T21:59:59.999]
 define NotProperInTime: @T22:00:00.000 properly included in Interval[@T12:00:00.000, @T21:59:59.999]
-define MayProperInTime: @T12:00:00 properly included in Interval[@T12:00:00.001, @T21:59:59.999]
+define ProperInTimeAboveMillisecondBound: @T12:00:00.002 properly included in Interval[@T12:00:00.001, @T21:59:59.999]
+define NotProperInSecondPrecisionTime: @T12:00:00 properly included in Interval[@T12:00:00.001, @T21:59:59.999]
 define ProperInSecondOfTime: @T12:00:01 properly included in second of Interval[@T12:00:00.000, @T21:59:59.999]
 define NotProperInSecondOfTime: @T12:00:00 properly included in second of Interval[@T12:00:00.000, @T12:00:00.000]
 define MayProperInMillisecondOfTime: @T12:00:00 properly included in millisecond of Interval[@T12:00:00.001, @T21:59:59.999]

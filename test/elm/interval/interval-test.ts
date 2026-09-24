@@ -686,7 +686,8 @@ describe('ProperContains', () => {
   it('should correctly compare using the requested precision', async function () {
     (await this.properContainsSecondOfTime.exec(this.ctx)).should.be.true();
     (await this.notProperContainsSecondOfTime.exec(this.ctx)).should.be.false();
-    should(await this.mayProperContainsTime.exec(this.ctx)).be.null();
+    (await this.properContainsTimeAboveMillisecondBound.exec(this.ctx)).should.be.true();
+    (await this.notProperContainsSecondPrecisionTime.exec(this.ctx)).should.be.false();
     should(await this.mayProperContainsMillisecondOfTime.exec(this.ctx)).be.null();
   });
 
@@ -724,7 +725,8 @@ describe('ProperIn', () => {
   it('should correctly compare using the requested precision', async function () {
     (await this.properInSecondOfTime.exec(this.ctx)).should.be.true();
     (await this.notProperInSecondOfTime.exec(this.ctx)).should.be.false();
-    should(await this.mayProperInTime.exec(this.ctx)).be.null();
+    (await this.properInTimeAboveMillisecondBound.exec(this.ctx)).should.be.true();
+    (await this.notProperInSecondPrecisionTime.exec(this.ctx)).should.be.false();
     should(await this.mayProperInMillisecondOfTime.exec(this.ctx)).be.null();
   });
 
