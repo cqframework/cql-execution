@@ -1,6 +1,6 @@
 import should from 'should';
-import { Quantity } from '../../../src/datatypes/quantity';
-import * as MathUtil from '../../../src/util/math';
+import { Quantity } from '../../src/datatypes/quantity';
+import * as MathUtil from '../../src/util/math';
 
 describe('Quantity', () => {
   it('should allow creation of Quantity with valid ucum units', () =>
