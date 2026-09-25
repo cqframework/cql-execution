@@ -187,11 +187,3 @@ export function parseQuantity(str: string) {
     return null;
   }
 }
-
-export function doMultiplication(a: any, b: any) {
-  if (a != null && a.isQuantity) {
-    return a.multiplyBy(b);
-  } else {
-    return b.multiplyBy(a);
-  }
-}

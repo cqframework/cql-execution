@@ -1,5 +1,5 @@
 import should from 'should';
-import { doMultiplication, parseQuantity, Quantity } from '../../../src/datatypes/quantity';
+import { parseQuantity, Quantity } from '../../../src/datatypes/quantity';
 import * as MathUtil from '../../../src/util/math';
 import setup from '../../setup';
 import {
@@ -33,9 +33,9 @@ const validateQuantity = function (
 const doQuantityMathTests = function (tests: string[][], operator: string) {
   let func: any;
   if (operator === '*') {
-    func = doMultiplication;
+    func = MathUtil.multiply;
   } else if (operator === '/') {
-    func = (a: Quantity, b: Quantity) => a.dividedBy(b);
+    func = MathUtil.divide;
   } else if (operator === '+') {
     func = MathUtil.add;
   } else if (operator === '-') {
