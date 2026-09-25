@@ -1,7 +1,16 @@
 import { Uncertainty } from '../../src/datatypes/uncertainty';
 import { MAX_FLOAT_VALUE, MIN_FLOAT_VALUE } from '../../src/util/limits';
 import { Decimal } from '../../src/datatypes/decimal';
-import { finalizeNumericResult, predecessor, successor } from '../../src/util/math';
+import { parseQuantity, Quantity } from '../../src/datatypes/quantity';
+import {
+  finalizeNumericResult,
+  predecessor,
+  successor,
+  add,
+  subtract,
+  multiply,
+  divide
+} from '../../src/util/math';
 
 describe('successor', () => {
   it('should preserve integers in an Uncertainty', () => {
@@ -57,5 +66,74 @@ describe('finalizeNumericResult', () => {
     input.high.should.equalDecimal('2.345678995');
     result.low.should.equalDecimal('1.23456790');
     result.high.should.equalDecimal('2.34567900');
+  });
+});
+
+const doQuantityMathTests = function (tests: string[][], operator: string) {
+  let func: any;
+  if (operator === '*') {
+    func = multiply;
+  } else if (operator === '/') {
+    func = divide;
+  } else if (operator === '+') {
+    func = add;
+  } else if (operator === '-') {
+    func = subtract;
+  }
+
+  for (const t of tests) {
+    const a = parseQuantity(t[0]);
+    const b = parseQuantity(t[1]);
+    // try to parse the expected value but if it comes back null
+    // which it will if there are no units create a new Quantity
+    // with just the expected as the value with null units
+    const e = parseQuantity(t[2]) || new Quantity(t[2]);
+
+    const res = func(a, b);
+    e.equals(res).should.be.true(`${a} ${operator} ${b} should eq ${e} but was ${res}`);
+  }
+};
+
+describe('Quantity math utilities', () => {
+  it('should be able to perform ucum multiplication', function () {
+    const tests = [
+      ["10 'm'", "20 'm'", "200 'm2'"],
+      ["25 'km'", "5 'm'", "125000 'm2'"],
+      ["10 'ml'", "20 'dl'", "0.02 'l2'"]
+    ];
+    doQuantityMathTests(tests, '*');
+  });
+
+  it('should be able to perform ucum division', function () {
+    const tests = [
+      ["10 'cm2'", "5 'cm'", "2 'cm'"],
+      ["10 'm2'", "5 'm'", "2 'm'"],
+      ["25 'km'", "5 'm'", "5000 '1'"],
+      ["25 'mg'", "5 'mg'", "5 '1'"],
+      ["25 'mg'", "5 '1'", "5 'mg'"],
+      ["100 'm'", "2 'h'", "50 'm/h'"],
+      ["100 '[in_i]'", "2 '[lb_av]'", "50 '[in_i]/[lb_av]'"]
+    ];
+    // Note that these tests check for equality but not that the result
+    // has any particular unit.  12 cm^2 / 4 cm = 0.03 m rather than 3 cm.
+    doQuantityMathTests(tests, '/');
+  });
+
+  it('should be able to perform ucum addition', function () {
+    const tests = [
+      ["10 'm'", "20 'm'", "30 'm'"],
+      ["25 'km'", "5 'm'", "25005 'm'"],
+      ["10 'ml'", "20 'dl'", "2.01 'l'"]
+    ];
+    doQuantityMathTests(tests, '+');
+  });
+
+  it('should be able to perform ucum subtraction', function () {
+    const tests = [
+      ["10 'd'", "20 'd'", "-10 'd'"],
+      ["25 'km'", "5 'm'", "24995 'm'"],
+      ["10 'ml'", "20 'dl'", "-1.99 'l'"]
+    ];
+    doQuantityMathTests(tests, '-');
   });
 });

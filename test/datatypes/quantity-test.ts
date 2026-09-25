@@ -1,6 +1,6 @@
 import should from 'should';
-import { doMultiplication, Quantity } from '../../../src/datatypes/quantity';
-import * as MathUtil from '../../../src/util/math';
+import { Quantity } from '../../src/datatypes/quantity';
+import * as MathUtil from '../../src/util/math';
 
 describe('Quantity', () => {
   it('should allow creation of Quantity with valid ucum units', () =>
@@ -95,7 +95,7 @@ describe('Quantity', () => {
     const quantity1 = new Quantity(2, 'm');
     const quantity2 = new Quantity(2, 'm');
     quantity2.unit = 'fakeUnit';
-    should(doMultiplication(quantity1, quantity2)).be.null();
+    should(quantity1.multiplyBy(quantity2)).be.null();
   });
 
   it('divided by Quantity with invalid ucum units results in null', () => {
