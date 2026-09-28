@@ -1025,7 +1025,7 @@ function compareTo(a: AbstractDate, b: AbstractDate, precision?: string): number
     isPrecisionUnspecifiedOrGreaterThanDay(precision)
   ) {
     const differentTZ =
-      a.timezoneOffset === null
+      a.timezoneOffset == null
         ? b.timezoneOffset != null
         : !equals(a.timezoneOffset, b.timezoneOffset);
     if (differentTZ) {
