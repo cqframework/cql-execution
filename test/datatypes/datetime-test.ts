@@ -344,7 +344,7 @@ describe('DateTime', () => {
       .should.eql(tzDate(2012, 9, 25, 12, 55, 14, 0));
   });
 
-  it('should floor unknown values when it converts to javascript Date', () =>
+  it('should floor missing fields when it converts to javascript Date', () =>
     DateTime.parse('2012')
       .toJSDate()
       .should.eql(tzDate(2012, 0, 1, 0, 0, 0, 0)));
@@ -366,7 +366,7 @@ describe('DateTime', () => {
       .should.eql(luxon.DateTime.fromISO('2012-10-25T12:55:14.000-05:00', { setZone: true }));
   });
 
-  it('should floor unknown values when it converts to Luxon DateTime', () =>
+  it('should floor missing fields when it converts to Luxon DateTime', () =>
     DateTime.parse('2012')
       .toLuxonDateTime()
       .should.eql(luxonTzDate(2012, 1, 1, 0, 0, 0, 0)));
@@ -2729,7 +2729,7 @@ describe('DateTime.before', () => {
       .should.be.true();
   });
 
-  it('should return false in cases where a is b but there are unknown values', () => {
+  it('should return false in cases where a is b but there are missing fields', () => {
     DateTime.parse('2000-01-01T00:00:00')
       .before(DateTime.parse('2000-01-01T00:00:00'))
       .should.be.false();
@@ -2740,13 +2740,20 @@ describe('DateTime.before', () => {
     DateTime.parse('2000').before(DateTime.parse('2000')).should.be.false();
   });
 
-  it('should return null in cases where a has unknown values that prevent deterministic result', () => {
+  it('should combine seconds and milliseconds for comparison when the precision level is not specified', () => {
     DateTime.parse('2000-01-01T00:00:00')
       .before(DateTime.parse('2000-01-01T00:00:00.999'))
       .should.be.true();
     DateTime.parse('2000-01-01T00:00:00')
       .before(DateTime.parse('2000-01-01T00:00:00.000'))
       .should.be.false();
+
+    DateTime.parse('2000-01-01T00:00:00.001')
+      .before(DateTime.parse('2000-01-01T00:00:00'))
+      .should.be.false();
+  });
+
+  it('should return null in cases where a has missing fields that prevent deterministic result', () => {
     should.not.exist(
       DateTime.parse('2000-01-01T00:00:00').before(
         DateTime.parse('2000-01-01T00:00:00.999'),
@@ -2766,10 +2773,7 @@ describe('DateTime.before', () => {
     should.not.exist(DateTime.parse('2000').before(DateTime.parse('2000-01-01T00:00:00.999')));
   });
 
-  it('should return null in cases where b has unknown values that prevent deterministic result', () => {
-    DateTime.parse('2000-01-01T00:00:00.001')
-      .before(DateTime.parse('2000-01-01T00:00:00'))
-      .should.be.false();
+  it('should return null in cases where b has missing fields that prevent deterministic result', () => {
     should.not.exist(
       DateTime.parse('2000-01-01T00:00:00.001').before(
         DateTime.parse('2000-01-01T00:00:00'),
@@ -2789,7 +2793,7 @@ describe('DateTime.before', () => {
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').before(DateTime.parse('2000')));
   });
 
-  it('should accept cases where a has unknown values but is still deterministicly before b', () => {
+  it('should accept cases where a has missing fields but is still deterministicly before b', () => {
     DateTime.parse('2000-01-01T00:00:00')
       .before(DateTime.parse('2000-01-01T00:00:01.0'))
       .should.be.true();
@@ -2804,7 +2808,7 @@ describe('DateTime.before', () => {
     DateTime.parse('2000').before(DateTime.parse('2001-01-01T00:00:00.0')).should.be.true();
   });
 
-  it('should accept cases where b has unknown values but a is still deterministicly before b', () => {
+  it('should accept cases where b has missing fields but a is still deterministicly before b', () => {
     DateTime.parse('2000-01-01T00:00:00.0')
       .before(DateTime.parse('2000-01-01T00:00:01'))
       .should.be.true();
@@ -2819,7 +2823,7 @@ describe('DateTime.before', () => {
     DateTime.parse('2000-01-01T00:00:00.0').before(DateTime.parse('2001')).should.be.true();
   });
 
-  it('should reject cases where a has unknown values but is still deterministicly after b', () => {
+  it('should reject cases where a has missing fields but is still deterministicly after b', () => {
     DateTime.parse('2000-01-01T00:00:01')
       .before(DateTime.parse('2000-01-01T00:00:00.0'))
       .should.be.false();
@@ -2834,7 +2838,7 @@ describe('DateTime.before', () => {
     DateTime.parse('2001').before(DateTime.parse('2000-01-01T00:00:00.0')).should.be.false();
   });
 
-  it('should reject cases where b has unknown values but a is still deterministicly after b', () => {
+  it('should reject cases where b has missing fields but a is still deterministicly after b', () => {
     DateTime.parse('2000-01-01T00:01:00.0')
       .before(DateTime.parse('2000-01-01T00:00:00'))
       .should.be.false();
@@ -2864,13 +2868,13 @@ describe('DateTime.before', () => {
 });
 
 describe('DateTime.sameOrBefore', () => {
-  it('treats an omitted millisecond component as zero at second precision', () => {
+  it('treats an omitted millisecond field as zero when precision not specified', () => {
     should(
       DateTime.parse('2025-01-15T08:00:00.000').sameOrBefore(DateTime.parse('2025-01-15T08:00:00'))
     ).be.true();
   });
 
-  it('orders a nonzero millisecond after an omitted millisecond component', () => {
+  it('orders a nonzero millisecond after an omitted millisecond field', () => {
     should(
       DateTime.parse('2025-01-15T08:00:00.001').sameOrBefore(DateTime.parse('2025-01-15T08:00:00'))
     ).be.false();
@@ -3041,7 +3045,7 @@ describe('DateTime.sameOrBefore', () => {
     DateTime.parse('2000').sameOrBefore(DateTime.parse('2000')).should.be.true();
   });
 
-  it('should handle missing milliseconds in a and return null for other unknown values', () => {
+  it('should handle missing milliseconds in a and return null for other missing fields', () => {
     DateTime.parse('2000-01-01T00:00:00')
       .sameOrBefore(DateTime.parse('2000-01-01T00:00:00.998'))
       .should.be.true();
@@ -3071,7 +3075,7 @@ describe('DateTime.sameOrBefore', () => {
     );
   });
 
-  it('should handle missing milliseconds in b and return null for other unknown values', () => {
+  it('should handle missing milliseconds in b and return null for other missing fields', () => {
     DateTime.parse('2000-01-01T00:00:00.001')
       .sameOrBefore(DateTime.parse('2000-01-01T00:00:00'))
       .should.be.false();
@@ -3101,7 +3105,7 @@ describe('DateTime.sameOrBefore', () => {
     );
   });
 
-  it('should accept cases where a has unknown values but is still deterministicly before b', () => {
+  it('should accept cases where a has missing fields but is still deterministicly before b', () => {
     DateTime.parse('2000-01-01T00:00:00')
       .sameOrBefore(DateTime.parse('2000-01-01T00:00:01.0'))
       .should.be.true();
@@ -3150,7 +3154,7 @@ describe('DateTime.sameOrBefore', () => {
     );
   });
 
-  it('should accept cases where b has unknown values but a is still deterministicly before b', () => {
+  it('should accept cases where b has missing fields but a is still deterministicly before b', () => {
     DateTime.parse('2000-01-01T00:00:00.999')
       .sameOrBefore(DateTime.parse('2000-01-01T00:00:01'))
       .should.be.true();
@@ -3197,7 +3201,7 @@ describe('DateTime.sameOrBefore', () => {
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.0').sameOrBefore(DateTime.parse('2000')));
   });
 
-  it('should reject cases where a has unknown values but is still deterministicly after b', () => {
+  it('should reject cases where a has missing fields but is still deterministicly after b', () => {
     DateTime.parse('2000-01-01T00:00:01')
       .sameOrBefore(DateTime.parse('2000-01-01T00:00:00.999'))
       .should.be.false();
@@ -3218,7 +3222,7 @@ describe('DateTime.sameOrBefore', () => {
       .should.be.false();
   });
 
-  it('should reject cases where b has unknown values but a is still deterministicly after b', () => {
+  it('should reject cases where b has missing fields but a is still deterministicly after b', () => {
     DateTime.parse('2000-01-01T00:00:01')
       .sameOrBefore(DateTime.parse('2000-01-01T00:00:00'))
       .should.be.false();
@@ -3396,7 +3400,7 @@ describe('DateTime.after', () => {
       .should.be.true();
   });
 
-  it('should return false in cases where a is b, with unknown values but the precision level is matching', () => {
+  it('should return false in cases where a is b, with missing fields but the precision level is matching', () => {
     DateTime.parse('2000-01-01T00:00:00')
       .after(DateTime.parse('2000-01-01T00:00:00'))
       .should.be.false();
@@ -3407,7 +3411,7 @@ describe('DateTime.after', () => {
     DateTime.parse('2000').after(DateTime.parse('2000')).should.be.false();
   });
 
-  it('should handle missing milliseconds in a and return null for other unknown values', () => {
+  it('should handle missing milliseconds in a and return null for other missing fields', () => {
     DateTime.parse('2000-01-01T00:00:00')
       .after(DateTime.parse('2000-01-01T00:00:00.0'))
       .should.be.false();
@@ -3431,7 +3435,7 @@ describe('DateTime.after', () => {
     should.not.exist(DateTime.parse('2000').after(DateTime.parse('2000-01-01T00:00:00.0')));
   });
 
-  it('should handle missing milliseconds in b and return null for other unknown values', () => {
+  it('should handle missing milliseconds in b and return null for other missing fields', () => {
     DateTime.parse('2000-01-01T00:00:00.001')
       .after(DateTime.parse('2000-01-01T00:00:00'))
       .should.be.true();
@@ -3455,7 +3459,7 @@ describe('DateTime.after', () => {
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').after(DateTime.parse('2000')));
   });
 
-  it('should accept cases where a has unknown values but is still deterministicly after b', () => {
+  it('should accept cases where a has missing fields but is still deterministicly after b', () => {
     DateTime.parse('2000-01-01T00:00:01')
       .after(DateTime.parse('2000-01-01T00:00:00.0'))
       .should.be.true();
@@ -3468,7 +3472,7 @@ describe('DateTime.after', () => {
     DateTime.parse('2001').after(DateTime.parse('2000-01-01T00:00:00.0')).should.be.true();
   });
 
-  it('should accept cases where b has unknown values but a is still deterministicly after b', () => {
+  it('should accept cases where b has missing fields but a is still deterministicly after b', () => {
     DateTime.parse('2000-01-01T00:00:01.0')
       .after(DateTime.parse('2000-01-01T00:00:00'))
       .should.be.true();
@@ -3481,7 +3485,7 @@ describe('DateTime.after', () => {
     DateTime.parse('2001-01-01T00:00:00.0').after(DateTime.parse('2000')).should.be.true();
   });
 
-  it('should reject cases where a has unknown values but is still deterministicly before b', () => {
+  it('should reject cases where a has missing fields but is still deterministicly before b', () => {
     DateTime.parse('2000-01-01T00:00:00')
       .after(DateTime.parse('2000-01-01T00:00:01.0'))
       .should.be.false();
@@ -3496,7 +3500,7 @@ describe('DateTime.after', () => {
     DateTime.parse('2000').after(DateTime.parse('2001-01-01T00:00:00.0')).should.be.false();
   });
 
-  it('should reject cases where b has unknown values but a is still deterministicly before b', () => {
+  it('should reject cases where b has missing fields but a is still deterministicly before b', () => {
     DateTime.parse('2000-01-01T00:00:00.0')
       .after(DateTime.parse('2000-01-01T00:00:01'))
       .should.be.false();
@@ -3691,7 +3695,7 @@ describe('DateTime.sameOrAfter', () => {
     DateTime.parse('2000').sameOrAfter(DateTime.parse('2000')).should.be.true();
   });
 
-  it('should handle missing milliseconds in a and return null for other unknown values', () => {
+  it('should handle missing milliseconds in a and return null for other missing fields', () => {
     DateTime.parse('2000-01-01T00:00:00')
       .sameOrAfter(DateTime.parse('2000-01-01T00:00:00.999'))
       .should.be.false();
@@ -3719,7 +3723,7 @@ describe('DateTime.sameOrAfter', () => {
     should.not.exist(DateTime.parse('2000').sameOrAfter(DateTime.parse('2000-12-31T23:59:59.999')));
   });
 
-  it('should handle missing milliseconds in b and return null for other unknown values', () => {
+  it('should handle missing milliseconds in b and return null for other missing fields', () => {
     DateTime.parse('2000-01-01T00:00:00.001')
       .sameOrAfter(DateTime.parse('2000-01-01T00:00:00'))
       .should.be.true();
@@ -3747,7 +3751,7 @@ describe('DateTime.sameOrAfter', () => {
     should.not.exist(DateTime.parse('2000-01-01T00:00:00.001').sameOrAfter(DateTime.parse('2000')));
   });
 
-  it('should accept cases where a has unknown values but is still deterministicly after b', () => {
+  it('should accept cases where a has missing fields but is still deterministicly after b', () => {
     DateTime.parse('2000-01-01T00:00:01')
       .sameOrAfter(DateTime.parse('2000-01-01T00:00:00.999'))
       .should.be.true();
@@ -3794,7 +3798,7 @@ describe('DateTime.sameOrAfter', () => {
     should.not.exist(DateTime.parse('2000').sameOrAfter(DateTime.parse('2000-01-01T00:00:00.0')));
   });
 
-  it('should accept cases where b has unknown values but a is still deterministicly after or same as b', () => {
+  it('should accept cases where b has missing fields but a is still deterministicly after or same as b', () => {
     DateTime.parse('2000-01-01T00:00:01.0')
       .sameOrAfter(DateTime.parse('2000-01-01T00:00:00'))
       .should.be.true();
@@ -3839,7 +3843,7 @@ describe('DateTime.sameOrAfter', () => {
     should.not.exist(DateTime.parse('2000-12-31T23:59:59.999').sameOrAfter(DateTime.parse('2000')));
   });
 
-  it('should reject cases where a has unknown values but is still deterministicly before b', () => {
+  it('should reject cases where a has missing fields but is still deterministicly before b', () => {
     DateTime.parse('2000-01-01T00:00:00')
       .sameOrAfter(DateTime.parse('2000-01-01T00:00:01.0'))
       .should.be.false();
@@ -3858,7 +3862,7 @@ describe('DateTime.sameOrAfter', () => {
     DateTime.parse('2000').sameOrAfter(DateTime.parse('2001-01-01T00:00:00.0')).should.be.false();
   });
 
-  it('should reject cases where b has unknown values but a is still deterministicly before b', () => {
+  it('should reject cases where b has missing fields but a is still deterministicly before b', () => {
     DateTime.parse('2000-01-01T00:00:00.999')
       .sameOrAfter(DateTime.parse('2000-01-01T00:00:01'))
       .should.be.false();
