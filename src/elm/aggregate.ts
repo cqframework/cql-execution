@@ -1,7 +1,8 @@
+import { CQLNumber, CQLDecimal } from '../datatypes/cql-number';
 import { Expression } from './expression';
 import { typeIsArray, allTrue, anyTrue, removeNulls } from '../util/util';
-import { Integer, Quantity } from '../datatypes/datatypes';
-import { Decimal } from '../datatypes/decimal';
+import { Quantity } from '../datatypes/datatypes';
+
 import { Context } from '../runtime/context';
 import { Exception } from '../datatypes/exception';
 import { greaterThan, lessThan } from '../util/comparison';
@@ -40,9 +41,9 @@ export class Count extends AggregateExpression {
   async exec(ctx: Context) {
     const items = await this.source.execute(ctx);
     if (typeIsArray(items)) {
-      return Integer.from(removeNulls(items).length);
+      return CQLNumber.integer(removeNulls(items).length);
     }
-    return Integer.from(0);
+    return CQLNumber.integer(0);
   }
 }
 
@@ -173,7 +174,7 @@ export class Avg extends AggregateExpression {
       decimals = getValuesFromQuantities(items);
     } else {
       // return type is always Decimal, so just map everything to Decimals
-      decimals = items.map((x: any) => Decimal.from(x));
+      decimals = items.map((x: any) => CQLNumber.decimal(x));
     }
     const sum = sumOfDecimals(decimals);
     const avg = sum.divideBy(items.length);
@@ -208,7 +209,7 @@ export class Median extends AggregateExpression {
       // Note that the Median signature is Median(argument List<Decimal>) Decimal
       // because median on a list of even number of items takes the average of the 2 middle items
       // so we can treat all the input as decimals
-      decimals = items.map((x: any) => Decimal.from(x));
+      decimals = items.map((x: any) => CQLNumber.decimal(x));
     }
 
     const sorted = [...decimals].sort((a, b) => a.compareTo(b));
@@ -319,36 +320,36 @@ export class StdDev extends AggregateExpression {
     if (hasOnlyQuantities(items)) {
       values = getValuesFromQuantities(items);
     } else {
-      values = items.map((x: any) => Decimal.from(x));
+      values = items.map((x: any) => CQLNumber.decimal(x));
     }
 
     const stdDev = this.standardDeviation(values);
     return finalizeAggregateResult(stdDev, items[0]);
   }
 
-  standardDeviation(list: Decimal[]) {
+  standardDeviation(list: CQLDecimal[]) {
     const val = this.stats(list);
     if (val) {
       return val[this.type];
     }
   }
 
-  stats(list: Decimal[]) {
+  stats(list: CQLDecimal[]) {
     if (list.length === 1) {
       return {
         standard_variance: null,
-        population_variance: Decimal.from(0),
+        population_variance: CQLNumber.decimal(0),
         standard_deviation: null,
-        population_deviation: Decimal.from(0)
+        population_deviation: CQLNumber.decimal(0)
       };
     }
-    const sum = list.reduce((x, y) => x.add(y), Decimal.from(0));
+    const sum = list.reduce((x, y) => x.add(y), CQLNumber.decimal(0));
     const mean = sum.divideBy(list.length);
 
     const sumOfSquares = list.reduce((total, value) => {
       const difference = value.subtract(mean);
       return total.add(difference.power(2));
-    }, Decimal.from(0));
+    }, CQLNumber.decimal(0));
 
     const std_var = sumOfSquares.divideBy(list.length - 1);
     const pop_var = sumOfSquares.divideBy(list.length);
@@ -419,7 +420,7 @@ export class GeometricMean extends AggregateExpression {
     if (hasOnlyQuantities(items)) {
       decimals = getValuesFromQuantities(items);
     } else {
-      decimals = items.map((x: any) => Decimal.from(x));
+      decimals = items.map((x: any) => CQLNumber.decimal(x));
     }
 
     try {
@@ -494,7 +495,7 @@ function processQuantities(values: any[]) {
   }
 }
 
-function getValuesFromQuantities(quantities: Quantity[]): Decimal[] {
+function getValuesFromQuantities(quantities: Quantity[]): CQLDecimal[] {
   return quantities.map(quantity => quantity.value);
 }
 
@@ -511,10 +512,10 @@ function convertAllUnits(arr: any[]) {
   return arr.map(q => q.convertUnit(arr[0].unit));
 }
 
-function sumOfDecimals(values: Decimal[]) {
+function sumOfDecimals(values: CQLDecimal[]) {
   return values.reduce((sum, value) => sum.add(value));
 }
 
-function productOfDecimals(values: Decimal[]) {
+function productOfDecimals(values: CQLDecimal[]) {
   return values.reduce((product, value) => product.multiplyBy(value));
 }

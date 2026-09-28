@@ -1,8 +1,8 @@
+import { CQLNumber } from '../../src/datatypes/cql-number';
 import * as luxon from 'luxon';
 import should from 'should';
 import { DateTime, MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } from '../../src/datatypes/datetime';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
-import { Decimal } from '../../src/datatypes/decimal';
 
 const tzDate = function (
   y: number,
@@ -221,7 +221,7 @@ describe('DateTime', () => {
     );
     DateTime.fromJSDate(
       new Date(Date.UTC(1999, 1, 16, 13, 56, 24, 123)),
-      Decimal.from(-5)
+      CQLNumber.decimal(-5)
     ).should.eql(DateTime.parse('1999-02-16T08:56:24.123-05:00'));
   });
 

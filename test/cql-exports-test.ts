@@ -15,6 +15,7 @@ libNames.push(
   'Code',
   'CodeSystem',
   'Concept',
+  'CQLNumber',
   'Date',
   'DateTime',
   'Interval',

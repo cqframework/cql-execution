@@ -1,3 +1,4 @@
+import { CQLNumber } from '../../src/datatypes/cql-number';
 import fs from 'fs';
 import path from 'path';
 import should from 'should';
@@ -7,9 +8,6 @@ import '../../src/elm/expressions'; // Needed for side-effect
 import { build } from '../../src/elm/builder';
 import { Library } from '../../src/elm/library';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
-import { Decimal } from '../../src/datatypes/decimal';
-import { Integer } from '../../src/datatypes/integer';
-import { Long } from '../../src/datatypes/long';
 
 describe('CQL Spec Tests (from XML)', () => {
   fs.readdirSync(path.join(__dirname, 'cql')).forEach(f => {
@@ -54,7 +52,7 @@ describe('CQL Spec Tests (from XML)', () => {
               }
               if (testCaseMap.has('expression') && testCaseMap.has('output')) {
                 const ctx = new PatientContext(library);
-                ctx.getExecutionDateTime().timezoneOffset = Decimal.from(0);
+                ctx.getExecutionDateTime().timezoneOffset = CQLNumber.decimal(0);
                 const actualExp = build(testCaseMap.get('expression')) as any;
                 const actual = await actualExp.execute(ctx);
                 const expectedExp = build(testCaseMap.get('output')) as any;
@@ -103,11 +101,11 @@ describe('CQL Spec Tests (from XML)', () => {
                 } catch {
                   should.fail(actual, expected, 'Lists are not equal');
                 }
-              } else if (expected instanceof Integer) {
+              } else if (expected?.isInteger === true) {
                 actual.should.equalInteger(expected);
-              } else if (expected instanceof Long) {
+              } else if (expected?.isLong === true) {
                 actual.should.equalLong(expected);
-              } else if (expected instanceof Decimal) {
+              } else if (expected?.isDecimal === true) {
                 // The tests are somewhat inconsistent w/ number of decimal places used.
                 // To get consistency (and avoid false negatives), always round to 8 places.
                 actual = roundDecimalsWhenApplicable(actual);
@@ -139,7 +137,7 @@ describe('CQL Spec Tests (from XML)', () => {
   }
 
   function roundDecimalsWhenApplicable(item: any) {
-    if (item instanceof Decimal) {
+    if (item instanceof CQLNumber && item.isDecimal) {
       // Round to 8 places since that's the number of places used by expected outputs
       item = item.withScale(8);
     }

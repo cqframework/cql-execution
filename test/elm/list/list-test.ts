@@ -1,7 +1,8 @@
+import { CQLNumber } from '../../../src/datatypes/cql-number';
 import should from 'should';
 import setup from '../../setup';
 import { getLocalIdByPath } from '../../testHelpers';
-import { Decimal } from '../../../src/datatypes/decimal';
+
 const data = require('./data');
 
 describe('List', () => {
@@ -206,14 +207,14 @@ describe('Union', () => {
   });
 
   it('should use equality semantics for Decimal (ignores scale)', async function () {
-    const expected = ['1.0', '2.0', '3.0'].map(Decimal.from);
-    should(await this.unionDecimalsAcrossScales.exec(this.ctx)).be.eql(expected);
+    const expected = ['1.0', '2.0', '3.0'].map(CQLNumber.decimal);
+    should(await this.unionDecimalsAcrossScales.exec(this.ctx)).be.equalCql(expected);
   });
 
   it('should use equality semantics for Decimal (not equivalence)', async function () {
     // {1.0, 2.0} union {1.04, 3.0}
-    const expected = ['1.0', '2.0', '1.04', '3.0'].map(Decimal.from);
-    should(await this.unionDecimalsEquivalentNotEqual.exec(this.ctx)).be.eql(expected);
+    const expected = ['1.0', '2.0', '1.04', '3.0'].map(CQLNumber.decimal);
+    should(await this.unionDecimalsEquivalentNotEqual.exec(this.ctx)).be.equalCql(expected);
   });
 });
 
@@ -271,13 +272,13 @@ describe('Except', () => {
   });
 
   it('should use equality semantics for Decimal (ignores scale)', async function () {
-    const expected = [Decimal.from('2.0')];
-    should(await this.exceptDecimalsAcrossScales.exec(this.ctx)).be.eql(expected);
+    const expected = [CQLNumber.decimal('2.0')];
+    should(await this.exceptDecimalsAcrossScales.exec(this.ctx)).be.equalCql(expected);
   });
 
   it('should use equality semantics for Decimal (not equivalence)', async function () {
-    const expected = [Decimal.from('1.0'), Decimal.from('2.0')];
-    should(await this.exceptDecimalsEquivalentNotEqual.exec(this.ctx)).be.eql(expected);
+    const expected = [CQLNumber.decimal('1.0'), CQLNumber.decimal('2.0')];
+    should(await this.exceptDecimalsEquivalentNotEqual.exec(this.ctx)).be.equalCql(expected);
   });
 });
 
@@ -331,12 +332,12 @@ describe('Intersect', () => {
   });
 
   it('should use equality semantics for Decimal (ignores scale)', async function () {
-    const expected = [Decimal.from('1.0')];
-    should(await this.intersectDecimalsAcrossScales.exec(this.ctx)).be.eql(expected);
+    const expected = [CQLNumber.decimal('1.0')];
+    should(await this.intersectDecimalsAcrossScales.exec(this.ctx)).be.equalCql(expected);
   });
 
   it('should use equality semantics for Decimal (not equivalence)', async function () {
-    const expected: Array<Decimal> = [];
+    const expected: Array<CQLNumber> = [];
     should(await this.intersectDecimalsEquivalentNotEqual.exec(this.ctx)).be.eql(expected);
   });
 });
@@ -881,13 +882,17 @@ describe('Distinct', () => {
   });
 
   it('should use equality semantics for Decimal (ignores scale)', async function () {
-    const expected = [Decimal.from('1.0'), Decimal.from('2.0')];
-    should(await this.distinctDecimalsAcrossScales.exec(this.ctx)).be.eql(expected);
+    const expected = [CQLNumber.decimal('1.0'), CQLNumber.decimal('2.0')];
+    should(await this.distinctDecimalsAcrossScales.exec(this.ctx)).be.equalCql(expected);
   });
 
   it('should use equality semantics for Decimal (not equivalence)', async function () {
-    const expected = [Decimal.from('1.0'), Decimal.from('1.04'), Decimal.from('2.0')];
-    should(await this.distinctDecimalsEquivalentNotEqual.exec(this.ctx)).be.eql(expected);
+    const expected = [
+      CQLNumber.decimal('1.0'),
+      CQLNumber.decimal('1.04'),
+      CQLNumber.decimal('2.0')
+    ];
+    should(await this.distinctDecimalsEquivalentNotEqual.exec(this.ctx)).be.equalCql(expected);
   });
 });
 

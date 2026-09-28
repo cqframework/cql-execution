@@ -1,15 +1,13 @@
+import { CQLNumber } from '../src/datatypes/cql-number';
 import should from 'should';
 import { Interval } from '../src/datatypes/interval';
-import { Decimal } from '../src/datatypes/decimal';
-import { Integer } from '../src/datatypes/integer';
-import { Long } from '../src/datatypes/long';
 
 declare module 'should' {
   interface Assertion {
     equalInterval(expected: Interval): this;
-    equalDecimal(expected: number | bigint | Decimal | string): this;
-    equalInteger(expected: number | bigint | Integer | string): this;
-    equalLong(expected: number | bigint | Long | Integer | string): this;
+    equalDecimal(expected: number | bigint | CQLNumber | string): this;
+    equalInteger(expected: number | bigint | CQLNumber | string): this;
+    equalLong(expected: number | bigint | CQLNumber | string): this;
     equalCql(expected: any): this;
   }
 }
@@ -38,26 +36,23 @@ declare module 'should' {
 
 (should as any).Assertion.add(
   'equalDecimal',
-  function (this: any, expected: number | bigint | Decimal | string) {
+  function (this: any, expected: number | bigint | CQLNumber | string) {
     this.params = {
       operator: 'to equal Decimal',
       expected: expected.toString(),
       obj: this.obj.toString()
     };
 
-    this.assert(this.obj instanceof Decimal && this.obj.equals(expected));
+    this.assert(this.obj?.isDecimal === true && this.obj.equals(expected));
   }
 );
 
 function cqlValuesEqual(actual: any, expected: any): boolean {
-  if (actual instanceof Integer) {
-    return actual.equals(expected);
+  if (actual?.isCQLNumber === true) {
+    return actual.equals(expected?.isCQLNumber === true ? expected : CQLNumber.from(expected));
   }
-  if (actual instanceof Long) {
-    return actual.equals(expected);
-  }
-  if (actual instanceof Decimal) {
-    return actual.equals(expected);
+  if (expected?.isCQLNumber === true) {
+    return expected.equals(actual);
   }
   if (actual?.isUncertainty && expected?.isUncertainty) {
     return cqlValuesEqual(actual.low, expected.low) && cqlValuesEqual(actual.high, expected.high);
@@ -93,16 +88,16 @@ function cqlValuesEqual(actual: any, expected: any): boolean {
 
 (should as any).Assertion.add(
   'equalInteger',
-  function (this: any, expected: number | bigint | Integer | string) {
+  function (this: any, expected: number | bigint | CQLNumber | string) {
     this.params = { operator: 'to equal Integer', expected: expected.toString() };
-    this.assert(this.obj instanceof Integer && this.obj.equals(Integer.from(expected)));
+    this.assert(this.obj?.isInteger === true && this.obj.equals(CQLNumber.integer(expected)));
   }
 );
 
 (should as any).Assertion.add(
   'equalLong',
-  function (this: any, expected: number | bigint | Long | Integer | string) {
+  function (this: any, expected: number | bigint | CQLNumber | string) {
     this.params = { operator: 'to equal Long', expected: expected.toString() };
-    this.assert(this.obj instanceof Long && this.obj.equals(Long.from(expected)));
+    this.assert(this.obj?.isLong === true && this.obj.equals(CQLNumber.long(expected)));
   }
 );

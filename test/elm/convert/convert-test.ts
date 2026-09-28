@@ -1,3 +1,4 @@
+import { CQLNumber } from '../../../src/datatypes/cql-number';
 import should from 'should';
 import setup from '../../setup';
 const data = require('./data');
@@ -5,7 +6,6 @@ import { isNull } from '../../../src/util/util';
 import { DateTime } from '../../../src/datatypes/datetime';
 import { Quantity } from '../../../src/datatypes/quantity';
 import { Uncertainty } from '../../../src/datatypes/uncertainty';
-import { Decimal } from '../../../src/datatypes/decimal';
 
 describe('FromString', () => {
   beforeEach(function () {
@@ -105,7 +105,7 @@ describe('FromString', () => {
   });
 
   it('should convert DateTime string with Z', async function () {
-    const expectedDateTime = new DateTime(2014, 1, 1, 14, 30, 0, 0, Decimal.from(0));
+    const expectedDateTime = new DateTime(2014, 1, 1, 14, 30, 0, 0, CQLNumber.decimal(0));
     (await this.zDateTime.exec(this.ctx)).equals(expectedDateTime).should.be.true();
   });
 

@@ -32,19 +32,19 @@ function normalizeParameterValue(value: any, spec?: any, defaultValue?: any): an
     case ELM_NAMED_TYPE_SPECIFIER:
       if (spec.name === ELM_INTEGER_TYPE) {
         return typeof value === 'number' && Number.isSafeInteger(value)
-          ? dt.Integer.from(value)
+          ? dt.CQLNumber.integer(value)
           : value;
       }
       if (spec.name === ELM_LONG_TYPE) {
         return typeof value === 'bigint' ||
           (typeof value === 'number' && Number.isSafeInteger(value))
-          ? dt.Long.from(value)
+          ? dt.CQLNumber.long(value)
           : value;
       }
       return value;
     case ELM_LIST_TYPE_SPECIFIER:
       return typeIsArray(value)
-        ? value.map(item => normalizeParameterValue(item, spec.elementType))
+        ? value.map((item: any) => normalizeParameterValue(item, spec.elementType))
         : value;
     case ELM_TUPLE_TYPE_SPECIFIER:
       if (value.constructor !== Object) {
@@ -78,7 +78,7 @@ function normalizeParameterValue(value: any, spec?: any, defaultValue?: any): an
       }
       if (defaultValue?.isIntegerLiteral) {
         return typeof value === 'number' && Number.isSafeInteger(value)
-          ? dt.Integer.from(value)
+          ? dt.CQLNumber.integer(value)
           : value;
       }
       return normalizeNumericInput(value);
@@ -191,7 +191,7 @@ export class Context {
     }
   }
 
-  getTimezoneOffset(): dt.Decimal | null {
+  getTimezoneOffset(): dt.CQLDecimal | null {
     if (this.executionDateTime != null) {
       return this.executionDateTime.timezoneOffset;
     } else if (this.parent && this.parent.getTimezoneOffset != null) {

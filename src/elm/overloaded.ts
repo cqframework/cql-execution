@@ -1,5 +1,6 @@
+import { CQLNumber } from '../datatypes/cql-number';
 import { Expression } from './expression';
-import { Integer } from '../datatypes/integer';
+
 import { ThreeValuedLogic } from '../datatypes/logic';
 import { DateTime } from '../datatypes/datetime';
 import { resolveValueSet, typeIsArray } from '../util/util';
@@ -319,9 +320,9 @@ export class Length extends Expression {
   async exec(ctx: Context) {
     const arg = await this.execArgs(ctx);
     if (arg != null) {
-      return Integer.from(arg.length);
+      return CQLNumber.integer(arg.length);
     } else if ((this.arg as any).asTypeSpecifier.type === ELM_LIST_TYPE_SPECIFIER) {
-      return Integer.from(0);
+      return CQLNumber.integer(0);
     } else {
       return null;
     }
@@ -436,6 +437,6 @@ export class Precision extends Expression {
       throw new Error(`Unimplemented Expression: Precision`);
     }
 
-    return Integer.from(arg.getPrecisionValue());
+    return CQLNumber.integer(arg.getPrecisionValue());
   }
 }

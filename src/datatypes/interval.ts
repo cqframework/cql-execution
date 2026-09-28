@@ -613,6 +613,9 @@ export class Interval {
     if (other == null) {
       return null;
     }
+    if (this.pointType !== other.pointType) {
+      return null;
+    }
 
     // "... the starting point of the first is equal to the starting point of the second interval
     // and the ending point of the first interval is less than or equal to the ending point of the

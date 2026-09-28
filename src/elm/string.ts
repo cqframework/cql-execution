@@ -1,5 +1,6 @@
+import { CQLNumber } from '../datatypes/cql-number';
 import { Expression } from './expression';
-import { Integer } from '../datatypes/integer';
+
 import { Context } from '../runtime/context';
 import { build } from './builder';
 
@@ -134,7 +135,7 @@ export class PositionOf extends Expression {
     if (pattern == null || string == null) {
       return null;
     } else {
-      return Integer.from(string.indexOf(pattern));
+      return CQLNumber.integer(string.indexOf(pattern));
     }
   }
 }
@@ -155,7 +156,7 @@ export class LastPositionOf extends Expression {
     if (pattern == null || string == null) {
       return null;
     } else {
-      return Integer.from(string.lastIndexOf(pattern));
+      return CQLNumber.integer(string.lastIndexOf(pattern));
     }
   }
 }

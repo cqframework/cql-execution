@@ -1,3 +1,4 @@
+import { CQLNumber, MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../datatypes/cql-number';
 import { Expression } from './expression';
 import * as MathUtil from '../util/math';
 import { Quantity, doMultiplication as doQuantityMultiplication } from '../datatypes/quantity';
@@ -13,9 +14,7 @@ import {
   MIN_DATETIME_VALUE,
   MIN_TIME_VALUE
 } from '../datatypes/datetime';
-import { Decimal, MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../datatypes/decimal';
-import { Integer } from '../datatypes/integer';
-import { Long } from '../datatypes/long';
+
 import { isCqlNumeric } from '../datatypes/numeric';
 import {
   ELM_DECIMAL_TYPE,
@@ -207,7 +206,7 @@ export class Ceiling extends Expression {
       return null;
     }
 
-    const ceiling = arg.isDecimal ? Integer.from(arg.ceil()) : arg;
+    const ceiling = arg.isDecimal ? CQLNumber.integer(arg.ceil()) : arg;
     return MathUtil.isValidInteger(ceiling) ? ceiling : null;
   }
 }
@@ -223,7 +222,7 @@ export class Floor extends Expression {
       return null;
     }
 
-    const floor = arg.isDecimal ? Integer.from(arg.floor()) : arg;
+    const floor = arg.isDecimal ? CQLNumber.integer(arg.floor()) : arg;
     return MathUtil.isValidInteger(floor) ? floor : null;
   }
 }
@@ -244,7 +243,7 @@ export class Truncate extends Expression {
       // Note that the CQL spec defines Truncate as returning an Integer,
       // but the Decimal bounds are greater than allowed for Integer.
       // If the spec changes, add another case here for truncating to Long.
-      truncated = Integer.from(arg.truncate());
+      truncated = CQLNumber.integer(arg.truncate());
     } else if (arg.isInteger === true) {
       truncated = arg;
     } else if (
@@ -252,7 +251,7 @@ export class Truncate extends Expression {
       arg.toBigInt() >= MIN_INT_VALUE &&
       arg.toBigInt() <= MAX_INT_VALUE
     ) {
-      truncated = Integer.from(arg.toNumber());
+      truncated = CQLNumber.integer(arg.toNumber());
     }
     return MathUtil.isValidInteger(truncated) ? truncated : null;
   }
@@ -270,7 +269,7 @@ export class Abs extends Expression {
     if (arg.isQuantity) {
       return finalizeArithmeticResult(new Quantity(arg.value.abs(), arg.unit));
     }
-    return isCqlNumeric(arg) ? finalizeArithmeticResult(arg.abs()) : null;
+    return isCqlNumeric(arg) ? finalizeArithmeticResult((arg as any).abs()) : null;
   }
 }
 
@@ -287,7 +286,7 @@ export class Negate extends Expression {
     if (arg.isQuantity) {
       return finalizeArithmeticResult(new Quantity(arg.value.negate(), arg.unit));
     }
-    return isCqlNumeric(arg) ? finalizeArithmeticResult(arg.negate()) : null;
+    return isCqlNumeric(arg) ? finalizeArithmeticResult((arg as any).negate()) : null;
   }
 }
 
@@ -307,7 +306,7 @@ export class Round extends Expression {
 
     const precision = this.precision != null ? await this.precision.execute(ctx) : null;
     const dec = precision?.isInteger === true ? precision.toNumber() : precision;
-    return Decimal.from(arg).round(dec);
+    return finalizeArithmeticResult(CQLNumber.decimal(arg).round(dec));
   }
 }
 
@@ -323,7 +322,7 @@ export class Ln extends Expression {
     }
 
     try {
-      const ln = Decimal.from(arg).ln();
+      const ln = CQLNumber.decimal(arg).ln();
       return finalizeArithmeticResult(ln);
     } catch {
       return null;
@@ -344,7 +343,7 @@ export class Exp extends Expression {
 
     let power;
     try {
-      power = Decimal.from(arg).exp();
+      power = CQLNumber.decimal(arg).exp();
     } catch {
       return null;
     }
@@ -365,7 +364,7 @@ export class Log extends Expression {
     }
 
     try {
-      const log = Decimal.from(args[0]).log(args[1]);
+      const log = CQLNumber.decimal(args[0]).log(args[1]);
       return finalizeArithmeticResult(log);
     } catch {
       return null;
@@ -386,7 +385,7 @@ export class Power extends Expression {
 
     // As of CQL 2.0.0, return type of Power is always a Decimal
     try {
-      const power = Decimal.from(args[0]).power(args[1]);
+      const power = CQLNumber.decimal(args[0]).power(args[1]);
       return finalizeArithmeticResult(power);
     } catch {
       // if the value is too large to represent
@@ -397,9 +396,9 @@ export class Power extends Expression {
 
 export class MinValue extends Expression {
   static readonly MIN_VALUES = {
-    [ELM_INTEGER_TYPE]: Integer.from(MIN_INT_VALUE),
-    [ELM_LONG_TYPE]: Long.from(MIN_LONG_VALUE),
-    [ELM_DECIMAL_TYPE]: MIN_DECIMAL_VALUE,
+    [ELM_INTEGER_TYPE]: CQLNumber.integer(MIN_INT_VALUE),
+    [ELM_LONG_TYPE]: CQLNumber.long(MIN_LONG_VALUE),
+    [ELM_DECIMAL_TYPE]: CQLNumber.decimal(MIN_DECIMAL_VALUE),
     [ELM_DATETIME_TYPE]: MIN_DATETIME_VALUE,
     [ELM_DATE_TYPE]: MIN_DATE_VALUE,
     [ELM_TIME_TYPE]: MIN_TIME_VALUE
@@ -429,9 +428,9 @@ export class MinValue extends Expression {
 
 export class MaxValue extends Expression {
   static readonly MAX_VALUES = {
-    [ELM_INTEGER_TYPE]: Integer.from(MAX_INT_VALUE),
-    [ELM_LONG_TYPE]: Long.from(MAX_LONG_VALUE),
-    [ELM_DECIMAL_TYPE]: MAX_DECIMAL_VALUE,
+    [ELM_INTEGER_TYPE]: CQLNumber.integer(MAX_INT_VALUE),
+    [ELM_LONG_TYPE]: CQLNumber.long(MAX_LONG_VALUE),
+    [ELM_DECIMAL_TYPE]: CQLNumber.decimal(MAX_DECIMAL_VALUE),
     [ELM_DATETIME_TYPE]: MAX_DATETIME_VALUE,
     [ELM_DATE_TYPE]: MAX_DATE_VALUE,
     [ELM_TIME_TYPE]: MAX_TIME_VALUE

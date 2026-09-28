@@ -6,7 +6,7 @@ import {
   TupleTypeSpecifier,
   TupleElementDefinition,
   AnyTypeSpecifier,
-  Decimal,
+  CQLNumber,
   Interval
 } from '../../..';
 import { ELM_ANY_TYPE } from '../../../lib/util/elmTypes';
@@ -61,8 +61,8 @@ export function guessSpecifierType(val: any): AnyTypeSpecifier | undefined {
     return typeHierarchy[0];
   } else if (typeof val === 'boolean') {
     return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}Boolean' };
-  } else if (val instanceof Decimal) {
-    return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}Decimal' };
+  } else if (val instanceof CQLNumber) {
+    return { type: 'NamedTypeSpecifier', name: `{urn:hl7-org:elm-types:r1}${val.numericKind}` };
   } else if (typeof val === 'number') {
     return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}Integer' };
   } else if (typeof val === 'string') {

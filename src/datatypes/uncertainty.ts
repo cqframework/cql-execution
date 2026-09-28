@@ -2,6 +2,15 @@ import { equals } from '../util/comparison';
 import { ThreeValuedLogic } from './logic';
 import { normalizeNumericInput } from './numeric';
 
+function haveCompatibleTypes(a: any, b: any) {
+  return (
+    (a?.isInteger === true && b?.isInteger === true) ||
+    (a?.isLong === true && b?.isLong === true) ||
+    (a?.isDecimal === true && b?.isDecimal === true) ||
+    (typeof a === typeof b && a?.constructor === b?.constructor)
+  );
+}
+
 export class Uncertainty {
   static from(obj: any) {
     if (obj != null && obj.isUncertainty) {
@@ -20,7 +29,7 @@ export class Uncertainty {
       this.high = normalizeNumericInput(this.high);
     }
     const gt = (a: any, b: any) => {
-      if (typeof a !== typeof b || a?.constructor !== b?.constructor) {
+      if (!haveCompatibleTypes(a, b)) {
         // TODO: This should probably throw rather than return false.
         // Uncertainties with different types probably shouldn't be supported.
         return false;
@@ -68,7 +77,7 @@ export class Uncertainty {
     // Note: Can't use normal equality, as that fails for Javascript dates
     // TODO: Fix after we don't need to support Javascript date uncertainties anymore
     const lte = (a: any, b: any): boolean | null => {
-      if (typeof a !== typeof b || a?.constructor !== b?.constructor) {
+      if (!haveCompatibleTypes(a, b)) {
         return null;
       }
 
@@ -106,7 +115,7 @@ export class Uncertainty {
     // if this is a point, and other is not an uncertainty or a point, then we can compare directly
     if (this.isPoint()) {
       const sameFn = (a: any, b: any) => {
-        if (typeof a !== typeof b || a?.constructor !== b?.constructor) {
+        if (!haveCompatibleTypes(a, b)) {
           return false;
         }
 
@@ -152,7 +161,7 @@ export class Uncertainty {
   lessThan(other: any, precision?: any) {
     other = normalizeNumericInput(other);
     const lt = (a: any, b: any) => {
-      if (typeof a !== typeof b || a?.constructor !== b?.constructor) {
+      if (!haveCompatibleTypes(a, b)) {
         return null;
       }
 

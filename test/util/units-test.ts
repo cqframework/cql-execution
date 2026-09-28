@@ -1,5 +1,6 @@
+import { CQLNumber } from '../../src/datatypes/cql-number';
 import should from 'should';
-import { Decimal } from '../../src/datatypes/decimal';
+
 import {
   checkUnit,
   compareUnits,
@@ -109,109 +110,109 @@ describe('checkUnit', () => {
 
 describe('convertUnit', () => {
   it('should convert compatible units', () => {
-    convertUnit(Decimal.from(18), '[in_i]', '[ft_i]').should.equalDecimal(1.5);
+    convertUnit(CQLNumber.decimal(18), '[in_i]', '[ft_i]').should.equalDecimal(1.5);
   });
 
   it('should return same value for same units', () => {
-    convertUnit(Decimal.from(18), '[in_i]', '[in_i]').should.equalDecimal(18);
+    convertUnit(CQLNumber.decimal(18), '[in_i]', '[in_i]').should.equalDecimal(18);
   });
 
   it('should consider empty as 1 during conversion', () => {
-    convertUnit(Decimal.from(18), '', '').should.equalDecimal(18);
-    convertUnit(Decimal.from(18), null, null).should.equalDecimal(18);
-    convertUnit(Decimal.from(18), '', null).should.equalDecimal(18);
-    convertUnit(Decimal.from(18), null, '').should.equalDecimal(18);
+    convertUnit(CQLNumber.decimal(18), '', '').should.equalDecimal(18);
+    convertUnit(CQLNumber.decimal(18), null, null).should.equalDecimal(18);
+    convertUnit(CQLNumber.decimal(18), '', null).should.equalDecimal(18);
+    convertUnit(CQLNumber.decimal(18), null, '').should.equalDecimal(18);
   });
 
   it('should support CQL date units during conversion', () => {
-    convertUnit(Decimal.from(18), 'months', 'years').should.equalDecimal(1.5);
-    convertUnit(Decimal.from(1.5), 'years', 'months').should.equalDecimal(18);
-    convertUnit(Decimal.from(2), 'seconds', 'milliseconds').should.equalDecimal(2000);
-    convertUnit(Decimal.from(2000), 'milliseconds', 'seconds').should.equalDecimal(2);
+    convertUnit(CQLNumber.decimal(18), 'months', 'years').should.equalDecimal(1.5);
+    convertUnit(CQLNumber.decimal(1.5), 'years', 'months').should.equalDecimal(18);
+    convertUnit(CQLNumber.decimal(2), 'seconds', 'milliseconds').should.equalDecimal(2000);
+    convertUnit(CQLNumber.decimal(2000), 'milliseconds', 'seconds').should.equalDecimal(2);
   });
 
   it('should truncate precision to 8 decimals by default', () => {
-    const result = convertUnit(Decimal.from(1), '[ft_i]', '[mi_i]');
+    const result = convertUnit(CQLNumber.decimal(1), '[ft_i]', '[mi_i]');
     result.should.equalDecimal('0.00018939');
   });
 
   it('should return undefined for incompatible units', () => {
-    should(convertUnit(Decimal.from(18), '[in_i]', '[in_i]2')).be.undefined();
+    should(convertUnit(CQLNumber.decimal(18), '[in_i]', '[in_i]2')).be.undefined();
   });
 });
 
 describe('normalizeUnitsWhenPossible', () => {
   it('should keep same units', () => {
-    normalizeUnitsWhenPossible(Decimal.from(10), 'm', Decimal.from(1), 'm').should.eql([
-      Decimal.from(10),
+    normalizeUnitsWhenPossible(CQLNumber.decimal(10), 'm', CQLNumber.decimal(1), 'm').should.eql([
+      CQLNumber.decimal(10),
       'm',
-      Decimal.from(1),
+      CQLNumber.decimal(1),
       'm'
     ]);
   });
 
   it('should convert compatible units, preferring smaller units', () => {
-    normalizeUnitsWhenPossible(Decimal.from(10), 'cm', Decimal.from(1), 'm').should.eql([
-      Decimal.from(10),
+    normalizeUnitsWhenPossible(CQLNumber.decimal(10), 'cm', CQLNumber.decimal(1), 'm').should.eql([
+      CQLNumber.decimal(10),
       'cm',
-      Decimal.from(100),
+      CQLNumber.decimal(100),
       'cm'
     ]);
-    normalizeUnitsWhenPossible(Decimal.from(1), 'm', Decimal.from(10), 'cm').should.eql([
-      Decimal.from(100),
+    normalizeUnitsWhenPossible(CQLNumber.decimal(1), 'm', CQLNumber.decimal(10), 'cm').should.eql([
+      CQLNumber.decimal(100),
       'cm',
-      Decimal.from(10),
+      CQLNumber.decimal(10),
       'cm'
     ]);
   });
 
   it('should treat null or empty string units as 1', () => {
-    normalizeUnitsWhenPossible(Decimal.from(10), null, Decimal.from(1), '').should.eql([
-      Decimal.from(10),
+    normalizeUnitsWhenPossible(CQLNumber.decimal(10), null, CQLNumber.decimal(1), '').should.eql([
+      CQLNumber.decimal(10),
       '1',
-      Decimal.from(1),
+      CQLNumber.decimal(1),
       '1'
     ]);
-    normalizeUnitsWhenPossible(Decimal.from(1), '', Decimal.from(10), null).should.eql([
-      Decimal.from(1),
+    normalizeUnitsWhenPossible(CQLNumber.decimal(1), '', CQLNumber.decimal(10), null).should.eql([
+      CQLNumber.decimal(1),
       '1',
-      Decimal.from(10),
+      CQLNumber.decimal(10),
       '1'
     ]);
   });
 
   it('should normalize CQL date units and return CQL date units', () => {
-    normalizeUnitsWhenPossible(Decimal.from(10), 'year', Decimal.from(12), 'month').should.eql([
-      Decimal.from(120),
-      'month',
-      Decimal.from(12),
+    normalizeUnitsWhenPossible(
+      CQLNumber.decimal(10),
+      'year',
+      CQLNumber.decimal(12),
       'month'
-    ]);
+    ).should.eql([CQLNumber.decimal(120), 'month', CQLNumber.decimal(12), 'month']);
   });
 
   it('should return CQL date units when UCUM units are passed in', () => {
-    normalizeUnitsWhenPossible(Decimal.from(10), 'a_g', Decimal.from(12), 'mo_g').should.eql([
-      Decimal.from(120),
-      'mo_g',
-      Decimal.from(12),
+    normalizeUnitsWhenPossible(
+      CQLNumber.decimal(10),
+      'a_g',
+      CQLNumber.decimal(12),
       'mo_g'
-    ]);
+    ).should.eql([CQLNumber.decimal(120), 'mo_g', CQLNumber.decimal(12), 'mo_g']);
   });
 
   it('should not convert units of different dimensions', () => {
-    normalizeUnitsWhenPossible(Decimal.from(10), 'm', Decimal.from(1), 'm2').should.eql([
-      Decimal.from(10),
+    normalizeUnitsWhenPossible(CQLNumber.decimal(10), 'm', CQLNumber.decimal(1), 'm2').should.eql([
+      CQLNumber.decimal(10),
       'm',
-      Decimal.from(1),
+      CQLNumber.decimal(1),
       'm2'
     ]);
   });
 
   it('should not convert incompatible units', () => {
-    normalizeUnitsWhenPossible(Decimal.from(10), 'm', Decimal.from(1), 'mg').should.eql([
-      Decimal.from(10),
+    normalizeUnitsWhenPossible(CQLNumber.decimal(10), 'm', CQLNumber.decimal(1), 'mg').should.eql([
+      CQLNumber.decimal(10),
       'm',
-      Decimal.from(1),
+      CQLNumber.decimal(1),
       'mg'
     ]);
   });

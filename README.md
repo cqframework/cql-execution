@@ -29,6 +29,55 @@ Implementors interested in using the National Library of Medicine's Value Set Au
 The [cql-exec-examples](https://github.com/cqframework/cql-exec-examples) project provides examples
 of how `cql-execution`, `cql-exec-fhir`, and `cql-exec-vsac` can be used together.
 
+# Numeric values
+
+CQL `Integer`, `Long`, and `Decimal` values use `CQLNumber`, which stores its
+value directly in decimal.js and retains the CQL type in `numericKind`:
+
+```ts
+import { CQLNumber } from 'cql-execution';
+
+const integer = CQLNumber.integer(42);
+const long = CQLNumber.long(9007199254740993n);
+const decimal = CQLNumber.decimal('2.00');
+```
+
+Use decimal strings to preserve exact input values and trailing zeros.
+`CQLNumber.from` preserves existing instances, maps safe integral JS numbers to
+Integer, and maps BigInts to Long. Decimal inputs require `CQLNumber.decimal`.
+`isInteger` checks the CQL kind; `isIntegral()` checks whether the value has no
+fractional part. Quantity values and DateTime timezone offsets also use
+Decimal-kind `CQLNumber` instances.
+
+The former `Integer`, `Long`, and `Decimal` classes are no longer exported.
+Replace `Decimal.from(value)` with `CQLNumber.decimal(value)` (and similarly use
+`integer` and `long` for the other factories). Arithmetic preserves or promotes
+the CQL kind; the evaluator applies CQL bounds and Decimal normalization at
+operator boundaries. Use `toNumber()`, `toBigInt()`, or `toString()` explicitly
+when interacting with native JS APIs. JSON serialization emits Integer and
+Decimal as numbers and Long as a string; converting Decimal or Long to a JS
+number can lose precision.
+
+TypeScript tracks the kind through `CQLNumber<K>`. The type-only aliases
+`CQLInteger`, `CQLLong`, and `CQLDecimal` describe the same runtime class:
+
+```ts
+import { CQLNumber, type CQLInteger } from 'cql-execution';
+
+const integer = CQLNumber.integer(7); // CQLInteger
+const long = integer.modulo(CQLNumber.long(2n)); // CQLLong
+const decimal = long.add(CQLNumber.decimal('0.5')); // CQLDecimal
+const invalid: CQLInteger = decimal; // Compile-time error
+```
+
+Unary operations such as `abs()` preserve the kind; binary arithmetic infers
+the promoted kind. Methods such as `sqrt()` and `withScale()` return Decimal.
+Use `AnyCQLNumber` (the union of the three aliases) when checking `numericKind`
+should narrow the whole value. A plain `CQLNumber` accepts any kind;
+`value.hasKind('Integer')` also narrows that broader type to `CQLInteger`.
+These types do not check numeric bounds or input integrality at compile time;
+runtime validation still applies.
+
 # Current Limitations
 
 This library supports operations defined in CQL 1.4 and 1.5, but is not yet a complete implementation.
@@ -36,11 +85,6 @@ Implementors should be aware of the following limitations and gaps in `cql-execu
 
 * Direct support for specific data models is not provided by this library (see above for details).
 * `PatientSource`, `CodeService`, and `Results` APIs are still evolving and subject to change.
-* Since this library uses the JavaScript `Number` class for both CQL `Integer` and CQL `Decimal`,
-  it may display the following limitations related to numbers and math:
-  * Reduced precision compared to that which is specified by the CQL specification
-  * Issues typically associated with floating point arithmetic
-  * Decimals without a decimal portion (e.g., `2.0`) may be treated as CQL `Integer`s
 * The following STU (non-normative) features introduced in CQL 1.5 are not yet supported:
   * Retrieve search paths
   * Retrieve includes

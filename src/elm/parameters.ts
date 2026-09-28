@@ -1,9 +1,9 @@
+import { CQLNumber } from '../datatypes/cql-number';
 import { Context } from '../runtime/context';
 import { Expression } from './expression';
 import { build } from './builder';
-import { Integer } from '../datatypes/integer';
-import { Long } from '../datatypes/long';
-import { ELM_INTEGER_TYPE, ELM_LONG_TYPE } from '../util/elmTypes';
+
+import { ELM_DECIMAL_TYPE, ELM_INTEGER_TYPE, ELM_LONG_TYPE } from '../util/elmTypes';
 
 export class ParameterDef extends Expression {
   name: string;
@@ -40,9 +40,11 @@ function normalizeNumericParameter(value: any, spec: any) {
   }
   switch (spec?.name) {
     case ELM_INTEGER_TYPE:
-      return Integer.from(value);
+      return CQLNumber.integer(value);
     case ELM_LONG_TYPE:
-      return Long.from(value);
+      return CQLNumber.long(value);
+    case ELM_DECIMAL_TYPE:
+      return CQLNumber.decimal(value);
     default:
       return value;
   }

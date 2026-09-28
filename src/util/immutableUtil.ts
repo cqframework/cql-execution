@@ -2,11 +2,9 @@ import * as ucum from '@lhncbc/ucum-lhc';
 import { type Collection, Map as ImmutableMap, Seq as ImmutableSeq } from 'immutable';
 import {
   Code,
+  CQLNumber,
   DateTime,
-  Decimal,
-  Integer,
   Interval,
-  Long,
   Quantity,
   Ratio,
   Uncertainty
@@ -44,6 +42,16 @@ export const toNormalizedKey = (js: any): NormalizedKey => {
 
   // Handle objects - normalize as necessary to generate unique keys
   switch (js.constructor) {
+    case CQLNumber:
+      return js.isLong
+        ? js.toBigInt()
+        : js.isInteger
+          ? js.toNumber()
+          : ImmutableMap({
+              value: js.withoutTrailingZeros().toString(),
+              __instance: js.constructor
+            });
+
     case Array:
       return ImmutableSeq(js)
         .map((x: any) => toNormalizedKey(x))
@@ -76,19 +84,6 @@ export const toNormalizedKey = (js: any): NormalizedKey => {
           .toMap()
           .set('__instance', js.constructor);
       }
-
-    case Decimal:
-      return ImmutableMap({
-        // Decimal value equality ignores trailing zeros, so scale is essentially ignored
-        value: js.withoutTrailingZeros().toString(),
-        __instance: js.constructor
-      });
-
-    case Integer:
-      return js.toNumber();
-
-    case Long:
-      return js.toBigInt();
 
     case Interval:
       return ImmutableSeq(js.toClosed())

@@ -1,3 +1,4 @@
+import { CQLNumber, MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../datatypes/cql-number';
 import { Exception } from '../datatypes/exception';
 import { Quantity } from '../datatypes/quantity';
 import {
@@ -9,9 +10,6 @@ import {
   MAX_TIME_VALUE
 } from '../datatypes/datetime';
 
-import { Decimal, MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../datatypes/decimal';
-import { Integer } from '../datatypes/integer';
-import { Long } from '../datatypes/long';
 import { binaryNumericOperation, isCqlNumeric, normalizeNumericInput } from '../datatypes/numeric';
 
 import { Uncertainty } from '../datatypes/uncertainty';
@@ -339,9 +337,9 @@ export function predecessor(val: any, precision?: string): any {
 export function maxValueForType(type: string, quantityInstance?: Quantity) {
   switch (type) {
     case ELM_INTEGER_TYPE:
-      return Integer.from(MAX_INT_VALUE);
+      return CQLNumber.integer(MAX_INT_VALUE);
     case ELM_LONG_TYPE:
-      return Long.from(MAX_LONG_VALUE);
+      return CQLNumber.long(MAX_LONG_VALUE);
     case ELM_DECIMAL_TYPE:
       return MAX_DECIMAL_VALUE;
     case ELM_DATETIME_TYPE:
@@ -364,9 +362,9 @@ export function maxValueForType(type: string, quantityInstance?: Quantity) {
 export function minValueForType(type: string, quantityInstance?: Quantity) {
   switch (type) {
     case ELM_INTEGER_TYPE:
-      return Integer.from(MIN_INT_VALUE);
+      return CQLNumber.integer(MIN_INT_VALUE);
     case ELM_LONG_TYPE:
-      return Long.from(MIN_LONG_VALUE);
+      return CQLNumber.long(MIN_LONG_VALUE);
     case ELM_DECIMAL_TYPE:
       return MIN_DECIMAL_VALUE;
     case ELM_DATETIME_TYPE:
@@ -387,17 +385,17 @@ export function minValueForType(type: string, quantityInstance?: Quantity) {
 }
 
 export function finalizeNumericResult(result: any) {
-  if (result instanceof Decimal) {
+  if (result instanceof CQLNumber) {
     return result.normalized();
   } else if (result instanceof Quantity) {
     return new Quantity(result.value.normalized(), result.unit);
   } else if (result instanceof Uncertainty) {
     let low = result.low;
-    if (low instanceof Quantity || low instanceof Decimal) {
+    if (low instanceof Quantity || low instanceof CQLNumber) {
       low = finalizeNumericResult(low);
     }
     let high = result.high;
-    if (high instanceof Quantity || high instanceof Decimal) {
+    if (high instanceof Quantity || high instanceof CQLNumber) {
       high = finalizeNumericResult(high);
     }
     return new Uncertainty(low, high);

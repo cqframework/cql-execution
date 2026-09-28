@@ -1,9 +1,10 @@
+import { CQLNumber } from '../../../src/datatypes/cql-number';
 import should from 'should';
 import { Code, Concept } from '../../../src/datatypes/clinical';
 import { Date, DateTime } from '../../../src/datatypes/datetime';
 import { Interval } from '../../../src/datatypes/interval';
 import { Quantity } from '../../../src/datatypes/quantity';
-import { Decimal } from '../../../src/datatypes/decimal';
+
 import setup from '../../setup';
 const data = require('./data');
 
@@ -102,9 +103,9 @@ describe('DecimalParameterTypes', () => {
   });
 
   it('should execute to provided valid value', async function () {
-    (await this.foo.exec(this.ctx.withParameters({ FooP: Decimal.from(3.0) }))).should.equalDecimal(
-      3.0
-    );
+    (
+      await this.foo.exec(this.ctx.withParameters({ FooP: CQLNumber.decimal(3.0) }))
+    ).should.equalDecimal(3.0);
   });
 
   it('should throw when provided value is wrong type', function () {
@@ -117,7 +118,7 @@ describe('DecimalParameterTypes', () => {
 
   it('should execute to overriding valid value', async function () {
     (
-      await this.foo2.exec(this.ctx.withParameters({ FooDP: Decimal.from(3.0) }))
+      await this.foo2.exec(this.ctx.withParameters({ FooDP: CQLNumber.decimal(3.0) }))
     ).should.equalDecimal(3.0);
   });
 
@@ -136,7 +137,7 @@ describe('IntegerParameterTypes', () => {
   });
 
   it('should throw when provided value is wrong type', function () {
-    should(() => this.foo.exec(this.ctx.withParameters({ FooP: Decimal.from(3.5) }))).throw(
+    should(() => this.foo.exec(this.ctx.withParameters({ FooP: CQLNumber.decimal(3.5) }))).throw(
       /.*wrong type.*/
     );
   });
@@ -150,7 +151,7 @@ describe('IntegerParameterTypes', () => {
   });
 
   it('should throw when overriding value is wrong type', function () {
-    should(() => this.foo2.exec(this.ctx.withParameters({ FooDP: Decimal.from(3.5) }))).throw(
+    should(() => this.foo2.exec(this.ctx.withParameters({ FooDP: CQLNumber.decimal(3.5) }))).throw(
       /.*wrong type.*/
     );
   });
@@ -436,7 +437,9 @@ describe('IntervalParameterTypes', () => {
   it('should throw when interval contains a wrong point type', async function () {
     should(() =>
       this.foo.exec(
-        this.ctx.withParameters({ FooP: new Interval(Decimal.from(1.5), Decimal.from(5.5)) })
+        this.ctx.withParameters({
+          FooP: new Interval(CQLNumber.decimal(1.5), CQLNumber.decimal(5.5))
+        })
       )
     ).throw(/.*wrong type.*/);
   });
@@ -458,7 +461,9 @@ describe('IntervalParameterTypes', () => {
   it('should throw when overriding interval contains a wrong point type', async function () {
     should(() =>
       this.foo2.exec(
-        this.ctx.withParameters({ FooP: new Interval(Decimal.from(1.5), Decimal.from(5.5)) })
+        this.ctx.withParameters({
+          FooP: new Interval(CQLNumber.decimal(1.5), CQLNumber.decimal(5.5))
+        })
       )
     ).throw(/.*wrong type.*/);
   });

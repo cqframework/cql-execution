@@ -1,6 +1,4 @@
 import { Decimal as DecimalJS } from 'decimal.js';
-import { Integer } from './integer';
-import { Long } from './long';
 
 // Use a clone rather than DecimalJS.set because decimal.js configuration is otherwise global.
 // This keeps our settings from changing the behavior of other decimal.js instances in
@@ -8,8 +6,51 @@ import { Long } from './long';
 // Precision is significant figures (not decimal places);
 // CQL's maximum Decimal value has 28 significant figures, 30 is just a cleaner number.
 const CQLDecimalJS = DecimalJS.clone({ precision: 30 });
+// A product of two signed 64-bit integers can have 38 digits. Preserve the
+// intermediate exactly so the evaluator can apply the CQL overflow rules.
+const CQLIntegralJS = DecimalJS.clone({ precision: 40 });
 
-export type DecimalInput = Decimal | Integer | Long | string | number | bigint;
+export type NumericKind = 'Integer' | 'Long' | 'Decimal';
+
+/** Distributes over unions so unknown operand kinds retain all possible results. */
+export type Promote<A extends NumericKind, B extends NumericKind> = A extends 'Decimal'
+  ? 'Decimal'
+  : B extends 'Decimal'
+    ? 'Decimal'
+    : A extends 'Long'
+      ? 'Long'
+      : B extends 'Long'
+        ? 'Long'
+        : 'Integer';
+
+export type CQLInteger = CQLNumber<'Integer'>;
+export type CQLLong = CQLNumber<'Long'>;
+export type CQLDecimal = CQLNumber<'Decimal'>;
+/** Use this union when switching on numericKind to narrow the entire value. */
+export type AnyCQLNumber = CQLInteger | CQLLong | CQLDecimal;
+
+/** Native integer inputs retain their kind; textual operands imply Decimal. */
+export type InputKind<T extends CQLNumberInput> =
+  T extends CQLNumber<infer K>
+    ? K
+    : T extends bigint
+      ? 'Long'
+      : T extends number
+        ? 'Integer'
+        : 'Decimal';
+
+export function promotedKind<A extends NumericKind, B extends NumericKind>(
+  left: A,
+  right: B
+): Promote<A, B>;
+export function promotedKind(left: NumericKind, right: NumericKind): NumericKind {
+  if (left === 'Decimal' || right === 'Decimal') {
+    return 'Decimal';
+  }
+  return left === 'Long' || right === 'Long' ? 'Long' : 'Integer';
+}
+
+export type CQLNumberInput = CQLNumber | string | number | bigint;
 
 export type DecimalRoundingMode = DecimalJS.Rounding;
 
@@ -17,17 +58,35 @@ const CQL_IMPLICIT_SCALE = 8;
 export const CQL_IMPLICIT_ROUNDING = CQLDecimalJS.ROUND_HALF_UP;
 export const TRUNCATE_TO_PRECISION = CQLDecimalJS.ROUND_DOWN;
 
-export class Decimal {
+/**
+ * Immutable CQL numeric value with direct decimal.js storage. Kind controls
+ * promotion, integral division, and serialization; scale records Decimal
+ * precision, including trailing zeros. Bounds are checked by the evaluator
+ * so arithmetic can retain intermediate values until the operator boundary.
+ */
+export class CQLNumber<K extends NumericKind = NumericKind> {
   private readonly value: DecimalJS;
   public readonly scale: number;
 
-  private constructor(value: string | number | bigint | DecimalJS, scale?: number) {
-    this.value = new CQLDecimalJS(value);
+  private constructor(
+    value: string | number | bigint | DecimalJS,
+    scale: number | undefined,
+    readonly numericKind: K
+  ) {
+    this.value = new (numericKind === 'Decimal' ? CQLDecimalJS : CQLIntegralJS)(value);
     if (!this.value.isFinite()) {
       throw new Error('Cannot create a decimal with a non-finite value');
     }
 
-    if (scale == null) {
+    if (numericKind !== 'Decimal') {
+      if (!this.value.isInteger()) {
+        throw new RangeError('Integer and Long values must be integral');
+      }
+      if (this.value.isZero()) {
+        this.value = new CQLIntegralJS(0);
+      }
+      scale = 0;
+    } else if (scale == null) {
       scale = determineScale(value, this.value);
     } else if (!Number.isInteger(scale) || scale < 0) {
       throw new RangeError('Decimal scale must be a non-negative integer');
@@ -39,26 +98,65 @@ export class Decimal {
     this.scale = scale;
   }
 
-  static from(value: DecimalInput) {
-    if (value instanceof Decimal) {
-      return value;
+  static decimal(value: CQLNumberInput): CQLDecimal {
+    if (value instanceof CQLNumber) {
+      return value.hasKind('Decimal') ? value : new CQLNumber(value.value, 0, 'Decimal');
     }
 
-    if (value instanceof Integer || value instanceof Long) {
-      return new Decimal(value.toString());
+    return new CQLNumber(value as string | number | bigint, undefined, 'Decimal');
+  }
+
+  /** Infer only exact native integral types; decimal input is always explicit. */
+  static from<T extends CQLNumber | number | bigint>(value: T): CQLNumber<InputKind<T>>;
+  static from(value: CQLNumber | number | bigint): CQLNumber {
+    if (value instanceof CQLNumber) {
+      return value;
     }
-    return new Decimal(value);
+    if (typeof value === 'bigint') {
+      return CQLNumber.long(value);
+    }
+    if (typeof value === 'number' && Number.isSafeInteger(value)) {
+      return CQLNumber.integer(value);
+    }
+    throw new TypeError('Use CQLNumber.decimal for non-integral or textual input');
+  }
+
+  static integer(value: CQLNumberInput): CQLInteger {
+    const result = new CQLNumber(value instanceof CQLNumber ? value.value : value, 0, 'Integer');
+    if (!Number.isSafeInteger(result.toNumber())) {
+      throw new RangeError('Cannot create an Integer with a non-safe-integer value');
+    }
+    return result;
+  }
+
+  static long(value: CQLNumberInput): CQLLong {
+    if (typeof value === 'number' && !Number.isSafeInteger(value)) {
+      throw new RangeError('Cannot create a Long from a non-safe-integer number');
+    }
+    return new CQLNumber(value instanceof CQLNumber ? value.value : value, 0, 'Long');
+  }
+
+  get isCQLNumber(): true {
+    return true;
+  }
+  get isInteger(): boolean {
+    return this.numericKind === 'Integer';
+  }
+  get isLong(): boolean {
+    return this.numericKind === 'Long';
   }
 
   get isDecimal() {
-    return true;
+    return this.numericKind === 'Decimal';
   }
 
-  get numericKind(): 'Decimal' {
-    return 'Decimal';
+  /** Narrow even a broad CQLNumber<NumericKind>, without a type assertion. */
+  hasKind<N extends NumericKind>(kind: N): this is CQLNumber<N> {
+    return (this.numericKind as NumericKind) === kind;
   }
 
-  normalized() {
+  normalized(): CQLNumber<K>;
+  normalized(): CQLNumber {
     if (this.scale <= CQL_IMPLICIT_SCALE) {
       return this;
     }
@@ -66,46 +164,71 @@ export class Decimal {
   }
 
   // Helper function to reduce repeated boilerplate.
-  // Apply the given function with the given operand, and wrap the result in a Decimal.
+  // Apply the given function with the given operand, and wrap with the promoted kind.
   // A function to set an appropriate scale based on the scales of the inputs may also be provided.
+  private applyWrapper<T extends CQLNumberInput>(
+    operation: (value: DecimalJS) => DecimalJS,
+    other: T,
+    scaleLogic?: (scaleL: number, scaleR: number) => number
+  ): CQLNumber<Promote<K, InputKind<T>>>;
   private applyWrapper(
     operation: (value: DecimalJS) => DecimalJS,
-    other: DecimalInput,
+    other: CQLNumberInput,
     scaleLogic?: (scaleL: number, scaleR: number) => number
-  ): Decimal {
-    const decimalOther = Decimal.from(other);
-
-    const unscaledResult = new Decimal(operation.call(this.value, decimalOther.value));
+  ): CQLNumber {
+    const decimalOther = this.operand(other);
+    const kind = promotedKind(this.numericKind, decimalOther.numericKind);
+    const leftValue = kind === 'Decimal' ? new CQLDecimalJS(this.value) : this.value;
+    const unscaledResult = new CQLNumber(
+      operation.call(leftValue, decimalOther.value),
+      undefined,
+      kind
+    );
 
     // NOTE: As of 2.0.0, the CQL spec says that scale of a Decimal should be preserved,
     // but does not describe how to propagate scale through arithmetic operations.
     // Unless otherwise stated, all the scale logic in this class is a best-guess based on testing.
-    if (scaleLogic) {
+    if (scaleLogic && kind === 'Decimal') {
       const targetScale = scaleLogic.call(null, this.scale, decimalOther.scale);
       return unscaledResult.withScale(targetScale);
     }
     return unscaledResult;
   }
 
-  add(other: DecimalInput): Decimal {
+  private operand(other: CQLNumberInput): CQLNumber {
+    if (other instanceof CQLNumber) {
+      return other;
+    }
+    // Decimal APIs historically accept strings and JS numbers for constants,
+    // quantities, timezone offsets, and unit conversion factors.
+    return this.isDecimal || typeof other === 'string'
+      ? CQLNumber.decimal(other)
+      : CQLNumber.from(other);
+  }
+
+  add<T extends CQLNumberInput>(other: T): CQLNumber<Promote<K, InputKind<T>>> {
     // scale logic: max(scale(left), scale(right))
     return this.applyWrapper(this.value.add, other, Math.max);
   }
 
-  subtract(other: DecimalInput): Decimal {
+  subtract<T extends CQLNumberInput>(other: T): CQLNumber<Promote<K, InputKind<T>>> {
     // scale logic: max(scale(left), scale(right))
     return this.applyWrapper(this.value.minus, other, Math.max);
   }
 
-  multiplyBy(other: DecimalInput): Decimal {
+  multiplyBy<T extends CQLNumberInput>(other: T): CQLNumber<Promote<K, InputKind<T>>> {
     const scaleLogic = (l: number, r: number) => Math.min(l + r, CQL_IMPLICIT_SCALE);
     return this.applyWrapper(this.value.times, other, scaleLogic);
   }
 
-  divideBy(other: DecimalInput): Decimal {
-    const decimalOther = Decimal.from(other);
+  divideBy<T extends CQLNumberInput>(other: T): CQLNumber<Promote<K, InputKind<T>>>;
+  divideBy(other: CQLNumberInput): CQLNumber {
+    const decimalOther = this.operand(other);
     if (decimalOther.equals(0)) {
       throw new RangeError('Cannot divide a decimal by zero');
+    }
+    if (promotedKind(this.numericKind, decimalOther.numericKind) !== 'Decimal') {
+      return this.truncatedDivideBy(decimalOther);
     }
     // division scaling is more complex, depends on whether the actual result can be represented exactly
     // IMPORTANT: The details of how to propagate Decimal scale through math are not defined in the CQL spec.
@@ -142,45 +265,49 @@ export class Decimal {
     return unscaledResult.withMinimumScale(preferredScale);
   }
 
-  truncatedDivideBy(other: DecimalInput) {
-    if (Decimal.from(other).equals(0)) {
+  truncatedDivideBy<T extends CQLNumberInput>(other: T): CQLNumber<Promote<K, InputKind<T>>> {
+    if (CQLNumber.decimal(other).equals(0)) {
       throw new RangeError('Cannot divide a decimal by zero');
     }
     return this.applyWrapper(this.value.dividedToIntegerBy, other);
   }
 
-  modulo(other: DecimalInput) {
-    if (Decimal.from(other).equals(0)) {
+  modulo<T extends CQLNumberInput>(other: T): CQLNumber<Promote<K, InputKind<T>>> {
+    if (CQLNumber.decimal(other).equals(0)) {
       throw new RangeError('Cannot calculate decimal modulo by zero');
     }
     return this.applyWrapper(this.value.mod, other);
   }
 
-  compareTo(other: DecimalInput) {
-    return this.value.comparedTo(Decimal.from(other).value);
+  compareTo(other: CQLNumberInput) {
+    return this.value.comparedTo(CQLNumber.decimal(other).value);
   }
 
-  greaterThan(other: DecimalInput) {
+  greaterThan(other: CQLNumberInput) {
     return this.compareTo(other) > 0;
   }
 
-  greaterThanOrEquals(other: DecimalInput) {
+  greaterThanOrEquals(other: CQLNumberInput) {
     return this.compareTo(other) >= 0;
   }
 
-  lessThan(other: DecimalInput) {
+  lessThan(other: CQLNumberInput) {
     return this.compareTo(other) < 0;
   }
 
-  lessThanOrEquals(other: DecimalInput) {
+  lessThanOrEquals(other: CQLNumberInput) {
     return this.compareTo(other) <= 0;
   }
 
-  equals(other: DecimalInput) {
+  equals(other: CQLNumberInput) {
     return this.compareTo(other) === 0;
   }
 
-  equivalent(other: DecimalInput) {
+  equivalent(other: CQLNumberInput) {
+    const operand = this.operand(other);
+    if (!this.isDecimal || !operand.isDecimal) {
+      return this.equals(operand);
+    }
     // For decimals, equivalent means the values are the same
     // with the comparison done on values rounded to
     // the precision of the least precise operand;
@@ -188,7 +315,7 @@ export class Decimal {
     // for equivalent comparison.
 
     // Because it ignores trailing zeros, we use decimal.js .decimalPlaces() instead of this.scale
-    const decimalOther = Decimal.from(other);
+    const decimalOther = CQLNumber.decimal(other);
     const lessPreciseScale = Math.min(
       this.value.decimalPlaces(),
       decimalOther.value.decimalPlaces()
@@ -197,26 +324,34 @@ export class Decimal {
     return this.withScale(lessPreciseScale).equals(decimalOther.withScale(lessPreciseScale));
   }
 
-  successor() {
+  successor(): CQLNumber<K>;
+  successor(): CQLNumber {
+    if (!this.isDecimal) {
+      return this.add(1);
+    }
     // "For Decimal, successor is equivalent to adding 1 * the precision of the argument."
     // note that this is not 1 * Precision(this), since Precision is a number 0-8
-    const precision = Decimal.from(0.1).power(this.scale);
+    const precision = CQLNumber.decimal(0.1).power(this.scale);
     return this.add(precision);
   }
 
-  predecessor() {
+  predecessor(): CQLNumber<K>;
+  predecessor(): CQLNumber {
+    if (!this.isDecimal) {
+      return this.subtract(1);
+    }
     // "For Decimal, predecessor is equivalent to subtracting 1 * the precision of the argument."
     // note that this is not literally 1 * Precision(this), since Precision is a number 0-8
-    const precision = Decimal.from(0.1).power(this.scale);
+    const precision = CQLNumber.decimal(0.1).power(this.scale);
     return this.subtract(precision);
   }
 
-  negate() {
-    return new Decimal(this.value.neg(), this.scale);
+  negate(): CQLNumber<K> {
+    return new CQLNumber(this.value.neg(), this.scale, this.numericKind);
   }
 
-  abs() {
-    return new Decimal(this.value.abs(), this.scale);
+  abs(): CQLNumber<K> {
+    return new CQLNumber(this.value.abs(), this.scale, this.numericKind);
   }
 
   truncate(): number {
@@ -224,7 +359,11 @@ export class Decimal {
   }
 
   truncateToBigInt(): bigint {
-    return BigInt(this.value.truncated().toString());
+    return BigInt(this.value.truncated().toFixed(0));
+  }
+
+  toBigInt(): bigint {
+    return this.truncateToBigInt();
   }
 
   ceil(): number {
@@ -235,49 +374,53 @@ export class Decimal {
     return this.value.floor().toNumber();
   }
 
-  isInteger() {
+  isIntegral() {
     return this.value.isInteger();
   }
 
-  power(exponent: DecimalInput) {
-    return this.applyWrapper(this.value.toPower, exponent);
+  power(exponent: CQLNumberInput): CQLDecimal {
+    return CQLNumber.decimal(this).applyWrapper(this.value.toPower, CQLNumber.decimal(exponent));
   }
 
-  nthRoot(root: DecimalInput) {
+  nthRoot(root: CQLNumberInput): CQLDecimal {
     // The goal of this method is to preserve exact values in common cases,
     // by leveraging the decimal.js sqrt() and cubeRoot() methods for roots 2 and 3.
     // For other roots, fall back to the power method with the inverse of the provided value.
     // See docs on decimal.js pow, in particular the note about non-integer exponents:
     // https://mikemcl.github.io/decimal.js/#pow
-    const rootAsDecimal = Decimal.from(root);
+    const rootAsDecimal = CQLNumber.decimal(root);
     if (rootAsDecimal.equals(0)) {
       throw new RangeError('Cannot take the zero-th root of a decimal');
     } else if (rootAsDecimal.equals(2)) {
       return this.sqrt();
     } else if (rootAsDecimal.equals(3)) {
-      return new Decimal(this.value.cubeRoot()).withMinimumScale(this.scale);
+      return new CQLNumber(this.value.cubeRoot(), undefined, 'Decimal').withMinimumScale(
+        this.scale
+      );
     } else {
-      return this.power(Decimal.from(1).divideBy(root));
+      return this.power(CQLNumber.decimal(1).divideBy(root));
     }
   }
 
-  sqrt() {
-    return new Decimal(this.value.sqrt()).withMinimumScale(this.scale);
+  sqrt(): CQLDecimal {
+    return new CQLNumber(this.value.sqrt(), undefined, 'Decimal').withMinimumScale(this.scale);
   }
 
-  ln() {
-    return new Decimal(this.value.ln());
+  ln(): CQLDecimal {
+    return new CQLNumber(this.value.ln(), undefined, 'Decimal');
   }
 
-  exp() {
-    return new Decimal(this.value.exp());
+  exp(): CQLDecimal {
+    return new CQLNumber(this.value.exp(), undefined, 'Decimal');
   }
 
-  log(base: DecimalInput) {
-    return this.applyWrapper(this.value.log, base).withMinimumScale(this.scale);
+  log(base: CQLNumberInput): CQLDecimal {
+    return CQLNumber.decimal(this)
+      .applyWrapper(this.value.log, CQLNumber.decimal(base))
+      .withMinimumScale(this.scale);
   }
 
-  round(scale?: number | null) {
+  round(scale?: number | null): CQLDecimal {
     // "If precision is not specified or null, 0 is assumed."
     if (scale == null) {
       scale = 0;
@@ -292,25 +435,28 @@ export class Decimal {
     return this.withScale(scale, CQL_IMPLICIT_ROUNDING);
   }
 
-  withScale(scale: number, roundingMode: DecimalRoundingMode = CQL_IMPLICIT_ROUNDING) {
+  withScale(scale: number, roundingMode: DecimalRoundingMode = CQL_IMPLICIT_ROUNDING): CQLDecimal {
     if (!Number.isInteger(scale) || scale < 0) {
       throw new RangeError('Decimal scale must be a non-negative integer');
     }
 
-    return new Decimal(this.value.toDecimalPlaces(scale, roundingMode), scale);
+    return new CQLNumber(this.value.toDecimalPlaces(scale, roundingMode), scale, 'Decimal');
   }
 
   // Some functions would prefer a given scale for the result but will allow a greater one
   // if needed to represent the value.
   // Eg, 1.0 / 1.0 and 1.0 / 3.0 both have exactly the same input scales, but expect different output scales.
-  withMinimumScale(scale: number, roundingMode: DecimalRoundingMode = CQL_IMPLICIT_ROUNDING) {
+  withMinimumScale(
+    scale: number,
+    roundingMode: DecimalRoundingMode = CQL_IMPLICIT_ROUNDING
+  ): CQLNumber<K | 'Decimal'> {
     if (this.scale >= scale) {
       return this;
     }
     return this.withScale(scale, roundingMode);
   }
 
-  withoutTrailingZeros() {
+  withoutTrailingZeros(): CQLDecimal {
     return this.withScale(this.value.decimalPlaces());
   }
 
@@ -326,8 +472,8 @@ export class Decimal {
     // meaning, optional minus sign, at least one digit, decimal point, at least one digit
     // (# means any number of digits, including none; 0 means a digit must appear)
     // a regex for this is -?\d+\.\d+
-    // so Decimal.from(1).toString() --> "1.0"
-    const places = Math.max(1, this.scale);
+    // so CQLNumber.decimal(1).toString() --> "1.0"
+    const places = this.isDecimal ? Math.max(1, this.scale) : 0;
     return this.value.toFixed(places);
   }
 
@@ -335,7 +481,7 @@ export class Decimal {
     // The FHIR spec serializes `decimal` as a number, so we follow that convention here,
     // but note the risk of loss of precision.
     // https://hl7.org/fhir/json.html#primitive
-    return this.toNumber();
+    return this.isLong ? this.toString() : this.toNumber();
   }
 }
 
@@ -362,5 +508,5 @@ function determineScale(rawValue: string | number | bigint | DecimalJS, parsedVa
 export const MAX_DECIMAL_STRING = '99999999999999999999.99999999';
 export const MIN_DECIMAL_STRING = '-99999999999999999999.99999999';
 
-export const MAX_DECIMAL_VALUE = Decimal.from(MAX_DECIMAL_STRING);
-export const MIN_DECIMAL_VALUE = Decimal.from(MIN_DECIMAL_STRING);
+export const MAX_DECIMAL_VALUE = CQLNumber.decimal(MAX_DECIMAL_STRING);
+export const MIN_DECIMAL_VALUE = CQLNumber.decimal(MIN_DECIMAL_STRING);

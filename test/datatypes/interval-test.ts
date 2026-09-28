@@ -1,3 +1,4 @@
+import { CQLNumber, MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../../src/datatypes/cql-number';
 import should from 'should';
 import {
   DateTime,
@@ -11,7 +12,7 @@ import {
 } from '../../src/datatypes/datetime';
 import { Interval } from '../../src/datatypes/interval';
 import { Quantity } from '../../src/datatypes/quantity';
-import { Decimal, MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../../src/datatypes/decimal';
+
 import { Uncertainty } from '../../src/datatypes/uncertainty';
 import {
   ELM_DATE_TYPE,
@@ -132,7 +133,7 @@ describe('Interval', () => {
     });
 
     it('should return the point size for Decimal intervals', () => {
-      new Interval(Decimal.from(0.5), Decimal.from(9.5))
+      new Interval(CQLNumber.decimal(0.5), CQLNumber.decimal(9.5))
         .getPointSize()
         .should.equalDecimal(0.00000001);
     });
@@ -204,7 +205,7 @@ describe('Interval', () => {
         .should.eql(new Uncertainty(MIN_LONG_VALUE, 100n));
       d.zeroPointFiveToNinePointFive.withNullStart.openClosed
         .start()
-        .should.eql(new Uncertainty(MIN_DECIMAL_VALUE, Decimal.from(9.5)));
+        .should.eql(new Uncertainty(MIN_DECIMAL_VALUE, CQLNumber.decimal(9.5)));
       d.zeroToHundredMg.withNullStart.openClosed
         .start()
         .should.eql(
@@ -230,7 +231,7 @@ describe('Interval', () => {
         .should.eql(new Uncertainty(MIN_LONG_VALUE, 99n));
       d.zeroPointFiveToNinePointFive.withNullStart.open
         .start()
-        .should.eql(new Uncertainty(MIN_DECIMAL_VALUE, Decimal.from(9.4)));
+        .should.eql(new Uncertainty(MIN_DECIMAL_VALUE, CQLNumber.decimal(9.4)));
       d.zeroToHundredMg.withNullStart.open
         .start()
         .should.eql(
@@ -345,7 +346,7 @@ describe('Interval', () => {
         .should.eql(new Uncertainty(0n, MAX_LONG_VALUE));
       d.zeroPointFiveToNinePointFive.withNullEnd.closedOpen
         .end()
-        .should.eql(new Uncertainty(Decimal.from(0.5), MAX_DECIMAL_VALUE));
+        .should.eql(new Uncertainty(CQLNumber.decimal(0.5), MAX_DECIMAL_VALUE));
       d.zeroToHundredMg.withNullEnd.closedOpen
         .end()
         .should.eql(
@@ -369,7 +370,7 @@ describe('Interval', () => {
       d.zeroToHundredLong.withNullEnd.open.end().should.eql(new Uncertainty(1n, MAX_LONG_VALUE));
       d.zeroPointFiveToNinePointFive.withNullEnd.open
         .end()
-        .should.eql(new Uncertainty(Decimal.from('0.6'), MAX_DECIMAL_VALUE));
+        .should.eql(new Uncertainty(CQLNumber.decimal('0.6'), MAX_DECIMAL_VALUE));
       d.zeroToHundredMg.withNullEnd.open
         .end()
         .should.eql(
@@ -7021,8 +7022,8 @@ describe('DecimalInterval', () => {
 
   it('should calculate width and size outside the Integer range', () => {
     const interval = new Interval(
-      Decimal.from(0.0),
-      Decimal.from(3000000000.0),
+      CQLNumber.decimal(0.0),
+      CQLNumber.decimal(3000000000.0),
       true,
       true,
       ELM_DECIMAL_TYPE
@@ -7034,23 +7035,23 @@ describe('DecimalInterval', () => {
 
   it('should close open decimal uncertainty endpoints using decimal precision', () => {
     const closed = new Interval(
-      new Uncertainty(Decimal.from('1.0'), Decimal.from('2.0')),
-      new Uncertainty(Decimal.from('3.0'), Decimal.from('4.0')),
+      new Uncertainty(CQLNumber.decimal('1.0'), CQLNumber.decimal('2.0')),
+      new Uncertainty(CQLNumber.decimal('3.0'), CQLNumber.decimal('4.0')),
       false,
       false,
       ELM_DECIMAL_TYPE
     ).toClosed();
 
-    closed.low.should.eql(new Uncertainty(Decimal.from('1.1'), Decimal.from('2.1')));
-    closed.high.should.eql(new Uncertainty(Decimal.from('2.9'), Decimal.from('3.9')));
+    closed.low.should.eql(new Uncertainty(CQLNumber.decimal('1.1'), CQLNumber.decimal('2.1')));
+    closed.high.should.eql(new Uncertainty(CQLNumber.decimal('2.9'), CQLNumber.decimal('3.9')));
     closed.lowClosed.should.be.true();
     closed.highClosed.should.be.true();
   });
 
   it('should use decimal precision for meetsBefore decimal uncertainty bounds', () => {
-    const earlier = new Interval(Decimal.from('1.0'), Decimal.from('1.9'));
+    const earlier = new Interval(CQLNumber.decimal('1.0'), CQLNumber.decimal('1.9'));
     const later = new Interval(
-      new Uncertainty(Decimal.from('2.0'), Decimal.from('2.0')),
+      new Uncertainty(CQLNumber.decimal('2.0'), CQLNumber.decimal('2.0')),
       null,
       true,
       false,
@@ -7063,12 +7064,12 @@ describe('DecimalInterval', () => {
   it('should use decimal precision for meetsAfter decimal uncertainty bounds', () => {
     const earlier = new Interval(
       null,
-      new Uncertainty(Decimal.from('1.0'), Decimal.from('1.0')),
+      new Uncertainty(CQLNumber.decimal('1.0'), CQLNumber.decimal('1.0')),
       false,
       true,
       ELM_DECIMAL_TYPE
     );
-    const later = new Interval(Decimal.from('1.1'), Decimal.from('2.0'));
+    const later = new Interval(CQLNumber.decimal('1.1'), CQLNumber.decimal('2.0'));
 
     later.meetsAfter(earlier).should.be.true();
   });
@@ -7134,12 +7135,12 @@ describe('DecimalInterval', () => {
   });
 
   it('should properly handle null endpoints', () => {
-    const decimal = Decimal.from(1.5);
-    const early = Decimal.from(-1.5);
-    const late = Decimal.from(3.5);
-    const decimalInterval = new Interval(Decimal.from(0.5), Decimal.from(1.5));
-    const earlyInterval = new Interval(early, Decimal.from(-0.5));
-    const lateInterval = new Interval(Decimal.from(3.5), late);
+    const decimal = CQLNumber.decimal(1.5);
+    const early = CQLNumber.decimal(-1.5);
+    const late = CQLNumber.decimal(3.5);
+    const decimalInterval = new Interval(CQLNumber.decimal(0.5), CQLNumber.decimal(1.5));
+    const earlyInterval = new Interval(early, CQLNumber.decimal(-0.5));
+    const lateInterval = new Interval(CQLNumber.decimal(3.5), late);
     const startsAtDecimal = new Interval(decimal, late);
     const endsAtDecimal = new Interval(early, decimal);
 

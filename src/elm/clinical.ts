@@ -344,7 +344,7 @@ function calculateAge(
   precision: string,
   birthDate?: dt.Date | dt.DateTime,
   asOf?: dt.Date | dt.DateTime,
-  timeZoneOffset?: dt.Decimal | null
+  timeZoneOffset?: dt.CQLNumber | null
 ) {
   if (birthDate != null && asOf != null) {
     // Ensure we use like types (Date or DateTime) based on asOf type

@@ -142,7 +142,7 @@ export class DateTimeComponentFrom extends Expression {
     const arg = await this.execArgs(ctx);
     if (arg != null) {
       const value = arg[this.precision.toLowerCase()];
-      return typeof value === 'number' ? DT.Integer.from(value) : value;
+      return typeof value === 'number' ? DT.CQLNumber.integer(value) : value;
     } else {
       return null;
     }

@@ -1,3 +1,4 @@
+import { CQLNumber } from '../datatypes/cql-number';
 import { Context } from '../runtime/context';
 
 import { Expression, UnimplementedExpression } from './expression';
@@ -5,9 +6,7 @@ import { DateTime, Date } from '../datatypes/datetime';
 import { Concept } from '../datatypes/clinical';
 import { Interval as dtInterval } from '../datatypes/interval';
 import { Quantity, parseQuantity } from '../datatypes/quantity';
-import { Decimal } from '../datatypes/decimal';
-import { Integer } from '../datatypes/integer';
-import { Long } from '../datatypes/long';
+
 import { isValidDecimal, isValidInteger, isValidLong } from '../util/math';
 import { normalizeMillisecondsField } from '../util/util';
 import { Ratio } from '../datatypes/ratio';
@@ -98,13 +97,13 @@ export class ToBoolean extends Expression {
   async exec(ctx: Context) {
     const arg = await this.execArgs(ctx);
     if (arg != null) {
-      if (arg instanceof Decimal) {
-        // Unlike other types, Decimal.toString doesn't line up
+      if (arg?.isDecimal === true) {
+        // Unlike integral types, Decimal formatting doesn't line up
         // with the defined truthy/falsy values below.
         // Check numeric equality (ignores scale) for the two values that map to boolean
-        if (arg.equals('1.0')) {
+        if (CQLNumber.decimal(arg).equals('1.0')) {
           return true;
-        } else if (arg.equals('0.0')) {
+        } else if (CQLNumber.decimal(arg).equals('0.0')) {
           return false;
         }
       }
@@ -186,21 +185,21 @@ export class ToDecimal extends Expression {
     const arg = await this.execArgs(ctx);
     if (arg != null) {
       if (arg.isUncertainty) {
-        const low = Decimal.from(arg.low).normalized();
-        const high = Decimal.from(arg.high).normalized();
-        return new Uncertainty(low, high);
+        const low = CQLNumber.decimal(arg.low).normalized();
+        const high = CQLNumber.decimal(arg.high).normalized();
+        return new Uncertainty(CQLNumber.decimal(low), CQLNumber.decimal(high));
       } else {
         if (typeof arg === 'string' && !CQL_DECIMAL_STRING.test(arg)) {
           // reject anything that doesn't match the CQL Decimal format
-          // In particular, our Decimal.from could be more permissive
+          // In particular, CQLNumber.decimal is more permissive
           // and allow things like "1e8", which is not allowed by the spec
           return null;
         }
 
         try {
-          const decimal = Decimal.from(arg.toString());
+          const decimal = CQLNumber.decimal(arg.toString());
           if (isValidDecimal(decimal)) {
-            return decimal.normalized();
+            return CQLNumber.decimal(decimal.normalized());
           }
         } catch {
           return null;
@@ -224,7 +223,7 @@ export class ToInteger extends Expression {
       }
     } else if (arg?.isLong === true) {
       try {
-        const integer = Integer.from(arg.toNumber());
+        const integer = CQLNumber.integer(arg.toNumber());
         if (isValidInteger(integer)) {
           return integer;
         }
@@ -232,7 +231,7 @@ export class ToInteger extends Expression {
         return null;
       }
     } else if (arg?.isDecimal) {
-      const integer = Integer.from(arg.truncate());
+      const integer = CQLNumber.integer(arg.truncate());
       if (isValidInteger(integer)) {
         return integer;
       }
@@ -243,7 +242,7 @@ export class ToInteger extends Expression {
       }
       // note: invalid strings will result in NaN and fail isValidInteger
       try {
-        const integer = Integer.from(arg);
+        const integer = CQLNumber.integer(arg);
         if (isValidInteger(integer)) {
           return integer;
         }
@@ -251,7 +250,7 @@ export class ToInteger extends Expression {
         return null;
       }
     } else if (typeof arg === 'boolean') {
-      return Integer.from(arg ? 1 : 0);
+      return CQLNumber.integer(arg ? 1 : 0);
     }
     return null;
   }
@@ -270,7 +269,7 @@ export class ToLong extends Expression {
       }
     } else if (arg?.isInteger === true) {
       try {
-        const long = Long.from(arg);
+        const long = CQLNumber.long(arg);
         if (isValidLong(long)) {
           return long;
         }
@@ -282,12 +281,12 @@ export class ToLong extends Expression {
       if (!/^[+-]?\d+$/.test(arg)) {
         return null;
       }
-      const long = Long.from(arg);
+      const long = CQLNumber.long(arg);
       if (isValidLong(long)) {
         return long;
       }
     } else if (typeof arg === 'boolean') {
-      return Long.from(arg ? 1n : 0n);
+      return CQLNumber.long(arg ? 1n : 0n);
     }
     return null;
   }

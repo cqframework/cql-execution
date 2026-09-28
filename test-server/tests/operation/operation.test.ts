@@ -4,6 +4,7 @@ import * as translateModule from '@src/translate';
 import * as convertModule from '@src/convert';
 import { Parameters } from 'fhir/r4';
 import logger from '@src/logger';
+import { CQLNumber } from '../../..';
 
 describe('operation.$cql', () => {
   let translateSpy: MockInstance<typeof translateModule.translate>;
@@ -55,7 +56,10 @@ describe('operation.$cql', () => {
     const result = await $cql('1 + 2');
 
     expect(translateSpy).toHaveBeenCalledWith('1 + 2', expect.toBeOneOf([true, false]));
-    expect(toParametersSpy).toHaveBeenCalledWith(3, '{urn:hl7-org:elm-types:r1}Integer');
+    expect(toParametersSpy).toHaveBeenCalledWith(
+      CQLNumber.integer(3),
+      '{urn:hl7-org:elm-types:r1}Integer'
+    );
     expect(result).toBe(parameters);
   });
 });

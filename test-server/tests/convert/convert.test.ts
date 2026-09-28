@@ -6,7 +6,7 @@ import {
   Concept,
   Date as CqlDate,
   DateTime,
-  Decimal,
+  CQLNumber,
   Interval,
   IntervalTypeSpecifier,
   ListTypeSpecifier,
@@ -43,6 +43,18 @@ describe('convert.toParameters', () => {
   });
 
   describe('primitives', () => {
+    it('infers numeric kinds and serializes unified runtime values', () => {
+      expect(toParameters(CQLNumber.integer(42)).parameter?.[0]).toMatchObject({
+        valueInteger: 42
+      });
+      expect(toParameters(CQLNumber.long('9007199254740993')).parameter?.[0]).toMatchObject({
+        valueString: '9007199254740993'
+      });
+      expect(toParameters(CQLNumber.decimal('2.00')).parameter?.[0]).toMatchObject({
+        valueDecimal: 2
+      });
+    });
+
     it('converts boolean to valueBoolean', () => {
       expect(toParameters(true, 'System.Boolean')).toEqual({
         resourceType: 'Parameters',
@@ -67,7 +79,7 @@ describe('convert.toParameters', () => {
     });
 
     it('converts decimal to valueDecimal', () => {
-      expect(toParameters(Decimal.from('3.14159'), 'System.Decimal')).toEqual({
+      expect(toParameters(CQLNumber.decimal('3.14159'), 'System.Decimal')).toEqual({
         resourceType: 'Parameters',
         parameter: [
           { extension: cqlTypeExt('System.Decimal'), name: 'return', valueDecimal: 3.14159 }
@@ -687,7 +699,7 @@ describe('convert.toParameters', () => {
     });
 
     it('guesses type when no type is passed in and converts value (Decimal example)', () => {
-      expect(toParameters(Decimal.from('1.25'))).toEqual({
+      expect(toParameters(CQLNumber.decimal('1.25'))).toEqual({
         resourceType: 'Parameters',
         parameter: [
           {

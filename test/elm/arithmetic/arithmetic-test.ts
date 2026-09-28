@@ -1,3 +1,4 @@
+import { CQLNumber, MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../../../src/datatypes/cql-number';
 import should from 'should';
 import { doMultiplication, parseQuantity, Quantity } from '../../../src/datatypes/quantity';
 import * as MathUtil from '../../../src/util/math';
@@ -16,13 +17,12 @@ import {
   MIN_DATETIME_VALUE,
   MIN_TIME_VALUE
 } from '../../../src/datatypes/datetime';
-import { Decimal, MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../../../src/datatypes/decimal';
 
 const data = require('./data');
 
 const validateQuantity = function (
   object: any,
-  expectedValue: number | Decimal,
+  expectedValue: number | CQLNumber,
   expectedUnit: string
 ) {
   object.isQuantity.should.be.true();
@@ -376,7 +376,7 @@ describe('MinValue', () => {
 
   it('of Decimal should return exact minimum representable Decimal value', async function () {
     const minDecimalStringValue = '-99999999999999999999.99999999';
-    const minDecimalValue = Decimal.from(minDecimalStringValue);
+    const minDecimalValue = CQLNumber.decimal(minDecimalStringValue);
     const minDecimalResult = await this.minDecimal.exec(this.ctx);
     minDecimalResult.should.equalDecimal(minDecimalValue);
     minDecimalResult.toString().should.equal(minDecimalStringValue);
@@ -429,7 +429,7 @@ describe('MaxValue', () => {
 
   it('of Decimal should return exact maximum representable Decimal value', async function () {
     const maxDecimalStringValue = '99999999999999999999.99999999';
-    const maxDecimalValue = Decimal.from(maxDecimalStringValue);
+    const maxDecimalValue = CQLNumber.decimal(maxDecimalStringValue);
     const maxDecimalResult = await this.maxDecimal.exec(this.ctx);
     maxDecimalResult.should.equalDecimal(maxDecimalValue);
     maxDecimalResult.toString().should.equal(maxDecimalStringValue);
@@ -508,7 +508,7 @@ describe('TruncatedDivide', () => {
     );
     validateQuantity(
       await this.truncatedDivideLargePositiveQuantity.exec(this.ctx),
-      Decimal.from('9007199254740993.0'),
+      CQLNumber.decimal('9007199254740993.0'),
       '1'
     );
   });
@@ -1230,11 +1230,11 @@ describe('OutOfBounds', () => {
     });
 
     it('should return value for Add near overflow', async function () {
-      should(await this.decimalAddNearOverflow.exec(this.ctx)).eql(MAX_DECIMAL_VALUE);
+      should(await this.decimalAddNearOverflow.exec(this.ctx)).equalDecimal(MAX_DECIMAL_VALUE);
     });
 
     it('should return value for Add near underflow', async function () {
-      should(await this.decimalAddNearUnderflow.exec(this.ctx)).eql(MIN_DECIMAL_VALUE);
+      should(await this.decimalAddNearUnderflow.exec(this.ctx)).equalDecimal(MIN_DECIMAL_VALUE);
     });
 
     it('should return null for Subtract overflow', async function () {
@@ -1246,11 +1246,13 @@ describe('OutOfBounds', () => {
     });
 
     it('should return value for Subtract near overflow', async function () {
-      should(await this.decimalSubtractNearOverflow.exec(this.ctx)).eql(MAX_DECIMAL_VALUE);
+      should(await this.decimalSubtractNearOverflow.exec(this.ctx)).equalDecimal(MAX_DECIMAL_VALUE);
     });
 
     it('should return value for Subtract near underflow', async function () {
-      should(await this.decimalSubtractNearUnderflow.exec(this.ctx)).eql(MIN_DECIMAL_VALUE);
+      should(await this.decimalSubtractNearUnderflow.exec(this.ctx)).equalDecimal(
+        MIN_DECIMAL_VALUE
+      );
     });
 
     it('should return null for Multiply overflow', async function () {
@@ -1262,11 +1264,13 @@ describe('OutOfBounds', () => {
     });
 
     it('should return value for Multiply near overflow', async function () {
-      should(await this.decimalMultiplyNearOverflow.exec(this.ctx)).eql(MAX_DECIMAL_VALUE);
+      should(await this.decimalMultiplyNearOverflow.exec(this.ctx)).equalDecimal(MAX_DECIMAL_VALUE);
     });
 
     it('should return value for Multiply near underflow', async function () {
-      should(await this.decimalMultiplyNearUnderflow.exec(this.ctx)).eql(MIN_DECIMAL_VALUE);
+      should(await this.decimalMultiplyNearUnderflow.exec(this.ctx)).equalDecimal(
+        MIN_DECIMAL_VALUE
+      );
     });
 
     it('should return null for Divide overflow', async function () {
@@ -1278,11 +1282,11 @@ describe('OutOfBounds', () => {
     });
 
     it('should return value for Divide near overflow', async function () {
-      should(await this.decimalDivideNearOverflow.exec(this.ctx)).eql(MAX_DECIMAL_VALUE);
+      should(await this.decimalDivideNearOverflow.exec(this.ctx)).equalDecimal(MAX_DECIMAL_VALUE);
     });
 
     it('should return value for Divide near underflow', async function () {
-      should(await this.decimalDivideNearUnderflow.exec(this.ctx)).eql(MIN_DECIMAL_VALUE);
+      should(await this.decimalDivideNearUnderflow.exec(this.ctx)).equalDecimal(MIN_DECIMAL_VALUE);
     });
 
     it('should return null for Divide By Zero', async function () {
@@ -1298,11 +1302,11 @@ describe('OutOfBounds', () => {
     });
 
     it('should return value for Power near overflow', async function () {
-      should(await this.decimalPowerNearOverflow.exec(this.ctx)).eql(MAX_DECIMAL_VALUE);
+      should(await this.decimalPowerNearOverflow.exec(this.ctx)).equalDecimal(MAX_DECIMAL_VALUE);
     });
 
     it('should return value for Power near underflow', async function () {
-      should(await this.decimalPowerNearUnderflow.exec(this.ctx)).eql(MIN_DECIMAL_VALUE);
+      should(await this.decimalPowerNearUnderflow.exec(this.ctx)).equalDecimal(MIN_DECIMAL_VALUE);
     });
 
     it('should return null for successor overflow', async function () {

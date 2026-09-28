@@ -1,7 +1,6 @@
+import { CQLNumber, CQLDecimal } from './cql-number';
 import { isValidDecimal, overflowsOrUnderflows } from '../util/math';
-import { Decimal } from './decimal';
-import { Integer } from './integer';
-import { Long } from './long';
+
 import {
   checkUnit,
   convertUnit,
@@ -11,16 +10,16 @@ import {
 } from '../util/units';
 
 export class Quantity {
-  public readonly value: Decimal;
+  public readonly value: CQLDecimal;
 
   constructor(
-    value?: Decimal | Integer | Long | string | number | bigint,
+    value?: CQLNumber | string | number | bigint,
     public unit?: any
   ) {
     if (value == null || (typeof value === 'number' && isNaN(value))) {
       throw new Error('Cannot create a quantity with an undefined value');
     }
-    this.value = Decimal.from(value).normalized();
+    this.value = CQLNumber.decimal(value).normalized();
     if (!isValidDecimal(this.value)) {
       throw new Error('Cannot create a quantity with an invalid decimal value');
     }
@@ -122,7 +121,7 @@ export class Quantity {
     if (
       other == null ||
       other === 0 ||
-      (other.value != null && Decimal.from(other.value).equals(0))
+      (other.value != null && CQLNumber.decimal(other.value).equals(0))
     ) {
       return null;
     } else if (!other.isQuantity) {
@@ -174,7 +173,7 @@ export class Quantity {
 export function parseQuantity(str: string) {
   const components = /([+|-]?\d+\.?\d*)\s*('(.+)')?/.exec(str);
   if (components != null && components[1] != null) {
-    const value = Decimal.from(components[1]);
+    const value = CQLNumber.decimal(components[1]);
     if (!isValidDecimal(value)) {
       return null;
     }

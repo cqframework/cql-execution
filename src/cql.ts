@@ -20,12 +20,10 @@ import {
   Code,
   CodeSystem,
   Concept,
+  CQLNumber,
   Date,
   DateTime,
-  Decimal,
-  Integer,
   Interval,
-  Long,
   Quantity,
   Ratio,
   CQLValueSet,
@@ -36,6 +34,16 @@ import { AnnotatedError } from './util/customErrors';
 
 // Custom Types
 export * from './types';
+export type {
+  CQLInteger,
+  CQLLong,
+  CQLDecimal,
+  AnyCQLNumber,
+  NumericKind,
+  CQLNumberInput,
+  InputKind,
+  Promote
+} from './datatypes/cql-number';
 
 export {
   AnnotatedError,
@@ -55,12 +63,10 @@ export {
   Code,
   CodeSystem,
   Concept,
+  CQLNumber,
   Date,
   DateTime,
-  Decimal,
-  Integer,
   Interval,
-  Long,
   Quantity,
   Ratio,
   CQLValueSet,
@@ -85,12 +91,10 @@ export default {
   Code,
   CodeSystem,
   Concept,
+  CQLNumber,
   Date,
   DateTime,
-  Decimal,
-  Integer,
   Interval,
-  Long,
   Quantity,
   Ratio,
   CQLValueSet,

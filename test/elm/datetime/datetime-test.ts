@@ -1,15 +1,15 @@
+import { CQLNumber } from '../../../src/datatypes/cql-number';
 import should from 'should';
 import setup from '../../setup';
 const data = require('./data');
 import * as DT from '../../../src/datatypes/datatypes';
 import { PatientContext } from '../../../src/cql';
 import { Uncertainty } from '../../../src/datatypes/uncertainty';
-import { Decimal } from '../../../src/datatypes/decimal';
 
 describe('DateTime', () => {
   beforeEach(function () {
     setup(this, data);
-    this.defaultOffset = Decimal.from((new Date().getTimezoneOffset() / 60) * -1);
+    this.defaultOffset = CQLNumber.decimal((new Date().getTimezoneOffset() / 60) * -1);
   });
 
   it('should execute year precision correctly', async function () {

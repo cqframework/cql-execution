@@ -1,3 +1,4 @@
+import { CQLNumber, CQLDecimal } from './cql-number';
 import { Uncertainty } from './uncertainty';
 import {
   jsDate,
@@ -19,7 +20,7 @@ import {
   MIN_DATETIME_VALUE_STRING,
   MIN_TIME_VALUE_STRING
 } from '../util/limits';
-import { Decimal } from './decimal';
+
 import { equals } from '../util/comparison';
 
 // It's easiest and most performant to organize formats by length of the supported strings.
@@ -531,7 +532,7 @@ export class DateTime extends AbstractDate {
   minute: number | null;
   second: number | null;
   millisecond: number | null;
-  timezoneOffset: Decimal | null;
+  timezoneOffset: CQLDecimal | null;
 
   static readonly Unit = {
     YEAR: 'year',
@@ -601,14 +602,14 @@ export class DateTime extends AbstractDate {
   }
 
   // TODO: Note: using the jsDate type causes issues, fix later
-  static fromJSDate(date: any, timezoneOffset?: number | string | Decimal) {
+  static fromJSDate(date: any, timezoneOffset?: number | string | CQLNumber) {
     //This is from a JS Date, not a CQL Date
     if (date instanceof DateTime) {
       return date;
     }
     if (timezoneOffset != null) {
       let tzOffset: number;
-      if (timezoneOffset instanceof Decimal) {
+      if (timezoneOffset instanceof CQLNumber) {
         tzOffset = timezoneOffset.toNumber();
       } else {
         tzOffset = +timezoneOffset;
@@ -649,7 +650,7 @@ export class DateTime extends AbstractDate {
       luxonDT.minute,
       luxonDT.second,
       luxonDT.millisecond,
-      Decimal.from(luxonDT.offset / 60)
+      CQLNumber.decimal(luxonDT.offset / 60)
     );
   }
 
@@ -661,7 +662,7 @@ export class DateTime extends AbstractDate {
     minute: number | null = null,
     second: number | null = null,
     millisecond: number | null = null,
-    timezoneOffset?: Decimal | number | null
+    timezoneOffset?: CQLNumber | number | null
   ) {
     // from the spec: If no timezone is specified, the timezone of the evaluation request timestamp is used.
     // NOTE: timezoneOffset will be explicitly null for the Time overload, whereas
@@ -672,11 +673,11 @@ export class DateTime extends AbstractDate {
     this.second = second;
     this.millisecond = millisecond;
     if (timezoneOffset === undefined) {
-      this.timezoneOffset = Decimal.from((new jsDate().getTimezoneOffset() / 60) * -1);
+      this.timezoneOffset = CQLNumber.decimal((new jsDate().getTimezoneOffset() / 60) * -1);
     } else if (timezoneOffset === null) {
       this.timezoneOffset = null;
     } else {
-      this.timezoneOffset = Decimal.from(timezoneOffset);
+      this.timezoneOffset = CQLNumber.decimal(timezoneOffset);
     }
   }
 
@@ -1213,7 +1214,7 @@ export class Date extends AbstractDate {
     return str;
   }
 
-  getDateTime(timeZoneOffset?: Decimal | number | null) {
+  getDateTime(timeZoneOffset?: CQLNumber | number | null) {
     // from the spec: the result will be a DateTime with the time components unspecified,
     // except for the timezone offset, which will be set to the timezone offset of the evaluation
     // request timestamp. (this last part is achieved by passing in the timeZoneOffset from the context)

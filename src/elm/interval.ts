@@ -1,3 +1,4 @@
+import { CQLNumber, TRUNCATE_TO_PRECISION } from '../datatypes/cql-number';
 import { Expression } from './expression';
 import { MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } from '../datatypes/datetime';
 import { Quantity } from '../datatypes/quantity';
@@ -9,10 +10,8 @@ import { Context } from '../runtime/context';
 import { build } from './builder';
 import { IntervalTypeSpecifier, NamedTypeSpecifier } from '../types/type-specifiers.interfaces';
 import { ELM_ANY_TYPE, ELM_NAMED_TYPE_SPECIFIER } from '../util/elmTypes';
-import { Decimal, TRUNCATE_TO_PRECISION } from '../datatypes/decimal';
+
 import { MAX_INT_VALUE, MIN_INT_VALUE } from '../util/limits';
-import { Integer } from '../datatypes/integer';
-import { Long } from '../datatypes/long';
 
 export class Interval extends Expression {
   lowClosed: boolean;
@@ -636,30 +635,30 @@ export class Expand extends Expression {
     return this.makeNumericIntervalList(closed.low, closed.high, per.value);
   }
 
-  makeNumericIntervalList(lowValue: any, highValue: any, perValue: Decimal) {
+  makeNumericIntervalList(lowValue: any, highValue: any, perValue: CQLNumber) {
     if (lowValue == null || highValue == null) {
       return [];
     }
-    const perIsIntegral = perValue.isInteger();
+    const perIsIntegral = perValue.isIntegral();
 
     // For the purposes of this function, we'll perform all the arithmetic using Decimals,
     // then convert the results back to the required type as necessary
-    let low = Decimal.from(lowValue);
-    let high = Decimal.from(highValue);
+    let low = CQLNumber.decimal(lowValue);
+    let high = CQLNumber.decimal(highValue);
 
     if (low.greaterThan(high)) {
       return [];
     }
 
-    let convertBound: (d: Decimal) => Decimal | Integer | Long;
+    let convertBound: (d: CQLNumber) => CQLNumber;
     if (!perIsIntegral) {
       // If per is not an integer value, then regardless of the original point types, the values will be Decimals
       convertBound = d => d;
     } else if (lowValue.isLong === true || highValue.isLong === true) {
       // the bounds were integral and the per was integral, so there should be no risk of non-integral values
-      convertBound = d => Long.from(d.truncateToBigInt());
+      convertBound = d => CQLNumber.long(d.truncateToBigInt());
     } else if (lowValue.isInteger === true || highValue.isInteger === true) {
-      convertBound = d => Integer.from(d.truncate());
+      convertBound = d => CQLNumber.integer(d.truncate());
     } else {
       // per is integral but the original bounds of the interval were Decimal.
       // Make the resulting intervals either Long or Integer based on the original bounds.
@@ -672,13 +671,13 @@ export class Expand extends Expression {
         high.lessThan(MIN_INT_VALUE) ||
         high.greaterThan(MAX_INT_VALUE)
       ) {
-        convertBound = d => Long.from(d.truncateToBigInt());
+        convertBound = d => CQLNumber.long(d.truncateToBigInt());
       } else {
-        convertBound = d => Integer.from(d.truncate());
+        convertBound = d => CQLNumber.integer(d.truncate());
       }
     }
 
-    const makeInterval = (l: Decimal, h: Decimal) =>
+    const makeInterval = (l: CQLNumber, h: CQLNumber) =>
       new dtivl.Interval(convertBound(l), convertBound(h), true, true);
 
     // If the interval boundaries are more precise than the per quantity, the

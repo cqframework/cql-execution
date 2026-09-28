@@ -15,7 +15,7 @@ import {
   Concept,
   Date as CqlDate,
   DateTime as CqlDateTime,
-  Decimal as CqlDecimal,
+  CQLNumber,
   Quantity as CqlQuantity,
   Ratio as CqlRatio,
   Interval,
@@ -162,18 +162,18 @@ function toBooleanParameter(name: string, result: boolean): ParametersParameter 
   return { name, valueBoolean: result };
 }
 
-function toIntegerParameter(name: string, result: number): ParametersParameter {
-  return { name, valueInteger: result };
+function toIntegerParameter(name: string, result: CQLNumber | number): ParametersParameter {
+  return { name, valueInteger: result instanceof CQLNumber ? result.toNumber() : result };
 }
 
-function toLongParameter(name: string, result: number): ParametersParameter {
+function toLongParameter(name: string, result: CQLNumber | number | bigint): ParametersParameter {
   // TODO: use valueInteger64 for FHIR R5 and above
   return { name, valueString: String(result) };
 }
 
-function toDecimalParameter(name: string, result: CqlDecimal | number): ParametersParameter {
+function toDecimalParameter(name: string, result: CQLNumber | number): ParametersParameter {
   // TODO: use the quantity-precision extension to communicate precision of the value
-  return { name, valueDecimal: result instanceof CqlDecimal ? result.toNumber() : result };
+  return { name, valueDecimal: result instanceof CQLNumber ? result.toNumber() : result };
 }
 
 function toDateParameter(name: string, result: CqlDate) {
@@ -304,7 +304,7 @@ function toChoiceParameter(name: string, result: any, typeSpecifier: AnyTypeSpec
 }
 
 function toFhirQuantity(
-  val: CqlQuantity | CqlDecimal | number,
+  val: CqlQuantity | CQLNumber | number,
   isIntegerOrLong = false
 ): FhirQuantity {
   let fq: FhirQuantity;
@@ -312,7 +312,7 @@ function toFhirQuantity(
     fq = { value: val, system: 'http://unitsofmeasure.org', code: '1' };
   } else if (typeof val === 'bigint') {
     fq = { value: Number(val), system: 'http://unitsofmeasure.org', code: '1' };
-  } else if (val instanceof CqlDecimal) {
+  } else if (val instanceof CQLNumber) {
     fq = { value: val.toNumber(), system: 'http://unitsofmeasure.org', code: '1' };
   } else {
     const cq = val as CqlQuantity;

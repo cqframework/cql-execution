@@ -1,6 +1,7 @@
+import { MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../../../src/datatypes/cql-number';
 import should from 'should';
 import setup from '../../setup';
-import { MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../../../src/datatypes/decimal';
+
 const data = require('./data');
 const validateQuantity = function (object: any, expectedValue: any, expectedUnit: any) {
   object.isQuantity.should.be.true();
@@ -604,7 +605,9 @@ describe('Product', () => {
   });
 
   it('should return decimal product up to max decimal value', async function () {
-    (await this.decimals_at_max_value_product.exec(this.ctx)).should.eql(MAX_DECIMAL_VALUE);
+    (await this.decimals_at_max_value_product.exec(this.ctx)).should.equalDecimal(
+      MAX_DECIMAL_VALUE
+    );
   });
 
   it('should return null when decimal product overflows max decimal value', async function () {
@@ -612,7 +615,9 @@ describe('Product', () => {
   });
 
   it('should return decimal product down to min decimal value', async function () {
-    (await this.decimals_at_min_value_product.exec(this.ctx)).should.eql(MIN_DECIMAL_VALUE);
+    (await this.decimals_at_min_value_product.exec(this.ctx)).should.equalDecimal(
+      MIN_DECIMAL_VALUE
+    );
   });
 
   it('should return null when decimal product underflows min decimal value', async function () {

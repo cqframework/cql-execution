@@ -1,134 +1,65 @@
-import { Decimal } from './decimal';
-import { Integer } from './integer';
-import { Long } from './long';
+import { CQLNumber, NumericKind, Promote, AnyCQLNumber } from './cql-number';
 
-export type NumericKind = 'Integer' | 'Long' | 'Decimal';
+export { NumericKind, promotedKind } from './cql-number';
+export type CqlNumericValue = AnyCQLNumber;
 
-/** Common numeric behavior used after operands have been promoted. */
-export interface CqlNumeric {
-  readonly numericKind: NumericKind;
-  compareTo(other: any): number;
+export function isCqlNumeric(value: any): value is AnyCQLNumber {
+  return value?.isCQLNumber === true;
 }
 
-export type CqlNumericValue = Integer | Long | Decimal;
-
-/** CQL numeric promotion: Decimal > Long > Integer. */
-export function promotedKind(left: NumericKind, right: NumericKind): NumericKind {
-  if (left === 'Decimal' || right === 'Decimal') {
-    return 'Decimal';
-  }
-  return left === 'Long' || right === 'Long' ? 'Long' : 'Integer';
-}
-
-export function isCqlNumeric(value: any): value is CqlNumericValue {
-  return value?.isInteger === true || value?.isLong === true || value?.isDecimal === true;
-}
-
-/**
- * Normalizes JavaScript's exact integer primitives at API boundaries.
- *
- * A number is only a CQL Integer when it is a safe integral Number.  Decimal
- * values must still be expressed with Decimal so that their intended runtime
- * type is unambiguous.
- */
+/** Normalize exact JS integral primitives at API boundaries. */
 export function normalizeNumericInput(value: any): any {
   if (typeof value === 'bigint') {
-    return Long.from(value);
+    return CQLNumber.long(value);
   }
   if (typeof value === 'number' && Number.isSafeInteger(value)) {
-    return Integer.from(value);
+    return CQLNumber.integer(value);
   }
   return value;
 }
 
-export function coerceNumeric(value: CqlNumericValue, kind: 'Integer'): Integer;
-export function coerceNumeric(value: CqlNumericValue, kind: 'Long'): Long;
-export function coerceNumeric(value: CqlNumericValue, kind: 'Decimal'): Decimal;
-export function coerceNumeric(value: CqlNumericValue, kind: NumericKind): CqlNumericValue;
-export function coerceNumeric(value: CqlNumericValue, kind: NumericKind): CqlNumericValue {
+export function coerceNumeric<K extends NumericKind>(value: CQLNumber, kind: K): CQLNumber<K>;
+export function coerceNumeric(value: CQLNumber, kind: NumericKind): CQLNumber {
+  if (value.numericKind === kind) {
+    return value;
+  }
   switch (kind) {
     case 'Integer':
-      return value instanceof Integer ? value : Integer.from(value.toNumber());
+      return CQLNumber.integer(value);
     case 'Long':
-      return value instanceof Long
-        ? value
-        : Long.from(value instanceof Integer ? value : value.toString());
+      return CQLNumber.long(value);
     case 'Decimal':
-      return Decimal.from(value);
+      return CQLNumber.decimal(value);
   }
 }
 
-/** Compares two numeric values after applying CQL numeric promotion. */
-export function compareCqlNumeric(left: CqlNumericValue, right: CqlNumericValue): number {
-  const kind = promotedKind(left.numericKind, right.numericKind);
-  const promotedLeft = coerceNumeric(left, kind) as CqlNumeric;
-  const promotedRight = coerceNumeric(right, kind) as CqlNumeric;
-  return promotedLeft.compareTo(promotedRight);
+export function compareCqlNumeric(left: CQLNumber, right: CQLNumber): number {
+  return left.compareTo(right);
 }
 
-/**
- * Applies an operation after coercing both operands to their promoted CQL type.
- * Wrapper methods therefore only need to preserve their own runtime type.
- */
-export function binaryNumericOperation(
-  left: CqlNumericValue,
-  right: CqlNumericValue,
+/** CQLNumber owns promotion and arithmetic for every numeric kind. */
+export function binaryNumericOperation<A extends NumericKind, B extends NumericKind>(
+  left: CQLNumber<A>,
+  right: CQLNumber<B>,
   operation: 'add' | 'subtract' | 'multiply' | 'divide' | 'truncatedDivide' | 'modulo'
-): CqlNumericValue {
-  const kind = promotedKind(left.numericKind, right.numericKind);
-
-  switch (kind) {
-    case 'Integer': {
-      const x = coerceNumeric(left, kind);
-      const y = coerceNumeric(right, kind);
-      switch (operation) {
-        case 'add':
-          return x.add(y);
-        case 'subtract':
-          return x.subtract(y);
-        case 'multiply':
-          return x.multiplyBy(y);
-        case 'divide':
-        case 'truncatedDivide':
-          return x.divideBy(y);
-        case 'modulo':
-          return x.modulo(y);
-      }
-    }
-    case 'Long': {
-      const x = coerceNumeric(left, kind);
-      const y = coerceNumeric(right, kind);
-      switch (operation) {
-        case 'add':
-          return x.add(y);
-        case 'subtract':
-          return x.subtract(y);
-        case 'multiply':
-          return x.multiplyBy(y);
-        case 'divide':
-        case 'truncatedDivide':
-          return x.divideBy(y);
-        case 'modulo':
-          return x.modulo(y);
-      }
-    }
-    case 'Decimal': {
-      const x = coerceNumeric(left, kind);
-      const y = coerceNumeric(right, kind);
-      switch (operation) {
-        case 'add':
-          return x.add(y);
-        case 'subtract':
-          return x.subtract(y);
-        case 'multiply':
-          return x.multiplyBy(y);
-        case 'divide':
-          return x.divideBy(y);
-        case 'truncatedDivide':
-          return x.truncatedDivideBy(y);
-        case 'modulo':
-          return x.modulo(y);
-      }
-    }
+): CQLNumber<Promote<A, B>>;
+export function binaryNumericOperation(
+  left: CQLNumber,
+  right: CQLNumber,
+  operation: 'add' | 'subtract' | 'multiply' | 'divide' | 'truncatedDivide' | 'modulo'
+): CQLNumber {
+  switch (operation) {
+    case 'add':
+      return left.add(right);
+    case 'subtract':
+      return left.subtract(right);
+    case 'multiply':
+      return left.multiplyBy(right);
+    case 'divide':
+      return left.divideBy(right);
+    case 'truncatedDivide':
+      return left.truncatedDivideBy(right);
+    case 'modulo':
+      return left.modulo(right);
   }
 }

@@ -1,5 +1,6 @@
+import { CQLNumber, CQLDecimal } from '../datatypes/cql-number';
 import * as ucum from '@lhncbc/ucum-lhc';
-import { Decimal } from '../datatypes/decimal';
+
 const utils = ucum.UcumLhcUtils.getInstance();
 
 // The CQL specification says that dates are based on the Gregorian calendar, so CQL-based year and month
@@ -67,12 +68,12 @@ export function checkUnit(unit: any, allowEmptyUnits = true, allowCQLDateUnits =
   return unitValidityCache.get(unit);
 }
 
-export function convertUnit(fromVal: Decimal, fromUnit: any, toUnit: any) {
+export function convertUnit(fromVal: CQLDecimal, fromUnit: any, toUnit: any) {
   [fromUnit, toUnit] = [fromUnit, toUnit].map(fixUnit);
   if (fromUnit === toUnit) {
     return fromVal;
   }
-  // IMPORTANT: the UCUM library operates on raw JS numbers, not our Decimal
+  // IMPORTANT: the UCUM library operates on raw JS numbers, not CQLNumber
   // this means that extremely large or extremely small numbers could lose precision via this function.
   // To prevent this, instead of converting fromVal directly, convert 1 unit to get the conversion factor,
   // and manually multiply the fromVal by it.
@@ -86,7 +87,7 @@ export function convertUnit(fromVal: Decimal, fromUnit: any, toUnit: any) {
     return;
   }
 
-  let rawResult: Decimal;
+  let rawResult: CQLDecimal;
   if (testFrom.fromUnitIsSpecial === false && testTo.fromUnitIsSpecial === false) {
     const conversion = utils.convertUnitTo(fromUnit, 1, toUnit);
     if (conversion.status !== 'succeeded') {
@@ -100,7 +101,7 @@ export function convertUnit(fromVal: Decimal, fromUnit: any, toUnit: any) {
     if (result.status !== 'succeeded') {
       return;
     }
-    rawResult = Decimal.from(result.toVal);
+    rawResult = CQLNumber.decimal(result.toVal);
   }
   // IMPORTANT: Experimentation shows JS number issues are more common than one might anticipate,
   // eg 0 C to F produces "31.999999999999943" which gets normalized to "32.00000000".
@@ -111,7 +112,12 @@ export function convertUnit(fromVal: Decimal, fromUnit: any, toUnit: any) {
   return rawResult.normalized().withoutTrailingZeros().withMinimumScale(fromVal.scale);
 }
 
-export function normalizeUnitsWhenPossible(val1: Decimal, unit1: any, val2: Decimal, unit2: any) {
+export function normalizeUnitsWhenPossible(
+  val1: CQLDecimal,
+  unit1: any,
+  val2: CQLDecimal,
+  unit2: any
+) {
   // If both units are CQL date units, return CQL date units
   const useCQLDateUnits = unit1 in CQL_TO_UCUM_DATE_UNITS && unit2 in CQL_TO_UCUM_DATE_UNITS;
   const resultConverter = (unit: any) => {
@@ -155,7 +161,7 @@ export function convertToCQLDateUnit(unit: any) {
 
 export function compareUnits(unit1: any, unit2: any) {
   try {
-    const c = convertUnit(Decimal.from(1), unit1, unit2);
+    const c = convertUnit(CQLNumber.decimal(1), unit1, unit2);
     if (c && c.greaterThan(1)) {
       // unit1 is bigger (less precise)
       return 1;
@@ -274,7 +280,7 @@ export function getQuotientOfUnits(unit1: any, unit2: any) {
 
 // UNEXPORTED FUNCTIONS
 
-function convertToBaseUnit(fromVal: Decimal, fromUnit: any, toBaseUnit: any) {
+function convertToBaseUnit(fromVal: CQLDecimal, fromUnit: any, toBaseUnit: any) {
   const fromPower = getBaseUnitAndPower(fromUnit)[1];
   const toUnit = fromPower === 1 ? toBaseUnit : `${toBaseUnit}${fromPower}`;
   const newVal = convertUnit(fromVal, fromUnit, toUnit);

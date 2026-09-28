@@ -11,7 +11,7 @@ import {
   Concept,
   Date as CqlDate,
   DateTime,
-  Decimal,
+  CQLNumber,
   Interval,
   IntervalTypeSpecifier,
   ListTypeSpecifier,
@@ -138,7 +138,7 @@ describe('guessSpecifierType', () => {
       type: 'NamedTypeSpecifier',
       name: '{urn:hl7-org:elm-types:r1}Integer'
     } as NamedTypeSpecifier);
-    expect(guessSpecifierType(Decimal.from('3.14'))).toEqual({
+    expect(guessSpecifierType(CQLNumber.decimal('3.14'))).toEqual({
       type: 'NamedTypeSpecifier',
       name: '{urn:hl7-org:elm-types:r1}Decimal'
     } as NamedTypeSpecifier);
@@ -179,7 +179,9 @@ describe('guessSpecifierType', () => {
   });
 
   it('returns the correct type for Uncertainty values', () => {
-    const spec = guessSpecifierType(new Uncertainty(Decimal.from(1.5), Decimal.from(2.5)))!;
+    const spec = guessSpecifierType(
+      new Uncertainty(CQLNumber.decimal(1.5), CQLNumber.decimal(2.5))
+    )!;
     expect(spec).toEqual({
       type: 'NamedTypeSpecifier',
       name: '{urn:hl7-org:elm-types:r1}Decimal'
@@ -195,7 +197,7 @@ describe('guessSpecifierType', () => {
   });
 
   it('returns ListTypeSpecifier with Choice for arrays with mixed types', () => {
-    const spec = guessSpecifierType([1, Decimal.from(2.5), true])!;
+    const spec = guessSpecifierType([1, CQLNumber.decimal(2.5), true])!;
     expect(spec).toEqual({
       type: 'ListTypeSpecifier',
       elementType: {

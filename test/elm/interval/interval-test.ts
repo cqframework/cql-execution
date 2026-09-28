@@ -1,10 +1,11 @@
+import { MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../../../src/datatypes/cql-number';
 import should from 'should';
 import setup from '../../setup';
 const data = require('./data');
 import { Interval } from '../../../src/datatypes/interval';
 import { DateTime, MIN_DATETIME_VALUE, MAX_DATETIME_VALUE } from '../../../src/datatypes/datetime';
 import { Uncertainty } from '../../../src/datatypes/uncertainty';
-import { MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../../../src/datatypes/decimal';
+
 import {
   MIN_INT_VALUE,
   MAX_INT_VALUE,
@@ -2224,7 +2225,7 @@ describe('LongIntervalExcept', () => {
   });
 
   it('should properly calculate before/after except', async function () {
-    (await this.longBeforeExcept.exec(this.ctx)).should.eql(new Interval(1n, 5n));
+    (await this.longBeforeExcept.exec(this.ctx)).should.eql(new Interval(0n, 4n));
   });
 
   it('should properly calculate meets except', async function () {
