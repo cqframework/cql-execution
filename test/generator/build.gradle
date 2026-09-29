@@ -5,12 +5,13 @@ java {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
-    implementation group: 'org.cqframework', name: 'cql-to-elm-cli', version: '4.2.0'
-    implementation group: 'org.cqframework', name: 'cql-to-elm', version: '4.2.0'
+    implementation group: 'org.cqframework', name: 'cql-to-elm-cli', version: '5.3.0-dehalltest'
+    implementation group: 'org.cqframework', name: 'cql-to-elm', version: '5.3.0-dehalltest'
     implementation group: 'net.sf.jopt-simple', name: 'jopt-simple', version: '4.7'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.0'
 }

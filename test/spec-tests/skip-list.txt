@@ -1,8 +1,5 @@
 # Invalid CQL (does not translate)
-CqlTypesTest.Time.TimeUpperBoundHours       Intentional Translator error: Invalid time input (T24:59:59.999). Use ISO 8601 time representation (hh:mm:ss.fff)
-CqlTypesTest.Time.TimeUpperBoundMinutes     Translator error: Invalid time input[...]
-CqlTypesTest.Time.TimeUpperBoundSeconds     Translator error: Invalid time input[...]
-"CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision"       Translator error: Syntax error at Z
+"CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision"       Translator error: Syntax error at Z. Test is marked as invalid "true" but should be "syntax"
 
 # Invalid Translation (translates, but translates wrong)
 CqlAggregateTest.AggregateTests.RolledOutIntervals  CQL adds an integer to a date ("S + duration in days of X"). Should be "S + Quantity{ value: duration in days of X, unit: 'days' }". Translator translates it, but probably shouldn't.
@@ -55,7 +52,6 @@ CqlArithmeticFunctionsTest.LowBoundary.LowBoundaryNullPrecision             Wron
 # Equivalent answer but represented differently than expected output
 
 # Incorrect answer
-CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (true vs null - due to not evaluating DateTime(null) as null)
 "CqlComparisonOperatorsTest.Unit Comparison.TestQuantityMonthEqualMo"           Wrong answer: Quantity =/~ should have special semantics for calendar-based units
 "CqlComparisonOperatorsTest.Unit Comparison.TestQuantityMonthNotEqualMo"        Wrong answer: Quantity =/~ should have special semantics for calendar-based units
 "CqlComparisonOperatorsTest.Unit Comparison.TestQuantityMonthEquivalentMo"      Wrong answer: Quantity =/~ should have special semantics for calendar-based units
@@ -96,9 +92,3 @@ CqlArithmeticFunctionsTest.Modulo.Modulo10By3Quantity                 Modulo not
 CqlListOperatorsTest.Slice                              Slice not implemented
 
 # Legacy Behavior (Test targets an earlier version of CQL)
-CqlDateTimeOperatorsTest.DateTimeComponentFrom.DateTimeComponentFromTimezoneOffset      Translator error: Timezone keyword is only valid in 1.3 or lower
-CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1D          Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware.
-CqlArithmeticFunctionsTest.Predecessor.PredecessorOf101D        Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware
-CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1QCM        Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware
-CqlArithmeticFunctionsTest.Successor.SuccessorOf1D              Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware
-CqlArithmeticFunctionsTest.Successor.SuccessorOf101D            Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware

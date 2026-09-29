@@ -3,6 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const convert = require('xml-js');
 
+const cqlSpecVersion = fs.readFileSync(path.join(__dirname, '../../specification.version'), 'utf-8');
+
 // First read the skiplist and build a map of skipped tests
 const skippedTestMap = new Map();
 const skipListText = fs.readFileSync(path.join(__dirname, 'skip-list.txt'), 'utf-8');
@@ -85,6 +87,17 @@ fs.readdirSync(path.join(__dirname, 'xml')).forEach(file => {
         processedSkips.add(`${suiteName}.${groupName}.${testName}`);
       } else if (test.library != null) {
         skipped = 'Test <library> tag not supported in cql-execution test runner';
+      } else if (test.expression._attributes && test.expression._attributes.invalid) {
+        const invalid = test.expression._attributes.invalid;
+        if (invalid === 'syntax') {
+          skipped = 'Test includes an intentional syntax error; it cannot be parsed or translated'
+        } else if (invalid === 'semantic') {
+          skipped = 'Test includes an intentional semantic error; it parses but does not translate'
+        }
+      } else if (test._attributes && test._attributes.version > cqlSpecVersion) {
+        skipped = `Test targets minimum CQL version ${test.version} which is higher than configured library target ${cqlSpecVersion}`
+      } else if (test._attributes && test._attributes.versionTo < cqlSpecVersion) {
+        skipped = `Test targets maximum CQL version ${test.version} which is lower than configured library target ${cqlSpecVersion}`
       }
       if (skipped != null) {
         cql += `    skipped: '${skipped.replace(/'/g, "\\'").trim()}'\n`;
@@ -96,11 +109,7 @@ fs.readdirSync(path.join(__dirname, 'xml')).forEach(file => {
       if (test.expression != null) {
         cql += `    expression: ${test.expression._text}`;
         if (test.expression._attributes && test.expression._attributes.invalid) {
-          if (test.expression._attributes.invalid == 'true') {
-            cql += ',\n    invalid: true';
-          } else if (test.expression._attributes.invalid == 'semantic') {
-            cql += ",\n    invalid: 'semantic'";
-          }
+          cql += `,\n    invalid: ${test.expression._attributes.invalid}`;
         }
       }
       if (test.output != null) {
