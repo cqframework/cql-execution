@@ -452,14 +452,14 @@ describe('HighBoundary', () => {
     setup(this, data);
   });
 
-  it('should return the greatest possible Decimal boundaries', async function () {
-    (await this.decimalEightPrecision.exec(this.ctx)).should.equalDecimal('1.58799999');
-    (await this.minimalDecimalFivePrecision.exec(this.ctx)).should.equalDecimal('1.19999');
-    (await this.fullDecimalFivePrecision.exec(this.ctx)).should.equalDecimal('1.58794');
+  it('should return the greatest possible Decimal boundaries at the requested precision', async function () {
+    (await this.decimalEightPrecision.exec(this.ctx)).should.equalDecimal('1.58750000');
+    (await this.minimalDecimalFivePrecision.exec(this.ctx)).should.equalDecimal('1.15000');
+    (await this.fullDecimalFivePrecision.exec(this.ctx)).should.equalDecimal('1.58795');
   });
 
-  it.skip('should return the greatest possible Decimal boundaries with trailing zero on input', async function () {
-    (await this.decimalTrailingZeroFivePrecision.exec(this.ctx)).should.equalDecimal('1.09999');
+  it('should return the greatest possible Decimal boundaries with trailing zero on input', async function () {
+    (await this.decimalTrailingZeroFivePrecision.exec(this.ctx)).should.equalDecimal('1.05000');
   });
 
   it('should return the greatest possible Date boundaries', async function () {
@@ -534,8 +534,8 @@ describe('LowBoundary', () => {
   });
 
   it('should return the least possible Decimal boundaries', async function () {
-    (await this.decimalEightPrecision.exec(this.ctx)).should.equalDecimal('1.587');
-    (await this.minimalDecimalFivePrecision.exec(this.ctx)).should.equalDecimal('1.0'); // note: Number doesn't keep trailing 0s in decimal
+    (await this.decimalEightPrecision.exec(this.ctx)).should.equalDecimal('1.58650000');
+    (await this.minimalDecimalFivePrecision.exec(this.ctx)).should.equalDecimal('0.95000');
     (await this.fullDecimalFivePrecision.exec(this.ctx)).should.equalDecimal('1.58794');
   });
 

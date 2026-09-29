@@ -298,9 +298,11 @@ define "Exp": Tuple{
 
 define "HighBoundary": Tuple{
   "HighBoundaryDecimal": Tuple{
+    skipped: 'Wrong output: HighBoundary(Decimal) was clarified in 2.0. HighBoundary(1.587, 8) should be 1.58750000, not 1.58799999'
+    /*
     expression: HighBoundary(1.587, 8),
     output: 1.58799999
-  },
+    */  },
   "HighBoundaryDateMonth": Tuple{
     expression: HighBoundary(@2014, 6),
     output: @2014-12
@@ -318,9 +320,11 @@ define "HighBoundary": Tuple{
     output: null
   },
   "HighBoundaryNullPrecision": Tuple{
+    skipped: 'Wrong output: HighBoundary(Decimal) was clarified in 2.0. HighBoundary(1.58888, null) should be 1.58888500, not 1.58888999'
+    /*
     expression: HighBoundary(1.58888, null),
     output: 1.58888999
-  }
+    */  }
 }
 
 define "Log": Tuple{
@@ -364,9 +368,11 @@ define "Log": Tuple{
 
 define "LowBoundary": Tuple{
   "LowBoundaryDecimal": Tuple{
+    skipped: 'Wrong output: LowBoundary(Decimal) was clarified in 2.0. LowBoundary(1.587, 8) should be 1.58650000, not 1.58700000'
+    /*
     expression: LowBoundary(1.587, 8),
     output: 1.58700000
-  },
+    */  },
   "LowBoundaryDateMonth": Tuple{
     expression: LowBoundary(@2014, 6),
     output: @2014-01
@@ -384,9 +390,11 @@ define "LowBoundary": Tuple{
     output: null
   },
   "LowBoundaryNullPrecision": Tuple{
+    skipped: 'Wrong output: LowBoundary(Decimal) was clarified in 2.0. LowBoundary(1.58888, null) should be 1.58887500, not 1.58888000'
+    /*
     expression: LowBoundary(1.58888, null),
     output: 1.58888000
-  }
+    */  }
 }
 
 define "Ln": Tuple{

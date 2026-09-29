@@ -8760,20 +8760,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -8900,20 +8891,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -8937,20 +8919,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -9077,20 +9050,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -9110,20 +9074,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -9131,37 +9086,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
-                      "value": {
-                        "type": "HighBoundary",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                            "value": "1.587",
-                            "annotation": []
-                          },
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                            "value": "8",
-                            "annotation": []
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "value": {
                         "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "value": "1.58799999",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: HighBoundary(Decimal) was clarified in 2.0. HighBoundary(1.587, 8) should be 1.58750000, not 1.58799999",
                         "annotation": []
                       }
                     }
@@ -9573,20 +9503,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -9594,41 +9515,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
-                      "value": {
-                        "type": "HighBoundary",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                            "value": "1.58888",
-                            "annotation": []
-                          },
-                          {
-                            "type": "As",
-                            "asType": "{urn:hl7-org:elm-types:r1}Integer",
-                            "annotation": [],
-                            "signature": [],
-                            "operand": {
-                              "type": "Null",
-                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
-                              "annotation": []
-                            }
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "value": {
                         "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "value": "1.58888999",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: HighBoundary(Decimal) was clarified in 2.0. HighBoundary(1.58888, null) should be 1.58888500, not 1.58888999",
                         "annotation": []
                       }
                     }
@@ -10875,20 +10767,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -11015,20 +10898,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -11052,20 +10926,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -11192,20 +11057,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -11225,20 +11081,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -11246,37 +11093,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
-                      "value": {
-                        "type": "LowBoundary",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                            "value": "1.587",
-                            "annotation": []
-                          },
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                            "value": "8",
-                            "annotation": []
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "value": {
                         "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "value": "1.58700000",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: LowBoundary(Decimal) was clarified in 2.0. LowBoundary(1.587, 8) should be 1.58650000, not 1.58700000",
                         "annotation": []
                       }
                     }
@@ -11688,20 +11510,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -11709,41 +11522,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
-                      "value": {
-                        "type": "LowBoundary",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                            "value": "1.58888",
-                            "annotation": []
-                          },
-                          {
-                            "type": "As",
-                            "asType": "{urn:hl7-org:elm-types:r1}Integer",
-                            "annotation": [],
-                            "signature": [],
-                            "operand": {
-                              "type": "Null",
-                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
-                              "annotation": []
-                            }
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "value": {
                         "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "value": "1.58888000",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: LowBoundary(Decimal) was clarified in 2.0. LowBoundary(1.58888, null) should be 1.58887500, not 1.58888000",
                         "annotation": []
                       }
                     }

@@ -444,25 +444,6 @@ export class MaxValue extends Expression {
   }
 }
 
-function decimalBoundary(value: Decimal, precision: number | null, boundary: 'high' | 'low') {
-  precision ??= 8;
-  if (precision < 0 || precision > 8) {
-    return null;
-  }
-
-  const [whole = '0', decimalPart = ''] = value.toString().split('.');
-  // we can't do much w/ decimals that are using scientific notation
-  if (decimalPart.includes('e')) {
-    return value;
-  }
-
-  const filledDecimalPart = decimalPart
-    .padEnd(precision, boundary === 'high' ? '9' : '0')
-    .slice(0, precision);
-
-  return Decimal.from(`${whole}.${filledDecimalPart}`);
-}
-
 function boundary(
   value: CQLDate | DateTime | Decimal,
   precision: number | null,
@@ -470,10 +451,6 @@ function boundary(
 ) {
   if (value == null) {
     return null;
-  }
-
-  if (value instanceof Decimal) {
-    return decimalBoundary(value, precision, boundary);
   }
 
   if (boundary === 'high') {
