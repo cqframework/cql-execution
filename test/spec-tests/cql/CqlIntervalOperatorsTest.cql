@@ -745,9 +745,11 @@ define "Included In": Tuple{
     output: false
   },
   "DateTimeIncludedInNull": Tuple{
+    skipped: 'Wrong output: @2017-09-01T00:00:00 is equal to the lower bound @2017-09-01T00:00:00.000 since missing milliseconds compare as 0, so the interval is included; expected true, not null.'
+    /*
     expression: Interval [@2017-09-01T00:00:00, @2017-09-01T00:00:00] included in Interval [@2017-09-01T00:00:00.000, @2017-12-30T23:59:59.999],
     output: null
-  },
+    */  },
   "DateTimeIncludedInPrecisionTrue": Tuple{
     expression: Interval [@2017-09-01T00:00:00, @2017-09-01T00:00:00] included in day of Interval [@2017-09-01T00:00:00.000, @2017-12-30T23:59:59.999],
     output: true
@@ -1402,9 +1404,11 @@ define "ProperContains": Tuple{
     output: false
     */  },
   "TimeProperContainsNull": Tuple{
+    skipped: 'Wrong output: @T12:00:00 is before the lower bound @T12:00:00.001 since missing milliseconds compare as 0; expected false, not null.'
+    /*
     expression: Interval[@T12:00:00.001, @T21:59:59.999] properly includes @T12:00:00,
     output: null
-  },
+    */  },
   "TimeProperContainsPrecisionTrue": Tuple{
     expression: Interval[@T12:00:00.000, @T21:59:59.999] properly includes second of @T12:00:01,
     output: true
@@ -1433,9 +1437,11 @@ define "ProperIn": Tuple{
     output: false
     */  },
   "TimeProperInNull": Tuple{
+    skipped: 'Wrong output: @T12:00:00 is before the lower bound @T12:00:00.001 since missing milliseconds compare as 0; expected false, not null.'
+    /*
     expression: @T12:00:00 properly included in Interval[@T12:00:00.001, @T21:59:59.999],
     output: null
-  },
+    */  },
   "TimeProperInPrecisionTrue": Tuple{
     expression: @T12:00:01 properly included in second of Interval[@T12:00:00.000, @T21:59:59.999],
     output: true
