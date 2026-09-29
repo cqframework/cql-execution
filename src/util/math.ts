@@ -186,6 +186,12 @@ export function subtract(a: any, b: any): any {
 }
 
 export function multiply(a: any, b: any) {
+  if (a.isQuantity) {
+    return a.multiplyBy(b);
+  }
+  if (b.isQuantity) {
+    return b.multiplyBy(a);
+  }
   if (a.isDecimal || b.isDecimal) {
     const product = Decimal.from(a).multiplyBy(b);
     return overflowsOrUnderflows(product) ? null : product;
@@ -203,6 +209,9 @@ export function multiply(a: any, b: any) {
 }
 
 export function divide(a: any, b: any, truncated?: boolean) {
+  if (a.isQuantity) {
+    return a.dividedBy(b, truncated);
+  }
   if (a.isDecimal || b.isDecimal) {
     const bDecimal = Decimal.from(b);
     if (bDecimal.equals(0)) {

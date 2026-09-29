@@ -1,6 +1,6 @@
 import { Expression } from './expression';
 import * as MathUtil from '../util/math';
-import { Quantity, doMultiplication as doQuantityMultiplication } from '../datatypes/quantity';
+import { Quantity } from '../datatypes/quantity';
 import { Uncertainty } from '../datatypes/uncertainty';
 import { Context } from '../runtime/context';
 import { build } from './builder';
@@ -84,20 +84,8 @@ export class Multiply extends Expression {
     }
 
     let product;
-    if (x.isQuantity || y.isQuantity) {
-      product = doQuantityMultiplication(x, y);
-    } else if (x.isUncertainty && y.isUncertainty) {
-      if (x.low.isQuantity) {
-        product = new Uncertainty(
-          doQuantityMultiplication(x.low, y.low),
-          doQuantityMultiplication(x.high, y.high)
-        );
-      } else {
-        product = new Uncertainty(
-          MathUtil.multiply(x.low, y.low),
-          MathUtil.multiply(x.high, y.high)
-        );
-      }
+    if (x.isUncertainty && y.isUncertainty) {
+      product = new Uncertainty(MathUtil.multiply(x.low, y.low), MathUtil.multiply(x.high, y.high));
     } else {
       product = MathUtil.multiply(x, y);
     }
@@ -126,17 +114,9 @@ export class Divide extends Expression {
         x = new Uncertainty(x, x);
       }
 
-      if (x.isQuantity) {
-        quotient = x.dividedBy(y);
-      } else if (x.isUncertainty && y.isUncertainty) {
-        let low, high;
-        if (x.low.isQuantity) {
-          low = x.low.dividedBy(y.high);
-          high = x.high.dividedBy(y.low);
-        } else {
-          low = MathUtil.divide(x.low, y.high);
-          high = MathUtil.divide(x.high, y.low);
-        }
+      if (x.isUncertainty && y.isUncertainty) {
+        const low = MathUtil.divide(x.low, y.high);
+        const high = MathUtil.divide(x.high, y.low);
         quotient = new Uncertainty(low, high);
       } else {
         quotient = MathUtil.divide(x, y);
@@ -162,13 +142,7 @@ export class TruncatedDivide extends Expression {
     }
 
     const [x, y] = args;
-    let quotient;
-    if (x.isQuantity) {
-      quotient = x.dividedBy(y, true);
-    } else {
-      quotient = MathUtil.divide(x, y, true);
-    }
-
+    const quotient = MathUtil.divide(x, y, true);
     return finalizeArithmeticResult(quotient);
   }
 }

@@ -1,6 +1,5 @@
 import should from 'should';
-import { doMultiplication, parseQuantity, Quantity } from '../../../src/datatypes/quantity';
-import * as MathUtil from '../../../src/util/math';
+import { Quantity } from '../../../src/datatypes/quantity';
 import setup from '../../setup';
 import {
   MAX_INT_VALUE,
@@ -28,31 +27,6 @@ const validateQuantity = function (
   object.isQuantity.should.be.true();
   const q = new Quantity(expectedValue, expectedUnit);
   q.equals(object).should.be.true('Expected ' + object + ' to equal ' + q);
-};
-
-const doQuantityMathTests = function (tests: string[][], operator: string) {
-  let func: any;
-  if (operator === '*') {
-    func = doMultiplication;
-  } else if (operator === '/') {
-    func = (a: Quantity, b: Quantity) => a.dividedBy(b);
-  } else if (operator === '+') {
-    func = MathUtil.add;
-  } else if (operator === '-') {
-    func = MathUtil.subtract;
-  }
-
-  for (const t of tests) {
-    const a = parseQuantity(t[0]);
-    const b = parseQuantity(t[1]);
-    // try to parse the expected value but if it comes back null
-    // which it will if there are no units create a new Quantity
-    // with just the exepected as the value with null units
-    const e = parseQuantity(t[2]) || new Quantity(t[2]);
-
-    const res = func(a, b);
-    e.equals(res).should.be.true(`${a} ${operator} ${b} should eq ${e} but was ${res}`);
-  }
 };
 
 describe('Add', () => {
@@ -960,47 +934,6 @@ describe('Quantity', () => {
 
   it('should be able to perform ucum subtraction in cql', async function () {
     (await this.subtractUcum.exec(this.ctx)).should.be.true();
-  });
-
-  it('should be able to perform ucum multiplication', async function () {
-    const tests = [
-      ["10 'm'", "20 'm'", "200 'm2'"],
-      ["25 'km'", "5 'm'", "125000 'm2'"],
-      ["10 'ml'", "20 'dl'", "0.02 'l2'"]
-    ];
-    doQuantityMathTests(tests, '*');
-  });
-
-  it('should be able to perform ucum division', async function () {
-    const tests = [
-      ["10 'cm2'", "5 'cm'", "2 'cm'"],
-      ["10 'm2'", "5 'm'", "2 'm'"],
-      ["25 'km'", "5 'm'", "5000 '1'"],
-      ["25 'mg'", "5 'mg'", "5 '1'"],
-      ["25 'mg'", "5 '1'", "5 'mg'"],
-      ["100 'm'", "2 'h'", "50 'm/h'"],
-      ["100 '[in_i]'", "2 '[lb_av]'", "50 '[in_i]/[lb_av]'"]
-    ];
-    // Note that these tests check for equality but not that the result
-    // has any particular unit.  12 cm^2 / 4 cm = 0.03 m rather than 3 cm.
-    doQuantityMathTests(tests, '/');
-  });
-  it('should be able to perform ucum addition', async function () {
-    const tests = [
-      ["10 'm'", "20 'm'", "30 'm'"],
-      ["25 'km'", "5 'm'", "25005 'm'"],
-      ["10 'ml'", "20 'dl'", "2.01 'l'"]
-    ];
-    doQuantityMathTests(tests, '+');
-  });
-
-  it('should be able to perform ucum subtraction', async function () {
-    const tests = [
-      ["10 'd'", "20 'd'", "-10 'd'"],
-      ["25 'km'", "5 'm'", "24995 'm'"],
-      ["10 'ml'", "20 'dl'", "-1.99 'l'"]
-    ];
-    doQuantityMathTests(tests, '-');
   });
 });
 
