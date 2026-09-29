@@ -3,7 +3,10 @@ const fs = require('fs');
 const path = require('path');
 const convert = require('xml-js');
 
-const cqlSpecVersion = fs.readFileSync(path.join(__dirname, '../../specification.version'), 'utf-8');
+const cqlSpecVersion = fs.readFileSync(
+  path.join(__dirname, '../../specification.version'),
+  'utf-8'
+);
 
 // First read the skiplist and build a map of skipped tests
 const skippedTestMap = new Map();
@@ -90,14 +93,14 @@ fs.readdirSync(path.join(__dirname, 'xml')).forEach(file => {
       } else if (test.expression._attributes && test.expression._attributes.invalid) {
         const invalid = test.expression._attributes.invalid;
         if (invalid === 'syntax') {
-          skipped = 'Test includes an intentional syntax error; it cannot be parsed or translated'
+          skipped = 'Test includes an intentional syntax error; it cannot be parsed or translated';
         } else if (invalid === 'semantic') {
-          skipped = 'Test includes an intentional semantic error; it parses but does not translate'
+          skipped = 'Test includes an intentional semantic error; it parses but does not translate';
         }
       } else if (test._attributes && test._attributes.version > cqlSpecVersion) {
-        skipped = `Test targets minimum CQL version ${test.version} which is higher than configured library target ${cqlSpecVersion}`
+        skipped = `Test targets minimum CQL version ${test.version} which is higher than configured library target ${cqlSpecVersion}`;
       } else if (test._attributes && test._attributes.versionTo < cqlSpecVersion) {
-        skipped = `Test targets maximum CQL version ${test.version} which is lower than configured library target ${cqlSpecVersion}`
+        skipped = `Test targets maximum CQL version ${test.version} which is lower than configured library target ${cqlSpecVersion}`;
       }
       if (skipped != null) {
         cql += `    skipped: '${skipped.replace(/'/g, "\\'").trim()}'\n`;
