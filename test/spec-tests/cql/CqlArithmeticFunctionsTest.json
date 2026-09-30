@@ -8779,11 +8779,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}Date",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Date",
                         "annotation": []
                       }
                     }
@@ -8798,11 +8807,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}DateTime",
                         "annotation": []
                       }
                     }
@@ -8817,11 +8835,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}Time",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Time",
                         "annotation": []
                       }
                     }
@@ -8836,11 +8863,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
                         "annotation": []
                       }
                     }
@@ -8902,11 +8938,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Date",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Date",
                           "annotation": []
                         }
                       }
@@ -8921,11 +8966,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
                           "annotation": []
                         }
                       }
@@ -8940,11 +8994,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Time",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Time",
                           "annotation": []
                         }
                       }
@@ -8959,11 +9022,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
                           "annotation": []
                         }
                       }
@@ -9019,7 +9091,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "HighBoundary not implemented",
+                        "value": "Wrong output: HighBoundary(Decimal) was clarified in 2.0. HighBoundary(1.587, 8) should be 1.58750000, not 1.58799999",
                         "annotation": []
                       }
                     }
@@ -9036,11 +9108,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Date",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Date",
                           "annotation": []
                         }
                       }
@@ -9048,13 +9129,54 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "HighBoundary not implemented",
-                        "annotation": []
+                        "type": "HighBoundary",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Date",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Date",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Date",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2014",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "6",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Date",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Date",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2014",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "12",
+                          "annotation": []
+                        }
                       }
                     }
                   ]
@@ -9070,11 +9192,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
                           "annotation": []
                         }
                       }
@@ -9082,13 +9213,102 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "HighBoundary not implemented",
-                        "annotation": []
+                        "type": "HighBoundary",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "DateTime",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2014",
+                              "annotation": []
+                            },
+                            "month": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "1",
+                              "annotation": []
+                            },
+                            "day": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "1",
+                              "annotation": []
+                            },
+                            "hour": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "8",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "17",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "DateTime",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2014",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "8",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "59",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "59",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "999",
+                          "annotation": []
+                        }
                       }
                     }
                   ]
@@ -9104,11 +9324,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Time",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Time",
                           "annotation": []
                         }
                       }
@@ -9116,13 +9345,72 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "HighBoundary not implemented",
-                        "annotation": []
+                        "type": "HighBoundary",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Time",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Time",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Time",
+                            "annotation": [],
+                            "signature": [],
+                            "hour": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "10",
+                              "annotation": []
+                            },
+                            "minute": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "30",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "9",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Time",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Time",
+                        "annotation": [],
+                        "signature": [],
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "10",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "30",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "59",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "999",
+                          "annotation": []
+                        }
                       }
                     }
                   ]
@@ -9138,11 +9426,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
                           "annotation": []
                         }
                       }
@@ -9150,12 +9447,46 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "HighBoundary not implemented",
+                        "type": "HighBoundary",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "strict": false,
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
+                              "annotation": []
+                            },
+                            "asTypeSpecifier": {
+                              "type": "NamedTypeSpecifier",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                              "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "8",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                         "annotation": []
                       }
                     }
@@ -9189,7 +9520,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "HighBoundary not implemented",
+                        "value": "Wrong output: HighBoundary(Decimal) was clarified in 2.0. HighBoundary(1.58888, null) should be 1.58888500, not 1.58888999",
                         "annotation": []
                       }
                     }
@@ -10455,11 +10786,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}Date",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Date",
                         "annotation": []
                       }
                     }
@@ -10474,11 +10814,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}DateTime",
                         "annotation": []
                       }
                     }
@@ -10493,11 +10842,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}Time",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Time",
                         "annotation": []
                       }
                     }
@@ -10512,11 +10870,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
                         "annotation": []
                       }
                     }
@@ -10578,11 +10945,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Date",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Date",
                           "annotation": []
                         }
                       }
@@ -10597,11 +10973,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
                           "annotation": []
                         }
                       }
@@ -10616,11 +11001,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Time",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Time",
                           "annotation": []
                         }
                       }
@@ -10635,11 +11029,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
                           "annotation": []
                         }
                       }
@@ -10695,7 +11098,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "LowBoundary not implemented",
+                        "value": "Wrong output: LowBoundary(Decimal) was clarified in 2.0. LowBoundary(1.587, 8) should be 1.58650000, not 1.58700000",
                         "annotation": []
                       }
                     }
@@ -10712,11 +11115,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Date",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Date",
                           "annotation": []
                         }
                       }
@@ -10724,13 +11136,54 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "LowBoundary not implemented",
-                        "annotation": []
+                        "type": "LowBoundary",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Date",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Date",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Date",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2014",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "6",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Date",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Date",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2014",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        }
                       }
                     }
                   ]
@@ -10746,11 +11199,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
                           "annotation": []
                         }
                       }
@@ -10758,13 +11220,102 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "LowBoundary not implemented",
-                        "annotation": []
+                        "type": "LowBoundary",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "DateTime",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2014",
+                              "annotation": []
+                            },
+                            "month": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "1",
+                              "annotation": []
+                            },
+                            "day": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "1",
+                              "annotation": []
+                            },
+                            "hour": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "8",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "17",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "DateTime",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2014",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "8",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        }
                       }
                     }
                   ]
@@ -10780,11 +11331,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Time",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Time",
                           "annotation": []
                         }
                       }
@@ -10792,13 +11352,72 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "LowBoundary not implemented",
-                        "annotation": []
+                        "type": "LowBoundary",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Time",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Time",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Time",
+                            "annotation": [],
+                            "signature": [],
+                            "hour": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "10",
+                              "annotation": []
+                            },
+                            "minute": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "30",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "9",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Time",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Time",
+                        "annotation": [],
+                        "signature": [],
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "10",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "30",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        }
                       }
                     }
                   ]
@@ -10814,11 +11433,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
                           "annotation": []
                         }
                       }
@@ -10826,12 +11454,46 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "LowBoundary not implemented",
+                        "type": "LowBoundary",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "strict": false,
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
+                              "annotation": []
+                            },
+                            "asTypeSpecifier": {
+                              "type": "NamedTypeSpecifier",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                              "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "8",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                         "annotation": []
                       }
                     }
@@ -10865,7 +11527,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "LowBoundary not implemented",
+                        "value": "Wrong output: LowBoundary(Decimal) was clarified in 2.0. LowBoundary(1.58888, null) should be 1.58887500, not 1.58888000",
                         "annotation": []
                       }
                     }

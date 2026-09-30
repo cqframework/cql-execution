@@ -308,6 +308,46 @@ export class Decimal {
     return this.withScale(this.value.decimalPlaces());
   }
 
+  highBoundary(precision?: number | null) {
+    return this.boundary('high', precision);
+  }
+
+  lowBoundary(precision?: number | null) {
+    return this.boundary('low', precision);
+  }
+
+  private boundary(mode: 'high' | 'low', precision?: number | null) {
+    precision ??= CQL_IMPLICIT_SCALE;
+    // "If the precision is greater than the maximum possible precision of the implementation, the result is null."
+    // Also return null for negative values, to match fhirpath
+    if (precision > CQL_IMPLICIT_SCALE || precision < 0) {
+      return null;
+    }
+
+    if (!Number.isInteger(precision)) {
+      throw new RangeError(
+        `IllegalArgument: '${mode}Boundary' precision must be a non-negative integer`
+      );
+    }
+
+    // First add/subtract 5 at the next decimal place per the current scale
+    // for low:  1.0 --> 1.0 - 0.05 = 0.95,  1.00 --> 1.00 - 0.005 = 0.995,  1.234567 --> 1.2345665
+    // for high: 1.0 --> 1.0 + 0.05 = 1.05,  1.00 --> 1.00 + 0.005 = 1.005,  1.234567 --> 1.2345675
+    const nextPlace = Decimal.from('0.' + '0'.repeat(this.scale) + '5');
+
+    let unscaledResult: Decimal;
+    let roundingMode: DecimalRoundingMode;
+    if (mode === 'low') {
+      unscaledResult = this.subtract(nextPlace);
+      roundingMode = DecimalJS.ROUND_FLOOR; //round towards -infinity;
+    } else {
+      unscaledResult = this.add(nextPlace);
+      roundingMode = DecimalJS.ROUND_CEIL; // round towards +infinity
+    }
+    // Then round with the appropriate mode at the requested precision
+    return unscaledResult.withScale(precision, roundingMode);
+  }
+
   toNumber() {
     return this.value.toNumber();
   }

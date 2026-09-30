@@ -44,6 +44,10 @@ CqlComparisonOperatorsTest.Equal.TupleEqDifferentNamesWithOneNullId             
 "CqlComparisonOperatorsTest.Not Equal.TupleNotEqDifferingNamesWithOneNullId"        Wrong output: Tuple inequality with a known-unequal element should return true
 CqlStringOperatorsTest.Substring.SubstringEmptyAnd0                   Wrong output: Substring(x, x.length) should be null'. Note similar test SubstringAB2. See https://github.com/cqframework/cql-tests/issues/149
 "CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision2"      Wrong output: Comparing an imprecise time with a more precise time results in uncertainty
+CqlArithmeticFunctionsTest.HighBoundary.HighBoundaryDecimal                 Wrong output: HighBoundary(Decimal) was clarified in 2.0. HighBoundary(1.587, 8) should be 1.58750000, not 1.58799999
+CqlArithmeticFunctionsTest.HighBoundary.HighBoundaryNullPrecision           Wrong output: HighBoundary(Decimal) was clarified in 2.0. HighBoundary(1.58888, null) should be 1.58888500, not 1.58888999
+CqlArithmeticFunctionsTest.LowBoundary.LowBoundaryDecimal                   Wrong output: LowBoundary(Decimal) was clarified in 2.0. LowBoundary(1.587, 8) should be 1.58650000, not 1.58700000
+CqlArithmeticFunctionsTest.LowBoundary.LowBoundaryNullPrecision             Wrong output: LowBoundary(Decimal) was clarified in 2.0. LowBoundary(1.58888, null) should be 1.58887500, not 1.58888000
 
 # Potentially Incorrect Expected Output
 "CqlStringOperatorsTest.toString tests.DateTimeToString2"         Answer does not include timezone offset, but default offset depends on test environment
@@ -81,8 +85,6 @@ CqlTypesTest.Time.TimeMillisParsing                                             
 CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1QCMPrecision          Wrong answer: Translator loses Decimal precision (trailing zeros) in ELM representation of Quantity literal
 
 # Unimplemented
-CqlArithmeticFunctionsTest.HighBoundary                 HighBoundary not implemented
-CqlArithmeticFunctionsTest.LowBoundary                  LowBoundary not implemented
 CqlArithmeticFunctionsTest.Precision.PrecisionDecimal   Precision for Decimal not implemented
 CqlListOperatorsTest.Descendents                        Descendents not implemented
 

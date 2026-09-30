@@ -1,3 +1,4 @@
+import should from 'should';
 import { Decimal, TRUNCATE_TO_PRECISION } from '../../src/datatypes/decimal';
 
 describe('Decimal', () => {
@@ -361,6 +362,62 @@ describe('Decimal', () => {
       const value = Decimal.from('1.200').withoutTrailingZeros();
       value.should.equalDecimal('1.2');
       value.scale.should.equal(1);
+    });
+  });
+
+  describe('highBoundary', () => {
+    it('should return the greatest possible value of the input to the specified precision', () => {
+      Decimal.from(1.587).highBoundary().should.equalDecimal('1.58750000');
+      Decimal.from(1.587).highBoundary(8).should.equalDecimal('1.58750000');
+      Decimal.from(1.587).highBoundary(6).should.equalDecimal('1.587500');
+      Decimal.from(1.587).highBoundary(3).should.equalDecimal('1.588');
+      Decimal.from(1.587).highBoundary(2).should.equalDecimal('1.59');
+      Decimal.from(1.587).highBoundary(0).should.equalDecimal('2');
+      Decimal.from(-1.587).highBoundary().should.equalDecimal('-1.58650000');
+      Decimal.from(-1.587).highBoundary(8).should.equalDecimal('-1.58650000');
+      Decimal.from(-1.587).highBoundary(6).should.equalDecimal('-1.586500');
+      Decimal.from(-1.587).highBoundary(3).should.equalDecimal('-1.586');
+      Decimal.from(-1.587).highBoundary(2).should.equalDecimal('-1.58');
+      Decimal.from(-1.587).highBoundary(0).should.equalDecimal('-1');
+    });
+
+    it('should return null for out-of-bounds precision', () => {
+      should(Decimal.from(1.587).highBoundary(9)).be.null();
+      should(Decimal.from(1.587).highBoundary(100)).be.null();
+      should(Decimal.from(1.587).highBoundary(-1)).be.null();
+    });
+
+    it('should throw on non-integer precision', () => {
+      (() => Decimal.from(1).highBoundary(1.5)).should.throw(RangeError);
+      (() => Decimal.from(1).highBoundary(NaN)).should.throw(RangeError);
+    });
+  });
+
+  describe('lowBoundary', () => {
+    it('should return the least possible value of the input to the specified precision', () => {
+      Decimal.from(1.587).lowBoundary().should.equalDecimal('1.58650000');
+      Decimal.from(1.587).lowBoundary(8).should.equalDecimal('1.58650000');
+      Decimal.from(1.587).lowBoundary(6).should.equalDecimal('1.586500');
+      Decimal.from(1.587).lowBoundary(3).should.equalDecimal('1.586');
+      Decimal.from(1.587).lowBoundary(2).should.equalDecimal('1.58');
+      Decimal.from(1.587).lowBoundary(0).should.equalDecimal('1');
+      Decimal.from(-1.587).lowBoundary().should.equalDecimal('-1.58750000');
+      Decimal.from(-1.587).lowBoundary(8).should.equalDecimal('-1.58750000');
+      Decimal.from(-1.587).lowBoundary(6).should.equalDecimal('-1.587500');
+      Decimal.from(-1.587).lowBoundary(3).should.equalDecimal('-1.588');
+      Decimal.from(-1.587).lowBoundary(2).should.equalDecimal('-1.59');
+      Decimal.from(-1.587).lowBoundary(0).should.equalDecimal('-2');
+    });
+
+    it('should return null for out-of-bounds precision', () => {
+      should(Decimal.from(1.587).lowBoundary(9)).be.null();
+      should(Decimal.from(1.587).lowBoundary(100)).be.null();
+      should(Decimal.from(1.587).lowBoundary(-1)).be.null();
+    });
+
+    it('should throw on non-integer precision', () => {
+      (() => Decimal.from(1).lowBoundary(1.5)).should.throw(RangeError);
+      (() => Decimal.from(1).lowBoundary(NaN)).should.throw(RangeError);
     });
   });
 

@@ -5,6 +5,7 @@ import { Uncertainty } from '../datatypes/uncertainty';
 import { Context } from '../runtime/context';
 import { build } from './builder';
 import {
+  Date as CQLDate,
   DateTime,
   MAX_DATE_VALUE,
   MAX_DATETIME_VALUE,
@@ -440,6 +441,30 @@ export class MaxValue extends Expression {
     } else {
       throw new Error(`Maximum not supported for ${this.valueType}`);
     }
+  }
+}
+
+export class HighBoundary extends Expression {
+  constructor(json: any) {
+    super(json);
+  }
+
+  async exec(ctx: Context) {
+    const [value, precision]: [CQLDate | DateTime | Decimal | null, number | null] =
+      await this.execArgs(ctx);
+    return value?.highBoundary(precision) ?? null;
+  }
+}
+
+export class LowBoundary extends Expression {
+  constructor(json: any) {
+    super(json);
+  }
+
+  async exec(ctx: Context) {
+    const [value, precision]: [CQLDate | DateTime | Decimal | null, number | null] =
+      await this.execArgs(ctx);
+    return value?.lowBoundary(precision) ?? null;
   }
 }
 
