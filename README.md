@@ -36,11 +36,6 @@ Implementors should be aware of the following limitations and gaps in `cql-execu
 
 * Direct support for specific data models is not provided by this library (see above for details).
 * `PatientSource`, `CodeService`, and `Results` APIs are still evolving and subject to change.
-* Since this library uses the JavaScript `Number` class for both CQL `Integer` and CQL `Decimal`,
-  it may display the following limitations related to numbers and math:
-  * Reduced precision compared to that which is specified by the CQL specification
-  * Issues typically associated with floating point arithmetic
-  * Decimals without a decimal portion (e.g., `2.0`) may be treated as CQL `Integer`s
 * The following STU (non-normative) features introduced in CQL 1.5 are not yet supported:
   * Retrieve search paths
   * Retrieve includes
@@ -54,7 +49,7 @@ Implementors should be aware of the following limitations and gaps in `cql-execu
     with the intent on making incremental type improvements in subsequent pull requests.
 
 The above is a partial list covering the most significant limitations. For more details, see the
-[CQL_Execution_Features.xlsx](CQL_Execution_Features.xlsx) spreadsheet.
+[Feature Status wiki page](https://github.com/cqframework/cql-execution/wiki/Feature-Status).
 
 # Project Configuration
 
