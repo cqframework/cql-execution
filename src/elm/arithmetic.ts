@@ -444,32 +444,15 @@ export class MaxValue extends Expression {
   }
 }
 
-function boundary(
-  value: CQLDate | DateTime | Decimal,
-  precision: number | null,
-  boundary: 'high' | 'low'
-) {
-  if (value == null) {
-    return null;
-  }
-
-  if (boundary === 'high') {
-    return value.highBoundary?.(precision);
-  } else if (boundary === 'low') {
-    return value.lowBoundary?.(precision);
-  }
-
-  return null;
-}
-
 export class HighBoundary extends Expression {
   constructor(json: any) {
     super(json);
   }
 
   async exec(ctx: Context) {
-    const [value, precision] = await this.execArgs(ctx);
-    return boundary(value, precision, 'high');
+    const [value, precision]: [CQLDate | DateTime | Decimal | null, number | null] =
+      await this.execArgs(ctx);
+    return value?.highBoundary(precision) ?? null;
   }
 }
 
@@ -479,8 +462,9 @@ export class LowBoundary extends Expression {
   }
 
   async exec(ctx: Context) {
-    const [value, precision] = await this.execArgs(ctx);
-    return boundary(value, precision, 'low');
+    const [value, precision]: [CQLDate | DateTime | Decimal | null, number | null] =
+      await this.execArgs(ctx);
+    return value?.lowBoundary(precision) ?? null;
   }
 }
 
