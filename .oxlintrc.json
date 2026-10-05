@@ -10,7 +10,8 @@
     "**/lib",
     "**/lib-test",
     "**/dist",
-    "test-server/**"
+    "test-server/**",
+    "test/spec-tests/cql-tests-runner/**"
   ],
   "rules": {
     "no-loss-of-precision": "off",

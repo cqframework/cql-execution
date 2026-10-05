@@ -4,6 +4,7 @@
     "./",
     "../src"
   ],
+  "exclude": ["spec-tests/cql-tests-runner", "**/node_modules"],
   "compilerOptions": {
     "strictNullChecks": false,
     "rootDir": "../",

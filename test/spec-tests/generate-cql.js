@@ -27,13 +27,23 @@ skipListText.split(/[\r\n]+/).forEach(line => {
   skippedTestMap.set(match[1].replace(/(^")|("$)/g, ''), match[2]);
 });
 
-fs.readdirSync(path.join(__dirname, 'xml')).forEach(file => {
+const inputDir = path.join(__dirname, 'cql-tests-runner/cql-tests/tests/cql');
+const outputDir = path.join(__dirname, 'cql');
+
+if (!fs.existsSync(inputDir)) {
+  console.error('ERROR: cql-tests under the cql-tests-runner submodule not found!');
+  console.error(
+    'Have you loaded the submodules by running `git submodule update --init --recursive` ?'
+  );
+}
+
+fs.readdirSync(inputDir).forEach(file => {
   if (!file.endsWith('.xml')) {
     return;
   }
 
   // Read the XML file
-  const xmlFile = path.join(__dirname, 'xml', file);
+  const xmlFile = path.join(inputDir, file);
   let xmlJS;
   try {
     const xml = fs.readFileSync(xmlFile, 'utf-8');
@@ -129,15 +139,17 @@ fs.readdirSync(path.join(__dirname, 'xml')).forEach(file => {
   });
 
   // Write the CQL
-  const cqlFile = path.join(__dirname, 'cql', file.replace(/xml$/, 'cql'));
+  const cqlFile = path.join(outputDir, file.replace(/xml$/, 'cql'));
   fs.writeFileSync(cqlFile, cql, 'utf-8');
   console.log('Generated', cqlFile);
 });
 
+let exitError = false;
 if (invalidLines.size > 0) {
   console.error();
   console.error('Invalid lines in skip-list.txt:');
   invalidLines.forEach(l => console.error(`> ${l}`));
+  exitError = true;
 }
 
 processedSkips.forEach(s => skippedTestMap.delete(s));
@@ -145,4 +157,9 @@ if (skippedTestMap.size > 0) {
   console.error();
   console.error('Unmatched tests in skip-list.txt:');
   Array.from(skippedTestMap.keys()).forEach(k => console.error(`> ${k}`));
+  exitError = true;
+}
+
+if (exitError) {
+  process.exit(1);
 }
