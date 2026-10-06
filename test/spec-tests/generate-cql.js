@@ -35,6 +35,7 @@ if (!fs.existsSync(inputDir)) {
   console.error(
     'Have you loaded the submodules by running `git submodule update --init --recursive` ?'
   );
+  process.exit(1);
 }
 
 fs.readdirSync(inputDir).forEach(file => {
