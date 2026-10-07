@@ -2,12 +2,12 @@
 "CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision"       Translator error: Syntax error at Z. Test is marked as invalid "true" but should be "syntax"
 
 # Invalid Translation (translates, but translates wrong)
-CqlAggregateTest.AggregateTests.RolledOutIntervals  CQL adds an integer to a date ("S + duration in days of X"). Should be "S + Quantity{ value: duration in days of X, unit: 'days' }". Translator translates it, but probably shouldn't.
-CqlIntervalOperatorsTest.Overlaps.TestMaxIntervalOverlapsTrue               To get the desired result, the translator needs to case the Interval[null, null] operand as Interval<Integer>. See https://github.com/cqframework/clinical_quality_language/issues/1856
-CqlIntervalOperatorsTest.OverlapsBefore.TestMaxIntervalOverlapsBeforeTrue   To get the desired result, the translator needs to case the Interval[null, null] operand as Interval<Integer>.
-CqlIntervalOperatorsTest.OverlapsAfter.TestMaxIntervalOverlapsAfterTrue     To get the desired result, the translator needs to case the Interval[null, null] operand as Interval<Integer>.
-CqlIntervalOperatorsTest.Starts.TestMaxIntervalStartsFalse                  To get the desired result, the translator needs to case the Interval[null, null] operand as Interval<Integer>.
-CqlIntervalOperatorsTest.Union.TestUnionMaxInterval                         To get the desired result, the translator needs to case the Interval[null, null] operand as Interval<Integer>.
+CqlAggregateTest.AggregateTests.RolledOutIntervals                          Invalid Test: Incorrectly casts starting expression to List<Interval<DateTime>>: https://github.com/cqframework/cql-tests/pull/146 (merged, remove this skip once cql-tests-runner points to that commit or newer)
+CqlIntervalOperatorsTest.Overlaps.TestMaxIntervalOverlapsTrue               To get the desired result, the translator needs to cast the Interval[null, null] operand as Interval<Integer>. https://github.com/cqframework/clinical_quality_language/issues/1856
+CqlIntervalOperatorsTest.OverlapsBefore.TestMaxIntervalOverlapsBeforeTrue   To get the desired result, the translator needs to cast the Interval[null, null] operand as Interval<Integer>. https://github.com/cqframework/clinical_quality_language/issues/1856
+CqlIntervalOperatorsTest.OverlapsAfter.TestMaxIntervalOverlapsAfterTrue     To get the desired result, the translator needs to cast the Interval[null, null] operand as Interval<Integer>. https://github.com/cqframework/clinical_quality_language/issues/1856
+CqlIntervalOperatorsTest.Starts.TestMaxIntervalStartsFalse                  To get the desired result, the translator needs to cast the Interval[null, null] operand as Interval<Integer>. https://github.com/cqframework/clinical_quality_language/issues/1856
+CqlIntervalOperatorsTest.Union.TestUnionMaxInterval                         To get the desired result, the translator needs to cast the Interval[null, null] operand as Interval<Integer>. https://github.com/cqframework/clinical_quality_language/issues/1856
 
 # Incorrect Expected Output
 CqlIntervalOperatorsTest.ProperContains.TimeProperContainsPrecisionFalse  Wrong output: According to spec, a contained point is properly contained as long as the interval is not a unit interval
@@ -16,18 +16,29 @@ CqlIntervalOperatorsTest.ProperIn.TimeProperInPrecisionFalse    Wrong output: Ac
 CqlIntervalOperatorsTest.ProperIn.TimeProperInFalse             Wrong output: According to spec, a contained point is properly in as long as the interval is not a unit interval
 CqlIntervalOperatorsTest.Expand.ExpandPer0D1                    Wrong output: Clarification still needed but provided answer is incorrect. See https://jira.hl7.org/browse/FHIR-58705
 CqlIntervalOperatorsTest.Expand.ExpandPer0D1IntervalOverload    Wrong output: Clarification still needed but provided answer is incorrect. See https://jira.hl7.org/browse/FHIR-58705
-CqlIntervalOperatorsTest.Except.DecimalIntervalExcept1to3       # Wrong output: The expected value is a closed form of the correct open-endpoint Interval[1.0, 4.0) . Converting to closed-form produces different results for CQL 2.0.0+ due to Decimal precision-awareness. See https://jira.hl7.org/browse/FHIR-59229
-CqlIntervalOperatorsTest.Except.QuantityIntervalExcept1to4      # Wrong output: The expected value is a closed form of the correct open-endpoint Interval[1.0 'g', 5.0 'g'). Converting to closed-form produces different results for CQL 2.0.0+ due to Decimal precision-awareness. See https://jira.hl7.org/browse/FHIR-59229
+CqlIntervalOperatorsTest.Except.DecimalIntervalExcept1to3       Wrong output: The expected value is a closed form of the correct open-endpoint Interval[1.0, 4.0) . Converting to closed-form produces different results for CQL 2.0.0+ due to Decimal precision-awareness. See https://jira.hl7.org/browse/FHIR-59229
+CqlIntervalOperatorsTest.Except.QuantityIntervalExcept1to4      Wrong output: The expected value is a closed form of the correct open-endpoint Interval[1.0 'g', 5.0 'g'). Converting to closed-form produces different results for CQL 2.0.0+ due to Decimal precision-awareness. See https://jira.hl7.org/browse/FHIR-59229
 CqlIntervalOperatorsTest.Intersect.TestIntersectNull            Wrong output: Expected is Interval[5, null) but this example is in the spec, where the result "ends at some value between 5 and 10" meaning an uncertainty.
 "CqlIntervalOperatorsTest.Included In.DateTimeIncludedInNull"               Wrong output: @2017-09-01T00:00:00 is equal to the lower bound @2017-09-01T00:00:00.000 since missing milliseconds compare as 0, so the interval is included; expected true, not null.
 CqlIntervalOperatorsTest.ProperContains.TimeProperContainsNull              Wrong output: @T12:00:00 is before the lower bound @T12:00:00.001 since missing milliseconds compare as 0; expected false, not null.
 CqlIntervalOperatorsTest.ProperIn.TimeProperInNull                          Wrong output: @T12:00:00 is before the lower bound @T12:00:00.001 since missing milliseconds compare as 0; expected false, not null.
-CqlIntervalOperatorsTest.PointFrom.TestPointFromUnknownIntervalNull         Wrong output: Per the spec, "attempting to extract a point from the maximum interval (Interval[null, null]) will result in an error."
 
-CqlListOperatorsTest.Equal.EqualNullNull                        Wrong output: According to spec, if either list contains a null, the result is null
 CqlListOperatorsTest.Sort.simpleSortAsc                         Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 CqlListOperatorsTest.Sort.simpleSortDesc                        Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 "CqlStringOperatorsTest.toString tests.QuantityToString"        Wrong output: Spec says Quantity and Decimal ToString must always contain a decimal point and at least 1 digit on each side. Note this requirement itself also causes issues by introducing precision in the string that may not exist in the original Decimal. Future spec changes may make this test's expected value correct.
+CqlComparisonOperatorsTest.Equal.TupleEqDifferentNamesWithOneNullId                 Wrong output: Tuple equality with a known-unequal element should return false
+"CqlComparisonOperatorsTest.Not Equal.TupleNotEqDifferingNamesWithOneNullId"        Wrong output: Tuple inequality with a known-unequal element should return true
+CqlStringOperatorsTest.Substring.SubstringEmptyAnd0                   Wrong output: Substring(x, x.length) should be null'. Note similar test SubstringAB2. See https://github.com/cqframework/cql-tests/issues/149
+"CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision2"      Wrong output: Comparing an imprecise time with a more precise time results in uncertainty
+CqlArithmeticFunctionsTest.HighBoundary.HighBoundaryDecimal                 Wrong output: HighBoundary(Decimal) was clarified in 2.0. HighBoundary(1.587, 8) should be 1.58750000, not 1.58799999
+CqlArithmeticFunctionsTest.HighBoundary.HighBoundaryNullPrecision           Wrong output: HighBoundary(Decimal) was clarified in 2.0. HighBoundary(1.58888, null) should be 1.58888500, not 1.58888999
+CqlArithmeticFunctionsTest.LowBoundary.LowBoundaryDecimal                   Wrong output: LowBoundary(Decimal) was clarified in 2.0. LowBoundary(1.587, 8) should be 1.58650000, not 1.58700000
+CqlArithmeticFunctionsTest.LowBoundary.LowBoundaryNullPrecision             Wrong output: LowBoundary(Decimal) was clarified in 2.0. LowBoundary(1.58888, null) should be 1.58887500, not 1.58888000
+
+# Potentially Incorrect Expected Output
+"CqlStringOperatorsTest.toString tests.DateTimeToString2"         Answer does not include timezone offset, but default offset depends on test environment
+
+# Numeric Type Mismatch
 CqlArithmeticFunctionsTest.Power.Power0To0                      Wrong output: As of CQL 2.0, Power always returns Decimal
 CqlArithmeticFunctionsTest.Power.Power2To2                      Wrong output: As of CQL 2.0, Power always returns Decimal
 CqlArithmeticFunctionsTest.Power.PowerNeg2To2                   Wrong output: As of CQL 2.0, Power always returns Decimal
@@ -41,17 +52,6 @@ ValueLiteralsAndSelectors.Integer.Integer2Pow31ToZero1IntegerMaxValue       Wron
 ValueLiteralsAndSelectors.Integer.IntegerPos2Pow31ToZero1IntegerMaxValue    Wrong output: As of CQL 2.0, Power always returns Decimal
 ValueLiteralsAndSelectors.Integer.IntegerNeg2Pow31ToZero1                   Wrong output: As of CQL 2.0, Power always returns Decimal
 ValueLiteralsAndSelectors.Integer.IntegerNeg2Pow31IntegerMinValue           Wrong output: As of CQL 2.0, Power always returns Decimal
-CqlComparisonOperatorsTest.Equal.TupleEqDifferentNamesWithOneNullId                 Wrong output: Tuple equality with a known-unequal element should return false
-"CqlComparisonOperatorsTest.Not Equal.TupleNotEqDifferingNamesWithOneNullId"        Wrong output: Tuple inequality with a known-unequal element should return true
-CqlStringOperatorsTest.Substring.SubstringEmptyAnd0                   Wrong output: Substring(x, x.length) should be null'. Note similar test SubstringAB2. See https://github.com/cqframework/cql-tests/issues/149
-"CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision2"      Wrong output: Comparing an imprecise time with a more precise time results in uncertainty
-CqlArithmeticFunctionsTest.HighBoundary.HighBoundaryDecimal                 Wrong output: HighBoundary(Decimal) was clarified in 2.0. HighBoundary(1.587, 8) should be 1.58750000, not 1.58799999
-CqlArithmeticFunctionsTest.HighBoundary.HighBoundaryNullPrecision           Wrong output: HighBoundary(Decimal) was clarified in 2.0. HighBoundary(1.58888, null) should be 1.58888500, not 1.58888999
-CqlArithmeticFunctionsTest.LowBoundary.LowBoundaryDecimal                   Wrong output: LowBoundary(Decimal) was clarified in 2.0. LowBoundary(1.587, 8) should be 1.58650000, not 1.58700000
-CqlArithmeticFunctionsTest.LowBoundary.LowBoundaryNullPrecision             Wrong output: LowBoundary(Decimal) was clarified in 2.0. LowBoundary(1.58888, null) should be 1.58887500, not 1.58888000
-
-# Potentially Incorrect Expected Output
-"CqlStringOperatorsTest.toString tests.DateTimeToString2"         Answer does not include timezone offset, but default offset depends on test environment
 
 # Equivalent answer but represented differently than expected output
 
@@ -69,6 +69,8 @@ CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (tr
 "CqlComparisonOperatorsTest.Unit Comparison.TestQuantityYearsEquivalentA"       Wrong answer: Quantity =/~ should have special semantics for calendar-based units
 "CqlComparisonOperatorsTest.Unit Comparison.TestYearEquivalentDays"             Wrong answer: Quantity =/~ should have special semantics for calendar-based units
 "CqlComparisonOperatorsTest.Unit Comparison.TestMonthEquivalentDays"            Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+CqlListOperatorsTest.Equal.EqualNullNull                        Wrong answer: According to 1.5.3, if either list contains a null, the result is null, however in 2.0.0, null elements are considered equal in list equality
+CqlIntervalOperatorsTest.PointFrom.TestPointFromUnknownIntervalNull         Wrong answer: whether Interval(null, null) is a unit interval is indeterminate so the result should be null
 
 CqlIntervalOperatorsTest.Collapse.TestCollapseNull              Wrong answer (Interval(null, null) vs null)
 CqlIntervalOperatorsTest.Expand.ExpandListWithNull                        Wrong answer (should be empty list due to removing nulls)
