@@ -289,7 +289,7 @@ export class DateTime extends AbstractDate {
     DateTime.Unit.MILLISECOND
   ];
 
-  static parse(string: any) {
+  static parse(string: any, defaultTimezoneOffset?: Decimal | number | null) {
     if (string === null) {
       return null;
     }
@@ -330,6 +330,8 @@ export class DateTime extends AbstractDate {
       args.push(matches[17] === '+' ? num : num * -1);
     } else if (matches[15] === 'Z') {
       args.push(0);
+    } else if (defaultTimezoneOffset != null) {
+      args.push(Decimal.from(defaultTimezoneOffset).toNumber());
     }
     // @ts-ignore
     return new DateTime(...args);

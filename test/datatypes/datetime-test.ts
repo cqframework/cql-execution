@@ -146,6 +146,20 @@ describe('DateTime', () => {
     d.should.eql(new DateTime(2012, 10, 25, 12, 55, 14, 953, 0));
   });
 
+  it('should use the default timezone offset when the string has none', () => {
+    // use a quarter-hour offset that no real-world timezone has, so it can
+    // never coincide with the host machine's offset
+    const d = DateTime.parse('2012-10-25T12:55', -3.25);
+    d.timezoneOffset.should.equalDecimal(-3.25);
+  });
+
+  it('should ignore the default timezone offset when the string specifies one', () => {
+    let d = DateTime.parse('2012-10-25T12:55+05:30', -3.25);
+    d.timezoneOffset.should.equalDecimal(5.5);
+    d = DateTime.parse('2012-10-25T12:55Z', -3.25);
+    d.timezoneOffset.should.equalDecimal(0);
+  });
+
   it('should toString yyyy', () => {
     const d = new DateTime(2012);
     d.toString().should.eql('2012');
