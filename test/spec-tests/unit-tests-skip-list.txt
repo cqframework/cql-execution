@@ -1,0 +1,59 @@
+## This file should contain skips for issues in the actual evaluation of the test by the cql-execution library, or in the evaluation of the test result by our test harness.
+
+# Numeric Type Mismatch
+CqlArithmeticFunctionsTest.Power.Power0To0                      Wrong output: As of CQL 2.0, Power always returns Decimal
+CqlArithmeticFunctionsTest.Power.Power2To2                      Wrong output: As of CQL 2.0, Power always returns Decimal
+CqlArithmeticFunctionsTest.Power.PowerNeg2To2                   Wrong output: As of CQL 2.0, Power always returns Decimal
+CqlArithmeticFunctionsTest.Power.Power2LTo2L                    Wrong output: As of CQL 2.0, Power always returns Decimal
+CqlArithmeticFunctionsTest.Power.Power2To4                      Wrong output: As of CQL 2.0, Power always returns Decimal
+CqlArithmeticFunctionsTest.Power.Power2LTo3L                    Wrong output: As of CQL 2.0, Power always returns Decimal
+ValueLiteralsAndSelectors.Integer.Integer10Pow9                             Wrong output: As of CQL 2.0, Power always returns Decimal
+ValueLiteralsAndSelectors.Integer.IntegerPos10Pow9                          Wrong output: As of CQL 2.0, Power always returns Decimal
+ValueLiteralsAndSelectors.Integer.IntegerNeg10Pow9                          Wrong output: As of CQL 2.0, Power always returns Decimal
+ValueLiteralsAndSelectors.Integer.Integer2Pow31ToZero1IntegerMaxValue       Wrong output: As of CQL 2.0, Power always returns Decimal
+ValueLiteralsAndSelectors.Integer.IntegerPos2Pow31ToZero1IntegerMaxValue    Wrong output: As of CQL 2.0, Power always returns Decimal
+ValueLiteralsAndSelectors.Integer.IntegerNeg2Pow31ToZero1                   Wrong output: As of CQL 2.0, Power always returns Decimal
+ValueLiteralsAndSelectors.Integer.IntegerNeg2Pow31IntegerMinValue           Wrong output: As of CQL 2.0, Power always returns Decimal
+
+# Equivalent answer but represented differently than expected output
+
+# Incorrect answer
+CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (true vs null - due to not evaluating DateTime(null) as null)
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityMonthEqualMo"           Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityMonthNotEqualMo"        Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityMonthEquivalentMo"      Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityMonthsNotEqualMo"       Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityMonthsEquivalentMo"     Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityYearEqualA"             Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityYearNotEqualA"          Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityYearEquivalentA"        Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityYearsNotEqualA"         Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityYearsEquivalentA"       Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestYearEquivalentDays"             Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestMonthEquivalentDays"            Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+CqlListOperatorsTest.Equal.EqualNullNull                        Wrong answer: According to 1.5.3, if either list contains a null, the result is null, however in 2.0.0, null elements are considered equal in list equality
+CqlIntervalOperatorsTest.PointFrom.TestPointFromUnknownIntervalNull         Wrong answer: whether Interval(null, null) is a unit interval is indeterminate so the result should be null
+
+CqlIntervalOperatorsTest.Collapse.TestCollapseNull              Wrong answer (Interval(null, null) vs null)
+CqlIntervalOperatorsTest.Expand.ExpandListWithNull                        Wrong answer (should be empty list due to removing nulls)
+CqlTypeOperatorsTest.Convert.StringToDateTime                   Wrong answer (different offsets)
+CqlTypeOperatorsTest.ToDateTime.ToDateTime1                     Wrong answer (different offsets)
+CqlTypeOperatorsTest.ToDateTime.ToDateTime2                     Wrong answer (different offsets)
+CqlTypeOperatorsTest.ToDateTime.ToDateTime3                     Wrong answer (different offsets)
+ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    Wrong answer (null vs big number); intermediate value exceeds max Decimal
+ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number); intermediate value exceeds max Decimal
+
+CqlTypesTest.DateTime.DateTimeNull                                                      Wrong answer: null vs DateTime with null components
+CqlTypesTest.Time.TimeMillisParsing                                                     Wrong answer: @T23:59:59.100 vs @T23:59:59.10000
+CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1QCMPrecision          Wrong answer: Translator loses Decimal precision (trailing zeros) in ELM representation of Quantity literal
+
+# Unimplemented
+CqlArithmeticFunctionsTest.Precision.PrecisionDecimal   Precision for Decimal not implemented
+CqlListOperatorsTest.Descendents                        Descendents not implemented
+
+# Unimplemented (New in CQL 1.5)
+CqlArithmeticFunctionsTest.Modulo.ModuloQuantity                      Modulo not implemented for Quantity
+CqlArithmeticFunctionsTest.Modulo.Modulo10By3Quantity                 Modulo not implemented for Quantity
+
+# Unimplemented (New in CQL 2.0)
+
