@@ -1,4 +1,5 @@
-# Include (Additional tests skipped by the tests-runner but not in our unit tests)
+## This file should include tests that are skipped only in the cql-tests-runner, due to limitations in the cql-test-runner itself.
+
 CqlArithmeticFunctionsTest.Exp.Exp1000                          Invalid Test: Overflows and Underflows should result in null: https://github.com/cqframework/cql-tests/pull/120
 CqlArithmeticFunctionsTest.Exp.Exp1000D                         Invalid Test: Overflows and Underflows should result in null: https://github.com/cqframework/cql-tests/pull/120
 CqlArithmeticFunctionsTest.Ln.Ln0                               Invalid Test: Overflows and Underflows should result in null: https://github.com/cqframework/cql-tests/pull/120
@@ -63,7 +64,3 @@ CqlIntervalOperatorsTest.Expand.ExpandPerHourOpenIntervalOverload   Test Runner 
 ValueLiteralsAndSelectors.Decimal.DecimalTenthStep          Invalid Test: CQL allows systems to support more than 8 digits precision: https://github.com/cqframework/cql-tests/issues/153
 ValueLiteralsAndSelectors.Decimal.DecimalPosTenthStep       Invalid Test: CQL allows systems to support more than 8 digits precision: https://github.com/cqframework/cql-tests/issues/153
 ValueLiteralsAndSelectors.Decimal.DecimalNegTenthStep       Invalid Test: CQL allows systems to support more than 8 digits precision: https://github.com/cqframework/cql-tests/issues/153
-
-
-# Exclude (Tests/groups from skip-list.txt that the tests-runner should execute)
-

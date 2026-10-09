@@ -3,117 +3,40 @@ const fs = require('fs');
 const path = require('path');
 const convert = require('xml-js');
 
-// First read the skiplist and build a map of skipped tests
-const skippedTestMap = new Map();
-const unskippedTestMap = new Map();
-const skipListText = fs.readFileSync(path.join(__dirname, 'skip-list.txt'), 'utf-8');
-const runnerSkipOverrides = fs.readFileSync(
-  path.join(__dirname, 'runner-skip-overrides.txt'),
-  'utf-8'
-);
-const processedSkips = new Set();
-const invalidSkipListLines = new Set();
-const invalidOverridesLines = new Set();
-
 let exitError = false; // if a non-fatal error occurs, report it and set this flag, but let processing continue
 
-// There are 3 categories of skips to consider:
-// 1. Skip both in unit tests and cql-tests-runner. These are defined in skip-list.txt and not in runner-skip-overrides.txt. No special action needed.
-// 2. Skip only in tests-runner, not in unit tests. These are present in runner-skip-overrides.txt but no special action needed: just treat them like they were in skip-list.txt.
-// 3. Skip only in unit tests, not in tests-runner. These either need to be identified by category name, or in the overrides "unskip"/"exclude" category.
+// First read the skiplist and build a map of skipped tests
+const skipListFiles = ['common-skip-list.txt', 'runner-skip-list.txt'];
+const skippedTestMap = new Map();
+const processedSkips = new Set();
+const invalidLines = new Set();
 
-// The categories from the original skip-list file that we always ignore here
-const CATEGORIES_TO_IGNORE = [
-  'Incorrect answer',
-  'Numeric Type Mismatch', // the runner compares all numeric results as JS number, so the type distinction is irrelevant there
-  'Unimplemented',
-  'Unimplemented (New in CQL 1.5)',
-  'Unimplemented (New in CQL 2.0)'
-];
-
-// The names of groups from the overrides file that we have to cross-reference to the skip-list and "un-skip".
-const CATEGORIES_TO_UNSKIP = [
-  'Exclude (Tests/groups from skip-list.txt that the tests-runner should execute)'
-];
-
-// Helper function to process the common format of skip-list.txt and runner-skip-overrides.txt
-const processFile = (fileText, invalidLinesSet) => {
-  let currentCategory;
-  fileText.split(/[\r\n]+/).forEach(line => {
-    // Ignore blank lines
-    if (!line.trim()) {
-      return;
-    }
-
-    // Assume any line starting with # is a category header. Lines should only be commented out for debugging elsewhere
-    if (line.startsWith('#')) {
-      currentCategory = line.substring(1).trim();
-      return;
-    }
-
-    if (CATEGORIES_TO_IGNORE.includes(currentCategory)) {
-      // Skip processing this line
-      return;
-    }
-
-    // Pull out the test/group and the reason
-    const match = line.match(/^([A-Za-z0-9.]+|"[A-Za-z0-9.\s]+")\s+(.+)\s*$/);
-    if (!match) {
-      invalidLinesSet.add(line);
-      return;
-    }
-    const testName = match[1].replace(/(^")|("$)/g, '');
-    const reason = match[2];
-
-    if (CATEGORIES_TO_UNSKIP.includes(currentCategory)) {
-      unskippedTestMap.set(testName, { hit: false }); // reason not important for unskips, but use a boolean to track whether it's used
-    } else {
-      skippedTestMap.set(testName, reason);
-    }
-  });
-};
-
-processFile(skipListText, invalidSkipListLines);
-processFile(runnerSkipOverrides, invalidOverridesLines);
-
-for (const testName of skippedTestMap.keys()) {
-  const testNameParts = testName.split('.');
-
-  switch (testNameParts.length) {
-    case 3:
-      if (unskippedTestMap.has(testName)) {
-        skippedTestMap.delete(testName);
-        unskippedTestMap.get(testName).hit = true;
-      }
-    // intentionally fall through
-    case 2:
-      const testGroup = testNameParts[0] + '.' + testNameParts[1];
-      if (unskippedTestMap.has(testGroup)) {
-        skippedTestMap.delete(testName);
-        unskippedTestMap.get(testGroup).hit = true;
-      }
-    // intentionally fall through
-    case 1:
-      const testFile = testNameParts[0];
-      if (unskippedTestMap.has(testFile)) {
-        skippedTestMap.delete(testName);
-        unskippedTestMap.get(testFile).hit = true;
-      }
+const parseTestNameAndReason = line => {
+  // Ignore lines that are blank or commented out via #
+  if (/(^\s*#)|(^\s*$)/.test(line)) {
+    return;
   }
-}
-
-for (const [testName, hitTracker] of unskippedTestMap) {
-  if (!hitTracker.hit) {
-    console.error(
-      `${testName} was marked to be unskipped, but no matching lines were found in skip-list`
-    );
+  // Pull out the thing being skipped and the reason for skipping
+  const match = line.match(/^([A-Za-z0-9.]+|"[A-Za-z0-9.\s]+")\s+(.+)\s*$/);
+  if (!match) {
+    invalidLines.add(line);
+    return;
+  }
+  const testName = match[1].replace(/(^")|("$)/g, '');
+  const reason = match[2];
+  if (skippedTestMap.has(testName)) {
+    console.error(`Duplicate skipped test: ${testName}`);
     exitError = true;
   }
+  skippedTestMap.set(testName, reason);
+};
+
+for (const skipListFile of skipListFiles) {
+  const skipListText = fs.readFileSync(path.join(__dirname, skipListFile), 'utf-8');
+  skipListText.split(/[\r\n]+/).forEach(parseTestNameAndReason);
 }
 
-// Now, the skippedTestMap contains only items we actually want to skip.
 // Do a pass through the actual tests to make sure the referenced tests exist, and expand test suite and group references to specific tests.
-
 const inputDir = path.join(__dirname, 'cql-tests-runner/cql-tests/tests/cql');
 
 if (!fs.existsSync(inputDir)) {
@@ -237,23 +160,17 @@ console.log(
 );
 
 // Final cleanup
-if (invalidSkipListLines.size > 0) {
+if (invalidLines.size > 0) {
   console.error();
-  console.error('Invalid lines in skip-list.txt:');
-  invalidSkipListLines.forEach(l => console.error(`> ${l}`));
-  exitError = true;
-}
-if (invalidOverridesLines.size > 0) {
-  console.error();
-  console.error('Invalid lines in runner-skip-overrides.txt:');
-  invalidOverridesLines.forEach(l => console.error(`> ${l}`));
+  console.error('Invalid skip-list lines:');
+  invalidLines.forEach(l => console.error(`> ${l}`));
   exitError = true;
 }
 
 processedSkips.forEach(s => skippedTestMap.delete(s));
 if (skippedTestMap.size > 0) {
   console.error();
-  console.error('Unmatched tests in skip-list.txt or runner-skip-overrides.txt:');
+  console.error('Unmatched skip-list tests:');
   Array.from(skippedTestMap.keys()).forEach(k => console.error(`> ${k}`));
   exitError = true;
 }

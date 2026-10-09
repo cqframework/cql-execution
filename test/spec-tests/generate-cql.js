@@ -8,12 +8,15 @@ const cqlSpecVersion = fs.readFileSync(
   'utf-8'
 );
 
+let exitError = false; // if a non-fatal error occurs, report it and set this flag, but let processing continue
+
 // First read the skiplist and build a map of skipped tests
+const skipListFiles = ['common-skip-list.txt', 'unit-tests-skip-list.txt'];
 const skippedTestMap = new Map();
-const skipListText = fs.readFileSync(path.join(__dirname, 'skip-list.txt'), 'utf-8');
 const processedSkips = new Set();
 const invalidLines = new Set();
-skipListText.split(/[\r\n]+/).forEach(line => {
+
+const parseTestNameAndReason = line => {
   // Ignore lines that are blank or commented out via #
   if (/(^\s*#)|(^\s*$)/.test(line)) {
     return;
@@ -24,8 +27,19 @@ skipListText.split(/[\r\n]+/).forEach(line => {
     invalidLines.add(line);
     return;
   }
-  skippedTestMap.set(match[1].replace(/(^")|("$)/g, ''), match[2]);
-});
+  const testName = match[1].replace(/(^")|("$)/g, '');
+  const reason = match[2];
+  if (skippedTestMap.has(testName)) {
+    console.error(`Duplicate skipped test: ${testName}`);
+    exitError = true;
+  }
+  skippedTestMap.set(testName, reason);
+};
+
+for (const skipListFile of skipListFiles) {
+  const skipListText = fs.readFileSync(path.join(__dirname, skipListFile), 'utf-8');
+  skipListText.split(/[\r\n]+/).forEach(parseTestNameAndReason);
+}
 
 const inputDir = path.join(__dirname, 'cql-tests-runner/cql-tests/tests/cql');
 const outputDir = path.join(__dirname, 'cql');
@@ -145,10 +159,9 @@ fs.readdirSync(inputDir).forEach(file => {
   console.log('Generated', cqlFile);
 });
 
-let exitError = false;
 if (invalidLines.size > 0) {
   console.error();
-  console.error('Invalid lines in skip-list.txt:');
+  console.error('Invalid skip-list lines:');
   invalidLines.forEach(l => console.error(`> ${l}`));
   exitError = true;
 }
@@ -156,7 +169,7 @@ if (invalidLines.size > 0) {
 processedSkips.forEach(s => skippedTestMap.delete(s));
 if (skippedTestMap.size > 0) {
   console.error();
-  console.error('Unmatched tests in skip-list.txt:');
+  console.error('Unmatched skip-list tests:');
   Array.from(skippedTestMap.keys()).forEach(k => console.error(`> ${k}`));
   exitError = true;
 }
