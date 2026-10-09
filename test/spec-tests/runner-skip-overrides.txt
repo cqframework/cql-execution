@@ -1,0 +1,69 @@
+# Include (Additional tests skipped by the tests-runner but not in our unit tests)
+CqlArithmeticFunctionsTest.Exp.Exp1000                          Invalid Test: Overflows and Underflows should result in null: https://github.com/cqframework/cql-tests/pull/120
+CqlArithmeticFunctionsTest.Exp.Exp1000D                         Invalid Test: Overflows and Underflows should result in null: https://github.com/cqframework/cql-tests/pull/120
+CqlArithmeticFunctionsTest.Ln.Ln0                               Invalid Test: Overflows and Underflows should result in null: https://github.com/cqframework/cql-tests/pull/120
+CqlArithmeticFunctionsTest.Ln.LnNeg0                            Invalid Test: Overflows and Underflows should result in null: https://github.com/cqframework/cql-tests/pull/120
+CqlArithmeticFunctionsTest.Predecessor.PredecessorUnderflowDt   Invalid Test: Overflows and Underflows should result in null: https://github.com/cqframework/cql-tests/pull/120
+CqlArithmeticFunctionsTest.Predecessor.PredecessorUnderflowT    Invalid Test: Overflows and Underflows should result in null: https://github.com/cqframework/cql-tests/pull/120
+CqlArithmeticFunctionsTest.Successor.SuccessorOverflowDt        Invalid Test: Overflows and Underflows should result in null: https://github.com/cqframework/cql-tests/pull/120
+CqlArithmeticFunctionsTest.Successor.SuccessorOverflowT         Invalid Test: Overflows and Underflows should result in null: https://github.com/cqframework/cql-tests/pull/120
+CqlDateTimeOperatorsTest.Add.DateTimeAddInvalidYears            Invalid Test: Overflows and Underflows should result in null: https://github.com/cqframework/cql-tests/pull/120
+CqlDateTimeOperatorsTest.Subtract.DateTimeSubtractInvalidYears  Invalid Test: Overflows and Underflows should result in null: https://github.com/cqframework/cql-tests/pull/120
+ValueLiteralsAndSelectors.Integer.IntegerNeg2Pow31ToInf1        Invalid Test: Overflows and Underflows should result in null: https://github.com/cqframework/cql-tests/pull/120
+
+CqlArithmeticFunctionsTest.MinValue.DateTimeMinValue        Test Runner Not Detecting Equal DateTimes (+00:00 vs Z): https://github.com/cqframework/cql-tests-runner/issues/83
+CqlArithmeticFunctionsTest.MaxValue.DateTimeMaxValue        Test Runner Not Detecting Equal DateTimes (+00:00 vs Z): https://github.com/cqframework/cql-tests-runner/issues/83
+CqlQueryTest.Sort.DateTimeAscending                         Test Runner Not Detecting Equal DateTimes (+00:00 vs Z): https://github.com/cqframework/cql-tests-runner/issues/83
+CqlQueryTest.Sort.DateTimeDescending                        Test Runner Not Detecting Equal DateTimes (+00:00 vs Z): https://github.com/cqframework/cql-tests-runner/issues/83
+
+CqlDateTimeOperatorsTest.Add.DateTimeAdd5Hours                              Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Add.DateTimeAdd5HoursWithLeftMinPrecisionSecond    Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Add.DateTimeAdd5Milliseconds                       Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Add.DateTimeAdd5Minutes                            Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Add.DateTimeAdd5Seconds                            Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Add.DateTimeAddHoursOverflow                       Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Add.DateTimeAddMillisecondsOverflow                Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Add.DateTimeAddMinutesOverflow                     Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Add.DateTimeAddSecondsOverflow                     Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.DateTime.DateTimeHour                              Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.DateTime.DateTimeMillisecond                       Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.DateTime.DateTimeMinute                            Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.DateTime.DateTimeSecond                            Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Subtract.DateTimeSubtract15HourPrecisionSecond     Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Subtract.DateTimeSubtract5Hours                    Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Subtract.DateTimeSubtract5Milliseconds             Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Subtract.DateTimeSubtract5Minutes                  Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Subtract.DateTimeSubtract5Seconds                  Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Subtract.DateTimeSubtractHoursUnderflow            Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Subtract.DateTimeSubtractMillisecondsUnderflow     Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Subtract.DateTimeSubtractMinutesUnderflow          Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlDateTimeOperatorsTest.Subtract.DateTimeSubtractSecondsUnderflow          Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+"CqlDateTimeOperatorsTest.Uncertainty tests.DateTime1"                      Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+"CqlDateTimeOperatorsTest.Uncertainty tests.DateTime2"                      Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlIntervalOperatorsTest.End.DateTimeIntervalEnd                            Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlIntervalOperatorsTest.In.TestPeriod1                                     Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlIntervalOperatorsTest.In.TestPeriod2                                     Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlIntervalOperatorsTest.Interval.DateTimeIntervalTest                      Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlIntervalOperatorsTest.Start.DateTimeIntervalStart                        Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlListOperatorsTest.Sort.SortDatesAsc                                      Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlListOperatorsTest.Sort.SortDatesDesc                                     Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlTypesTest.DateTime.DateTimeMax                                           Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlTypesTest.DateTime.DateTimeMin                                           Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+CqlTypesTest.DateTime.DateTimeProper                                        Test Runner Not Detecting Equal DateTimes (Offset vs No Offset): https://github.com/cqframework/cql-tests-runner/issues/84
+
+CqlIntervalOperatorsTest.Except.ExceptTime2             Test Runner Not Detecting Equal Intervals (Open vs Closed Boundaries): https://github.com/cqframework/cql-tests-runner/issues/85
+CqlIntervalOperatorsTest.Except.ExceptTimeInterval      Test Runner Not Detecting Equal Intervals (Open vs Closed Boundaries): https://github.com/cqframework/cql-tests-runner/issues/85
+
+CqlIntervalOperatorsTest.Expand.ExpandPerHour       Test Runner Not Detecting Equal Lists on Interval<Time>: https://github.com/cqframework/cql-tests-runner/issues/94
+CqlIntervalOperatorsTest.Expand.ExpandPerHourOpen   Test Runner Not Detecting Equal Lists on Interval<Time>: https://github.com/cqframework/cql-tests-runner/issues/94
+
+CqlIntervalOperatorsTest.Expand.ExpandPerHourIntervalOverload       Test Runner does not honor the time-precision extension on dateTime, time and Period boundaries: https://github.com/cqframework/cql-tests-runner/pull/135
+CqlIntervalOperatorsTest.Expand.ExpandPerHourOpenIntervalOverload   Test Runner does not honor the time-precision extension on dateTime, time and Period boundaries: https://github.com/cqframework/cql-tests-runner/pull/135
+
+ValueLiteralsAndSelectors.Decimal.DecimalTenthStep          Invalid Test: CQL allows systems to support more than 8 digits precision: https://github.com/cqframework/cql-tests/issues/153
+ValueLiteralsAndSelectors.Decimal.DecimalPosTenthStep       Invalid Test: CQL allows systems to support more than 8 digits precision: https://github.com/cqframework/cql-tests/issues/153
+ValueLiteralsAndSelectors.Decimal.DecimalNegTenthStep       Invalid Test: CQL allows systems to support more than 8 digits precision: https://github.com/cqframework/cql-tests/issues/153
+
+
+# Exclude (Tests/groups from skip-list.txt that the tests-runner should execute)
+

@@ -110,6 +110,7 @@
     "build:all": "npm run build && npm run build:test-data && npm run build:spec-test-data",
     "watch:test-data": "cd \"./test/generator\" && \"./gradlew\" watchTestData && cd ..",
     "check-skip-list": "node \"test/spec-tests/check-skip-list.js\"",
+    "create-runner-skip-list": "node \"test/spec-tests/create-runner-skip-list.js\"",
     "test": "cross-env TSX_TSCONFIG_PATH=\"./test/tsconfig.json\" mocha --reporter spec --recursive",
     "test:nyc": "cross-env TSX_TSCONFIG_PATH=\"./test/tsconfig.json\" nyc --reporter=html npx mocha --reporter spec --recursive",
     "test:watch": "cross-env TSX_TSCONFIG_PATH=\"./test/tsconfig.json\" mocha --reporter spec --recursive --watch",
