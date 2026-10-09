@@ -37,7 +37,7 @@ for (const skipListFile of skipListFiles) {
 }
 
 // Do a pass through the actual tests to make sure the referenced tests exist, and expand test suite and group references to specific tests.
-const inputDir = path.join(__dirname, 'cql-tests-runner/cql-tests/tests/cql');
+const inputDir = path.join(__dirname, '../../cql-tests-runner/cql-tests/tests/cql');
 
 if (!fs.existsSync(inputDir)) {
   console.error('ERROR: cql-tests under the cql-tests-runner submodule not found!');
@@ -128,7 +128,10 @@ for (const key of testKeysToRemove) {
 }
 
 // Now load the previous config file and update the SkipList
-const PREVIOUS_CONFIG_PATH = path.join(__dirname, 'cql-tests-runner/conf/cql-execution-local.json');
+const PREVIOUS_CONFIG_PATH = path.join(
+  __dirname,
+  '../../cql-tests-runner/conf/cql-execution-local.json'
+);
 const config = JSON.parse(fs.readFileSync(PREVIOUS_CONFIG_PATH, 'utf8'));
 
 if (!config.Tests) {

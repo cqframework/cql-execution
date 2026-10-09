@@ -13,7 +13,7 @@ PathTo.Skipped.Test2               Reason for skipping test
 
 # Implementation
 
-For the purposes of testing `cql-execution`, we process the XML tests in the `test/spec-tests/cql-tests-runner/cql-tests/tests/cql` folder and generate corresponding CQL libraries in the `test/spec-tests/cql` folder. These libraries use Tuples to organize the tests as well as to represent the input and expected output in CQL. For example:
+For the purposes of testing `cql-execution`, we process the XML tests in the `cql-tests-runner/cql-tests/tests/cql` folder and generate corresponding CQL libraries in the `test/spec-tests/cql` folder. These libraries use Tuples to organize the tests as well as to represent the input and expected output in CQL. For example:
 
 ```
 library CqlAggregateFunctionsTest version '1.4.0'
