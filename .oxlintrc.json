@@ -11,7 +11,7 @@
     "**/lib-test",
     "**/dist",
     "test-server/**",
-    "test/spec-tests/cql-tests-runner/**"
+    "cql-tests-runner/**"
   ],
   "rules": {
     "no-loss-of-precision": "off",

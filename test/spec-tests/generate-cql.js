@@ -41,7 +41,7 @@ for (const skipListFile of skipListFiles) {
   skipListText.split(/[\r\n]+/).forEach(parseTestNameAndReason);
 }
 
-const inputDir = path.join(__dirname, 'cql-tests-runner/cql-tests/tests/cql');
+const inputDir = path.join(__dirname, '../../cql-tests-runner/cql-tests/tests/cql');
 const outputDir = path.join(__dirname, 'cql');
 
 if (!fs.existsSync(inputDir)) {
