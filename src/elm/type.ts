@@ -162,7 +162,7 @@ export class ToDateTime extends Expression {
       const timezoneOffset = ctx.getExecutionDateTime().timezoneOffset;
       return arg.getDateTime(timezoneOffset);
     } else {
-      return DateTime.parse(arg.toString());
+      return DateTime.parse(arg.toString(), ctx.getExecutionDateTime().timezoneOffset);
     }
   }
 }

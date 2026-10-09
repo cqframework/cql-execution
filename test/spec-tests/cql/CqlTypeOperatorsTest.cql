@@ -31,11 +31,9 @@ define "Convert": Tuple{
     output: null
   },
   "StringToDateTime": Tuple{
-    skipped: 'Wrong answer (different offsets)'
-    /*
     expression: convert '2014-01-01' to DateTime,
     output: @2014-01-01T
-    */  },
+  },
   "StringToTime": Tuple{
     expression: convert 'T14:30:00.0' to Time,
     output: @T14:30:00.000
@@ -79,23 +77,17 @@ define "ToConcept": Tuple{
 
 define "ToDateTime": Tuple{
   "ToDateTime1": Tuple{
-    skipped: 'Wrong answer (different offsets)'
-    /*
     expression: ToDateTime('2014-01-01'),
     output: @2014-01-01T
-    */  },
+  },
   "ToDateTime2": Tuple{
-    skipped: 'Wrong answer (different offsets)'
-    /*
     expression: ToDateTime('2014-01-01T12:05'),
     output: @2014-01-01T12:05
-    */  },
+  },
   "ToDateTime3": Tuple{
-    skipped: 'Wrong answer (different offsets)'
-    /*
     expression: ToDateTime('2014-01-01T12:05:05.955'),
     output: @2014-01-01T12:05:05.955
-    */  },
+  },
   "ToDateTime4": Tuple{
     expression: ToDateTime('2014-01-01T12:05:05.955+01:30'),
     output: @2014-01-01T12:05:05.955+01:30

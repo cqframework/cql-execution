@@ -71,10 +71,6 @@ CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (tr
 
 CqlIntervalOperatorsTest.Collapse.TestCollapseNull              Wrong answer (Interval(null, null) vs null)
 CqlIntervalOperatorsTest.Expand.ExpandListWithNull                        Wrong answer (should be empty list due to removing nulls)
-CqlTypeOperatorsTest.Convert.StringToDateTime                   Wrong answer (different offsets)
-CqlTypeOperatorsTest.ToDateTime.ToDateTime1                     Wrong answer (different offsets)
-CqlTypeOperatorsTest.ToDateTime.ToDateTime2                     Wrong answer (different offsets)
-CqlTypeOperatorsTest.ToDateTime.ToDateTime3                     Wrong answer (different offsets)
 ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    Wrong answer (null vs big number); intermediate value exceeds max Decimal
 ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number); intermediate value exceeds max Decimal
 

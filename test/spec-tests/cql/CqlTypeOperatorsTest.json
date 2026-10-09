@@ -589,11 +589,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}DateTime",
                         "annotation": []
                       }
                     }
@@ -757,11 +766,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
                           "annotation": []
                         }
                       }
@@ -1012,11 +1030,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
                           "annotation": []
                         }
                       }
@@ -1024,13 +1051,46 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong answer (different offsets)",
-                        "annotation": []
+                        "type": "ToDateTime",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "2014-01-01",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "DateTime",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2014",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        }
                       }
                     }
                   ]
@@ -1909,11 +1969,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}DateTime",
                         "annotation": []
                       }
                     }
@@ -1928,11 +1997,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}DateTime",
                         "annotation": []
                       }
                     }
@@ -1947,11 +2025,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}DateTime",
                         "annotation": []
                       }
                     }
@@ -2143,11 +2230,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
                           "annotation": []
                         }
                       }
@@ -2162,11 +2258,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
                           "annotation": []
                         }
                       }
@@ -2181,11 +2286,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
                           "annotation": []
                         }
                       }
@@ -2373,11 +2487,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
                           "annotation": []
                         }
                       }
@@ -2385,13 +2508,46 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong answer (different offsets)",
-                        "annotation": []
+                        "type": "ToDateTime",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "2014-01-01",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "DateTime",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2014",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        }
                       }
                     }
                   ]
@@ -2407,11 +2563,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
                           "annotation": []
                         }
                       }
@@ -2419,13 +2584,58 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong answer (different offsets)",
-                        "annotation": []
+                        "type": "ToDateTime",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "2014-01-01T12:05",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "DateTime",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2014",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "12",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "5",
+                          "annotation": []
+                        }
                       }
                     }
                   ]
@@ -2441,11 +2651,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
                           "annotation": []
                         }
                       }
@@ -2453,13 +2672,70 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong answer (different offsets)",
-                        "annotation": []
+                        "type": "ToDateTime",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "2014-01-01T12:05:05.955",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "DateTime",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2014",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "12",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "5",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "5",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "955",
+                          "annotation": []
+                        }
                       }
                     }
                   ]

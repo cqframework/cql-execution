@@ -6,6 +6,7 @@ import { DateTime } from '../../../src/datatypes/datetime';
 import { Quantity } from '../../../src/datatypes/quantity';
 import { Uncertainty } from '../../../src/datatypes/uncertainty';
 import { Decimal } from '../../../src/datatypes/decimal';
+import { PatientContext } from '../../../src/runtime/context';
 
 describe('FromString', () => {
   beforeEach(function () {
@@ -89,6 +90,21 @@ describe('FromString', () => {
     date.year.should.equal(2015);
     date.month.should.equal(1);
     date.day.should.equal(2);
+    date.isDateTime.should.equal(true);
+  });
+
+  it("should convert '2015-01-02' to DateTime using the execution timezone offset", async function () {
+    this.ctx = new PatientContext(
+      this.ctx.library,
+      this.ctx.patient,
+      this.ctx.codeService,
+      this.ctx.parameters,
+      // use a quarter-hour offset that no real-world timezone has, so it can
+      // never coincide with the host machine's offset
+      DateTime.fromJSDate(new Date(), -3.25)
+    );
+    const date = await this.dateTimeStr.exec(this.ctx);
+    date.timezoneOffset.should.equalDecimal(-3.25);
     date.isDateTime.should.equal(true);
   });
 
