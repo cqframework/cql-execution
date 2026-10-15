@@ -1,6 +1,6 @@
 import { Set as ImmutableSet } from 'immutable';
 import { Context } from '../runtime/context';
-import { equals } from '../util/comparison';
+import { equals, equivalent } from '../util/comparison';
 import { NormalizedKey, toNormalizedKey } from '../util/immutableUtil';
 import { typeIsArray } from '../util/util';
 import { build } from './builder';
@@ -139,6 +139,42 @@ export function doContains(container: any[], item: any) {
   return container.some(
     (element: any) => equals(element, item) || (element == null && item == null)
   );
+}
+
+function doEquivalentContains(container: any[], item: any) {
+  return container.some((element: any) => equivalent(element, item));
+}
+
+// Unlike plain Contains, EquivalentContains is only used for Lists, not Intervals,
+// and the ~contains operator with ValueSet/CodeSystem maps to the "InValueSet"/"InCodeSystem" expressions, not this
+export class EquivalentContains extends Expression {
+  constructor(json: any) {
+    super(json);
+  }
+
+  async exec(ctx: Context) {
+    const [container, item] = await this.execArgs(ctx);
+    if (container == null) {
+      return false;
+    }
+    return doEquivalentContains(container, item);
+  }
+}
+
+// Unlike plain In, EquivalentIn is only used for Lists, not Intervals,
+// and the ~in operator with ValueSet/CodeSystem maps to the "InValueSet"/"InCodeSystem" expressions, not this
+export class EquivalentIn extends Expression {
+  constructor(json: any) {
+    super(json);
+  }
+
+  async exec(ctx: Context) {
+    const [item, container] = await this.execArgs(ctx);
+    if (container == null) {
+      return false;
+    }
+    return doEquivalentContains(container, item);
+  }
 }
 
 // Delegated to by overloaded#ProperContains and overloaded#ProperIn
