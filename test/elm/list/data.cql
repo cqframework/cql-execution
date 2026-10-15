@@ -223,6 +223,30 @@ define InNull: (null as List<Integer>) properly includes 1
 define NullIn: {1, 2, null, 3} properly includes null
 define NullNotIn: {1, 2, 3} properly includes null
 
+// @Test: EquivalentContains
+define ContainsEquivalentNotEqual: { 'A', 'B', 'C' } ~contains 'a'
+define ContainsEquivalentAndEqual: { 'A', 'B', 'C' } ~contains 'A'
+define ContainsEquivalentNotEqualQuantity: { 100 'cm', 200 'cm', 300 'cm' } ~contains 1 'm'
+define ContainsEqualQuantity: { 100 'cm', 200 'cm', 300 'cm' } ~contains 100 'cm'
+define ContainsEquivalentNotEqualDecimal: { 1.01, 2.02, 3.03 } ~contains 1.0
+define DoesNotContain: { 'B', 'C' } ~contains 'a'
+define DoesNotContainQuantity: { 200 'cm', 300 'cm' } ~contains 100 'cm'
+define NullContainer: null ~contains 'a'
+define DoesNotContainNull: { 'A', 'B', 'C' } ~contains null
+define DoesContainNull: { 'A', 'B', 'C', null } ~contains null
+
+// @Test: EquivalentIn
+define ContainsEquivalentNotEqual: 'a' ~in { 'A', 'B', 'C' }
+define ContainsEquivalentAndEqual: 'A' ~in { 'A', 'B', 'C' }
+define ContainsEquivalentNotEqualQuantity: 1 'm' ~in { 100 'cm', 200 'cm', 300 'cm' }
+define ContainsEqualQuantity: 100 'cm' ~in { 100 'cm', 200 'cm', 300 'cm' }
+define ContainsEquivalentNotEqualDecimal: 1.0 ~in { 1.01, 2.02, 3.03 }
+define DoesNotContain: 'a' ~in { 'B', 'C' }
+define DoesNotContainQuantity: 100 'cm' ~in { 200 'cm', 300 'cm' }
+define NullContainer: 'a' ~in null
+define DoesNotContainNull: null ~in { 'A', 'B', 'C' }
+define DoesContainNull: null ~in { 'A', 'B', 'C', null }
+
 // @Test: Flatten
 define ListOfLists: flatten { {1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {9, 8, 7, 6, 5}, {4}, {3, 2, 1} }
 define NullValue: flatten null

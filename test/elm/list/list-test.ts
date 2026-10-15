@@ -827,6 +827,97 @@ describe('ProperContains', () => {
   });
 });
 
+describe('EquivalentContains', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+  it('should return true when list contains an equivalent but not equal string', async function () {
+    should(await this.containsEquivalentNotEqual.exec(this.ctx)).be.true();
+  });
+
+  it('should return true when list contains an equal string', async function () {
+    should(await this.containsEquivalentAndEqual.exec(this.ctx)).be.true();
+  });
+
+  it('should return true when list contains an equivalent but not equal Quantity (unit conversion)', async function () {
+    should(await this.containsEquivalentNotEqualQuantity.exec(this.ctx)).be.true();
+  });
+
+  it('should return true when list contains an equal Quantity', async function () {
+    should(await this.containsEqualQuantity.exec(this.ctx)).be.true();
+  });
+
+  it('should return true when list contains an equivalent but not equal Decimal', async function () {
+    should(await this.containsEquivalentNotEqualDecimal.exec(this.ctx)).be.true();
+  });
+
+  it('should return false when list does not contain an equivalent string', async function () {
+    should(await this.doesNotContain.exec(this.ctx)).be.false();
+  });
+
+  it('should return false when list does not contain an equivalent Quantity', async function () {
+    should(await this.doesNotContainQuantity.exec(this.ctx)).be.false();
+  });
+
+  it('should return false when first operand is null', async function () {
+    should(await this.nullContainer.exec(this.ctx)).be.false();
+  });
+
+  it('should treat nulls as equivalent', async function () {
+    should(await this.doesContainNull.exec(this.ctx)).be.true();
+  });
+
+  it('should return false when list does not contain null for ~contains null', async function () {
+    should(await this.doesNotContainNull.exec(this.ctx)).be.false();
+  });
+});
+
+describe('EquivalentIn', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should return true when list contains an equivalent but not equal string', async function () {
+    should(await this.containsEquivalentNotEqual.exec(this.ctx)).be.true();
+  });
+
+  it('should return true when list contains an equal string', async function () {
+    should(await this.containsEquivalentAndEqual.exec(this.ctx)).be.true();
+  });
+
+  it('should return true when list contains an equivalent but not equal Quantity (unit conversion)', async function () {
+    should(await this.containsEquivalentNotEqualQuantity.exec(this.ctx)).be.true();
+  });
+
+  it('should return true when list contains an equal Quantity', async function () {
+    should(await this.containsEqualQuantity.exec(this.ctx)).be.true();
+  });
+
+  it('should return true when list contains an equivalent but not equal Decimal', async function () {
+    should(await this.containsEquivalentNotEqualDecimal.exec(this.ctx)).be.true();
+  });
+
+  it('should return false when list does not contain an equivalent string', async function () {
+    should(await this.doesNotContain.exec(this.ctx)).be.false();
+  });
+
+  it('should return false when list does not contain an equivalent Quantity', async function () {
+    should(await this.doesNotContainQuantity.exec(this.ctx)).be.false();
+  });
+
+  it('should return false when first operand is null', async function () {
+    should(await this.nullContainer.exec(this.ctx)).be.false();
+  });
+
+  it('should treat nulls as equivalent', async function () {
+    should(await this.doesContainNull.exec(this.ctx)).be.true();
+  });
+
+  it('should return false when list does not contain null for ~contains null', async function () {
+    should(await this.doesNotContainNull.exec(this.ctx)).be.false();
+  });
+});
+
 describe('Flatten', () => {
   beforeEach(function () {
     setup(this, data);
