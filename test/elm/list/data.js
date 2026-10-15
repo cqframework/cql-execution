@@ -37518,6 +37518,2442 @@ module.exports['ProperContains'] = {
   }
 }
 
+/* EquivalentContains
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define ContainsEquivalentNotEqual: { 'A', 'B', 'C' } ~contains 'a'
+define ContainsEquivalentAndEqual: { 'A', 'B', 'C' } ~contains 'A'
+define ContainsEquivalentNotEqualQuantity: { 100 'cm', 200 'cm', 300 'cm' } ~contains 1 'm' 
+define ContainsEqualQuantity: { 100 'cm', 200 'cm', 300 'cm' } ~contains 100 'cm'
+define ContainsEquivalentNotEqualDecimal: { 1.01, 2.02, 3.03 } ~contains 1.0
+define DoesNotContain: { 'B', 'C' } ~contains 'a'
+define DoesNotContainQuantity: { 200 'cm', 300 'cm' } ~contains 100 'cm' 
+define NullContainer: null ~contains 'a'
+define DoesNotContainNull: { 'A', 'B', 'C' } ~contains null
+define DoesContainNull: { 'A', 'B', 'C', null } ~contains null
+*/
+
+module.exports['EquivalentContains'] = {
+  "library" : {
+    "localId" : "0",
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorVersion" : "4.2.0",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+      "signatureLevel" : "All"
+    }, {
+      "type" : "Annotation",
+      "t" : [ ],
+      "s" : {
+        "r" : "352",
+        "s" : [ {
+          "value" : [ "", "library TestSnippet version '1'" ]
+        } ]
+      }
+    } ],
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1",
+        "annotation" : [ ]
+      }, {
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "206",
+            "s" : [ {
+              "value" : [ "", "using " ]
+            }, {
+              "s" : [ {
+                "value" : [ "Simple" ]
+              } ]
+            }, {
+              "value" : [ " version '1.0.0'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "211",
+        "name" : "Patient",
+        "annotation" : [ ]
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "localId" : "209",
+        "name" : "Patient",
+        "context" : "Patient",
+        "annotation" : [ ],
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "210",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "208",
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+            "annotation" : [ ],
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ]
+          }
+        }
+      }, {
+        "localId" : "214",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ContainsEquivalentNotEqual",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "214",
+            "s" : [ {
+              "value" : [ "", "define ", "ContainsEquivalentNotEqual", ": " ]
+            }, {
+              "r" : "226",
+              "s" : [ {
+                "r" : "215",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "216",
+                  "s" : [ {
+                    "value" : [ "'A'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "218",
+                  "s" : [ {
+                    "value" : [ "'B'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "220",
+                  "s" : [ {
+                    "value" : [ "'C'" ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              }, {
+                "value" : [ " contains " ]
+              }, {
+                "r" : "224",
+                "s" : [ {
+                  "value" : [ "'a'" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentContains",
+          "localId" : "226",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "227",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "228",
+              "name" : "{urn:hl7-org:elm-types:r1}String",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "229",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "215",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "222",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "223",
+                "name" : "{urn:hl7-org:elm-types:r1}String",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "216",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "A",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "218",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "B",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "220",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "C",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "Literal",
+            "localId" : "224",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "232",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ContainsEquivalentAndEqual",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "232",
+            "s" : [ {
+              "value" : [ "", "define ", "ContainsEquivalentAndEqual", ": " ]
+            }, {
+              "r" : "244",
+              "s" : [ {
+                "r" : "233",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "234",
+                  "s" : [ {
+                    "value" : [ "'A'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "236",
+                  "s" : [ {
+                    "value" : [ "'B'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "238",
+                  "s" : [ {
+                    "value" : [ "'C'" ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              }, {
+                "value" : [ " contains " ]
+              }, {
+                "r" : "242",
+                "s" : [ {
+                  "value" : [ "'A'" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentContains",
+          "localId" : "244",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "245",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "246",
+              "name" : "{urn:hl7-org:elm-types:r1}String",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "247",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "233",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "240",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "241",
+                "name" : "{urn:hl7-org:elm-types:r1}String",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "234",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "A",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "236",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "B",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "238",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "C",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "Literal",
+            "localId" : "242",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "A",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "250",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ContainsEquivalentNotEqualQuantity",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "250",
+            "s" : [ {
+              "value" : [ "", "define ", "ContainsEquivalentNotEqualQuantity", ": " ]
+            }, {
+              "r" : "258",
+              "s" : [ {
+                "r" : "251",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "252",
+                  "s" : [ {
+                    "value" : [ "100 ", "'cm'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "253",
+                  "s" : [ {
+                    "value" : [ "200 ", "'cm'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "254",
+                  "s" : [ {
+                    "value" : [ "300 ", "'cm'" ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              }, {
+                "value" : [ " contains " ]
+              }, {
+                "r" : "257",
+                "s" : [ {
+                  "value" : [ "1 ", "'m'" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentContains",
+          "localId" : "258",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "259",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "260",
+              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "261",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "251",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "255",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "256",
+                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Quantity",
+              "localId" : "252",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 100,
+              "unit" : "cm",
+              "annotation" : [ ]
+            }, {
+              "type" : "Quantity",
+              "localId" : "253",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 200,
+              "unit" : "cm",
+              "annotation" : [ ]
+            }, {
+              "type" : "Quantity",
+              "localId" : "254",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 300,
+              "unit" : "cm",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "Quantity",
+            "localId" : "257",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 1,
+            "unit" : "m",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "264",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ContainsEqualQuantity",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "264",
+            "s" : [ {
+              "value" : [ "", "define ", "ContainsEqualQuantity", ": " ]
+            }, {
+              "r" : "272",
+              "s" : [ {
+                "r" : "265",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "266",
+                  "s" : [ {
+                    "value" : [ "100 ", "'cm'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "267",
+                  "s" : [ {
+                    "value" : [ "200 ", "'cm'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "268",
+                  "s" : [ {
+                    "value" : [ "300 ", "'cm'" ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              }, {
+                "value" : [ " contains " ]
+              }, {
+                "r" : "271",
+                "s" : [ {
+                  "value" : [ "100 ", "'cm'" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentContains",
+          "localId" : "272",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "273",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "274",
+              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "275",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "265",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "269",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "270",
+                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Quantity",
+              "localId" : "266",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 100,
+              "unit" : "cm",
+              "annotation" : [ ]
+            }, {
+              "type" : "Quantity",
+              "localId" : "267",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 200,
+              "unit" : "cm",
+              "annotation" : [ ]
+            }, {
+              "type" : "Quantity",
+              "localId" : "268",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 300,
+              "unit" : "cm",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "Quantity",
+            "localId" : "271",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 100,
+            "unit" : "cm",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "278",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ContainsEquivalentNotEqualDecimal",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "278",
+            "s" : [ {
+              "value" : [ "", "define ", "ContainsEquivalentNotEqualDecimal", ": " ]
+            }, {
+              "r" : "286",
+              "s" : [ {
+                "r" : "279",
+                "s" : [ {
+                  "r" : "280",
+                  "value" : [ "{ ", "1.01", ", ", "2.02", ", ", "3.03", " }" ]
+                } ]
+              }, {
+                "r" : "285",
+                "value" : [ " contains ", "1.0" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentContains",
+          "localId" : "286",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "287",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "288",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "289",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "279",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "283",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "284",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "280",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.01",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "281",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.02",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "282",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "3.03",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "Literal",
+            "localId" : "285",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.0",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "292",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DoesNotContain",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "292",
+            "s" : [ {
+              "value" : [ "", "define ", "DoesNotContain", ": " ]
+            }, {
+              "r" : "302",
+              "s" : [ {
+                "r" : "293",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "294",
+                  "s" : [ {
+                    "value" : [ "'B'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "296",
+                  "s" : [ {
+                    "value" : [ "'C'" ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              }, {
+                "value" : [ " contains " ]
+              }, {
+                "r" : "300",
+                "s" : [ {
+                  "value" : [ "'a'" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentContains",
+          "localId" : "302",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "303",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "304",
+              "name" : "{urn:hl7-org:elm-types:r1}String",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "305",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "293",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "298",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "299",
+                "name" : "{urn:hl7-org:elm-types:r1}String",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "294",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "B",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "296",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "C",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "Literal",
+            "localId" : "300",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "308",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DoesNotContainQuantity",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "308",
+            "s" : [ {
+              "value" : [ "", "define ", "DoesNotContainQuantity", ": " ]
+            }, {
+              "r" : "315",
+              "s" : [ {
+                "r" : "309",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "310",
+                  "s" : [ {
+                    "value" : [ "200 ", "'cm'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "311",
+                  "s" : [ {
+                    "value" : [ "300 ", "'cm'" ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              }, {
+                "value" : [ " contains " ]
+              }, {
+                "r" : "314",
+                "s" : [ {
+                  "value" : [ "100 ", "'cm'" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentContains",
+          "localId" : "315",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "316",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "317",
+              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "318",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "309",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "312",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "313",
+                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Quantity",
+              "localId" : "310",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 200,
+              "unit" : "cm",
+              "annotation" : [ ]
+            }, {
+              "type" : "Quantity",
+              "localId" : "311",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 300,
+              "unit" : "cm",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "Quantity",
+            "localId" : "314",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 100,
+            "unit" : "cm",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "321",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "NullContainer",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "321",
+            "s" : [ {
+              "value" : [ "", "define ", "NullContainer", ": " ]
+            }, {
+              "r" : "325",
+              "s" : [ {
+                "r" : "322",
+                "value" : [ "null", " contains " ]
+              }, {
+                "r" : "323",
+                "s" : [ {
+                  "value" : [ "'a'" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentContains",
+          "localId" : "325",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "329",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "330",
+              "name" : "{urn:hl7-org:elm-types:r1}String",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "331",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "326",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "322",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "327",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "328",
+                "name" : "{urn:hl7-org:elm-types:r1}String",
+                "annotation" : [ ]
+              }
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "323",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "334",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DoesNotContainNull",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "334",
+            "s" : [ {
+              "value" : [ "", "define ", "DoesNotContainNull", ": " ]
+            }, {
+              "r" : "345",
+              "s" : [ {
+                "r" : "335",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "336",
+                  "s" : [ {
+                    "value" : [ "'A'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "338",
+                  "s" : [ {
+                    "value" : [ "'B'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "340",
+                  "s" : [ {
+                    "value" : [ "'C'" ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              }, {
+                "r" : "344",
+                "value" : [ " contains ", "null" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentContains",
+          "localId" : "345",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "347",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "348",
+              "name" : "{urn:hl7-org:elm-types:r1}String",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "349",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "335",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "342",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "343",
+                "name" : "{urn:hl7-org:elm-types:r1}String",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "336",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "A",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "338",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "B",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "340",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "C",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "As",
+            "localId" : "346",
+            "asType" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "344",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      }, {
+        "localId" : "352",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DoesContainNull",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "352",
+            "s" : [ {
+              "value" : [ "", "define ", "DoesContainNull", ": " ]
+            }, {
+              "r" : "365",
+              "s" : [ {
+                "r" : "353",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "354",
+                  "s" : [ {
+                    "value" : [ "'A'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "356",
+                  "s" : [ {
+                    "value" : [ "'B'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "358",
+                  "s" : [ {
+                    "value" : [ "'C'" ]
+                  } ]
+                }, {
+                  "r" : "360",
+                  "value" : [ ", ", "null", " }" ]
+                } ]
+              }, {
+                "r" : "364",
+                "value" : [ " contains ", "null" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentContains",
+          "localId" : "365",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "367",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "368",
+              "name" : "{urn:hl7-org:elm-types:r1}String",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "369",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "353",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "362",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "363",
+                "name" : "{urn:hl7-org:elm-types:r1}String",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "354",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "A",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "356",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "B",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "358",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "C",
+              "annotation" : [ ]
+            }, {
+              "type" : "As",
+              "localId" : "361",
+              "asType" : "{urn:hl7-org:elm-types:r1}String",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "operand" : {
+                "type" : "Null",
+                "localId" : "360",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                "annotation" : [ ]
+              }
+            } ]
+          }, {
+            "type" : "As",
+            "localId" : "366",
+            "asType" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "364",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      } ]
+    }
+  }
+}
+
+/* EquivalentIn
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define ContainsEquivalentNotEqual: 'a' ~in { 'A', 'B', 'C' }
+define ContainsEquivalentAndEqual: 'A' ~in { 'A', 'B', 'C' }
+define ContainsEquivalentNotEqualQuantity: 1 'm'  ~in { 100 'cm', 200 'cm', 300 'cm' }
+define ContainsEqualQuantity: 100 'cm' ~in { 100 'cm', 200 'cm', 300 'cm' }
+define ContainsEquivalentNotEqualDecimal: 1.0 ~in { 1.01, 2.02, 3.03 }
+define DoesNotContain: 'a' ~in { 'B', 'C' }
+define DoesNotContainQuantity: 100 'cm'  ~in { 200 'cm', 300 'cm' }
+define NullContainer: 'a' ~in null
+define DoesNotContainNull: null ~in { 'A', 'B', 'C' }
+define DoesContainNull: null ~in { 'A', 'B', 'C', null }
+*/
+
+module.exports['EquivalentIn'] = {
+  "library" : {
+    "localId" : "0",
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorVersion" : "4.2.0",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+      "signatureLevel" : "All"
+    }, {
+      "type" : "Annotation",
+      "t" : [ ],
+      "s" : {
+        "r" : "352",
+        "s" : [ {
+          "value" : [ "", "library TestSnippet version '1'" ]
+        } ]
+      }
+    } ],
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1",
+        "annotation" : [ ]
+      }, {
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "206",
+            "s" : [ {
+              "value" : [ "", "using " ]
+            }, {
+              "s" : [ {
+                "value" : [ "Simple" ]
+              } ]
+            }, {
+              "value" : [ " version '1.0.0'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "211",
+        "name" : "Patient",
+        "annotation" : [ ]
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "localId" : "209",
+        "name" : "Patient",
+        "context" : "Patient",
+        "annotation" : [ ],
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "210",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "208",
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+            "annotation" : [ ],
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ]
+          }
+        }
+      }, {
+        "localId" : "214",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ContainsEquivalentNotEqual",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "214",
+            "s" : [ {
+              "value" : [ "", "define ", "ContainsEquivalentNotEqual", ": " ]
+            }, {
+              "r" : "226",
+              "s" : [ {
+                "r" : "215",
+                "s" : [ {
+                  "value" : [ "'a'" ]
+                } ]
+              }, {
+                "value" : [ " in " ]
+              }, {
+                "r" : "217",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "218",
+                  "s" : [ {
+                    "value" : [ "'A'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "220",
+                  "s" : [ {
+                    "value" : [ "'B'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "222",
+                  "s" : [ {
+                    "value" : [ "'C'" ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentIn",
+          "localId" : "226",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "227",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "228",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "229",
+              "name" : "{urn:hl7-org:elm-types:r1}String",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "215",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a",
+            "annotation" : [ ]
+          }, {
+            "type" : "List",
+            "localId" : "217",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "224",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "225",
+                "name" : "{urn:hl7-org:elm-types:r1}String",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "218",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "A",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "220",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "B",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "222",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "C",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "232",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ContainsEquivalentAndEqual",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "232",
+            "s" : [ {
+              "value" : [ "", "define ", "ContainsEquivalentAndEqual", ": " ]
+            }, {
+              "r" : "244",
+              "s" : [ {
+                "r" : "233",
+                "s" : [ {
+                  "value" : [ "'A'" ]
+                } ]
+              }, {
+                "value" : [ " in " ]
+              }, {
+                "r" : "235",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "236",
+                  "s" : [ {
+                    "value" : [ "'A'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "238",
+                  "s" : [ {
+                    "value" : [ "'B'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "240",
+                  "s" : [ {
+                    "value" : [ "'C'" ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentIn",
+          "localId" : "244",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "245",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "246",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "247",
+              "name" : "{urn:hl7-org:elm-types:r1}String",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "233",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "A",
+            "annotation" : [ ]
+          }, {
+            "type" : "List",
+            "localId" : "235",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "242",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "243",
+                "name" : "{urn:hl7-org:elm-types:r1}String",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "236",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "A",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "238",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "B",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "240",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "C",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "250",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ContainsEquivalentNotEqualQuantity",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "250",
+            "s" : [ {
+              "value" : [ "", "define ", "ContainsEquivalentNotEqualQuantity", ": " ]
+            }, {
+              "r" : "258",
+              "s" : [ {
+                "r" : "251",
+                "s" : [ {
+                  "value" : [ "1 ", "'m'" ]
+                } ]
+              }, {
+                "value" : [ "  in " ]
+              }, {
+                "r" : "252",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "253",
+                  "s" : [ {
+                    "value" : [ "100 ", "'cm'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "254",
+                  "s" : [ {
+                    "value" : [ "200 ", "'cm'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "255",
+                  "s" : [ {
+                    "value" : [ "300 ", "'cm'" ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentIn",
+          "localId" : "258",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "259",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "260",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "261",
+              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Quantity",
+            "localId" : "251",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 1,
+            "unit" : "m",
+            "annotation" : [ ]
+          }, {
+            "type" : "List",
+            "localId" : "252",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "256",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "257",
+                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Quantity",
+              "localId" : "253",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 100,
+              "unit" : "cm",
+              "annotation" : [ ]
+            }, {
+              "type" : "Quantity",
+              "localId" : "254",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 200,
+              "unit" : "cm",
+              "annotation" : [ ]
+            }, {
+              "type" : "Quantity",
+              "localId" : "255",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 300,
+              "unit" : "cm",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "264",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ContainsEqualQuantity",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "264",
+            "s" : [ {
+              "value" : [ "", "define ", "ContainsEqualQuantity", ": " ]
+            }, {
+              "r" : "272",
+              "s" : [ {
+                "r" : "265",
+                "s" : [ {
+                  "value" : [ "100 ", "'cm'" ]
+                } ]
+              }, {
+                "value" : [ " in " ]
+              }, {
+                "r" : "266",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "267",
+                  "s" : [ {
+                    "value" : [ "100 ", "'cm'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "268",
+                  "s" : [ {
+                    "value" : [ "200 ", "'cm'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "269",
+                  "s" : [ {
+                    "value" : [ "300 ", "'cm'" ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentIn",
+          "localId" : "272",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "273",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "274",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "275",
+              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Quantity",
+            "localId" : "265",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 100,
+            "unit" : "cm",
+            "annotation" : [ ]
+          }, {
+            "type" : "List",
+            "localId" : "266",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "270",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "271",
+                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Quantity",
+              "localId" : "267",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 100,
+              "unit" : "cm",
+              "annotation" : [ ]
+            }, {
+              "type" : "Quantity",
+              "localId" : "268",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 200,
+              "unit" : "cm",
+              "annotation" : [ ]
+            }, {
+              "type" : "Quantity",
+              "localId" : "269",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 300,
+              "unit" : "cm",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "278",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ContainsEquivalentNotEqualDecimal",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "278",
+            "s" : [ {
+              "value" : [ "", "define ", "ContainsEquivalentNotEqualDecimal", ": " ]
+            }, {
+              "r" : "286",
+              "s" : [ {
+                "r" : "279",
+                "value" : [ "1.0", " in " ]
+              }, {
+                "r" : "280",
+                "s" : [ {
+                  "r" : "281",
+                  "value" : [ "{ ", "1.01", ", ", "2.02", ", ", "3.03", " }" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentIn",
+          "localId" : "286",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "287",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "288",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "289",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "279",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.0",
+            "annotation" : [ ]
+          }, {
+            "type" : "List",
+            "localId" : "280",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "284",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "285",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "281",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.01",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "282",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.02",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "283",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "3.03",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "292",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DoesNotContain",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "292",
+            "s" : [ {
+              "value" : [ "", "define ", "DoesNotContain", ": " ]
+            }, {
+              "r" : "302",
+              "s" : [ {
+                "r" : "293",
+                "s" : [ {
+                  "value" : [ "'a'" ]
+                } ]
+              }, {
+                "value" : [ " in " ]
+              }, {
+                "r" : "295",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "296",
+                  "s" : [ {
+                    "value" : [ "'B'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "298",
+                  "s" : [ {
+                    "value" : [ "'C'" ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentIn",
+          "localId" : "302",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "303",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "304",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "305",
+              "name" : "{urn:hl7-org:elm-types:r1}String",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "293",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a",
+            "annotation" : [ ]
+          }, {
+            "type" : "List",
+            "localId" : "295",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "300",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "301",
+                "name" : "{urn:hl7-org:elm-types:r1}String",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "296",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "B",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "298",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "C",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "308",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DoesNotContainQuantity",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "308",
+            "s" : [ {
+              "value" : [ "", "define ", "DoesNotContainQuantity", ": " ]
+            }, {
+              "r" : "315",
+              "s" : [ {
+                "r" : "309",
+                "s" : [ {
+                  "value" : [ "100 ", "'cm'" ]
+                } ]
+              }, {
+                "value" : [ "  in " ]
+              }, {
+                "r" : "310",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "311",
+                  "s" : [ {
+                    "value" : [ "200 ", "'cm'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "312",
+                  "s" : [ {
+                    "value" : [ "300 ", "'cm'" ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentIn",
+          "localId" : "315",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "316",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "317",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "318",
+              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Quantity",
+            "localId" : "309",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 100,
+            "unit" : "cm",
+            "annotation" : [ ]
+          }, {
+            "type" : "List",
+            "localId" : "310",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "313",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "314",
+                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Quantity",
+              "localId" : "311",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 200,
+              "unit" : "cm",
+              "annotation" : [ ]
+            }, {
+              "type" : "Quantity",
+              "localId" : "312",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 300,
+              "unit" : "cm",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "321",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "NullContainer",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "321",
+            "s" : [ {
+              "value" : [ "", "define ", "NullContainer", ": " ]
+            }, {
+              "r" : "325",
+              "s" : [ {
+                "r" : "322",
+                "s" : [ {
+                  "value" : [ "'a'" ]
+                } ]
+              }, {
+                "r" : "324",
+                "value" : [ " in ", "null" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentIn",
+          "localId" : "325",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "329",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          }, {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "330",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "331",
+              "name" : "{urn:hl7-org:elm-types:r1}String",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "322",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a",
+            "annotation" : [ ]
+          }, {
+            "type" : "As",
+            "localId" : "326",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "324",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "327",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "328",
+                "name" : "{urn:hl7-org:elm-types:r1}String",
+                "annotation" : [ ]
+              }
+            }
+          } ]
+        }
+      }, {
+        "localId" : "334",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DoesNotContainNull",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "334",
+            "s" : [ {
+              "value" : [ "", "define ", "DoesNotContainNull", ": " ]
+            }, {
+              "r" : "345",
+              "s" : [ {
+                "r" : "335",
+                "value" : [ "null", " in " ]
+              }, {
+                "r" : "336",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "337",
+                  "s" : [ {
+                    "value" : [ "'A'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "339",
+                  "s" : [ {
+                    "value" : [ "'B'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "341",
+                  "s" : [ {
+                    "value" : [ "'C'" ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentIn",
+          "localId" : "345",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "347",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "348",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "349",
+              "name" : "{urn:hl7-org:elm-types:r1}String",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "346",
+            "asType" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "335",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "List",
+            "localId" : "336",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "343",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "344",
+                "name" : "{urn:hl7-org:elm-types:r1}String",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "337",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "A",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "339",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "B",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "341",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "C",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "352",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DoesContainNull",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "352",
+            "s" : [ {
+              "value" : [ "", "define ", "DoesContainNull", ": " ]
+            }, {
+              "r" : "365",
+              "s" : [ {
+                "r" : "353",
+                "value" : [ "null", " in " ]
+              }, {
+                "r" : "354",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "355",
+                  "s" : [ {
+                    "value" : [ "'A'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "357",
+                  "s" : [ {
+                    "value" : [ "'B'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "359",
+                  "s" : [ {
+                    "value" : [ "'C'" ]
+                  } ]
+                }, {
+                  "r" : "361",
+                  "value" : [ ", ", "null", " }" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "EquivalentIn",
+          "localId" : "365",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "367",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "368",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "369",
+              "name" : "{urn:hl7-org:elm-types:r1}String",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "366",
+            "asType" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "353",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "List",
+            "localId" : "354",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "363",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "364",
+                "name" : "{urn:hl7-org:elm-types:r1}String",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "355",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "A",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "357",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "B",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "359",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "C",
+              "annotation" : [ ]
+            }, {
+              "type" : "As",
+              "localId" : "362",
+              "asType" : "{urn:hl7-org:elm-types:r1}String",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "operand" : {
+                "type" : "Null",
+                "localId" : "361",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                "annotation" : [ ]
+              }
+            } ]
+          } ]
+        }
+      } ]
+    }
+  }
+}
+
 /* Flatten
 library TestSnippet version '1'
 using Simple version '1.0.0'
