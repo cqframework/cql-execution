@@ -105,6 +105,21 @@ describe('Quantity', () => {
     should(quantity1.dividedBy(quantity2)).be.null();
   });
 
+  it('should allow rounding', () => {
+    const quantity = new Quantity(3.456, 'mg');
+    let result = quantity.round();
+    result.unit.should.equal('mg');
+    result.value.should.equalDecimal(3);
+
+    result = quantity.round(0);
+    result.unit.should.equal('mg');
+    result.value.should.equalDecimal(3);
+
+    result = quantity.round(1);
+    result.unit.should.equal('mg');
+    result.value.should.equalDecimal(3.5);
+  });
+
   it('should convert units when possible to perform arithmetic', () => {
     const divide = new Quantity(8, 'm').dividedBy(new Quantity(50, 'cm'));
     divide.equals(new Quantity(16, '1')).should.be.true();

@@ -167,6 +167,10 @@ export class Quantity {
     }
     return new Quantity(resultValue, resultUnit);
   }
+
+  round(precision?: number) {
+    return new Quantity(this.value.round(precision), this.unit);
+  }
 }
 
 export function parseQuantity(str: string) {

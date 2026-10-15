@@ -292,6 +292,9 @@ export class Round extends Expression {
     }
 
     const dec = this.precision != null ? await this.precision.execute(ctx) : 0;
+    if (arg instanceof Quantity) {
+      return arg.round(dec);
+    }
     return Decimal.from(arg).round(dec);
   }
 }

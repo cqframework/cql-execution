@@ -13328,6 +13328,9 @@ define RoundPositiveHalfZeroPrecision: Round(1.5, 0)
 define RoundNegativeHalfOmittedPrecision: Round(-1.5)
 define RoundNegativeHalfNullPrecision: Round(-1.5, null as Integer)
 define RoundNegativeHalfZeroPrecision: Round(-1.5, 0)
+define QuantityRound: Round(2.54 'cm') // 3 'cm'
+define QuantityRoundZero: Round(2.54 'cm', 0) // 3 'cm'
+define QuantityRoundOne: Round(2.54 'cm', 1) // 2.5 'cm'
 */
 
 module.exports['Round'] = {
@@ -13342,7 +13345,7 @@ module.exports['Round'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "340",
+        "r" : "375",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -14141,6 +14144,149 @@ module.exports['Round'] = {
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "0",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "354",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "QuantityRound",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "354",
+            "s" : [ {
+              "value" : [ "", "define ", "QuantityRound", ": " ]
+            }, {
+              "r" : "359",
+              "s" : [ {
+                "r" : "355",
+                "value" : [ "Round", "(", "2.54", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Round",
+          "localId" : "359",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "360",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type": "Quantity",
+            "value": 2.54,
+            "unit": "cm"
+          }
+        }
+      }, {
+        "localId" : "363",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "QuantityRoundZero",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "363",
+            "s" : [ {
+              "value" : [ "// 3 'cm'\n", "define ", "QuantityRoundZero", ": " ]
+            }, {
+              "r" : "370",
+              "s" : [ {
+                "r" : "364",
+                "value" : [ "Round", "(", "2.54", ", ", "0", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Round",
+          "localId" : "370",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "371",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "372",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type": "Quantity",
+            "value": 2.54,
+            "unit": "cm"
+          },
+          "precision" : {
+            "type" : "Literal",
+            "localId" : "365",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "375",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "QuantityRoundOne",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "375",
+            "s" : [ {
+              "value" : [ "// 3 'cm'\n", "define ", "QuantityRoundOne", ": " ]
+            }, {
+              "r" : "382",
+              "s" : [ {
+                "r" : "376",
+                "value" : [ "Round", "(", "2.54", " , ", "1", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Round",
+          "localId" : "382",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "383",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "384",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type": "Quantity",
+            "value": 2.54,
+            "unit": "cm"
+          },
+          "precision" : {
+            "type" : "Literal",
+            "localId" : "377",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1",
             "annotation" : [ ]
           }
         }
