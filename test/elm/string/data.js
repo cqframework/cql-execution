@@ -5493,6 +5493,7 @@ using Simple version '1.0.0'
 context Patient
 define MatchesTrue: Matches('1,2three', '\\d,\\d\\w+')
 define MatchesFalse: Matches('three', '\\d')
+define MatchesPartial: Matches('12three', '\\d')
 define MatchesIsNullFirst: Matches(null, '\\w+')
 define MatchesIsNullSecond: Matches('12three', null)
 define MatchesAllNull: Matches(null, null)
@@ -5510,7 +5511,7 @@ module.exports['Matches'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "272",
+        "r" : "286",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -5719,7 +5720,7 @@ module.exports['Matches'] = {
       }, {
         "localId" : "242",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-        "name" : "MatchesIsNullFirst",
+        "name" : "MatchesPartial",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -5728,16 +5729,22 @@ module.exports['Matches'] = {
           "s" : {
             "r" : "242",
             "s" : [ {
-              "value" : [ "", "define ", "MatchesIsNullFirst", ": " ]
+              "value" : [ "", "define ", "MatchesPartial", ": " ]
             }, {
               "r" : "251",
               "s" : [ {
-                "r" : "243",
-                "value" : [ "Matches", "(", "null", ", " ]
+                "value" : [ "Matches", "(" ]
               }, {
-                "r" : "244",
+                "r" : "243",
                 "s" : [ {
-                  "value" : [ "'\\\\w+'" ]
+                  "value" : [ "'12three'" ]
+                } ]
+              }, {
+                "value" : [ ", " ]
+              }, {
+                "r" : "245",
+                "s" : [ {
+                  "value" : [ "'\\\\d'" ]
                 } ]
               }, {
                 "value" : [ ")" ]
@@ -5752,30 +5759,91 @@ module.exports['Matches'] = {
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "253",
+            "localId" : "252",
             "name" : "{urn:hl7-org:elm-types:r1}String",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "254",
+            "localId" : "253",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "243",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "12three",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "245",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "\\d",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "256",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MatchesIsNullFirst",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "256",
+            "s" : [ {
+              "value" : [ "", "define ", "MatchesIsNullFirst", ": " ]
+            }, {
+              "r" : "265",
+              "s" : [ {
+                "r" : "257",
+                "value" : [ "Matches", "(", "null", ", " ]
+              }, {
+                "r" : "258",
+                "s" : [ {
+                  "value" : [ "'\\\\w+'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Matches",
+          "localId" : "265",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "267",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "268",
             "name" : "{urn:hl7-org:elm-types:r1}String",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "As",
-            "localId" : "252",
+            "localId" : "266",
             "asType" : "{urn:hl7-org:elm-types:r1}String",
             "annotation" : [ ],
             "signature" : [ ],
             "operand" : {
               "type" : "Null",
-              "localId" : "243",
+              "localId" : "257",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
               "annotation" : [ ]
             }
           }, {
             "type" : "Literal",
-            "localId" : "244",
+            "localId" : "258",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
             "value" : "\\w+",
@@ -5783,7 +5851,7 @@ module.exports['Matches'] = {
           } ]
         }
       }, {
-        "localId" : "257",
+        "localId" : "271",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
         "name" : "MatchesIsNullSecond",
         "context" : "Patient",
@@ -5792,20 +5860,20 @@ module.exports['Matches'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "257",
+            "r" : "271",
             "s" : [ {
               "value" : [ "", "define ", "MatchesIsNullSecond", ": " ]
             }, {
-              "r" : "266",
+              "r" : "280",
               "s" : [ {
                 "value" : [ "Matches", "(" ]
               }, {
-                "r" : "258",
+                "r" : "272",
                 "s" : [ {
                   "value" : [ "'12three'" ]
                 } ]
               }, {
-                "r" : "260",
+                "r" : "274",
                 "value" : [ ", ", "null", ")" ]
               } ]
             } ]
@@ -5813,43 +5881,43 @@ module.exports['Matches'] = {
         } ],
         "expression" : {
           "type" : "Matches",
-          "localId" : "266",
+          "localId" : "280",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "268",
+            "localId" : "282",
             "name" : "{urn:hl7-org:elm-types:r1}String",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "269",
+            "localId" : "283",
             "name" : "{urn:hl7-org:elm-types:r1}String",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "Literal",
-            "localId" : "258",
+            "localId" : "272",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
             "value" : "12three",
             "annotation" : [ ]
           }, {
             "type" : "As",
-            "localId" : "267",
+            "localId" : "281",
             "asType" : "{urn:hl7-org:elm-types:r1}String",
             "annotation" : [ ],
             "signature" : [ ],
             "operand" : {
               "type" : "Null",
-              "localId" : "260",
+              "localId" : "274",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
               "annotation" : [ ]
             }
           } ]
         }
       }, {
-        "localId" : "272",
+        "localId" : "286",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
         "name" : "MatchesAllNull",
         "context" : "Patient",
@@ -5858,13 +5926,13 @@ module.exports['Matches'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "272",
+            "r" : "286",
             "s" : [ {
               "value" : [ "", "define ", "MatchesAllNull", ": " ]
             }, {
-              "r" : "281",
+              "r" : "295",
               "s" : [ {
-                "r" : "273",
+                "r" : "287",
                 "value" : [ "Matches", "(", "null", ", ", "null", ")" ]
               } ]
             } ]
@@ -5872,41 +5940,539 @@ module.exports['Matches'] = {
         } ],
         "expression" : {
           "type" : "Matches",
-          "localId" : "281",
+          "localId" : "295",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "284",
+            "localId" : "298",
             "name" : "{urn:hl7-org:elm-types:r1}String",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "285",
+            "localId" : "299",
             "name" : "{urn:hl7-org:elm-types:r1}String",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "As",
-            "localId" : "282",
+            "localId" : "296",
             "asType" : "{urn:hl7-org:elm-types:r1}String",
             "annotation" : [ ],
             "signature" : [ ],
             "operand" : {
               "type" : "Null",
-              "localId" : "273",
+              "localId" : "287",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
               "annotation" : [ ]
             }
           }, {
             "type" : "As",
+            "localId" : "297",
+            "asType" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "288",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      } ]
+    }
+  }
+}
+
+/* MatchesFull
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define MatchesTrue: MatchesFull('1,2three', '\\d,\\d\\w+')
+define MatchesFalse: MatchesFull('three', '\\d')
+define MatchesPartial: MatchesFull('12three', '\\d')
+define MatchesIsNullFirst: MatchesFull(null, '\\w+')
+define MatchesIsNullSecond: MatchesFull('12three', null)
+define MatchesAllNull: MatchesFull(null, null)
+*/
+
+module.exports['MatchesFull'] = {
+  "library" : {
+    "localId" : "0",
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorVersion" : "4.2.0",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+      "signatureLevel" : "All"
+    }, {
+      "type" : "Annotation",
+      "t" : [ ],
+      "s" : {
+        "r" : "286",
+        "s" : [ {
+          "value" : [ "", "library TestSnippet version '1'" ]
+        } ]
+      }
+    } ],
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1",
+        "annotation" : [ ]
+      }, {
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "206",
+            "s" : [ {
+              "value" : [ "", "using " ]
+            }, {
+              "s" : [ {
+                "value" : [ "Simple" ]
+              } ]
+            }, {
+              "value" : [ " version '1.0.0'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "211",
+        "name" : "Patient",
+        "annotation" : [ ]
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "localId" : "209",
+        "name" : "Patient",
+        "context" : "Patient",
+        "annotation" : [ ],
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "210",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "208",
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+            "annotation" : [ ],
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ]
+          }
+        }
+      }, {
+        "localId" : "214",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MatchesTrue",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "214",
+            "s" : [ {
+              "value" : [ "", "define ", "MatchesTrue", ": " ]
+            }, {
+              "r" : "223",
+              "s" : [ {
+                "value" : [ "Matches", "(" ]
+              }, {
+                "r" : "215",
+                "s" : [ {
+                  "value" : [ "'1,2three'" ]
+                } ]
+              }, {
+                "value" : [ ", " ]
+              }, {
+                "r" : "217",
+                "s" : [ {
+                  "value" : [ "'\\\\d,\\\\d\\\\w+'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "MatchesFull",
+          "localId" : "223",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "224",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "225",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "215",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "1,2three",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "217",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "\\d,\\d\\w+",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "228",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MatchesFalse",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "228",
+            "s" : [ {
+              "value" : [ "", "define ", "MatchesFalse", ": " ]
+            }, {
+              "r" : "237",
+              "s" : [ {
+                "value" : [ "Matches", "(" ]
+              }, {
+                "r" : "229",
+                "s" : [ {
+                  "value" : [ "'three'" ]
+                } ]
+              }, {
+                "value" : [ ", " ]
+              }, {
+                "r" : "231",
+                "s" : [ {
+                  "value" : [ "'\\\\d'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "MatchesFull",
+          "localId" : "237",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "238",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "239",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "229",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "three",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "231",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "\\d",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "242",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MatchesPartial",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "242",
+            "s" : [ {
+              "value" : [ "", "define ", "MatchesPartial", ": " ]
+            }, {
+              "r" : "251",
+              "s" : [ {
+                "value" : [ "Matches", "(" ]
+              }, {
+                "r" : "243",
+                "s" : [ {
+                  "value" : [ "'12three'" ]
+                } ]
+              }, {
+                "value" : [ ", " ]
+              }, {
+                "r" : "245",
+                "s" : [ {
+                  "value" : [ "'\\\\d'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "MatchesFull",
+          "localId" : "251",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "252",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "253",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "243",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "12three",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "245",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "\\d",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "256",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MatchesIsNullFirst",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "256",
+            "s" : [ {
+              "value" : [ "", "define ", "MatchesIsNullFirst", ": " ]
+            }, {
+              "r" : "265",
+              "s" : [ {
+                "r" : "257",
+                "value" : [ "Matches", "(", "null", ", " ]
+              }, {
+                "r" : "258",
+                "s" : [ {
+                  "value" : [ "'\\\\w+'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "MatchesFull",
+          "localId" : "265",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "267",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "268",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "266",
+            "asType" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "257",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "258",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "\\w+",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "271",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MatchesIsNullSecond",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "271",
+            "s" : [ {
+              "value" : [ "", "define ", "MatchesIsNullSecond", ": " ]
+            }, {
+              "r" : "280",
+              "s" : [ {
+                "value" : [ "Matches", "(" ]
+              }, {
+                "r" : "272",
+                "s" : [ {
+                  "value" : [ "'12three'" ]
+                } ]
+              }, {
+                "r" : "274",
+                "value" : [ ", ", "null", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "MatchesFull",
+          "localId" : "280",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "282",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
             "localId" : "283",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "272",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "12three",
+            "annotation" : [ ]
+          }, {
+            "type" : "As",
+            "localId" : "281",
             "asType" : "{urn:hl7-org:elm-types:r1}String",
             "annotation" : [ ],
             "signature" : [ ],
             "operand" : {
               "type" : "Null",
               "localId" : "274",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      }, {
+        "localId" : "286",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MatchesAllNull",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "286",
+            "s" : [ {
+              "value" : [ "", "define ", "MatchesAllNull", ": " ]
+            }, {
+              "r" : "295",
+              "s" : [ {
+                "r" : "287",
+                "value" : [ "Matches", "(", "null", ", ", "null", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "MatchesFull",
+          "localId" : "295",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "298",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "299",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "296",
+            "asType" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "287",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "As",
+            "localId" : "297",
+            "asType" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "288",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
               "annotation" : [ ]
             }

@@ -219,6 +219,9 @@ define RoundPositiveHalfZeroPrecision: Round(1.5, 0)
 define RoundNegativeHalfOmittedPrecision: Round(-1.5)
 define RoundNegativeHalfNullPrecision: Round(-1.5, null as Integer)
 define RoundNegativeHalfZeroPrecision: Round(-1.5, 0)
+define QuantityRound: Round(2.54 'cm') // 3 'cm'
+define QuantityRoundZero: Round(2.54 'cm', 0) // 3 'cm'
+define QuantityRoundOne: Round(2.54 'cm', 1) // 2.5 'cm'
 
 // @Test: Ln
 define ln: Ln(4)

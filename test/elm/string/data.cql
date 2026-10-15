@@ -60,9 +60,18 @@ define NullIndex: 'HelloWorld'[null]
 // @Test: Matches
 define MatchesTrue: Matches('1,2three', '\\d,\\d\\w+')
 define MatchesFalse: Matches('three', '\\d')
+define MatchesPartial: Matches('12three', '\\d')
 define MatchesIsNullFirst: Matches(null, '\\w+')
 define MatchesIsNullSecond: Matches('12three', null)
 define MatchesAllNull: Matches(null, null)
+
+// @Test: MatchesFull
+define MatchesTrue: MatchesFull('1,2three', '\\d,\\d\\w+')
+define MatchesFalse: MatchesFull('three', '\\d')
+define MatchesPartial: MatchesFull('12three', '\\d')
+define MatchesIsNullFirst: MatchesFull(null, '\\w+')
+define MatchesIsNullSecond: MatchesFull('12three', null)
+define MatchesAllNull: MatchesFull(null, null)
 
 // @Test: PositionOf
 define Found: PositionOf('cde', 'abcdefg')
