@@ -155,11 +155,45 @@ describe('Matches', () => {
     setup(this, data);
   });
 
-  it('should match and return true', async function () {
+  it('should return true for entire string matching regex', async function () {
     (await this.matchesTrue.exec(this.ctx)).should.be.true();
   });
 
-  it('should not match and return false', async function () {
+  it('should return true for partial string matching regex', async function () {
+    (await this.matchesPartial.exec(this.ctx)).should.be.true();
+  });
+
+  it('should return false for nonmatching string', async function () {
+    (await this.matchesFalse.exec(this.ctx)).should.be.false();
+  });
+
+  it('should not match when string to match is null and return null', async function () {
+    should(await this.matchesIsNullFirst.exec(this.ctx)).be.null();
+  });
+
+  it('should not match and return null', async function () {
+    should(await this.matchesIsNullSecond.exec(this.ctx)).be.null();
+  });
+
+  it('should return null if both arguments are null', async function () {
+    should(await this.matchesAllNull.exec(this.ctx)).be.null();
+  });
+});
+
+describe('MatchesFull', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should return true for entire string matching regex', async function () {
+    (await this.matchesTrue.exec(this.ctx)).should.be.true();
+  });
+
+  it('should return false for partial string matching regex', async function () {
+    (await this.matchesPartial.exec(this.ctx)).should.be.false();
+  });
+
+  it('should return false for nonmatching string', async function () {
     (await this.matchesFalse.exec(this.ctx)).should.be.false();
   });
 

@@ -170,6 +170,26 @@ export class Matches extends Expression {
       return null;
     }
 
+    // "The Matches operator returns true if the given string matches the given regular expression pattern.
+    // Regular expressions should [...] use partial matching, use single line mode, and allow Unicode characters.
+    // The start/end of line markers ^ and $ can be used to match the entire string."
+    return new RegExp(pattern).test(string);
+  }
+}
+
+export class MatchesFull extends Expression {
+  constructor(json: any) {
+    super(json);
+  }
+
+  async exec(ctx: Context) {
+    const [string, pattern] = await this.execArgs(ctx);
+    if (string == null || pattern == null) {
+      return null;
+    }
+
+    // "The MatchesFull operator returns true when the value completely matches the given regular expression
+    // (implying that the start/end of line markers ^, $ are always surrounding the regex expression provided)."
     return new RegExp('^' + pattern + '$').test(string);
   }
 }
