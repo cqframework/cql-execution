@@ -821,6 +821,17 @@ describe('Round', () => {
     (await this.roundNegativeHalfNullPrecision.exec(this.ctx)).should.equalDecimal(-2.0);
     (await this.roundNegativeHalfZeroPrecision.exec(this.ctx)).should.equalDecimal(-2.0);
   });
+
+  it('should support rounding Quantity values', async function () {
+    const quantityRound = await this.quantityRound.exec(this.ctx); // Round(2.54 'cm') --> 3 'cm'
+    validateQuantity(quantityRound, 3, 'cm');
+
+    const quantityRoundZero = await this.quantityRoundZero.exec(this.ctx); // Round(2.54 'cm', 0) --> 3 'cm'
+    validateQuantity(quantityRoundZero, 3, 'cm');
+
+    const quantityRoundOne = await this.quantityRoundOne.exec(this.ctx); // Round(2.54 'cm', 1) --> 2.5 'cm'
+    validateQuantity(quantityRoundOne, 2.5, 'cm');
+  });
 });
 
 describe('Successor', () => {
