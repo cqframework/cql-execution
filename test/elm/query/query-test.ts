@@ -205,6 +205,47 @@ describe('Sorting', () => {
     }
   });
 
+  it('should sort DateTimes of mismatched precision when timezone offsets establish a definite order', async function () {
+    this.ctx.getExecutionDateTime().timezoneOffset = Decimal.from(0);
+    // 05-02:00 spans the entire hour starting at 07:00Z, so every possible
+    // instant is later than 05:30Z, despite both values having local hour 05.
+    const earlier = DateTime.parse('2025-01-02T05:30:00.000Z');
+    const later = DateTime.parse('2025-01-02T05-02:00');
+    earlier.before(later).should.be.true();
+    later.after(earlier).should.be.true();
+    const results = [
+      await this.dateTimeMixedPrecisionAsc.exec(this.ctx),
+      await this.dateTimeMixedPrecisionAscReversed.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.have.length(2);
+      result[0].equals(earlier).should.be.true();
+      result[1].equals(later).should.be.true();
+    }
+  });
+
+  it('should sort the lower-precision DateTime first when timezone offsets leave the order indeterminate', async function () {
+    this.ctx.getExecutionDateTime().timezoneOffset = Decimal.from(0);
+    // 05-02:00 spans 07:00Z–07:59:59.999Z, so it may be before, equal to,
+    // or after 07:30Z. The precision fallback places the hour-only value first.
+    const lowerPrecision = DateTime.parse('2025-01-02T05-02:00');
+    const higherPrecision = DateTime.parse('2025-01-02T07:30:00.000Z');
+    should(lowerPrecision.equals(higherPrecision)).be.null();
+    should(lowerPrecision.before(higherPrecision)).be.null();
+    should(lowerPrecision.after(higherPrecision)).be.null();
+    should(higherPrecision.before(lowerPrecision)).be.null();
+    should(higherPrecision.after(lowerPrecision)).be.null();
+    const results = [
+      await this.dateTimeIndeterminatePrecisionAsc.exec(this.ctx),
+      await this.dateTimeIndeterminatePrecisionAscReversed.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.have.length(2);
+      result[0].equals(lowerPrecision).should.be.true();
+      result[1].equals(higherPrecision).should.be.true();
+    }
+  });
+
   it('should sort DateTime values by direction asc', async function () {
     this.ctx.getExecutionDateTime().timezoneOffset = Decimal.from(0);
     const results = [

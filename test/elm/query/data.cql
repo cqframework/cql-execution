@@ -98,6 +98,12 @@ define DateTimeColumnAscReversed: ({ Tuple { value: @2025-01-01T20:00:00.000-10:
 define DateTimeColumnDescReversed: ({ Tuple { value: @2025-01-01T20:00:00.000-10:00 }, Tuple { value: @2025-01-02T05:00:00.000Z } }) X sort by value desc
 define DateTimeExpressionAscReversed: ({ Tuple { value: @2025-01-01T20:00:00.000-10:00 }, Tuple { value: @2025-01-02T05:00:00.000Z } }) X sort by (value + 0 days) asc
 define DateTimeExpressionDescReversed: ({ Tuple { value: @2025-01-01T20:00:00.000-10:00 }, Tuple { value: @2025-01-02T05:00:00.000Z } }) X sort by (value + 0 days) desc
+// The hour-precision value spans 07:00Z–07:59:59.999Z, entirely after 05:30Z.
+define DateTimeMixedPrecisionAsc: ({ @2025-01-02T05:30:00.000Z, @2025-01-02T05-02:00 }) X sort asc
+define DateTimeMixedPrecisionAscReversed: ({ @2025-01-02T05-02:00, @2025-01-02T05:30:00.000Z }) X sort asc
+// 05-02:00 spans 07:00Z–07:59:59.999Z and overlaps the precise 07:30Z instant.
+define DateTimeIndeterminatePrecisionAsc: ({ @2025-01-02T07:30:00.000Z, @2025-01-02T05-02:00 }) X sort asc
+define DateTimeIndeterminatePrecisionAscReversed: ({ @2025-01-02T05-02:00, @2025-01-02T07:30:00.000Z }) X sort asc
 define DecimalDirectionAsc: ({ 2.5, 10.25 }) X sort asc
 define DecimalDirectionDesc: ({ 2.5, 10.25 }) X sort desc
 define DecimalColumnAsc: ({ Tuple { value: 2.5 }, Tuple { value: 10.25 } }) X sort by value asc

@@ -81,6 +81,12 @@ function order(a: any, b: any, low_order: number, high_order: number): number {
     // Indeterminate, for example comparing DateTimes of different precision.
     // The spec doesn't clearly say what to do here (see https://github.com/cqframework/cql-tests/issues/168 ) so the heuristics below are an implementation decision.
 
+    if (typeof a.getPrecisionValue === 'function' && typeof b.getPrecisionValue === 'function') {
+      // Order DateTimes with lower precision first.
+      // Comparison functions above internally convert DateTimes to the same timezone, so if we get here, we know any timezone difference doesn't impact the result
+      return order(a.getPrecisionValue(), b.getPrecisionValue(), low_order, high_order);
+    }
+
     // Fallback to the plain JS operators, which coerce objects to primitives, likely strings: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Less_than
     // This is imperfect but at least sorts symmetrically (a < b is always true or false, and a < b always implies b > a)
     return a < b ? low_order : high_order;
