@@ -5,6 +5,7 @@ const vsets = require('./valuesets');
 const { p1 } = require('./patients');
 import { Interval } from '../../../src/datatypes/interval';
 import { DateTime } from '../../../src/datatypes/datetime';
+import { Decimal } from '../../../src/datatypes/decimal';
 import { Quantity } from '../../../src/datatypes/quantity';
 import { getLocalIdByPath } from '../../testHelpers';
 
@@ -191,6 +192,220 @@ describe('QueryFilterNulls', () => {
 describe('Sorting', () => {
   beforeEach(function () {
     setup(this, data, [p1]);
+  });
+
+  it('should select the newest instant across timezone offsets', async function () {
+    this.ctx.getExecutionDateTime().timezoneOffset = Decimal.from(0);
+    const results = [
+      await this.newest.exec(this.ctx),
+      await this.newestReversedInput.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.equal('newer 06:00Z');
+    }
+  });
+
+  it('should sort DateTimes of mismatched precision when timezone offsets establish a definite order', async function () {
+    this.ctx.getExecutionDateTime().timezoneOffset = Decimal.from(0);
+    // 05-02:00 spans the entire hour starting at 07:00Z, so every possible
+    // instant is later than 05:30Z, despite both values having local hour 05.
+    const earlier = DateTime.parse('2025-01-02T05:30:00.000Z');
+    const later = DateTime.parse('2025-01-02T05-02:00');
+    earlier.before(later).should.be.true();
+    later.after(earlier).should.be.true();
+    const results = [
+      await this.dateTimeMixedPrecisionAsc.exec(this.ctx),
+      await this.dateTimeMixedPrecisionAscReversed.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.have.length(2);
+      result[0].equals(earlier).should.be.true();
+      result[1].equals(later).should.be.true();
+    }
+  });
+
+  it('should sort the lower-precision DateTime first when timezone offsets leave the order indeterminate', async function () {
+    this.ctx.getExecutionDateTime().timezoneOffset = Decimal.from(0);
+    // 05-02:00 spans 07:00Z–07:59:59.999Z, so it may be before, equal to,
+    // or after 07:30Z. The precision fallback places the hour-only value first.
+    const lowerPrecision = DateTime.parse('2025-01-02T05-02:00');
+    const higherPrecision = DateTime.parse('2025-01-02T07:30:00.000Z');
+    should(lowerPrecision.equals(higherPrecision)).be.null();
+    should(lowerPrecision.before(higherPrecision)).be.null();
+    should(lowerPrecision.after(higherPrecision)).be.null();
+    should(higherPrecision.before(lowerPrecision)).be.null();
+    should(higherPrecision.after(lowerPrecision)).be.null();
+    const results = [
+      await this.dateTimeIndeterminatePrecisionAsc.exec(this.ctx),
+      await this.dateTimeIndeterminatePrecisionAscReversed.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.have.length(2);
+      result[0].equals(lowerPrecision).should.be.true();
+      result[1].equals(higherPrecision).should.be.true();
+    }
+  });
+
+  it('should sort DateTime values by direction asc', async function () {
+    this.ctx.getExecutionDateTime().timezoneOffset = Decimal.from(0);
+    const results = [
+      await this.dateTimeDirectionAsc.exec(this.ctx),
+      await this.dateTimeDirectionAscReversed.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.have.length(2);
+      result[0].equals(DateTime.parse('2025-01-02T05:00:00.000Z')).should.be.true();
+      result[1].equals(DateTime.parse('2025-01-01T20:00:00.000-10:00')).should.be.true();
+    }
+  });
+
+  it('should sort DateTime values by direction desc', async function () {
+    this.ctx.getExecutionDateTime().timezoneOffset = Decimal.from(0);
+    const results = [
+      await this.dateTimeDirectionDesc.exec(this.ctx),
+      await this.dateTimeDirectionDescReversed.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.have.length(2);
+      result[0].equals(DateTime.parse('2025-01-01T20:00:00.000-10:00')).should.be.true();
+      result[1].equals(DateTime.parse('2025-01-02T05:00:00.000Z')).should.be.true();
+    }
+  });
+
+  it('should sort DateTime values by column asc', async function () {
+    this.ctx.getExecutionDateTime().timezoneOffset = Decimal.from(0);
+    const results = [
+      await this.dateTimeColumnAsc.exec(this.ctx),
+      await this.dateTimeColumnAscReversed.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.have.length(2);
+      result[0].value.equals(DateTime.parse('2025-01-02T05:00:00.000Z')).should.be.true();
+      result[1].value.equals(DateTime.parse('2025-01-01T20:00:00.000-10:00')).should.be.true();
+    }
+  });
+
+  it('should sort DateTime values by column desc', async function () {
+    this.ctx.getExecutionDateTime().timezoneOffset = Decimal.from(0);
+    const results = [
+      await this.dateTimeColumnDesc.exec(this.ctx),
+      await this.dateTimeColumnDescReversed.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.have.length(2);
+      result[0].value.equals(DateTime.parse('2025-01-01T20:00:00.000-10:00')).should.be.true();
+      result[1].value.equals(DateTime.parse('2025-01-02T05:00:00.000Z')).should.be.true();
+    }
+  });
+
+  it('should sort DateTime values by expression asc', async function () {
+    this.ctx.getExecutionDateTime().timezoneOffset = Decimal.from(0);
+    const results = [
+      await this.dateTimeExpressionAsc.exec(this.ctx),
+      await this.dateTimeExpressionAscReversed.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.have.length(2);
+      result[0].value.equals(DateTime.parse('2025-01-02T05:00:00.000Z')).should.be.true();
+      result[1].value.equals(DateTime.parse('2025-01-01T20:00:00.000-10:00')).should.be.true();
+    }
+  });
+
+  it('should sort DateTime values by expression desc', async function () {
+    this.ctx.getExecutionDateTime().timezoneOffset = Decimal.from(0);
+    const results = [
+      await this.dateTimeExpressionDesc.exec(this.ctx),
+      await this.dateTimeExpressionDescReversed.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.have.length(2);
+      result[0].value.equals(DateTime.parse('2025-01-01T20:00:00.000-10:00')).should.be.true();
+      result[1].value.equals(DateTime.parse('2025-01-02T05:00:00.000Z')).should.be.true();
+    }
+  });
+
+  it('should sort Decimal values numerically by direction asc', async function () {
+    const results = [
+      await this.decimalDirectionAsc.exec(this.ctx),
+      await this.decimalDirectionAscReversed.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.have.length(2);
+      result[0].should.be.instanceOf(Decimal);
+      result[0].should.equalDecimal('2.5');
+      result[1].should.be.instanceOf(Decimal);
+      result[1].should.equalDecimal('10.25');
+    }
+  });
+
+  it('should sort Decimal values numerically by direction desc', async function () {
+    const results = [
+      await this.decimalDirectionDesc.exec(this.ctx),
+      await this.decimalDirectionDescReversed.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.have.length(2);
+      result[0].should.be.instanceOf(Decimal);
+      result[0].should.equalDecimal('10.25');
+      result[1].should.be.instanceOf(Decimal);
+      result[1].should.equalDecimal('2.5');
+    }
+  });
+
+  it('should sort Decimal values numerically by column asc', async function () {
+    const results = [
+      await this.decimalColumnAsc.exec(this.ctx),
+      await this.decimalColumnAscReversed.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.have.length(2);
+      result[0].value.should.be.instanceOf(Decimal);
+      result[0].value.should.equalDecimal('2.5');
+      result[1].value.should.be.instanceOf(Decimal);
+      result[1].value.should.equalDecimal('10.25');
+    }
+  });
+
+  it('should sort Decimal values numerically by column desc', async function () {
+    const results = [
+      await this.decimalColumnDesc.exec(this.ctx),
+      await this.decimalColumnDescReversed.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.have.length(2);
+      result[0].value.should.be.instanceOf(Decimal);
+      result[0].value.should.equalDecimal('10.25');
+      result[1].value.should.be.instanceOf(Decimal);
+      result[1].value.should.equalDecimal('2.5');
+    }
+  });
+
+  it('should sort Decimal values numerically by expression asc', async function () {
+    const results = [
+      await this.decimalExpressionAsc.exec(this.ctx),
+      await this.decimalExpressionAscReversed.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.have.length(2);
+      result[0].value.should.be.instanceOf(Decimal);
+      result[0].value.should.equalDecimal('2.5');
+      result[1].value.should.be.instanceOf(Decimal);
+      result[1].value.should.equalDecimal('10.25');
+    }
+  });
+
+  it('should sort Decimal values numerically by expression desc', async function () {
+    const results = [
+      await this.decimalExpressionDesc.exec(this.ctx),
+      await this.decimalExpressionDescReversed.exec(this.ctx)
+    ];
+    for (const result of results) {
+      result.should.have.length(2);
+      result[0].value.should.be.instanceOf(Decimal);
+      result[0].value.should.equalDecimal('10.25');
+      result[1].value.should.be.instanceOf(Decimal);
+      result[1].value.should.equalDecimal('2.5');
+    }
   });
 
   it('should correctly sort quantities asc', async function () {

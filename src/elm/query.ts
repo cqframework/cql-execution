@@ -1,4 +1,5 @@
 import { Context } from '../runtime/context';
+import { equals, greaterThan, lessThan } from '../util/comparison';
 import { allTrue, asyncMergeSort, Direction, typeIsArray } from '../util/util';
 import { build } from './builder';
 import { Expression, UnimplementedExpression } from './expression';
@@ -62,6 +63,36 @@ export class Without extends With {
 // ELM-only, not a product of CQL
 export class Sort extends UnimplementedExpression {}
 
+function order(a: any, b: any, low_order: number, high_order: number): number {
+  if (a == null || b == null) {
+    if (a == null && b == null) {
+      return 0;
+    }
+    // "When the data being sorted includes nulls, they are sorted first, meaning they will appear at the beginning of the list when the data is sorted ascending,
+    // and at the end of the list when the data is sorted descending."
+    return a == null ? low_order : high_order;
+  } else if (equals(a, b)) {
+    return 0;
+  } else if (lessThan(a, b)) {
+    return low_order;
+  } else if (greaterThan(a, b)) {
+    return high_order;
+  } else {
+    // Indeterminate, for example comparing DateTimes of different precision.
+    // The spec doesn't clearly say what to do here (see https://github.com/cqframework/cql-tests/issues/168 ) so the heuristics below are an implementation decision.
+
+    if (typeof a.getPrecisionValue === 'function' && typeof b.getPrecisionValue === 'function') {
+      // Order DateTimes with lower precision first.
+      // Comparison functions above internally convert DateTimes to the same timezone, so if we get here, we know any timezone difference doesn't impact the result
+      return order(a.getPrecisionValue(), b.getPrecisionValue(), low_order, high_order);
+    }
+
+    // Fallback to the plain JS operators, which coerce objects to primitives, likely strings: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Less_than
+    // This is imperfect but at least sorts symmetrically (a < b is always true or false, and a < b always implies b > a)
+    return a < b ? low_order : high_order;
+  }
+}
+
 export class ByDirection extends Expression {
   direction: Direction;
   low_order: number;
@@ -76,19 +107,7 @@ export class ByDirection extends Expression {
 
   // @ts-ignore
   async exec(ctx: Context, a: any, b: any) {
-    if (a === b) {
-      return 0;
-    } else if (a.isQuantity && b.isQuantity) {
-      if (a.before(b)) {
-        return this.low_order;
-      } else {
-        return this.high_order;
-      }
-    } else if (a < b) {
-      return this.low_order;
-    } else {
-      return this.high_order;
-    }
+    return order(a, b, this.low_order, this.high_order);
   }
 }
 
@@ -112,16 +131,7 @@ export class ByExpression extends Expression {
     const a_val = await this.expression.execute(sctx);
     sctx = ctx.childContext(b);
     const b_val = await this.expression.execute(sctx);
-
-    if (a_val === b_val || (a_val == null && b_val == null)) {
-      return 0;
-    } else if (a_val == null || b_val == null) {
-      return a_val == null ? this.low_order : this.high_order;
-    } else if (a_val.isQuantity && b_val.isQuantity) {
-      return a_val.before(b_val) ? this.low_order : this.high_order;
-    } else {
-      return a_val < b_val ? this.low_order : this.high_order;
-    }
+    return order(a_val, b_val, this.low_order, this.high_order);
   }
 }
 
