@@ -84,6 +84,33 @@ define sortByExpressionWithNullResults: ({8, null, 7}) N return Tuple{N: N} sort
 define sortWithAscendingKeyword: ({8, 6, 7, 5, 3, 0, 9}) N sort ascending
 define sortWithDescendingKeyword: ({8, 6, 7, 5, 3, 0, 9}) N return N sort descending
 
+define Newest: Last(({ Tuple { id: 'older 05:00Z', d: @2025-01-02T05:00:00.000Z }, Tuple { id: 'newer 06:00Z', d: @2025-01-01T20:00:00.000-10:00 } }) X sort by d).id
+define NewestReversedInput: Last(({ Tuple { id: 'newer 06:00Z', d: @2025-01-01T20:00:00.000-10:00 }, Tuple { id: 'older 05:00Z', d: @2025-01-02T05:00:00.000Z } }) X sort by d).id
+define DateTimeDirectionAsc: ({ @2025-01-02T05:00:00.000Z, @2025-01-01T20:00:00.000-10:00 }) X sort asc
+define DateTimeDirectionDesc: ({ @2025-01-02T05:00:00.000Z, @2025-01-01T20:00:00.000-10:00 }) X sort desc
+define DateTimeColumnAsc: ({ Tuple { value: @2025-01-02T05:00:00.000Z }, Tuple { value: @2025-01-01T20:00:00.000-10:00 } }) X sort by value asc
+define DateTimeColumnDesc: ({ Tuple { value: @2025-01-02T05:00:00.000Z }, Tuple { value: @2025-01-01T20:00:00.000-10:00 } }) X sort by value desc
+define DateTimeExpressionAsc: ({ Tuple { value: @2025-01-02T05:00:00.000Z }, Tuple { value: @2025-01-01T20:00:00.000-10:00 } }) X sort by (value + 0 days) asc
+define DateTimeExpressionDesc: ({ Tuple { value: @2025-01-02T05:00:00.000Z }, Tuple { value: @2025-01-01T20:00:00.000-10:00 } }) X sort by (value + 0 days) desc
+define DateTimeDirectionAscReversed: ({ @2025-01-01T20:00:00.000-10:00, @2025-01-02T05:00:00.000Z }) X sort asc
+define DateTimeDirectionDescReversed: ({ @2025-01-01T20:00:00.000-10:00, @2025-01-02T05:00:00.000Z }) X sort desc
+define DateTimeColumnAscReversed: ({ Tuple { value: @2025-01-01T20:00:00.000-10:00 }, Tuple { value: @2025-01-02T05:00:00.000Z } }) X sort by value asc
+define DateTimeColumnDescReversed: ({ Tuple { value: @2025-01-01T20:00:00.000-10:00 }, Tuple { value: @2025-01-02T05:00:00.000Z } }) X sort by value desc
+define DateTimeExpressionAscReversed: ({ Tuple { value: @2025-01-01T20:00:00.000-10:00 }, Tuple { value: @2025-01-02T05:00:00.000Z } }) X sort by (value + 0 days) asc
+define DateTimeExpressionDescReversed: ({ Tuple { value: @2025-01-01T20:00:00.000-10:00 }, Tuple { value: @2025-01-02T05:00:00.000Z } }) X sort by (value + 0 days) desc
+define DecimalDirectionAsc: ({ 2.5, 10.25 }) X sort asc
+define DecimalDirectionDesc: ({ 2.5, 10.25 }) X sort desc
+define DecimalColumnAsc: ({ Tuple { value: 2.5 }, Tuple { value: 10.25 } }) X sort by value asc
+define DecimalColumnDesc: ({ Tuple { value: 2.5 }, Tuple { value: 10.25 } }) X sort by value desc
+define DecimalExpressionAsc: ({ Tuple { value: 2.5 }, Tuple { value: 10.25 } }) X sort by (value + 0.0) asc
+define DecimalExpressionDesc: ({ Tuple { value: 2.5 }, Tuple { value: 10.25 } }) X sort by (value + 0.0) desc
+define DecimalDirectionAscReversed: ({ 10.25, 2.5 }) X sort asc
+define DecimalDirectionDescReversed: ({ 10.25, 2.5 }) X sort desc
+define DecimalColumnAscReversed: ({ Tuple { value: 10.25 }, Tuple { value: 2.5 } }) X sort by value asc
+define DecimalColumnDescReversed: ({ Tuple { value: 10.25 }, Tuple { value: 2.5 } }) X sort by value desc
+define DecimalExpressionAscReversed: ({ Tuple { value: 10.25 }, Tuple { value: 2.5 } }) X sort by (value + 0.0) asc
+define DecimalExpressionDescReversed: ({ Tuple { value: 10.25 }, Tuple { value: 2.5 } }) X sort by (value + 0.0) desc
+
 // @Test: Distinct
 define defaultNumbers: ({1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 2, 2, 1}) N return N
 define defaultStrings: ({'foo', 'bar', 'baz', 'bar'}) S return S
