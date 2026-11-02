@@ -20,7 +20,11 @@ import {
   ELM_QUANTITY_TYPE,
   ELM_TIME_TYPE,
   ELM_CODE_TYPE,
-  ELM_ANY_TYPE
+  ELM_CODESYSTEM_TYPE,
+  ELM_VALUESET_TYPE,
+  ELM_RATIO_TYPE,
+  ELM_ANY_TYPE,
+  ELM_VOCABULARY_TYPE
 } from '../util/elmTypes';
 import { typeIsArray } from '../util/util';
 import { MessageListener, NullMessageListener } from './messageListeners';
@@ -358,7 +362,7 @@ export class Context {
       case ELM_BOOLEAN_TYPE:
         return typeof val === 'boolean';
       case ELM_DECIMAL_TYPE:
-        return val && val.isDecimal;
+        return val.isDecimal;
       case ELM_INTEGER_TYPE:
         return typeof val === 'number' && Number.isInteger(val);
       case ELM_LONG_TYPE:
@@ -366,17 +370,25 @@ export class Context {
       case ELM_STRING_TYPE:
         return typeof val === 'string';
       case ELM_CONCEPT_TYPE:
-        return val && val.isConcept;
+        return val.isConcept;
       case ELM_CODE_TYPE:
-        return val && val.isCode;
+        return val.isCode;
+      case ELM_CODESYSTEM_TYPE:
+        return val.isCodeSystem;
+      case ELM_VALUESET_TYPE:
+        return val.isValueSet;
+      case ELM_VOCABULARY_TYPE:
+        return val.isCodeSystem ?? val.isValueSet;
+      case ELM_RATIO_TYPE:
+        return val.isRatio;
       case ELM_DATETIME_TYPE:
-        return val && val.isDateTime;
+        return val.isDateTime;
       case ELM_DATE_TYPE:
-        return val && val.isDate;
+        return val.isDate;
       case ELM_QUANTITY_TYPE:
-        return val && val.isQuantity;
+        return val.isQuantity;
       case ELM_TIME_TYPE:
-        return val && val.isTime && val.isTime();
+        return val.isTime && val.isTime();
       default:
         // Use the data model's implementation of _is, if it is available
         if (typeof val._is === 'function') {
@@ -391,12 +403,6 @@ export class Context {
           return false;
         }
         // Otherwise just default to true to match legacy behavior.
-        //
-        // NOTE: This is also where arbitrary tuples land because they will not have
-        // an "is" function and we don't encode the type information into the runtime
-        // objects so we can't easily determine their type. We can't reject them,
-        // else things like `Encounter{ id: "1" } is Encounter` would return false.
-        // So for now we allow false positives in order to avoid false negatives.
         return true;
     }
   }
