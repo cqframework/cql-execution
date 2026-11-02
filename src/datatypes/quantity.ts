@@ -144,6 +144,40 @@ export class Quantity {
     return new Quantity(resultValue, resultUnit);
   }
 
+  modulo(other: any) {
+    if (other == null) {
+      return null;
+    } else if (!other.isQuantity) {
+      // convert it to a quantity w/ unit 1
+      other = new Quantity(other, '1');
+    }
+
+    if (Decimal.from(other.value).equals(0)) {
+      // modulo by zero results in null according to specification
+      return null;
+    }
+
+    const [val1, unit1, val2, unit2] = normalizeUnitsWhenPossible(
+      this.value,
+      this.unit,
+      other.value,
+      other.unit
+    );
+
+    // The remainder only makes sense when both sides end up in the same unit, except that a
+    // unitless divisor has no dimension to convert, so the remainder keeps the dividend's unit
+    // (10 'g' mod 3 is 1 'g', as 10 'g' / 3 is 3.33 'g')
+    if (unit1 !== unit2 && unit2 !== '1') {
+      return null;
+    }
+
+    const resultValue = val1.modulo(val2);
+    if (overflowsOrUnderflows(resultValue)) {
+      return null;
+    }
+    return new Quantity(resultValue, unit1);
+  }
+
   multiplyBy(other: any) {
     if (other == null) {
       return null;

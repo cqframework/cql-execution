@@ -532,17 +532,13 @@ define "Modulo": Tuple{
     output: 0.5
   },
   "ModuloQuantity": Tuple{
-    skipped: 'Modulo not implemented for Quantity'
-    /*
     expression: 3.5 'cm' mod 3 'cm',
     output: 0.5 'cm'
-    */  },
+  },
   "Modulo10By3Quantity": Tuple{
-    skipped: 'Modulo not implemented for Quantity'
-    /*
     expression: 10.0 'g' mod 3.0 'g',
     output: 1.0 'g'
-    */  },
+  },
   "Modulo10By0Quantity": Tuple{
     expression: 10.0 'g' mod 0.0 'g',
     output: null

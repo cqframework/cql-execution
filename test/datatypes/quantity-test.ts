@@ -105,6 +105,47 @@ describe('Quantity', () => {
     should(quantity1.dividedBy(quantity2)).be.null();
   });
 
+  it('should compute modulo of quantities with the same unit', () => {
+    new Quantity(3.5, 'cm')
+      .modulo(new Quantity(3, 'cm'))
+      .equals(new Quantity(0.5, 'cm'))
+      .should.be.true();
+    new Quantity(10.0, 'g')
+      .modulo(new Quantity(3.0, 'g'))
+      .equals(new Quantity(1.0, 'g'))
+      .should.be.true();
+    new Quantity(-10, 'g')
+      .modulo(new Quantity(3, 'g'))
+      .equals(new Quantity(-1, 'g'))
+      .should.be.true();
+  });
+
+  it('should convert units when possible to compute modulo', () => {
+    const result = new Quantity(1.0, 'm').modulo(new Quantity(30.0, 'cm'));
+    result.unit.should.equal('cm');
+    result.value.should.equalDecimal(10);
+    result.equals(new Quantity(0.1, 'm')).should.be.true();
+  });
+
+  it('should keep the unit of the dividend for modulo by a unitless value', () => {
+    const result = new Quantity(10.0, 'g').modulo(3);
+    result.unit.should.equal('g');
+    result.value.should.equalDecimal(1);
+    new Quantity(10.0, 'g')
+      .modulo(new Quantity(3, '1'))
+      .equals(new Quantity(1, 'g'))
+      .should.be.true();
+  });
+
+  it('should return null for modulo by zero', () => {
+    should(new Quantity(10.0, 'g').modulo(new Quantity(0.0, 'g'))).be.null();
+    should(new Quantity(10.0, 'g').modulo(null)).be.null();
+  });
+
+  it('should return null for modulo when units cannot be converted', () => {
+    should(new Quantity(10.0, 'g').modulo(new Quantity(3.0, 'cm'))).be.null();
+  });
+
   it('should convert units when possible to perform arithmetic', () => {
     const divide = new Quantity(8, 'm').dividedBy(new Quantity(50, 'cm'));
     divide.equals(new Quantity(16, '1')).should.be.true();

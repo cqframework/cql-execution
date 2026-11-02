@@ -84,10 +84,6 @@ CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1QCMPrecision          Wrong
 CqlArithmeticFunctionsTest.Precision.PrecisionDecimal   Precision for Decimal not implemented
 CqlListOperatorsTest.Descendents                        Descendents not implemented
 
-# Unimplemented (New in CQL 1.5)
-CqlArithmeticFunctionsTest.Modulo.ModuloQuantity                      Modulo not implemented for Quantity
-CqlArithmeticFunctionsTest.Modulo.Modulo10By3Quantity                 Modulo not implemented for Quantity
-
 # Unimplemented (New in CQL 2.0)
 CqlListOperatorsTest.Slice                              Slice not implemented
 

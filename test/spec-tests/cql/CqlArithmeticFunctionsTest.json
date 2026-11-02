@@ -14570,11 +14570,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Quantity",
                         "annotation": []
                       }
                     }
@@ -14589,11 +14598,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Quantity",
                         "annotation": []
                       }
                     }
@@ -14897,11 +14915,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
                           "annotation": []
                         }
                       }
@@ -14916,11 +14943,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
                           "annotation": []
                         }
                       }
@@ -15590,11 +15626,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
                           "annotation": []
                         }
                       }
@@ -15602,12 +15647,37 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Modulo not implemented for Quantity",
+                        "type": "Modulo",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Quantity",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                            "value": 3.5,
+                            "unit": "cm",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Quantity",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                            "value": 3,
+                            "unit": "cm",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Quantity",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "value": 0.5,
+                        "unit": "cm",
                         "annotation": []
                       }
                     }
@@ -15624,11 +15694,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
                           "annotation": []
                         }
                       }
@@ -15636,12 +15715,37 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Modulo not implemented for Quantity",
+                        "type": "Modulo",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Quantity",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                            "value": 10,
+                            "unit": "g",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Quantity",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                            "value": 3,
+                            "unit": "g",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Quantity",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "value": 1,
+                        "unit": "g",
                         "annotation": []
                       }
                     }
