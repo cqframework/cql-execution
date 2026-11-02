@@ -102,6 +102,32 @@ describe('DateTime', () => {
     d.millisecond.should.equal(456);
     d.timezoneOffset.should.equalDecimal(-8);
   });
+
+  it('should default to a fractional execution timezone offset', async function () {
+    this.ctx = new PatientContext(
+      this.ctx.library,
+      this.ctx.patient,
+      this.ctx.codeService,
+      this.ctx.parameters,
+      DT.DateTime.fromJSDate(new Date(), 5.5)
+    );
+    const d = await this.minute.exec(this.ctx);
+    d.minute.should.equal(10);
+    d.timezoneOffset.should.equalDecimal(5.5);
+  });
+
+  it('should default to a negative fractional execution timezone offset', async function () {
+    this.ctx = new PatientContext(
+      this.ctx.library,
+      this.ctx.patient,
+      this.ctx.codeService,
+      this.ctx.parameters,
+      DT.DateTime.fromJSDate(new Date(), -9.5)
+    );
+    const d = await this.minute.exec(this.ctx);
+    d.minute.should.equal(10);
+    d.timezoneOffset.should.equalDecimal(-9.5);
+  });
 });
 
 describe('Time', () => {
