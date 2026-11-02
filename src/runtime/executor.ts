@@ -3,14 +3,16 @@ import { Results } from './results';
 import { UnfilteredContext, PatientContext } from './context';
 import { DateTime } from '../datatypes/datetime';
 import { Parameter } from '../types/runtime.types';
-import { DataProvider, TerminologyProvider } from '../types';
+import { DataModelProvider, DataProvider, TerminologyProvider } from '../types';
+import { SystemDataModelProvider } from './systemDataModelProvider';
 
 export class Executor {
   constructor(
     public library: any,
     public codeService?: TerminologyProvider,
     public parameters?: Parameter,
-    public messageListener: MessageListener = new NullMessageListener()
+    public messageListener: MessageListener = new NullMessageListener(),
+    public dataModelProviders: DataModelProvider[] = []
   ) {}
 
   withLibrary(lib: any) {
@@ -33,6 +35,11 @@ export class Executor {
     return this;
   }
 
+  withDataModelProviders(dmps: DataModelProvider[]) {
+    this.dataModelProviders = dmps;
+    return this;
+  }
+
   async exec_expression(expression: any, patientSource: DataProvider, executionDateTime: DateTime) {
     const r = new Results();
     const expr = this.library.expressions[expression];
@@ -47,7 +54,8 @@ export class Executor {
           this.codeService,
           this.parameters,
           executionDateTime,
-          this.messageListener
+          this.messageListener,
+          this.getDataModelProviders(patientSource)
         );
         r.recordPatientResults(patient_ctx, { [expression]: await expr.execute(patient_ctx) });
         currentPatient = await patientSource.nextPatient();
@@ -64,7 +72,8 @@ export class Executor {
       this.codeService,
       this.parameters,
       executionDateTime,
-      this.messageListener
+      this.messageListener,
+      this.getDataModelProviders(patientSource)
     );
     const resultMap: any = {};
     for (const key in this.library.expressions) {
@@ -90,7 +99,8 @@ export class Executor {
         this.codeService,
         this.parameters,
         executionDateTime,
-        this.messageListener
+        this.messageListener,
+        this.getDataModelProviders(patientSource)
       );
       const resultMap: any = {};
       for (const key in this.library.expressions) {
@@ -103,5 +113,14 @@ export class Executor {
       currentPatient = await patientSource.nextPatient();
     }
     return r;
+  }
+
+  private getDataModelProviders(patientSource: DataProvider) {
+    const dataModelProviders = new Set(this.dataModelProviders);
+    dataModelProviders.add(new SystemDataModelProvider());
+    if (typeof patientSource.getDataModelProvider === 'function') {
+      dataModelProviders.add(patientSource.getDataModelProvider());
+    }
+    return Array.from(dataModelProviders);
   }
 }

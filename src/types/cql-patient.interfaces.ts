@@ -8,6 +8,11 @@ import { AnyTypeSpecifier } from './type-specifiers.interfaces';
 export interface DataProvider {
   currentPatient(): PatientObject | undefined | Promise<PatientObject | undefined>;
   nextPatient(): PatientObject | undefined | Promise<PatientObject | undefined>;
+  getDataModelProvider?(): DataModelProvider;
+}
+
+export interface DataModelProvider {
+  createInstance(classType: string, obj: any): any;
 }
 
 /*

@@ -40,6 +40,10 @@ define Pharyngitis : Condition {
 }
 
 define val: QuantityA.value
+
+define PharyngitisIsCondition: Pharyngitis is Condition
+define PharyngitisIsEncounter: Pharyngitis is Encounter
+define PharyngitisIsAny: Pharyngitis is Any
 */
 
 module.exports['Instance'] = {
@@ -54,7 +58,7 @@ module.exports['Instance'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "266",
+        "r" : "283",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -619,6 +623,162 @@ module.exports['Instance'] = {
             "localId" : "267",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "QuantityA",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "271",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "PharyngitisIsCondition",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "271",
+            "s" : [ {
+              "value" : [ "", "define ", "PharyngitisIsCondition", ": " ]
+            }, {
+              "r" : "272",
+              "s" : [ {
+                "r" : "273",
+                "s" : [ {
+                  "value" : [ "Pharyngitis" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "274",
+                "s" : [ {
+                  "value" : [ "Condition" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "272",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "ExpressionRef",
+            "localId" : "273",
+            "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+            "name" : "Pharyngitis",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "274",
+            "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+            "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "277",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "PharyngitisIsEncounter",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "277",
+            "s" : [ {
+              "value" : [ "", "define ", "PharyngitisIsEncounter", ": " ]
+            }, {
+              "r" : "278",
+              "s" : [ {
+                "r" : "279",
+                "s" : [ {
+                  "value" : [ "Pharyngitis" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "280",
+                "s" : [ {
+                  "value" : [ "Encounter" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "278",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "ExpressionRef",
+            "localId" : "279",
+            "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+            "name" : "Pharyngitis",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "280",
+            "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+            "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "283",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "PharyngitisIsAny",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "283",
+            "s" : [ {
+              "value" : [ "", "define ", "PharyngitisIsAny", ": " ]
+            }, {
+              "r" : "284",
+              "s" : [ {
+                "r" : "285",
+                "s" : [ {
+                  "value" : [ "Pharyngitis" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "286",
+                "s" : [ {
+                  "value" : [ "Any" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "284",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "ExpressionRef",
+            "localId" : "285",
+            "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+            "name" : "Pharyngitis",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "286",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+            "name" : "{urn:hl7-org:elm-types:r1}Any",
             "annotation" : [ ]
           }
         }
