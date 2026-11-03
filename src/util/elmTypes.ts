@@ -1,6 +1,8 @@
 // Simple Types
 export const ELM_ANY_TYPE = '{urn:hl7-org:elm-types:r1}Any';
 export const ELM_BOOLEAN_TYPE = '{urn:hl7-org:elm-types:r1}Boolean';
+export const ELM_CODE_TYPE = '{urn:hl7-org:elm-types:r1}Code';
+export const ELM_CODESYSTEM_TYPE = '{urn:hl7-org:elm-types:r1}CodeSystem';
 export const ELM_CONCEPT_TYPE = '{urn:hl7-org:elm-types:r1}Concept';
 export const ELM_DATE_TYPE = '{urn:hl7-org:elm-types:r1}Date';
 export const ELM_DATETIME_TYPE = '{urn:hl7-org:elm-types:r1}DateTime';
@@ -8,8 +10,11 @@ export const ELM_DECIMAL_TYPE = '{urn:hl7-org:elm-types:r1}Decimal';
 export const ELM_INTEGER_TYPE = '{urn:hl7-org:elm-types:r1}Integer';
 export const ELM_LONG_TYPE = '{urn:hl7-org:elm-types:r1}Long';
 export const ELM_QUANTITY_TYPE = '{urn:hl7-org:elm-types:r1}Quantity';
+export const ELM_RATIO_TYPE = '{urn:hl7-org:elm-types:r1}Ratio';
 export const ELM_STRING_TYPE = '{urn:hl7-org:elm-types:r1}String';
 export const ELM_TIME_TYPE = '{urn:hl7-org:elm-types:r1}Time';
+export const ELM_VALUESET_TYPE = '{urn:hl7-org:elm-types:r1}ValueSet';
+export const ELM_VOCABULARY_TYPE = '{urn:hl7-org:elm-types:r1}Vocabulary';
 
 // Type Specifiers
 export const ELM_NAMED_TYPE_SPECIFIER = 'NamedTypeSpecifier';

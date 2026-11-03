@@ -29,5 +29,6 @@ define Pharyngitis : Condition {
 
 define val: QuantityA.value
 
-
-
+define PharyngitisIsCondition: Pharyngitis is Condition
+define PharyngitisIsEncounter: Pharyngitis is Encounter
+define PharyngitisIsAny: Pharyngitis is Any

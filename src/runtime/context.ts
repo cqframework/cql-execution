@@ -1,7 +1,7 @@
 import * as dt from '../datatypes/datatypes';
 import { Exception } from '../datatypes/exception';
 import { Library } from '../elm/library';
-import { PatientObject, RetrieveDetails, TerminologyProvider } from '../types';
+import { DataModelProvider, PatientObject, RetrieveDetails, TerminologyProvider } from '../types';
 import { Parameter } from '../types/runtime.types';
 import {
   ELM_NAMED_TYPE_SPECIFIER,
@@ -18,16 +18,24 @@ import {
   ELM_DATETIME_TYPE,
   ELM_DATE_TYPE,
   ELM_QUANTITY_TYPE,
-  ELM_TIME_TYPE
+  ELM_TIME_TYPE,
+  ELM_CODE_TYPE,
+  ELM_CODESYSTEM_TYPE,
+  ELM_VALUESET_TYPE,
+  ELM_RATIO_TYPE,
+  ELM_ANY_TYPE,
+  ELM_VOCABULARY_TYPE
 } from '../util/elmTypes';
 import { typeIsArray } from '../util/util';
 import { MessageListener, NullMessageListener } from './messageListeners';
+import { SystemDataModelProvider } from './systemDataModelProvider';
 
 export class Context {
   // Public Constructor args
   parent: any;
   executionDateTime?: dt.DateTime;
   messageListener?: MessageListener;
+  dataModelProviders?: DataModelProvider[];
 
   // Private Constructor args
   private _codeService?: TerminologyProvider;
@@ -44,7 +52,8 @@ export class Context {
     _codeService?: TerminologyProvider,
     _parameters?: Parameter,
     executionDateTime?: dt.DateTime,
-    messageListener?: MessageListener
+    messageListener?: MessageListener,
+    dataModelProviders?: DataModelProvider[]
   ) {
     this.parent = parent;
     this._codeService = _codeService;
@@ -57,6 +66,7 @@ export class Context {
     this._parameters = _parameters || {};
     this.executionDateTime = executionDateTime;
     this.messageListener = messageListener;
+    this.dataModelProviders = dataModelProviders;
   }
 
   get parameters(): any {
@@ -154,6 +164,17 @@ export class Context {
     } else {
       return new NullMessageListener();
     }
+  }
+
+  getDataModelProviders(): DataModelProvider[] {
+    if (this.dataModelProviders == null) {
+      if (this.parent instanceof Context) {
+        this.dataModelProviders = this.parent.getDataModelProviders();
+      } else {
+        this.dataModelProviders = [new SystemDataModelProvider()];
+      }
+    }
+    return this.dataModelProviders;
   }
 
   getValueSet(name: string, library: any) {
@@ -341,7 +362,7 @@ export class Context {
       case ELM_BOOLEAN_TYPE:
         return typeof val === 'boolean';
       case ELM_DECIMAL_TYPE:
-        return val && val.isDecimal;
+        return val.isDecimal;
       case ELM_INTEGER_TYPE:
         return typeof val === 'number' && Number.isInteger(val);
       case ELM_LONG_TYPE:
@@ -349,17 +370,25 @@ export class Context {
       case ELM_STRING_TYPE:
         return typeof val === 'string';
       case ELM_CONCEPT_TYPE:
-        return val && val.isConcept;
-      case '{urn:hl7-org:elm-types:r1}Code':
-        return val && val.isCode;
+        return val.isConcept;
+      case ELM_CODE_TYPE:
+        return val.isCode;
+      case ELM_CODESYSTEM_TYPE:
+        return val.isCodeSystem;
+      case ELM_VALUESET_TYPE:
+        return val.isValueSet;
+      case ELM_VOCABULARY_TYPE:
+        return val.isCodeSystem ?? val.isValueSet;
+      case ELM_RATIO_TYPE:
+        return val.isRatio;
       case ELM_DATETIME_TYPE:
-        return val && val.isDateTime;
+        return val.isDateTime;
       case ELM_DATE_TYPE:
-        return val && val.isDate;
+        return val.isDate;
       case ELM_QUANTITY_TYPE:
-        return val && val.isQuantity;
+        return val.isQuantity;
       case ELM_TIME_TYPE:
-        return val && val.isTime && val.isTime();
+        return val.isTime && val.isTime();
       default:
         // Use the data model's implementation of _is, if it is available
         if (typeof val._is === 'function') {
@@ -374,12 +403,6 @@ export class Context {
           return false;
         }
         // Otherwise just default to true to match legacy behavior.
-        //
-        // NOTE: This is also where arbitrary tuples land because they will not have
-        // an "is" function and we don't encode the type information into the runtime
-        // objects so we can't easily determine their type. We can't reject them,
-        // else things like `Encounter{ id: "1" } is Encounter` would return false.
-        // So for now we allow false positives in order to avoid false negatives.
         return true;
     }
   }
@@ -442,6 +465,25 @@ export class Context {
       (val.high == null || this.matchesInstanceType(val.high, pointType))
     );
   }
+
+  createInstance(classType: string, obj: any) {
+    for (const dataModel of this.getDataModelProviders()) {
+      const instance = dataModel.createInstance(classType, obj);
+      if (instance != null) {
+        return instance;
+      }
+    }
+
+    // None of the DataModelProviders know how to instantiate this as anything better, so return the plain object.
+    // Tag it with an _is method that lets us identify what it is.
+    // TODO / KNOWN LIMITATION: we have no way of knowing what the full type hierarchy of this type is here,
+    // so `Is` expressions with a supertype will incorrectly return false.
+    // `defineProperty` means it will still be callable but won’t appear in enumeration or object spread.
+    Object.defineProperty(obj, '_is', {
+      value: (spec: any) => spec.name === classType || spec.name === ELM_ANY_TYPE
+    });
+    return obj;
+  }
 }
 
 export class PatientContext extends Context {
@@ -451,9 +493,10 @@ export class PatientContext extends Context {
     codeService?: TerminologyProvider,
     parameters?: Parameter,
     executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),
-    messageListener: MessageListener = new NullMessageListener()
+    messageListener: MessageListener = new NullMessageListener(),
+    dataModelProviders?: DataModelProvider[]
   ) {
-    super(library, codeService, parameters, executionDateTime, messageListener);
+    super(library, codeService, parameters, executionDateTime, messageListener, dataModelProviders);
   }
 
   rootContext() {
@@ -468,7 +511,8 @@ export class PatientContext extends Context {
         this.codeService,
         this.parameters,
         this.executionDateTime,
-        this.messageListener
+        this.messageListener,
+        this.getDataModelProviders()
       );
     }
     return this.library_context[library];
@@ -482,7 +526,8 @@ export class PatientContext extends Context {
         this.codeService,
         this.parameters,
         this.executionDateTime,
-        this.messageListener
+        this.messageListener,
+        this.getDataModelProviders()
       );
     }
     return this.localId_context[localId];
@@ -500,9 +545,10 @@ export class UnfilteredContext extends Context {
     codeService?: TerminologyProvider,
     parameters?: Parameter,
     executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),
-    messageListener: MessageListener = new NullMessageListener()
+    messageListener: MessageListener = new NullMessageListener(),
+    dataModelProviders?: DataModelProvider[]
   ) {
-    super(library, codeService, parameters, executionDateTime, messageListener);
+    super(library, codeService, parameters, executionDateTime, messageListener, dataModelProviders);
   }
 
   rootContext() {

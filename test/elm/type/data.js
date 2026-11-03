@@ -311,6 +311,2246 @@ module.exports['IsSystemType'] = {
   }
 }
 
+/* IsCodeSystemType
+library TestSnippet version '1'
+using Simple version '1.0.0'
+codesystem "TestCodeSystem": 'urn:test:system'
+valueset "TestValueSet": 'urn:test:valueset'
+parameter Expansion Any
+context Patient
+define CodeSystemIsCodeSystem: "TestCodeSystem" is CodeSystem
+define ValueSetIsCodeSystem: "TestValueSet" is CodeSystem
+define RatioIsCodeSystem: Ratio { numerator: 1 '1', denominator: 2 '1' } is CodeSystem
+define TupleIsCodeSystem: Tuple { : } is CodeSystem
+define StringIsCodeSystem: 'test' is CodeSystem
+define IntegerIsCodeSystem: 1 is CodeSystem
+define BooleanIsCodeSystem: false is CodeSystem
+define ExpansionIsCodeSystem: Expansion is CodeSystem
+define NullIsCodeSystem: null is CodeSystem
+define CodeSystemIsAny: "TestCodeSystem" is Any
+*/
+
+module.exports['IsCodeSystemType'] = {
+  "library" : {
+    "localId" : "0",
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorVersion" : "4.2.0",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+      "signatureLevel" : "All"
+    }, {
+      "type" : "Annotation",
+      "t" : [ ],
+      "s" : {
+        "r" : "280",
+        "s" : [ {
+          "value" : [ "", "library TestSnippet version '1'" ]
+        } ]
+      }
+    } ],
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1",
+        "annotation" : [ ]
+      }, {
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "206",
+            "s" : [ {
+              "value" : [ "", "using " ]
+            }, {
+              "s" : [ {
+                "value" : [ "Simple" ]
+              } ]
+            }, {
+              "value" : [ " version '1.0.0'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "parameters" : {
+      "def" : [ {
+        "localId" : "212",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+        "name" : "Expansion",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "212",
+            "s" : [ {
+              "value" : [ "", "parameter ", "Expansion", " " ]
+            }, {
+              "r" : "213",
+              "s" : [ {
+                "value" : [ "Any" ]
+              } ]
+            } ]
+          }
+        } ],
+        "parameterTypeSpecifier" : {
+          "type" : "NamedTypeSpecifier",
+          "localId" : "213",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+          "name" : "{urn:hl7-org:elm-types:r1}Any",
+          "annotation" : [ ]
+        }
+      } ]
+    },
+    "codeSystems" : {
+      "def" : [ {
+        "localId" : "208",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+        "name" : "TestCodeSystem",
+        "id" : "urn:test:system",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "208",
+            "s" : [ {
+              "value" : [ "", "codesystem ", "\"TestCodeSystem\"", ": ", "'urn:test:system'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "valueSets" : {
+      "def" : [ {
+        "localId" : "210",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+        "name" : "TestValueSet",
+        "id" : "urn:test:valueset",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "210",
+            "s" : [ {
+              "value" : [ "", "valueset ", "\"TestValueSet\"", ": ", "'urn:test:valueset'" ]
+            } ]
+          }
+        } ],
+        "codeSystem" : [ ]
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "218",
+        "name" : "Patient",
+        "annotation" : [ ]
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "localId" : "216",
+        "name" : "Patient",
+        "context" : "Patient",
+        "annotation" : [ ],
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "217",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "215",
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+            "annotation" : [ ],
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ]
+          }
+        }
+      }, {
+        "localId" : "221",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "CodeSystemIsCodeSystem",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "221",
+            "s" : [ {
+              "value" : [ "", "define ", "CodeSystemIsCodeSystem", ": " ]
+            }, {
+              "r" : "222",
+              "s" : [ {
+                "r" : "223",
+                "s" : [ {
+                  "value" : [ "\"TestCodeSystem\"" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "224",
+                "s" : [ {
+                  "value" : [ "CodeSystem" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "222",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "CodeSystemRef",
+            "localId" : "223",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "TestCodeSystem",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "224",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "227",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ValueSetIsCodeSystem",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "227",
+            "s" : [ {
+              "value" : [ "", "define ", "ValueSetIsCodeSystem", ": " ]
+            }, {
+              "r" : "228",
+              "s" : [ {
+                "r" : "229",
+                "s" : [ {
+                  "value" : [ "\"TestValueSet\"" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "230",
+                "s" : [ {
+                  "value" : [ "CodeSystem" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "228",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "ValueSetRef",
+            "localId" : "229",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "TestValueSet",
+            "preserve" : true,
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "230",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "233",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "RatioIsCodeSystem",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "233",
+            "s" : [ {
+              "value" : [ "", "define ", "RatioIsCodeSystem", ": " ]
+            }, {
+              "r" : "234",
+              "s" : [ {
+                "r" : "235",
+                "s" : [ {
+                  "value" : [ "Ratio", " { " ]
+                }, {
+                  "s" : [ {
+                    "value" : [ "numerator", ": " ]
+                  }, {
+                    "r" : "237",
+                    "s" : [ {
+                      "value" : [ "1 ", "'1'" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "s" : [ {
+                    "value" : [ "denominator", ": " ]
+                  }, {
+                    "r" : "238",
+                    "s" : [ {
+                      "value" : [ "2 ", "'1'" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "239",
+                "s" : [ {
+                  "value" : [ "CodeSystem" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "234",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Instance",
+            "localId" : "235",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "classType" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "annotation" : [ ],
+            "element" : [ {
+              "name" : "numerator",
+              "value" : {
+                "type" : "Quantity",
+                "localId" : "237",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "value" : 1,
+                "unit" : "1",
+                "annotation" : [ ]
+              }
+            }, {
+              "name" : "denominator",
+              "value" : {
+                "type" : "Quantity",
+                "localId" : "238",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "value" : 2,
+                "unit" : "1",
+                "annotation" : [ ]
+              }
+            } ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "239",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "242",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "TupleIsCodeSystem",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "242",
+            "s" : [ {
+              "value" : [ "", "define ", "TupleIsCodeSystem", ": " ]
+            }, {
+              "r" : "243",
+              "s" : [ {
+                "r" : "244",
+                "value" : [ "Tuple { : }", " is " ]
+              }, {
+                "r" : "246",
+                "s" : [ {
+                  "value" : [ "CodeSystem" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "243",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Tuple",
+            "localId" : "244",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "TupleTypeSpecifier",
+              "localId" : "245",
+              "annotation" : [ ],
+              "element" : [ ]
+            },
+            "element" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "246",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "249",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "StringIsCodeSystem",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "249",
+            "s" : [ {
+              "value" : [ "", "define ", "StringIsCodeSystem", ": " ]
+            }, {
+              "r" : "250",
+              "s" : [ {
+                "r" : "251",
+                "s" : [ {
+                  "value" : [ "'test'" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "253",
+                "s" : [ {
+                  "value" : [ "CodeSystem" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "250",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "251",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "test",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "253",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "256",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerIsCodeSystem",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "256",
+            "s" : [ {
+              "value" : [ "", "define ", "IntegerIsCodeSystem", ": " ]
+            }, {
+              "r" : "257",
+              "s" : [ {
+                "r" : "258",
+                "value" : [ "1", " is " ]
+              }, {
+                "r" : "259",
+                "s" : [ {
+                  "value" : [ "CodeSystem" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "257",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "258",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "259",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "262",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "BooleanIsCodeSystem",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "262",
+            "s" : [ {
+              "value" : [ "", "define ", "BooleanIsCodeSystem", ": " ]
+            }, {
+              "r" : "263",
+              "s" : [ {
+                "r" : "264",
+                "value" : [ "false", " is " ]
+              }, {
+                "r" : "265",
+                "s" : [ {
+                  "value" : [ "CodeSystem" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "263",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "264",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "false",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "265",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "268",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ExpansionIsCodeSystem",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "268",
+            "s" : [ {
+              "value" : [ "", "define ", "ExpansionIsCodeSystem", ": " ]
+            }, {
+              "r" : "269",
+              "s" : [ {
+                "r" : "270",
+                "s" : [ {
+                  "value" : [ "Expansion" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "271",
+                "s" : [ {
+                  "value" : [ "CodeSystem" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "269",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "ParameterRef",
+            "localId" : "270",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+            "name" : "Expansion",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "271",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "274",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "NullIsCodeSystem",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "274",
+            "s" : [ {
+              "value" : [ "", "define ", "NullIsCodeSystem", ": " ]
+            }, {
+              "r" : "275",
+              "s" : [ {
+                "r" : "276",
+                "value" : [ "null", " is " ]
+              }, {
+                "r" : "277",
+                "s" : [ {
+                  "value" : [ "CodeSystem" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "275",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Null",
+            "localId" : "276",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "277",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "280",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "CodeSystemIsAny",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "280",
+            "s" : [ {
+              "value" : [ "", "define ", "CodeSystemIsAny", ": " ]
+            }, {
+              "r" : "281",
+              "s" : [ {
+                "r" : "282",
+                "s" : [ {
+                  "value" : [ "\"TestCodeSystem\"" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "283",
+                "s" : [ {
+                  "value" : [ "Any" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "281",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "CodeSystemRef",
+            "localId" : "282",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "TestCodeSystem",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "283",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+            "name" : "{urn:hl7-org:elm-types:r1}Any",
+            "annotation" : [ ]
+          }
+        }
+      } ]
+    }
+  }
+}
+
+/* IsValueSetType
+library TestSnippet version '1'
+using Simple version '1.0.0'
+codesystem "TestCodeSystem": 'urn:test:system'
+valueset "TestValueSet": 'urn:test:valueset'
+parameter Expansion Any
+context Patient
+define CodeSystemIsValueSet: "TestCodeSystem" is ValueSet
+define ValueSetIsValueSet: "TestValueSet" is ValueSet
+define RatioIsValueSet: Ratio { numerator: 1 '1', denominator: 2 '1' } is ValueSet
+define TupleIsValueSet: Tuple { : } is ValueSet
+define StringIsValueSet: 'test' is ValueSet
+define IntegerIsValueSet: 1 is ValueSet
+define BooleanIsValueSet: false is ValueSet
+define ExpansionIsValueSet: Expansion is ValueSet
+define NullIsValueSet: null is ValueSet
+define ValueSetIsAny: "TestValueSet" is Any
+*/
+
+module.exports['IsValueSetType'] = {
+  "library" : {
+    "localId" : "0",
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorVersion" : "4.2.0",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+      "signatureLevel" : "All"
+    }, {
+      "type" : "Annotation",
+      "t" : [ ],
+      "s" : {
+        "r" : "280",
+        "s" : [ {
+          "value" : [ "", "library TestSnippet version '1'" ]
+        } ]
+      }
+    } ],
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1",
+        "annotation" : [ ]
+      }, {
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "206",
+            "s" : [ {
+              "value" : [ "", "using " ]
+            }, {
+              "s" : [ {
+                "value" : [ "Simple" ]
+              } ]
+            }, {
+              "value" : [ " version '1.0.0'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "parameters" : {
+      "def" : [ {
+        "localId" : "212",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+        "name" : "Expansion",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "212",
+            "s" : [ {
+              "value" : [ "", "parameter ", "Expansion", " " ]
+            }, {
+              "r" : "213",
+              "s" : [ {
+                "value" : [ "Any" ]
+              } ]
+            } ]
+          }
+        } ],
+        "parameterTypeSpecifier" : {
+          "type" : "NamedTypeSpecifier",
+          "localId" : "213",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+          "name" : "{urn:hl7-org:elm-types:r1}Any",
+          "annotation" : [ ]
+        }
+      } ]
+    },
+    "codeSystems" : {
+      "def" : [ {
+        "localId" : "208",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+        "name" : "TestCodeSystem",
+        "id" : "urn:test:system",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "208",
+            "s" : [ {
+              "value" : [ "", "codesystem ", "\"TestCodeSystem\"", ": ", "'urn:test:system'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "valueSets" : {
+      "def" : [ {
+        "localId" : "210",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+        "name" : "TestValueSet",
+        "id" : "urn:test:valueset",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "210",
+            "s" : [ {
+              "value" : [ "", "valueset ", "\"TestValueSet\"", ": ", "'urn:test:valueset'" ]
+            } ]
+          }
+        } ],
+        "codeSystem" : [ ]
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "218",
+        "name" : "Patient",
+        "annotation" : [ ]
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "localId" : "216",
+        "name" : "Patient",
+        "context" : "Patient",
+        "annotation" : [ ],
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "217",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "215",
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+            "annotation" : [ ],
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ]
+          }
+        }
+      }, {
+        "localId" : "221",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "CodeSystemIsValueSet",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "221",
+            "s" : [ {
+              "value" : [ "", "define ", "CodeSystemIsValueSet", ": " ]
+            }, {
+              "r" : "222",
+              "s" : [ {
+                "r" : "223",
+                "s" : [ {
+                  "value" : [ "\"TestCodeSystem\"" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "224",
+                "s" : [ {
+                  "value" : [ "ValueSet" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "222",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "CodeSystemRef",
+            "localId" : "223",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "TestCodeSystem",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "224",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "227",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ValueSetIsValueSet",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "227",
+            "s" : [ {
+              "value" : [ "", "define ", "ValueSetIsValueSet", ": " ]
+            }, {
+              "r" : "228",
+              "s" : [ {
+                "r" : "229",
+                "s" : [ {
+                  "value" : [ "\"TestValueSet\"" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "230",
+                "s" : [ {
+                  "value" : [ "ValueSet" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "228",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "ValueSetRef",
+            "localId" : "229",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "TestValueSet",
+            "preserve" : true,
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "230",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "233",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "RatioIsValueSet",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "233",
+            "s" : [ {
+              "value" : [ "", "define ", "RatioIsValueSet", ": " ]
+            }, {
+              "r" : "234",
+              "s" : [ {
+                "r" : "235",
+                "s" : [ {
+                  "value" : [ "Ratio", " { " ]
+                }, {
+                  "s" : [ {
+                    "value" : [ "numerator", ": " ]
+                  }, {
+                    "r" : "237",
+                    "s" : [ {
+                      "value" : [ "1 ", "'1'" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "s" : [ {
+                    "value" : [ "denominator", ": " ]
+                  }, {
+                    "r" : "238",
+                    "s" : [ {
+                      "value" : [ "2 ", "'1'" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "239",
+                "s" : [ {
+                  "value" : [ "ValueSet" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "234",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Instance",
+            "localId" : "235",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "classType" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "annotation" : [ ],
+            "element" : [ {
+              "name" : "numerator",
+              "value" : {
+                "type" : "Quantity",
+                "localId" : "237",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "value" : 1,
+                "unit" : "1",
+                "annotation" : [ ]
+              }
+            }, {
+              "name" : "denominator",
+              "value" : {
+                "type" : "Quantity",
+                "localId" : "238",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "value" : 2,
+                "unit" : "1",
+                "annotation" : [ ]
+              }
+            } ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "239",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "242",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "TupleIsValueSet",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "242",
+            "s" : [ {
+              "value" : [ "", "define ", "TupleIsValueSet", ": " ]
+            }, {
+              "r" : "243",
+              "s" : [ {
+                "r" : "244",
+                "value" : [ "Tuple { : }", " is " ]
+              }, {
+                "r" : "246",
+                "s" : [ {
+                  "value" : [ "ValueSet" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "243",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Tuple",
+            "localId" : "244",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "TupleTypeSpecifier",
+              "localId" : "245",
+              "annotation" : [ ],
+              "element" : [ ]
+            },
+            "element" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "246",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "249",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "StringIsValueSet",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "249",
+            "s" : [ {
+              "value" : [ "", "define ", "StringIsValueSet", ": " ]
+            }, {
+              "r" : "250",
+              "s" : [ {
+                "r" : "251",
+                "s" : [ {
+                  "value" : [ "'test'" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "253",
+                "s" : [ {
+                  "value" : [ "ValueSet" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "250",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "251",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "test",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "253",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "256",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerIsValueSet",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "256",
+            "s" : [ {
+              "value" : [ "", "define ", "IntegerIsValueSet", ": " ]
+            }, {
+              "r" : "257",
+              "s" : [ {
+                "r" : "258",
+                "value" : [ "1", " is " ]
+              }, {
+                "r" : "259",
+                "s" : [ {
+                  "value" : [ "ValueSet" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "257",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "258",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "259",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "262",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "BooleanIsValueSet",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "262",
+            "s" : [ {
+              "value" : [ "", "define ", "BooleanIsValueSet", ": " ]
+            }, {
+              "r" : "263",
+              "s" : [ {
+                "r" : "264",
+                "value" : [ "false", " is " ]
+              }, {
+                "r" : "265",
+                "s" : [ {
+                  "value" : [ "ValueSet" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "263",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "264",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "false",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "265",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "268",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ExpansionIsValueSet",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "268",
+            "s" : [ {
+              "value" : [ "", "define ", "ExpansionIsValueSet", ": " ]
+            }, {
+              "r" : "269",
+              "s" : [ {
+                "r" : "270",
+                "s" : [ {
+                  "value" : [ "Expansion" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "271",
+                "s" : [ {
+                  "value" : [ "ValueSet" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "269",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "ParameterRef",
+            "localId" : "270",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+            "name" : "Expansion",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "271",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "274",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "NullIsValueSet",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "274",
+            "s" : [ {
+              "value" : [ "", "define ", "NullIsValueSet", ": " ]
+            }, {
+              "r" : "275",
+              "s" : [ {
+                "r" : "276",
+                "value" : [ "null", " is " ]
+              }, {
+                "r" : "277",
+                "s" : [ {
+                  "value" : [ "ValueSet" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "275",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Null",
+            "localId" : "276",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "277",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "280",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ValueSetIsAny",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "280",
+            "s" : [ {
+              "value" : [ "", "define ", "ValueSetIsAny", ": " ]
+            }, {
+              "r" : "281",
+              "s" : [ {
+                "r" : "282",
+                "s" : [ {
+                  "value" : [ "\"TestValueSet\"" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "283",
+                "s" : [ {
+                  "value" : [ "Any" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "281",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "ValueSetRef",
+            "localId" : "282",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "TestValueSet",
+            "preserve" : true,
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "283",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+            "name" : "{urn:hl7-org:elm-types:r1}Any",
+            "annotation" : [ ]
+          }
+        }
+      } ]
+    }
+  }
+}
+
+/* IsRatioType
+library TestSnippet version '1'
+using Simple version '1.0.0'
+codesystem "TestCodeSystem": 'urn:test:system'
+valueset "TestValueSet": 'urn:test:valueset'
+parameter Expansion Any
+context Patient
+define CodeSystemIsRatio: "TestCodeSystem" is Ratio
+define ValueSetIsRatio: "TestValueSet" is Ratio
+define RatioIsRatio: Ratio { numerator: 1 '1', denominator: 2 '1' } is Ratio
+define TupleIsRatio: Tuple { : } is Ratio
+define StringIsRatio: 'test' is Ratio
+define IntegerIsRatio: 1 is Ratio
+define BooleanIsRatio: false is Ratio
+define ExpansionIsRatio: Expansion is Ratio
+define NullIsRatio: null is Ratio
+define RatioIsAny: Ratio { numerator: 1 '1', denominator: 2 '1' } is Any
+*/
+
+module.exports['IsRatioType'] = {
+  "library" : {
+    "localId" : "0",
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorVersion" : "4.2.0",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+      "signatureLevel" : "All"
+    }, {
+      "type" : "Annotation",
+      "t" : [ ],
+      "s" : {
+        "r" : "280",
+        "s" : [ {
+          "value" : [ "", "library TestSnippet version '1'" ]
+        } ]
+      }
+    } ],
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1",
+        "annotation" : [ ]
+      }, {
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "206",
+            "s" : [ {
+              "value" : [ "", "using " ]
+            }, {
+              "s" : [ {
+                "value" : [ "Simple" ]
+              } ]
+            }, {
+              "value" : [ " version '1.0.0'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "parameters" : {
+      "def" : [ {
+        "localId" : "212",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+        "name" : "Expansion",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "212",
+            "s" : [ {
+              "value" : [ "", "parameter ", "Expansion", " " ]
+            }, {
+              "r" : "213",
+              "s" : [ {
+                "value" : [ "Any" ]
+              } ]
+            } ]
+          }
+        } ],
+        "parameterTypeSpecifier" : {
+          "type" : "NamedTypeSpecifier",
+          "localId" : "213",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+          "name" : "{urn:hl7-org:elm-types:r1}Any",
+          "annotation" : [ ]
+        }
+      } ]
+    },
+    "codeSystems" : {
+      "def" : [ {
+        "localId" : "208",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+        "name" : "TestCodeSystem",
+        "id" : "urn:test:system",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "208",
+            "s" : [ {
+              "value" : [ "", "codesystem ", "\"TestCodeSystem\"", ": ", "'urn:test:system'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "valueSets" : {
+      "def" : [ {
+        "localId" : "210",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+        "name" : "TestValueSet",
+        "id" : "urn:test:valueset",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "210",
+            "s" : [ {
+              "value" : [ "", "valueset ", "\"TestValueSet\"", ": ", "'urn:test:valueset'" ]
+            } ]
+          }
+        } ],
+        "codeSystem" : [ ]
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "218",
+        "name" : "Patient",
+        "annotation" : [ ]
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "localId" : "216",
+        "name" : "Patient",
+        "context" : "Patient",
+        "annotation" : [ ],
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "217",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "215",
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+            "annotation" : [ ],
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ]
+          }
+        }
+      }, {
+        "localId" : "221",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "CodeSystemIsRatio",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "221",
+            "s" : [ {
+              "value" : [ "", "define ", "CodeSystemIsRatio", ": " ]
+            }, {
+              "r" : "222",
+              "s" : [ {
+                "r" : "223",
+                "s" : [ {
+                  "value" : [ "\"TestCodeSystem\"" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "224",
+                "s" : [ {
+                  "value" : [ "Ratio" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "222",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "CodeSystemRef",
+            "localId" : "223",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "TestCodeSystem",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "224",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "227",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ValueSetIsRatio",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "227",
+            "s" : [ {
+              "value" : [ "", "define ", "ValueSetIsRatio", ": " ]
+            }, {
+              "r" : "228",
+              "s" : [ {
+                "r" : "229",
+                "s" : [ {
+                  "value" : [ "\"TestValueSet\"" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "230",
+                "s" : [ {
+                  "value" : [ "Ratio" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "228",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "ValueSetRef",
+            "localId" : "229",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "TestValueSet",
+            "preserve" : true,
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "230",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "233",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "RatioIsRatio",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "233",
+            "s" : [ {
+              "value" : [ "", "define ", "RatioIsRatio", ": " ]
+            }, {
+              "r" : "234",
+              "s" : [ {
+                "r" : "235",
+                "s" : [ {
+                  "value" : [ "Ratio", " { " ]
+                }, {
+                  "s" : [ {
+                    "value" : [ "numerator", ": " ]
+                  }, {
+                    "r" : "237",
+                    "s" : [ {
+                      "value" : [ "1 ", "'1'" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "s" : [ {
+                    "value" : [ "denominator", ": " ]
+                  }, {
+                    "r" : "238",
+                    "s" : [ {
+                      "value" : [ "2 ", "'1'" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "239",
+                "s" : [ {
+                  "value" : [ "Ratio" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "234",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Instance",
+            "localId" : "235",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "classType" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "annotation" : [ ],
+            "element" : [ {
+              "name" : "numerator",
+              "value" : {
+                "type" : "Quantity",
+                "localId" : "237",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "value" : 1,
+                "unit" : "1",
+                "annotation" : [ ]
+              }
+            }, {
+              "name" : "denominator",
+              "value" : {
+                "type" : "Quantity",
+                "localId" : "238",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "value" : 2,
+                "unit" : "1",
+                "annotation" : [ ]
+              }
+            } ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "239",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "242",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "TupleIsRatio",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "242",
+            "s" : [ {
+              "value" : [ "", "define ", "TupleIsRatio", ": " ]
+            }, {
+              "r" : "243",
+              "s" : [ {
+                "r" : "244",
+                "value" : [ "Tuple { : }", " is " ]
+              }, {
+                "r" : "246",
+                "s" : [ {
+                  "value" : [ "Ratio" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "243",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Tuple",
+            "localId" : "244",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "TupleTypeSpecifier",
+              "localId" : "245",
+              "annotation" : [ ],
+              "element" : [ ]
+            },
+            "element" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "246",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "249",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "StringIsRatio",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "249",
+            "s" : [ {
+              "value" : [ "", "define ", "StringIsRatio", ": " ]
+            }, {
+              "r" : "250",
+              "s" : [ {
+                "r" : "251",
+                "s" : [ {
+                  "value" : [ "'test'" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "253",
+                "s" : [ {
+                  "value" : [ "Ratio" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "250",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "251",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "test",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "253",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "256",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerIsRatio",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "256",
+            "s" : [ {
+              "value" : [ "", "define ", "IntegerIsRatio", ": " ]
+            }, {
+              "r" : "257",
+              "s" : [ {
+                "r" : "258",
+                "value" : [ "1", " is " ]
+              }, {
+                "r" : "259",
+                "s" : [ {
+                  "value" : [ "Ratio" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "257",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "258",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "259",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "262",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "BooleanIsRatio",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "262",
+            "s" : [ {
+              "value" : [ "", "define ", "BooleanIsRatio", ": " ]
+            }, {
+              "r" : "263",
+              "s" : [ {
+                "r" : "264",
+                "value" : [ "false", " is " ]
+              }, {
+                "r" : "265",
+                "s" : [ {
+                  "value" : [ "Ratio" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "263",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "264",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "false",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "265",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "268",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ExpansionIsRatio",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "268",
+            "s" : [ {
+              "value" : [ "", "define ", "ExpansionIsRatio", ": " ]
+            }, {
+              "r" : "269",
+              "s" : [ {
+                "r" : "270",
+                "s" : [ {
+                  "value" : [ "Expansion" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "271",
+                "s" : [ {
+                  "value" : [ "Ratio" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "269",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "ParameterRef",
+            "localId" : "270",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+            "name" : "Expansion",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "271",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "274",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "NullIsRatio",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "274",
+            "s" : [ {
+              "value" : [ "", "define ", "NullIsRatio", ": " ]
+            }, {
+              "r" : "275",
+              "s" : [ {
+                "r" : "276",
+                "value" : [ "null", " is " ]
+              }, {
+                "r" : "277",
+                "s" : [ {
+                  "value" : [ "Ratio" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "275",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Null",
+            "localId" : "276",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+            "annotation" : [ ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "277",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "280",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "RatioIsAny",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "280",
+            "s" : [ {
+              "value" : [ "", "define ", "RatioIsAny", ": " ]
+            }, {
+              "r" : "281",
+              "s" : [ {
+                "r" : "282",
+                "s" : [ {
+                  "value" : [ "Ratio", " { " ]
+                }, {
+                  "s" : [ {
+                    "value" : [ "numerator", ": " ]
+                  }, {
+                    "r" : "284",
+                    "s" : [ {
+                      "value" : [ "1 ", "'1'" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "s" : [ {
+                    "value" : [ "denominator", ": " ]
+                  }, {
+                    "r" : "285",
+                    "s" : [ {
+                      "value" : [ "2 ", "'1'" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              }, {
+                "value" : [ " is " ]
+              }, {
+                "r" : "286",
+                "s" : [ {
+                  "value" : [ "Any" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Is",
+          "localId" : "281",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Instance",
+            "localId" : "282",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "classType" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "annotation" : [ ],
+            "element" : [ {
+              "name" : "numerator",
+              "value" : {
+                "type" : "Quantity",
+                "localId" : "284",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "value" : 1,
+                "unit" : "1",
+                "annotation" : [ ]
+              }
+            }, {
+              "name" : "denominator",
+              "value" : {
+                "type" : "Quantity",
+                "localId" : "285",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "value" : 2,
+                "unit" : "1",
+                "annotation" : [ ]
+              }
+            } ]
+          },
+          "isTypeSpecifier" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "286",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+            "name" : "{urn:hl7-org:elm-types:r1}Any",
+            "annotation" : [ ]
+          }
+        }
+      } ]
+    }
+  }
+}
+
 /* IsListType
 library TestSnippet version '1'
 using Simple version '1.0.0'
