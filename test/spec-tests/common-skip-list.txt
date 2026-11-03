@@ -3,6 +3,7 @@
 # For instance, mismatched numeric types, since the cql-test-runner compares all numeric results as js number.
 
 # Invalid CQL (does not translate)
+"CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision"       Translator error: Syntax error at Z (currently marked invalid=true, should be marked invalid=syntax)
 
 # Invalid Translation (translates, but translates wrong)
 CqlAggregateTest.AggregateTests.RolledOutIntervals                          Invalid Test: Incorrectly casts starting expression to List<Interval<DateTime>>: https://github.com/cqframework/cql-tests/pull/146 (merged, remove this skip once cql-tests-runner points to that commit or newer)
@@ -32,6 +33,7 @@ CqlListOperatorsTest.Sort.simpleSortDesc                        Wrong output: Qu
 CqlComparisonOperatorsTest.Equal.TupleEqDifferentNamesWithOneNullId                 Wrong output: Tuple equality with a known-unequal element should return false
 "CqlComparisonOperatorsTest.Not Equal.TupleNotEqDifferingNamesWithOneNullId"        Wrong output: Tuple inequality with a known-unequal element should return true
 CqlStringOperatorsTest.Substring.SubstringEmptyAnd0                   Wrong output: Substring(x, x.length) should be null'. Note similar test SubstringAB2. See https://github.com/cqframework/cql-tests/issues/149
+"CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision2"      Wrong output: Comparing an imprecise time with a more precise time results in uncertainty
 CqlArithmeticFunctionsTest.HighBoundary.HighBoundaryDecimal                 Wrong output: HighBoundary(Decimal) was clarified in 2.0. HighBoundary(1.587, 8) should be 1.58750000, not 1.58799999
 CqlArithmeticFunctionsTest.HighBoundary.HighBoundaryNullPrecision           Wrong output: HighBoundary(Decimal) was clarified in 2.0. HighBoundary(1.58888, null) should be 1.58888500, not 1.58888999
 CqlArithmeticFunctionsTest.LowBoundary.LowBoundaryDecimal                   Wrong output: LowBoundary(Decimal) was clarified in 2.0. LowBoundary(1.587, 8) should be 1.58650000, not 1.58700000
