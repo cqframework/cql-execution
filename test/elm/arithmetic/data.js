@@ -33,7 +33,7 @@ module.exports['Add'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -93,6 +93,7 @@ module.exports['Add'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -1247,7 +1248,7 @@ module.exports['Subtract'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -1307,6 +1308,7 @@ module.exports['Subtract'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -2205,7 +2207,7 @@ module.exports['Multiply'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -2265,6 +2267,7 @@ module.exports['Multiply'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -3197,7 +3200,7 @@ module.exports['Divide'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -3257,6 +3260,7 @@ module.exports['Divide'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -4648,7 +4652,7 @@ module.exports['Negate'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -4708,6 +4712,7 @@ module.exports['Negate'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -4943,7 +4948,7 @@ module.exports['MathPrecedence'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -5003,6 +5008,7 @@ module.exports['MathPrecedence'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -5404,7 +5410,7 @@ module.exports['Power'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -5464,6 +5470,7 @@ module.exports['Power'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -6218,7 +6225,7 @@ module.exports['MinValue'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -6278,6 +6285,7 @@ module.exports['MinValue'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -6517,7 +6525,7 @@ module.exports['MaxValue'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -6577,6 +6585,7 @@ module.exports['MaxValue'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -6836,7 +6845,7 @@ module.exports['HighBoundary'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -6896,6 +6905,7 @@ module.exports['HighBoundary'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -8769,7 +8779,7 @@ module.exports['LowBoundary'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -8829,6 +8839,7 @@ module.exports['LowBoundary'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -10634,7 +10645,7 @@ module.exports['TruncatedDivide'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -10694,6 +10705,7 @@ module.exports['TruncatedDivide'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -11531,7 +11543,7 @@ module.exports['Modulo'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -11591,6 +11603,7 @@ module.exports['Modulo'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -12030,7 +12043,7 @@ module.exports['Ceiling'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -12090,6 +12103,7 @@ module.exports['Ceiling'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -12319,7 +12333,7 @@ module.exports['Floor'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -12379,6 +12393,7 @@ module.exports['Floor'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -12627,7 +12642,7 @@ module.exports['Truncate'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -12687,6 +12702,7 @@ module.exports['Truncate'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -12918,7 +12934,7 @@ module.exports['Abs'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -12978,6 +12994,7 @@ module.exports['Abs'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -13335,7 +13352,7 @@ module.exports['Round'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -13395,6 +13412,7 @@ module.exports['Round'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -14162,7 +14180,7 @@ module.exports['Ln'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -14222,6 +14240,7 @@ module.exports['Ln'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -14365,7 +14384,7 @@ module.exports['Log'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -14425,6 +14444,7 @@ module.exports['Log'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -14624,7 +14644,7 @@ module.exports['Successor'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -14684,6 +14704,7 @@ module.exports['Successor'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -15722,7 +15743,7 @@ module.exports['Predecessor'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -15782,6 +15803,7 @@ module.exports['Predecessor'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -16848,7 +16870,7 @@ module.exports['Quantity'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -16908,6 +16930,7 @@ module.exports['Quantity'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -18610,7 +18633,7 @@ module.exports['OutOfBounds'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -18670,6 +18693,7 @@ module.exports['OutOfBounds'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],

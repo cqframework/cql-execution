@@ -3,7 +3,7 @@
     "annotation": [
       {
         "type": "CqlToElmInfo",
-        "translatorVersion": "4.2.0",
+        "translatorVersion": "5.5.0",
         "translatorOptions": "EnableResultTypes",
         "signatureLevel": "None"
       }
@@ -42,6 +42,7 @@
     "statements": {
       "def": [
         {
+          "resultTypeName": "{http://hl7.org/fhir/us/qicore}Patient",
           "name": "Patient",
           "context": "Patient",
           "annotation": [],
@@ -2119,20 +2120,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Integer",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -2259,20 +2251,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Integer",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -2604,20 +2587,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -2744,20 +2718,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -3442,20 +3407,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -3463,31 +3419,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "value": {
-                        "type": "Ceiling",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": {
-                          "type": "ToDecimal",
-                          "annotation": [],
-                          "signature": [],
-                          "operand": {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                            "value": "2147483648",
-                            "annotation": []
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "value": {
-                        "type": "Null",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Test includes an intentional syntax error; it cannot be parsed or translated",
                         "annotation": []
                       }
                     }
@@ -3779,20 +3716,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -3800,37 +3728,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "value": {
-                        "type": "Ceiling",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": {
-                          "type": "ToDecimal",
-                          "annotation": [],
-                          "signature": [],
-                          "operand": {
-                            "type": "Negate",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                            "annotation": [],
-                            "signature": [],
-                            "operand": {
-                              "type": "Literal",
-                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                              "value": "2147483649",
-                              "annotation": []
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "value": {
-                        "type": "Null",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Test includes an intentional syntax error; it cannot be parsed or translated",
                         "annotation": []
                       }
                     }
@@ -14570,20 +14473,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -14598,20 +14492,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -14915,20 +14800,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -14943,20 +14819,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -15626,20 +15493,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -15647,37 +15505,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "value": {
-                        "type": "Modulo",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Quantity",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                            "value": 3.5,
-                            "unit": "cm",
-                            "annotation": []
-                          },
-                          {
-                            "type": "Quantity",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                            "value": 3,
-                            "unit": "cm",
-                            "annotation": []
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "value": {
-                        "type": "Quantity",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                        "value": 0.5,
-                        "unit": "cm",
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Modulo not implemented for Quantity",
                         "annotation": []
                       }
                     }
@@ -15694,20 +15527,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -15715,37 +15539,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "value": {
-                        "type": "Modulo",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Quantity",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                            "value": 10,
-                            "unit": "g",
-                            "annotation": []
-                          },
-                          {
-                            "type": "Quantity",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                            "value": 3,
-                            "unit": "g",
-                            "annotation": []
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "value": {
-                        "type": "Quantity",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                        "value": 1,
-                        "unit": "g",
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Modulo not implemented for Quantity",
                         "annotation": []
                       }
                     }
@@ -19960,7 +19759,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware.",
+                        "value": "Test targets maximum CQL version undefined which is lower than configured library target 2.0.0",
                         "annotation": []
                       }
                     }
@@ -19994,7 +19793,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware",
+                        "value": "Test targets maximum CQL version undefined which is lower than configured library target 2.0.0",
                         "annotation": []
                       }
                     }
@@ -20146,7 +19945,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware",
+                        "value": "Test targets maximum CQL version undefined which is lower than configured library target 2.0.0",
                         "annotation": []
                       }
                     }
@@ -25318,7 +25117,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware",
+                        "value": "Test targets maximum CQL version undefined which is lower than configured library target 2.0.0",
                         "annotation": []
                       }
                     }
@@ -25352,7 +25151,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware",
+                        "value": "Test targets maximum CQL version undefined which is lower than configured library target 2.0.0",
                         "annotation": []
                       }
                     }

@@ -20,7 +20,7 @@ module.exports['Expression'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -80,6 +80,7 @@ module.exports['Expression'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],

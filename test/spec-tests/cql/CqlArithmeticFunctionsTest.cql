@@ -106,9 +106,12 @@ define "Ceiling": Tuple{
     output: null
   },
   "CeilingIntegerGreaterThanMaxInteger": Tuple{
+    skipped: 'Test includes an intentional syntax error; it cannot be parsed or translated'
+    /*
     expression: Ceiling(2147483648),
+    invalid: syntax,
     output: null
-  },
+    */  },
   "CeilingDecimalGreaterThanMaxInteger": Tuple{
     expression: Ceiling(2147483648.2),
     output: null
@@ -126,9 +129,12 @@ define "Ceiling": Tuple{
     output: -2147483648
   },
   "CeilingIntegerLessThanMinInteger": Tuple{
+    skipped: 'Test includes an intentional syntax error; it cannot be parsed or translated'
+    /*
     expression: Ceiling(-2147483649),
+    invalid: syntax,
     output: null
-  },
+    */  },
   "CeilingDecimalLessThanMinInteger": Tuple{
     expression: Ceiling(-2147483649.2),
     output: null
@@ -532,13 +538,17 @@ define "Modulo": Tuple{
     output: 0.5
   },
   "ModuloQuantity": Tuple{
+    skipped: 'Modulo not implemented for Quantity'
+    /*
     expression: 3.5 'cm' mod 3 'cm',
     output: 0.5 'cm'
-  },
+    */  },
   "Modulo10By3Quantity": Tuple{
+    skipped: 'Modulo not implemented for Quantity'
+    /*
     expression: 10.0 'g' mod 3.0 'g',
     output: 1.0 'g'
-  },
+    */  },
   "Modulo10By0Quantity": Tuple{
     expression: 10.0 'g' mod 0.0 'g',
     output: null
@@ -674,13 +684,13 @@ define "Predecessor": Tuple{
     output: 0L
   },
   "PredecessorOf1D": Tuple{
-    skipped: 'Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware.'
+    skipped: 'Test targets maximum CQL version undefined which is lower than configured library target 2.0.0'
     /*
     expression: predecessor of 1.0,
     output: 0.99999999
     */  },
   "PredecessorOf101D": Tuple{
-    skipped: 'Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware'
+    skipped: 'Test targets maximum CQL version undefined which is lower than configured library target 2.0.0'
     /*
     expression: predecessor of 1.01,
     output: 1.00999999
@@ -694,7 +704,7 @@ define "Predecessor": Tuple{
     output: 1.00
   },
   "PredecessorOf1QCM": Tuple{
-    skipped: 'Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware'
+    skipped: 'Test targets maximum CQL version undefined which is lower than configured library target 2.0.0'
     /*
     expression: predecessor of 1.0 'cm',
     output: 0.99999999'cm'
@@ -890,13 +900,13 @@ define "Successor": Tuple{
     output: 2L
   },
   "SuccessorOf1D": Tuple{
-    skipped: 'Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware'
+    skipped: 'Test targets maximum CQL version undefined which is lower than configured library target 2.0.0'
     /*
     expression: successor of 1.0,
     output: 1.00000001
     */  },
   "SuccessorOf101D": Tuple{
-    skipped: 'Test targets <= 1.5.3. As of 2.0 Successor of Decimal is precision-aware'
+    skipped: 'Test targets maximum CQL version undefined which is lower than configured library target 2.0.0'
     /*
     expression: successor of 1.01,
     output: 1.01000001

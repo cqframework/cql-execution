@@ -20,7 +20,7 @@ module.exports['ExpressionDef'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -80,6 +80,7 @@ module.exports['ExpressionDef'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -159,7 +160,7 @@ module.exports['ExpressionRef'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -219,6 +220,7 @@ module.exports['ExpressionRef'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -737,7 +739,7 @@ module.exports['FunctionDefinitions'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -797,6 +799,7 @@ module.exports['FunctionDefinitions'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -983,7 +986,7 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -1043,6 +1046,7 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -1320,7 +1324,7 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -1380,6 +1384,7 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -1837,7 +1842,7 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -1897,6 +1902,7 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -2371,7 +2377,7 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -2431,6 +2437,7 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -2816,7 +2823,7 @@ module.exports['FluentFunctions'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -2876,6 +2883,7 @@ module.exports['FluentFunctions'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -3244,7 +3252,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -3313,6 +3321,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -6500,7 +6509,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -6583,6 +6592,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
     "statements" : {
       "def" : [ {
         "localId" : "211",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],

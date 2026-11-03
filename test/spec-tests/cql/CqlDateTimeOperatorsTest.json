@@ -3,7 +3,7 @@
     "annotation": [
       {
         "type": "CqlToElmInfo",
-        "translatorVersion": "4.2.0",
+        "translatorVersion": "5.5.0",
         "translatorOptions": "EnableResultTypes",
         "signatureLevel": "None"
       }
@@ -42,6 +42,7 @@
     "statements": {
       "def": [
         {
+          "resultTypeName": "{http://hl7.org/fhir/us/qicore}Patient",
           "name": "Patient",
           "context": "Patient",
           "annotation": [],
@@ -18478,7 +18479,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Translator error: Timezone keyword is only valid in 1.3 or lower",
+                        "value": "Test targets maximum CQL version undefined which is lower than configured library target 2.0.0",
                         "annotation": []
                       }
                     }
@@ -30957,7 +30958,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Translator error: Syntax error at Z",
+                        "value": "Translator error: Syntax error at Z (currently marked invalid=true, should be marked invalid=syntax)",
                         "annotation": []
                       }
                     }

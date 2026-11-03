@@ -20,7 +20,7 @@ module.exports['Nil'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -80,6 +80,7 @@ module.exports['Nil'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -144,7 +145,7 @@ module.exports['IsNull'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -204,6 +205,7 @@ module.exports['IsNull'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -473,7 +475,7 @@ module.exports['Coalesce'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -533,6 +535,7 @@ module.exports['Coalesce'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],

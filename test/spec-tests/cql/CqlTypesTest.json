@@ -3,7 +3,7 @@
     "annotation": [
       {
         "type": "CqlToElmInfo",
-        "translatorVersion": "4.2.0",
+        "translatorVersion": "5.5.0",
         "translatorOptions": "EnableResultTypes",
         "signatureLevel": "None"
       }
@@ -42,6 +42,7 @@
     "statements": {
       "def": [
         {
+          "resultTypeName": "{http://hl7.org/fhir/us/qicore}Patient",
           "name": "Patient",
           "context": "Patient",
           "annotation": [],
@@ -3772,7 +3773,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Intentional Translator error: Invalid time input (T24:59:59.999). Use ISO 8601 time representation (hh:mm:ss.fff)",
+                        "value": "Test includes an intentional semantic error; it parses but does not translate",
                         "annotation": []
                       }
                     }
@@ -3806,7 +3807,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Translator error: Invalid time input[...]",
+                        "value": "Test includes an intentional semantic error; it parses but does not translate",
                         "annotation": []
                       }
                     }
@@ -3840,7 +3841,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Translator error: Invalid time input[...]",
+                        "value": "Test includes an intentional semantic error; it parses but does not translate",
                         "annotation": []
                       }
                     }

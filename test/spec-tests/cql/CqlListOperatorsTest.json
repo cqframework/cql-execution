@@ -3,7 +3,7 @@
     "annotation": [
       {
         "type": "CqlToElmInfo",
-        "translatorVersion": "4.2.0",
+        "translatorVersion": "5.5.0",
         "translatorOptions": "EnableResultTypes",
         "signatureLevel": "None"
       },
@@ -402,6 +402,7 @@
     "statements": {
       "def": [
         {
+          "resultTypeName": "{http://hl7.org/fhir/us/qicore}Patient",
           "name": "Patient",
           "context": "Patient",
           "annotation": [],
@@ -7822,7 +7823,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong output: According to spec, if either list contains a null, the result is null",
+                        "value": "Wrong answer: According to 1.5.3, if either list contains a null, the result is null, however in 2.0.0, null elements are considered equal in list equality",
                         "annotation": []
                       }
                     }

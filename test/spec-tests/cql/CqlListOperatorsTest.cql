@@ -138,7 +138,7 @@ define "Distinct": Tuple{
 
 define "Equal": Tuple{
   "EqualNullNull": Tuple{
-    skipped: 'Wrong output: According to spec, if either list contains a null, the result is null'
+    skipped: 'Wrong answer: According to 1.5.3, if either list contains a null, the result is null, however in 2.0.0, null elements are considered equal in list equality'
     /*
     expression: {null} = {null},
     output: true
