@@ -1,13 +1,8 @@
 # Generated JavaScript ELM test fixtures.
 # Update with `npm run build:test-data` (or `npm run watch:test-data`)
 test/elm/**/data.js linguist-generated=true
-test/elm/external/Included.js linguist-generated=true
-test/elm/external/Retrieve.js linguist-generated=true
-test/elm/library/Common.js linguist-generated=true
-test/elm/library/Common2.js linguist-generated=true
-test/elm/message/Included.js linguist-generated=true
-test/elm/reusable/FluentFunctionsOverloadCallingSelf.js linguist-generated=true
 
-# Generated spec-test JSON ELM libraries.
+# Generated spec-test CQL and JSON ELM libraries.
 # Update with `npm run build:spec-test-data`
 test/spec-tests/cql/*.json linguist-generated=true
+test/spec-tests/cql/*.cql linguist-generated=true
