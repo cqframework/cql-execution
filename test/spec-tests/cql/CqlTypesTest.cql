@@ -102,22 +102,22 @@ define "String": Tuple{
 
 define "Time": Tuple{
   "TimeUpperBoundHours": Tuple{
-    skipped: 'Intentional Translator error: Invalid time input (T24:59:59.999). Use ISO 8601 time representation (hh:mm:ss.fff)'
+    skipped: 'Test includes an intentional semantic error; it parses but does not translate'
     /*
     expression: @T24:59:59.999,
-    invalid: 'semantic'
+    invalid: semantic
     */  },
   "TimeUpperBoundMinutes": Tuple{
-    skipped: 'Translator error: Invalid time input[...]'
+    skipped: 'Test includes an intentional semantic error; it parses but does not translate'
     /*
     expression: @T23:60:59.999,
-    invalid: 'semantic'
+    invalid: semantic
     */  },
   "TimeUpperBoundSeconds": Tuple{
-    skipped: 'Translator error: Invalid time input[...]'
+    skipped: 'Test includes an intentional semantic error; it parses but does not translate'
     /*
     expression: @T23:59:60.999,
-    invalid: 'semantic'
+    invalid: semantic
     */  },
   "TimeMillisParsing": Tuple{
     skipped: 'Wrong answer: @T23:59:59.100 vs @T23:59:59.10000'

@@ -104,7 +104,7 @@ curl -X POST http://localhost:8000/fhir/\$cql \
 
 This server is designed to be a `$cql` target for the [cql-tests-runner](https://github.com/cqframework/cql-tests-runner). To execute the test-runner against this server:
 
-1. Download or clone the `cql-tests-runner` repository.
+1. Initialize the `cql-tests-runner` submodule at the root of this repository with `git submodule update --init --recursive`.
 
 2. Start this test-server (see above), e.g. at `http://localhost:8000`.
 

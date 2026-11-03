@@ -428,7 +428,7 @@ define "DateTimeComponentFrom": Tuple{
     output: 1.00
   },
   "DateTimeComponentFromTimezoneOffset": Tuple{
-    skipped: 'Translator error: Timezone keyword is only valid in 1.3 or lower'
+    skipped: 'Test targets maximum CQL version undefined which is lower than configured library target 2.0.0'
     /*
     expression: timezone from DateTime(2003, 10, 29, 20, 50, 33, 955, 1),
     output: 1.00
@@ -712,7 +712,7 @@ define "Uncertainty tests": Tuple{
     output: 2
   },
   "TimeDurationBetweenHourDiffPrecision": Tuple{
-    skipped: 'Translator error: Syntax error at Z'
+    skipped: 'Translator error: Syntax error at Z (currently marked invalid=true, should be marked invalid=syntax)'
     /*
     expression: hours between @T06Z and @T07:00:00Z,
     invalid: true

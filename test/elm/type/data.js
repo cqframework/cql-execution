@@ -23,7 +23,7 @@ module.exports['IsSystemType'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -83,6 +83,7 @@ module.exports['IsSystemType'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -324,7 +325,7 @@ module.exports['IsListType'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -384,6 +385,7 @@ module.exports['IsListType'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -663,7 +665,7 @@ module.exports['IsIntervalType'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -723,6 +725,7 @@ module.exports['IsIntervalType'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -966,7 +969,7 @@ module.exports['IsTupleType'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -1026,6 +1029,7 @@ module.exports['IsTupleType'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -1428,7 +1432,7 @@ module.exports['IsChoiceType'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -1488,6 +1492,7 @@ module.exports['IsChoiceType'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -1573,26 +1578,26 @@ module.exports['IsChoiceType'] = {
               "choice" : [ {
                 "type" : "NamedTypeSpecifier",
                 "localId" : "221",
-                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "annotation" : [ ]
               }, {
                 "type" : "NamedTypeSpecifier",
                 "localId" : "222",
-                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               } ]
             },
             "choice" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "217",
-              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-              "name" : "{urn:hl7-org:elm-types:r1}Integer",
-              "annotation" : [ ]
-            }, {
-              "type" : "NamedTypeSpecifier",
               "localId" : "218",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }, {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "217",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ]
           }
@@ -1663,26 +1668,26 @@ module.exports['IsChoiceType'] = {
               "choice" : [ {
                 "type" : "NamedTypeSpecifier",
                 "localId" : "232",
-                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "annotation" : [ ]
               }, {
                 "type" : "NamedTypeSpecifier",
                 "localId" : "233",
-                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               } ]
             },
             "choice" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "228",
-              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-              "name" : "{urn:hl7-org:elm-types:r1}Integer",
-              "annotation" : [ ]
-            }, {
-              "type" : "NamedTypeSpecifier",
               "localId" : "229",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }, {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "228",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ]
           }
@@ -1757,26 +1762,26 @@ module.exports['IsChoiceType'] = {
               "choice" : [ {
                 "type" : "NamedTypeSpecifier",
                 "localId" : "244",
-                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "annotation" : [ ]
               }, {
                 "type" : "NamedTypeSpecifier",
                 "localId" : "245",
-                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               } ]
             },
             "choice" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "240",
-              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-              "name" : "{urn:hl7-org:elm-types:r1}Integer",
-              "annotation" : [ ]
-            }, {
-              "type" : "NamedTypeSpecifier",
               "localId" : "241",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }, {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "240",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ]
           }
@@ -1802,7 +1807,7 @@ module.exports['IsCustomDataModelType'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -1862,6 +1867,7 @@ module.exports['IsCustomDataModelType'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -2362,7 +2368,7 @@ module.exports['AsSystemType'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -2422,6 +2428,7 @@ module.exports['AsSystemType'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -3688,7 +3695,7 @@ module.exports['AsListType'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -3748,6 +3755,7 @@ module.exports['AsListType'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -5344,7 +5352,7 @@ module.exports['AsIntervalType'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -5404,6 +5412,7 @@ module.exports['AsIntervalType'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -7284,7 +7293,7 @@ module.exports['AsTupleType'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -7344,6 +7353,7 @@ module.exports['AsTupleType'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -9402,7 +9412,7 @@ module.exports['AsChoiceType'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -9462,6 +9472,7 @@ module.exports['AsChoiceType'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],
@@ -11528,7 +11539,7 @@ module.exports['AsCustomDataModelType'] = {
     "localId" : "0",
     "annotation" : [ {
       "type" : "CqlToElmInfo",
-      "translatorVersion" : "4.2.0",
+      "translatorVersion" : "5.5.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
@@ -11588,6 +11599,7 @@ module.exports['AsCustomDataModelType'] = {
     "statements" : {
       "def" : [ {
         "localId" : "209",
+        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Patient",
         "name" : "Patient",
         "context" : "Patient",
         "annotation" : [ ],

@@ -437,7 +437,15 @@ define "End": Tuple{
 }
 
 define "Ends": Tuple{
-  "TestEndsNull": Tuple{
+  "TestNullEndsNull": Tuple{
+    expression: Interval[1, 10] ends null,
+    output: null
+  },
+  "TestMaxIntervalEndsFalse": Tuple{
+    expression: Interval[1, 10] ends Interval[null, null],
+    output: false
+  },
+  "TestUnknownIntervalEndsNull": Tuple{
     expression: Interval[1, 10] ends Interval(null, null),
     output: null
   },
@@ -531,8 +539,12 @@ define "Equal": Tuple{
 }
 
 define "Except": Tuple{
-  "TestExceptNull": Tuple{
+  "TestMaxIntervalExceptNull": Tuple{
     expression: Interval[null, null] except Interval[null, null],
+    output: null
+  },
+  "TestUnitIntervalExceptNull": Tuple{
+    expression: Interval[1, 1] except Interval[1, 1],
     output: null
   },
   "IntegerIntervalExcept1to3": Tuple{
@@ -544,7 +556,7 @@ define "Except": Tuple{
     output: null
   },
   "DecimalIntervalExcept1to3": Tuple{
-    skipped: '# Wrong output: The expected value is a closed form of the correct open-endpoint Interval[1.0, 4.0) . Converting to closed-form produces different results for CQL 2.0.0+ due to Decimal precision-awareness. See https://jira.hl7.org/browse/FHIR-59229'
+    skipped: 'Wrong output: The expected value is a closed form of the correct open-endpoint Interval[1.0, 4.0) . Converting to closed-form produces different results for CQL 2.0.0+ due to Decimal precision-awareness. See https://jira.hl7.org/browse/FHIR-59229'
     /*
     expression: Interval[1.0, 10.0] except Interval[4.0, 10.0],
     output: Interval [ 1.0, 3.99999999 ]
@@ -554,7 +566,7 @@ define "Except": Tuple{
     output: null
   },
   "QuantityIntervalExcept1to4": Tuple{
-    skipped: '# Wrong output: The expected value is a closed form of the correct open-endpoint Interval[1.0 \'g\', 5.0 \'g\'). Converting to closed-form produces different results for CQL 2.0.0+ due to Decimal precision-awareness. See https://jira.hl7.org/browse/FHIR-59229'
+    skipped: 'Wrong output: The expected value is a closed form of the correct open-endpoint Interval[1.0 \'g\', 5.0 \'g\'). Converting to closed-form produces different results for CQL 2.0.0+ due to Decimal precision-awareness. See https://jira.hl7.org/browse/FHIR-59229'
     /*
     expression: Interval[1.0 'g', 10.0 'g'] except Interval[5.0 'g', 10.0 'g'],
     output: Interval [ 1.0 'g', 4.99999999 'g' ]
@@ -582,12 +594,14 @@ define "Except": Tuple{
 }
 
 define "In": Tuple{
-  "TestInNullBoundaries": Tuple{
-    skipped: 'Wrong output: According to spec, comparison against null closed boundaries should result in true'
-    /*
+  "TestIntegerInMaxIntervalTrue": Tuple{
     expression: 5 in Interval[null, null],
-    output: false
-    */  },
+    output: true
+  },
+  "TestIntegerInUnknownIntervalNull": Tuple{
+    expression: 5 in Interval(null, null),
+    output: null
+  },
   "IntegerIntervalInTrue": Tuple{
     expression: 5 in Interval[1, 10],
     output: true
@@ -1115,8 +1129,14 @@ define "OnOrBefore": Tuple{
 }
 
 define "Overlaps": Tuple{
-  "TestOverlapsNull": Tuple{
+  "TestMaxIntervalOverlapsTrue": Tuple{
+    skipped: 'To get the desired result, the translator needs to cast the Interval[null, null] operand as Interval<Integer>. https://github.com/cqframework/clinical_quality_language/issues/1856'
+    /*
     expression: Interval[null, null] overlaps Interval[1, 10],
+    output: true
+    */  },
+  "TestUnknownIntervalOverlapsNull": Tuple{
+    expression: Interval(null, null) overlaps Interval[1, 10],
     output: null
   },
   "IntegerIntervalOverlapsTrue": Tuple{
@@ -1222,8 +1242,14 @@ define "Overlaps": Tuple{
 }
 
 define "OverlapsBefore": Tuple{
-  "TestOverlapsBeforeNull": Tuple{
+  "TestMaxIntervalOverlapsBeforeTrue": Tuple{
+    skipped: 'To get the desired result, the translator needs to cast the Interval[null, null] operand as Interval<Integer>. https://github.com/cqframework/clinical_quality_language/issues/1856'
+    /*
     expression: Interval[null, null] overlaps before Interval[1, 10],
+    output: true
+    */  },
+  "TestUnknownIntervalOverlapsBeforeNull": Tuple{
+    expression: Interval(null, null) overlaps before Interval[1, 10],
     output: null
   },
   "IntegerIntervalOverlapsBeforeTrue": Tuple{
@@ -1297,8 +1323,14 @@ define "OverlapsBefore": Tuple{
 }
 
 define "OverlapsAfter": Tuple{
-  "TestOverlapsAfterNull": Tuple{
+  "TestMaxIntervalOverlapsAfterTrue": Tuple{
+    skipped: 'To get the desired result, the translator needs to cast the Interval[null, null] operand as Interval<Integer>. https://github.com/cqframework/clinical_quality_language/issues/1856'
+    /*
     expression: Interval[null, null] overlaps after Interval[1, 10],
+    output: true
+    */  },
+  "TestUnknownIntervalOverlapsAfterNull": Tuple{
+    expression: Interval(null, null) overlaps after Interval[1, 10],
     output: null
   },
   "IntegerIntervalOverlapsAfterTrue": Tuple{
@@ -1373,9 +1405,17 @@ define "OverlapsAfter": Tuple{
 
 define "PointFrom": Tuple{
   "TestPointFromNull": Tuple{
-    skipped: 'Wrong output: Interval[null, null] is not a unit interval, nor is it null'
-    /*
+    expression: point from (null as Interval<Integer>),
+    output: null
+  },
+  "TestPointFromMaxIntervalError": Tuple{
     expression: point from Interval[null, null],
+    invalid: true
+  },
+  "TestPointFromUnknownIntervalNull": Tuple{
+    skipped: 'Wrong answer: whether Interval(null, null) is a unit interval is indeterminate so the result should be null'
+    /*
+    expression: point from Interval(null, null),
     output: null
     */  },
   "TestPointFromInteger": Tuple{
@@ -1506,7 +1546,7 @@ define "ProperlyIncludes": Tuple{
 }
 
 define "ProperlyIncludedIn": Tuple{
-  "IntegerIntervalProperlyIncludedInNullBoundaries": Tuple{
+  "IntegerIntervalProperlyIncludedInMaxIntervalTrue": Tuple{
     expression: Interval[1, 10] properly included in Interval[null, null],
     output: true
   },
@@ -1576,8 +1616,18 @@ define "Start": Tuple{
 }
 
 define "Starts": Tuple{
-  "TestStartsNull": Tuple{
+  "TestNullStartsNull": Tuple{
+    expression: null starts Interval[1, 10],
+    output: null
+  },
+  "TestMaxIntervalStartsFalse": Tuple{
+    skipped: 'To get the desired result, the translator needs to cast the Interval[null, null] operand as Interval<Integer>. https://github.com/cqframework/clinical_quality_language/issues/1856'
+    /*
     expression: Interval[null, null] starts Interval[1, 10],
+    output: false
+    */  },
+  "TestUnknownIntervalStartsNull": Tuple{
+    expression: Interval(null, null) starts Interval[1, 10],
     output: null
   },
   "IntegerIntervalStartsTrue": Tuple{
@@ -1623,8 +1673,14 @@ define "Starts": Tuple{
 }
 
 define "Union": Tuple{
-  "TestUnionNull": Tuple{
+  "TestUnionMaxInterval": Tuple{
+    skipped: 'To get the desired result, the translator needs to cast the Interval[null, null] operand as Interval<Integer>. https://github.com/cqframework/clinical_quality_language/issues/1856'
+    /*
     expression: Interval[null, null] union Interval[1, 10],
+    output: Interval[null, null]
+    */  },
+  "TestUnionUnknownInterval": Tuple{
+    expression: Interval(null, null) union Interval[1, 10],
     output: null
   },
   "IntegerIntervalUnion1To15": Tuple{
