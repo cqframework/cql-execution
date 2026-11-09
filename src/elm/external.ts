@@ -1,6 +1,6 @@
 import { Expression } from './expression';
 import { resolveValueSet, typeIsArray } from '../util/util';
-import { equals, equivalent } from '../util/comparison';
+import { equals } from '../util/comparison';
 import { Context } from '../runtime/context';
 import { build } from './builder';
 import { RetrieveDetails } from '../types/cql-patient.interfaces';
@@ -109,7 +109,7 @@ export class Retrieve extends Expression {
     if (this.valueSetProperty) {
       return await this.valueSetMatchesCodesOrVS(record, codesToMatch, ctx);
     }
-    
+
     return false;
   }
 
@@ -122,7 +122,7 @@ export class Retrieve extends Expression {
 
       case 'contains':
       case '~contains':
-        // "The equivalent contains operator (~contains) was introduced as the formal converse of the equivalent in operator (~in) 
+        // "The equivalent contains operator (~contains) was introduced as the formal converse of the equivalent in operator (~in)
         // (i.e. A ~in B will always result in the same value as B ~contains A)."
         // Note this refers to the standalone operators, not specifically the context of a Retrieve, but we'll maintain that here as well
         return this.in(codesToMatch, recordCodeValue, equivalence);
@@ -141,32 +141,32 @@ export class Retrieve extends Expression {
   }
 
   async valueSetMatchesCodesOrVS(record: any, codesToMatch: any, ctx: Context): Promise<boolean> {
-      // "The valueSetProperty attribute optionally specifies which property of the model contains a value set identifier
-      //  that can be used as an alternative mechanism for matching the value set of the retrieve, in the case when no code is specified in the source data."
-      // Consider for example a QICore negation, https://hl7.org/fhir/us/qicore/STU7.0.2/negation.html#extent-of-negation
-      // Negation of a single code in a MedicationAdministrationNotDone is medicationCodeableConcept.coding
-      // Negation of a whole class in a MedicationAdministrationNotDone is medicationCodeableConcept.extension:codeOptions, whose value is a canonical(ValueSet)
-      const recordVSIdentifier = record.get(this.valueSetProperty);
-      if (!recordVSIdentifier) {
-        return false;
-      }
+    // "The valueSetProperty attribute optionally specifies which property of the model contains a value set identifier
+    //  that can be used as an alternative mechanism for matching the value set of the retrieve, in the case when no code is specified in the source data."
+    // Consider for example a QICore negation, https://hl7.org/fhir/us/qicore/STU7.0.2/negation.html#extent-of-negation
+    // Negation of a single code in a MedicationAdministrationNotDone is medicationCodeableConcept.coding
+    // Negation of a whole class in a MedicationAdministrationNotDone is medicationCodeableConcept.extension:codeOptions, whose value is a canonical(ValueSet)
+    const recordVSIdentifier = record.get(this.valueSetProperty);
+    if (!recordVSIdentifier) {
+      return false;
+    }
 
-      const recordVSInstance = await this.getValueSet(recordVSIdentifier, ctx);
-      switch (this.codeComparator) {
-        case 'contains':
-        case '~contains':
-          // "The equivalent contains operator (~contains) was introduced as the formal converse of the equivalent in operator (~in) 
-          // (i.e. A ~in B will always result in the same value as B ~contains A)."
-          // Note that "contains" here isn't well-defined since there's no `ValueSet contains` standalone operator to base it off.
-          return this.in(codesToMatch, recordVSInstance, this.codeComparator.startsWith('~'));
-    
-        default:
-          // TODO. Other operators don't necessarily make sense here. Throw an error for illegal combinations?
+    const recordVSInstance = await this.getValueSet(recordVSIdentifier, ctx);
+    switch (this.codeComparator) {
+      case 'contains':
+      case '~contains':
+        // "The equivalent contains operator (~contains) was introduced as the formal converse of the equivalent in operator (~in)
+        // (i.e. A ~in B will always result in the same value as B ~contains A)."
+        // Note that "contains" here isn't well-defined since there's no `ValueSet contains` standalone operator to base it off.
+        return this.in(codesToMatch, recordVSInstance, this.codeComparator.startsWith('~'));
 
-          // It's not obvious which operator/operand combinations should be allowed,
-          // but if the RHS is a ValueSet, we can at least try to match it by identifier (not by content)
-          return codesToMatch instanceof ValueSet && recordVSIdentifier === codesToMatch.oid;
-      }
+      default:
+        // TODO. Other operators don't necessarily make sense here. Throw an error for illegal combinations?
+
+        // It's not obvious which operator/operand combinations should be allowed,
+        // but if the RHS is a ValueSet, we can at least try to match it by identifier (not by content)
+        return codesToMatch instanceof ValueSet && recordVSIdentifier === codesToMatch.oid;
+    }
   }
 
   async getValueSet(identifier: string, ctx: Context) {
@@ -193,7 +193,7 @@ export class Retrieve extends Expression {
       // CQL 2.0 introduced `~in` and `~contains` which makes it more clear it uses equivalence semantics.
       // There is no equality-based terminology membership defined anywhere.
       return rhs.hasMatch(lhs);
-    } 
+    }
     // For code lists, fallback to the implementation in ~/= . See comments below.
     if (equivalence) {
       return this.equivalent(lhs, rhs);
