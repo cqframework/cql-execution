@@ -1,19 +1,20 @@
 import { Expression } from './expression';
 import { resolveValueSet, typeIsArray } from '../util/util';
-import { equals } from '../util/comparison';
+import { equals, equivalent } from '../util/comparison';
 import { Context } from '../runtime/context';
 import { build } from './builder';
 import { RetrieveDetails } from '../types/cql-patient.interfaces';
-import { Code, CodeSystem, CQLValueSet, ValueSet } from '../datatypes/clinical';
+import { Code, CodeSystem, Concept, CQLValueSet, ValueSet } from '../datatypes/clinical';
 
 export class Retrieve extends Expression {
   datatype: string;
   templateId?: string;
   codeProperty?: string;
-  codeComparator?: 'in' | '=' | '~';
+  codeComparator?: 'in' | '~in' | 'contains' | '~contains' | '=' | '~';
   codes?: Expression | null;
   dateProperty?: string;
   dateRange?: Expression | null;
+  valueSetProperty?: string;
 
   constructor(json: any) {
     super(json);
@@ -24,6 +25,7 @@ export class Retrieve extends Expression {
     this.codes = build(json.codes) as Expression;
     this.dateProperty = json.dateProperty;
     this.dateRange = build(json.dateRange) as Expression;
+    this.valueSetProperty = json.valueSetProperty;
   }
 
   async exec(ctx: Context) {
@@ -33,11 +35,12 @@ export class Retrieve extends Expression {
       datatype: this.datatype,
       ...(this.codeProperty ? { codeProperty: this.codeProperty } : {}),
       ...(this.codeComparator ? { codeComparator: this.codeComparator } : {}),
-      ...(this.dateProperty ? { dateProperty: this.dateProperty } : {})
+      ...(this.dateProperty ? { dateProperty: this.dateProperty } : {}),
+      ...(this.valueSetProperty ? { valueSetProperty: this.valueSetProperty } : {})
     };
 
     if (this.codes) {
-      const executedCodes: Code[] | CQLValueSet | undefined = await this.codes.execute(ctx);
+      const executedCodes = await this.codes.execute(ctx);
 
       if (executedCodes == null) {
         return [];
@@ -45,9 +48,14 @@ export class Retrieve extends Expression {
 
       if (typeIsArray(executedCodes)) {
         retrieveDetails.codes = executedCodes as Code[];
-      } else {
+      } else if (executedCodes instanceof CQLValueSet) {
         // retrieveDetails codes are expected to be expanded for external usage
-        retrieveDetails.codes = await resolveValueSet(executedCodes as CQLValueSet, ctx);
+        retrieveDetails.codes = await resolveValueSet(executedCodes, ctx);
+      } else if (executedCodes instanceof Code || executedCodes instanceof Concept) {
+        retrieveDetails.codes =
+          executedCodes instanceof Concept ? executedCodes.codes : [executedCodes];
+      } else {
+        retrieveDetails.codes = executedCodes;
       }
     }
 
@@ -65,7 +73,10 @@ export class Retrieve extends Expression {
     );
 
     if (retrieveDetails.codes) {
-      records = records.filter((r: any) => this.recordMatchesCodesOrVS(r, retrieveDetails.codes));
+      const matches = await Promise.all(
+        records.map((r: any) => this.recordMatchesCodesOrVS(r, retrieveDetails.codes, ctx))
+      );
+      records = records.filter((_r: any, i: number) => matches[i]);
     }
 
     if (retrieveDetails.dateRange && this.dateProperty) {
@@ -82,42 +93,112 @@ export class Retrieve extends Expression {
     return records;
   }
 
-  recordMatchesCodesOrVS(record: any, codes: any) {
+  async recordMatchesCodesOrVS(record: any, codesToMatch: any, ctx: Context) {
     let recordCodeValue = record.getCode(this.codeProperty);
 
-    if (Array.isArray(recordCodeValue)) {
-      if (recordCodeValue.length == 0) {
-        return false;
-      }
-    } else if (!recordCodeValue) {
-      return false;
-    } else {
+    if (recordCodeValue == null) {
+      recordCodeValue = [];
+    } else if (!Array.isArray(recordCodeValue)) {
       recordCodeValue = [recordCodeValue];
     }
 
+    if (recordCodeValue.length > 0) {
+      return this.codeMatchesCodesOrVS(recordCodeValue, codesToMatch);
+    }
+
+    if (this.valueSetProperty) {
+      return await this.valueSetMatchesCodesOrVS(record, codesToMatch, ctx);
+    }
+    
+    return false;
+  }
+
+  codeMatchesCodesOrVS(recordCodeValue: Array<any>, codesToMatch: any): boolean {
+    const equivalence = this.codeComparator?.startsWith('~') ?? false;
     switch (this.codeComparator) {
       case 'in':
-        return this.in(recordCodeValue, codes);
+      case '~in':
+        return this.in(recordCodeValue, codesToMatch, equivalence);
+
+      case 'contains':
+      case '~contains':
+        // "The equivalent contains operator (~contains) was introduced as the formal converse of the equivalent in operator (~in) 
+        // (i.e. A ~in B will always result in the same value as B ~contains A)."
+        // Note this refers to the standalone operators, not specifically the context of a Retrieve, but we'll maintain that here as well
+        return this.in(codesToMatch, recordCodeValue, equivalence);
 
       case '~':
-        return this.equivalent(recordCodeValue, codes);
+        return this.equivalent(recordCodeValue, codesToMatch);
 
       case '=':
-        return this.equal(recordCodeValue, codes);
+        return this.equal(recordCodeValue, codesToMatch);
 
       default:
         // if there's a terminology filter, there should always be a comparator,
         // but just in case, default to "in"
-        return this.in(recordCodeValue, codes);
+        return this.in(recordCodeValue, codesToMatch, true);
     }
   }
 
-  private in(lhs: Code[], rhs: any) {
+  async valueSetMatchesCodesOrVS(record: any, codesToMatch: any, ctx: Context): Promise<boolean> {
+      // "The valueSetProperty attribute optionally specifies which property of the model contains a value set identifier
+      //  that can be used as an alternative mechanism for matching the value set of the retrieve, in the case when no code is specified in the source data."
+      // Consider for example a QICore negation, https://hl7.org/fhir/us/qicore/STU7.0.2/negation.html#extent-of-negation
+      // Negation of a single code in a MedicationAdministrationNotDone is medicationCodeableConcept.coding
+      // Negation of a whole class in a MedicationAdministrationNotDone is medicationCodeableConcept.extension:codeOptions, whose value is a canonical(ValueSet)
+      const recordVSIdentifier = record.get(this.valueSetProperty);
+      if (!recordVSIdentifier) {
+        return false;
+      }
+
+      const recordVSInstance = await this.getValueSet(recordVSIdentifier, ctx);
+      switch (this.codeComparator) {
+        case 'contains':
+        case '~contains':
+          // "The equivalent contains operator (~contains) was introduced as the formal converse of the equivalent in operator (~in) 
+          // (i.e. A ~in B will always result in the same value as B ~contains A)."
+          // Note that "contains" here isn't well-defined since there's no `ValueSet contains` standalone operator to base it off.
+          return this.in(codesToMatch, recordVSInstance, this.codeComparator.startsWith('~'));
+    
+        default:
+          // TODO. Other operators don't necessarily make sense here. Throw an error for illegal combinations?
+
+          // It's not obvious which operator/operand combinations should be allowed,
+          // but if the RHS is a ValueSet, we can at least try to match it by identifier (not by content)
+          return codesToMatch instanceof ValueSet && recordVSIdentifier === codesToMatch.oid;
+      }
+  }
+
+  async getValueSet(identifier: string, ctx: Context) {
+    let recordVSInstance = ctx.getValueSet(identifier, null);
+    if (!recordVSInstance) {
+      if (!ctx.codeService) {
+        // TODO: throw error?
+        return null;
+      }
+
+      recordVSInstance = await ctx.codeService.findValueSet(identifier);
+      if (!recordVSInstance) {
+        // TODO: throw error?
+        return null;
+      }
+    }
+    return recordVSInstance;
+  }
+
+  private in(lhs: Code[], rhs: any, equivalence: boolean = true) {
     if (rhs instanceof ValueSet || rhs instanceof CodeSystem) {
+      // Note that hasMatch always uses equivalence semantics:
+      // CQL 1.5 `in ValueSet` was defined with equivalence semantics, and preserved for backwards compatibility.
+      // CQL 2.0 introduced `~in` and `~contains` which makes it more clear it uses equivalence semantics.
+      // There is no equality-based terminology membership defined anywhere.
       return rhs.hasMatch(lhs);
-    } else {
-      // For code lists, fallback to the implementation in ~ . See comments below.
+    } 
+    // For code lists, fallback to the implementation in ~/= . See comments below.
+    if (equivalence) {
       return this.equivalent(lhs, rhs);
+    } else {
+      return this.equal(lhs, rhs);
     }
   }
 
