@@ -4,7 +4,7 @@ import { equals } from '../util/comparison';
 import { Context } from '../runtime/context';
 import { build } from './builder';
 import { RetrieveDetails } from '../types/cql-patient.interfaces';
-import { Code, CodeSystem, Concept, CQLValueSet, ValueSet } from '../datatypes/clinical';
+import { Code, CodeSystem, CQLValueSet, ValueSet } from '../datatypes/clinical';
 
 export class Retrieve extends Expression {
   datatype: string;
@@ -51,9 +51,6 @@ export class Retrieve extends Expression {
       } else if (executedCodes instanceof CQLValueSet) {
         // retrieveDetails codes are expected to be expanded for external usage
         retrieveDetails.codes = await resolveValueSet(executedCodes, ctx);
-      } else if (executedCodes instanceof Code || executedCodes instanceof Concept) {
-        retrieveDetails.codes =
-          executedCodes instanceof Concept ? executedCodes.codes : [executedCodes];
       } else {
         retrieveDetails.codes = executedCodes;
       }
