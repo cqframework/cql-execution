@@ -1,4 +1,4 @@
-import { Code, ValueSet } from '../datatypes/clinical';
+import { Code, CodeSystem, ValueSet } from '../datatypes/clinical';
 import { Interval } from '../datatypes/interval';
 import { AnyTypeSpecifier } from './type-specifiers.interfaces';
 
@@ -31,8 +31,9 @@ export interface RetrieveDetails {
   datatype: string;
   templateId?: string;
   codeProperty?: string;
-  codeComparator?: 'in' | '=' | '~';
-  codes?: Code[] | ValueSet;
+  codeComparator?: 'in' | '~in' | 'contains' | '~contains' | '=' | '~';
+  codes?: Code[] | ValueSet | CodeSystem;
+  valueSetProperty?: string;
   dateProperty?: string;
   dateRange?: Interval;
 }
