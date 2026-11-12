@@ -3,7 +3,7 @@
     "annotation": [
       {
         "type": "CqlToElmInfo",
-        "translatorVersion": "4.2.0",
+        "translatorVersion": "5.6.1",
         "translatorOptions": "EnableResultTypes",
         "signatureLevel": "None"
       }
@@ -42,6 +42,7 @@
     "statements": {
       "def": [
         {
+          "resultTypeName": "{http://hl7.org/fhir/us/qicore}Patient",
           "name": "Patient",
           "context": "Patient",
           "annotation": [],

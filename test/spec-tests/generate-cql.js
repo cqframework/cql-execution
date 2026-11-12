@@ -3,12 +3,20 @@ const fs = require('fs');
 const path = require('path');
 const convert = require('xml-js');
 
+const cqlSpecVersion = fs.readFileSync(
+  path.join(__dirname, '../../specification.version'),
+  'utf-8'
+);
+
+let exitError = false; // if a non-fatal error occurs, report it and set this flag, but let processing continue
+
 // First read the skiplist and build a map of skipped tests
+const skipListFiles = ['common-skip-list.txt', 'unit-tests-skip-list.txt'];
 const skippedTestMap = new Map();
-const skipListText = fs.readFileSync(path.join(__dirname, 'skip-list.txt'), 'utf-8');
 const processedSkips = new Set();
 const invalidLines = new Set();
-skipListText.split(/[\r\n]+/).forEach(line => {
+
+const parseTestNameAndReason = line => {
   // Ignore lines that are blank or commented out via #
   if (/(^\s*#)|(^\s*$)/.test(line)) {
     return;
@@ -19,16 +27,38 @@ skipListText.split(/[\r\n]+/).forEach(line => {
     invalidLines.add(line);
     return;
   }
-  skippedTestMap.set(match[1].replace(/(^")|("$)/g, ''), match[2]);
-});
+  const testName = match[1].replace(/(^")|("$)/g, '');
+  const reason = match[2];
+  if (skippedTestMap.has(testName)) {
+    console.error(`Duplicate skipped test: ${testName}`);
+    exitError = true;
+  }
+  skippedTestMap.set(testName, reason);
+};
 
-fs.readdirSync(path.join(__dirname, 'xml')).forEach(file => {
+for (const skipListFile of skipListFiles) {
+  const skipListText = fs.readFileSync(path.join(__dirname, skipListFile), 'utf-8');
+  skipListText.split(/[\r\n]+/).forEach(parseTestNameAndReason);
+}
+
+const inputDir = path.join(__dirname, '../../cql-tests-runner/cql-tests/tests/cql');
+const outputDir = path.join(__dirname, 'cql');
+
+if (!fs.existsSync(inputDir)) {
+  console.error('ERROR: cql-tests under the cql-tests-runner submodule not found!');
+  console.error(
+    'Have you loaded the submodules by running `git submodule update --init --recursive` ?'
+  );
+  process.exit(1);
+}
+
+fs.readdirSync(inputDir).forEach(file => {
   if (!file.endsWith('.xml')) {
     return;
   }
 
   // Read the XML file
-  const xmlFile = path.join(__dirname, 'xml', file);
+  const xmlFile = path.join(inputDir, file);
   let xmlJS;
   try {
     const xml = fs.readFileSync(xmlFile, 'utf-8');
@@ -85,6 +115,17 @@ fs.readdirSync(path.join(__dirname, 'xml')).forEach(file => {
         processedSkips.add(`${suiteName}.${groupName}.${testName}`);
       } else if (test.library != null) {
         skipped = 'Test <library> tag not supported in cql-execution test runner';
+      } else if (test.expression._attributes && test.expression._attributes.invalid) {
+        const invalid = test.expression._attributes.invalid;
+        if (invalid === 'syntax') {
+          skipped = 'Test includes an intentional syntax error; it cannot be parsed or translated';
+        } else if (invalid === 'semantic') {
+          skipped = 'Test includes an intentional semantic error; it parses but does not translate';
+        }
+      } else if (test._attributes && test._attributes.version > cqlSpecVersion) {
+        skipped = `Test targets minimum CQL version ${test.version} which is higher than configured library target ${cqlSpecVersion}`;
+      } else if (test._attributes && test._attributes.versionTo < cqlSpecVersion) {
+        skipped = `Test targets maximum CQL version ${test.version} which is lower than configured library target ${cqlSpecVersion}`;
       }
       if (skipped != null) {
         cql += `    skipped: '${skipped.replace(/'/g, "\\'").trim()}'\n`;
@@ -96,11 +137,7 @@ fs.readdirSync(path.join(__dirname, 'xml')).forEach(file => {
       if (test.expression != null) {
         cql += `    expression: ${test.expression._text}`;
         if (test.expression._attributes && test.expression._attributes.invalid) {
-          if (test.expression._attributes.invalid == 'true') {
-            cql += ',\n    invalid: true';
-          } else if (test.expression._attributes.invalid == 'semantic') {
-            cql += ",\n    invalid: 'semantic'";
-          }
+          cql += `,\n    invalid: ${test.expression._attributes.invalid}`;
         }
       }
       if (test.output != null) {
@@ -117,20 +154,26 @@ fs.readdirSync(path.join(__dirname, 'xml')).forEach(file => {
   });
 
   // Write the CQL
-  const cqlFile = path.join(__dirname, 'cql', file.replace(/xml$/, 'cql'));
+  const cqlFile = path.join(outputDir, file.replace(/xml$/, 'cql'));
   fs.writeFileSync(cqlFile, cql, 'utf-8');
   console.log('Generated', cqlFile);
 });
 
 if (invalidLines.size > 0) {
   console.error();
-  console.error('Invalid lines in skip-list.txt:');
+  console.error('Invalid skip-list lines:');
   invalidLines.forEach(l => console.error(`> ${l}`));
+  exitError = true;
 }
 
 processedSkips.forEach(s => skippedTestMap.delete(s));
 if (skippedTestMap.size > 0) {
   console.error();
-  console.error('Unmatched tests in skip-list.txt:');
+  console.error('Unmatched skip-list tests:');
   Array.from(skippedTestMap.keys()).forEach(k => console.error(`> ${k}`));
+  exitError = true;
+}
+
+if (exitError) {
+  process.exit(1);
 }

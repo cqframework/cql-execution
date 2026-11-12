@@ -1,5 +1,6 @@
 {
-  "ignore": ["test/spec-tests/*.js"],
+  "ignore": ["test/spec-tests/*.js", "cql-tests-runner/**"],
+  "watch-ignore": ["cql-tests-runner"],
   "extension": ["ts"],
   "require": ["tsx/cjs", "./test/should-extensions.ts"]
 }

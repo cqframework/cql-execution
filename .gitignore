@@ -10,3 +10,4 @@ node_modules
 coverage
 *.original.coffee
 yarn-error.log
+/cql-execution-local.json
