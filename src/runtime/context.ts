@@ -1,7 +1,7 @@
 import * as dt from '../datatypes/datatypes';
 import { Exception } from '../datatypes/exception';
 import { Library } from '../elm/library';
-import { DataModelProvider, PatientObject, RetrieveDetails, TerminologyProvider } from '../types';
+import { InstanceCreator, PatientObject, RetrieveDetails, TerminologyProvider } from '../types';
 import { Parameter } from '../types/runtime.types';
 import {
   ELM_NAMED_TYPE_SPECIFIER,
@@ -28,14 +28,14 @@ import {
 } from '../util/elmTypes';
 import { typeIsArray } from '../util/util';
 import { MessageListener, NullMessageListener } from './messageListeners';
-import { SystemDataModelProvider } from './systemDataModelProvider';
+import { SystemInstanceCreator } from './systemInstanceCreator';
 
 export class Context {
   // Public Constructor args
   parent: any;
   executionDateTime?: dt.DateTime;
   messageListener?: MessageListener;
-  dataModelProviders?: DataModelProvider[];
+  instanceCreators?: InstanceCreator[];
 
   // Private Constructor args
   private _codeService?: TerminologyProvider;
@@ -53,7 +53,7 @@ export class Context {
     _parameters?: Parameter,
     executionDateTime?: dt.DateTime,
     messageListener?: MessageListener,
-    dataModelProviders?: DataModelProvider[]
+    instanceCreators?: InstanceCreator[]
   ) {
     this.parent = parent;
     this._codeService = _codeService;
@@ -66,7 +66,7 @@ export class Context {
     this._parameters = _parameters || {};
     this.executionDateTime = executionDateTime;
     this.messageListener = messageListener;
-    this.dataModelProviders = dataModelProviders;
+    this.instanceCreators = instanceCreators;
   }
 
   get parameters(): any {
@@ -166,15 +166,15 @@ export class Context {
     }
   }
 
-  getDataModelProviders(): DataModelProvider[] {
-    if (this.dataModelProviders == null) {
+  getInstanceCreators(): InstanceCreator[] {
+    if (this.instanceCreators == null) {
       if (this.parent instanceof Context) {
-        this.dataModelProviders = this.parent.getDataModelProviders();
+        this.instanceCreators = this.parent.getInstanceCreators();
       } else {
-        this.dataModelProviders = [new SystemDataModelProvider()];
+        this.instanceCreators = [new SystemInstanceCreator()];
       }
     }
-    return this.dataModelProviders;
+    return this.instanceCreators;
   }
 
   getValueSet(name: string, library: any) {
@@ -467,14 +467,14 @@ export class Context {
   }
 
   createInstance(classType: string, obj: any) {
-    for (const dataModel of this.getDataModelProviders()) {
-      const instance = dataModel.createInstance(classType, obj);
+    for (const creator of this.getInstanceCreators()) {
+      const instance = creator.createInstance(classType, obj);
       if (instance != null) {
         return instance;
       }
     }
 
-    // None of the DataModelProviders know how to instantiate this as anything better, so return the plain object.
+    // None of the InstanceCreators know how to instantiate this as anything better, so return the plain object.
     // Tag it with an _is method that lets us identify what it is.
     // TODO / KNOWN LIMITATION: we have no way of knowing what the full type hierarchy of this type is here,
     // so `Is` expressions with a supertype will incorrectly return false.
@@ -494,9 +494,9 @@ export class PatientContext extends Context {
     parameters?: Parameter,
     executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),
     messageListener: MessageListener = new NullMessageListener(),
-    dataModelProviders?: DataModelProvider[]
+    instanceCreators?: InstanceCreator[]
   ) {
-    super(library, codeService, parameters, executionDateTime, messageListener, dataModelProviders);
+    super(library, codeService, parameters, executionDateTime, messageListener, instanceCreators);
   }
 
   rootContext() {
@@ -512,7 +512,7 @@ export class PatientContext extends Context {
         this.parameters,
         this.executionDateTime,
         this.messageListener,
-        this.getDataModelProviders()
+        this.getInstanceCreators()
       );
     }
     return this.library_context[library];
@@ -527,7 +527,7 @@ export class PatientContext extends Context {
         this.parameters,
         this.executionDateTime,
         this.messageListener,
-        this.getDataModelProviders()
+        this.getInstanceCreators()
       );
     }
     return this.localId_context[localId];
@@ -546,9 +546,9 @@ export class UnfilteredContext extends Context {
     parameters?: Parameter,
     executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),
     messageListener: MessageListener = new NullMessageListener(),
-    dataModelProviders?: DataModelProvider[]
+    instanceCreators?: InstanceCreator[]
   ) {
-    super(library, codeService, parameters, executionDateTime, messageListener, dataModelProviders);
+    super(library, codeService, parameters, executionDateTime, messageListener, instanceCreators);
   }
 
   rootContext() {

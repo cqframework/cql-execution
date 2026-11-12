@@ -1,5 +1,5 @@
 import { Code, CodeSystem, Concept, CQLValueSet, Quantity, Ratio } from '../datatypes/datatypes';
-import { DataModelProvider } from '../types/cql-patient.interfaces';
+import { InstanceCreator } from '../types/cql-patient.interfaces';
 import {
   ELM_QUANTITY_TYPE,
   ELM_CODE_TYPE,
@@ -9,9 +9,12 @@ import {
   ELM_RATIO_TYPE
 } from '../util/elmTypes';
 
-export class SystemDataModelProvider implements DataModelProvider {
+export class SystemInstanceCreator implements InstanceCreator {
+  canCreate(classType: string): boolean {
+    return classType.startsWith('{urn:hl7-org:elm-types:r1}');
+  }
   createInstance(classType: string, obj: any) {
-    if (!classType.startsWith('{urn:hl7-org:elm-types:r1}')) {
+    if (!this.canCreate(classType)) {
       return null;
     }
     switch (classType) {

@@ -1,7 +1,7 @@
 import * as DT from './datatypes/datatypes';
-import { SystemDataModelProvider } from './runtime/systemDataModelProvider';
+import { SystemInstanceCreator } from './runtime/systemInstanceCreator';
 import {
-  DataModelProvider,
+  InstanceCreator,
   DataProvider,
   NamedTypeSpecifier,
   PatientObject,
@@ -167,7 +167,7 @@ export class PatientSource implements DataProvider {
     return this.current;
   }
 
-  getDataModelProvider(): DataModelProvider {
-    return new SystemDataModelProvider();
+  getInstanceCreator(): InstanceCreator {
+    return new SystemInstanceCreator();
   }
 }

@@ -8,11 +8,15 @@ import { AnyTypeSpecifier } from './type-specifiers.interfaces';
 export interface DataProvider {
   currentPatient(): PatientObject | undefined | Promise<PatientObject | undefined>;
   nextPatient(): PatientObject | undefined | Promise<PatientObject | undefined>;
-  getDataModelProvider?(): DataModelProvider;
+  getInstanceCreator?(): InstanceCreator;
 }
 
-export interface DataModelProvider {
-  createInstance(classType: string, obj: any): any;
+/**
+ * Supports instantiating the classes within a particular data model (or models).
+ */
+export interface InstanceCreator {
+  canCreate(classType: string): boolean;
+  createInstance(classType: string, fieldValues: any): any;
 }
 
 /*

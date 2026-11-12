@@ -34,13 +34,13 @@ describe('Context', () => {
       should(child.context_values).eql({});
     });
 
-    it('should inherit data model providers from its parent', () => {
-      const provider = { createInstance: () => ({ fromProvider: true }) };
-      const parent = new Context(library, undefined, undefined, undefined, undefined, [provider]);
+    it('should inherit instance creators from its parent', () => {
+      const creator = { canCreate: () => true, createInstance: () => ({ fromCreator: true }) };
+      const parent = new Context(library, undefined, undefined, undefined, undefined, [creator]);
       const child = parent.childContext();
 
-      should(child.getDataModelProviders()).containEql(provider);
-      should(child.createInstance('{urn:test}Record', {})).eql({ fromProvider: true });
+      should(child.getInstanceCreators()).containEql(creator);
+      should(child.createInstance('{urn:test}Record', {})).eql({ fromCreator: true });
     });
   });
 

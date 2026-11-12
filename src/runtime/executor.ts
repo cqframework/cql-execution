@@ -3,8 +3,8 @@ import { Results } from './results';
 import { UnfilteredContext, PatientContext } from './context';
 import { DateTime } from '../datatypes/datetime';
 import { Parameter } from '../types/runtime.types';
-import { DataModelProvider, DataProvider, TerminologyProvider } from '../types';
-import { SystemDataModelProvider } from './systemDataModelProvider';
+import { InstanceCreator, DataProvider, TerminologyProvider } from '../types';
+import { SystemInstanceCreator } from './systemInstanceCreator';
 
 export class Executor {
   constructor(
@@ -12,7 +12,7 @@ export class Executor {
     public codeService?: TerminologyProvider,
     public parameters?: Parameter,
     public messageListener: MessageListener = new NullMessageListener(),
-    public dataModelProviders: DataModelProvider[] = []
+    public instanceCreators: InstanceCreator[] = []
   ) {}
 
   withLibrary(lib: any) {
@@ -35,8 +35,8 @@ export class Executor {
     return this;
   }
 
-  withDataModelProviders(dmps: DataModelProvider[]) {
-    this.dataModelProviders = dmps;
+  withInstanceCreators(creators: InstanceCreator[]) {
+    this.instanceCreators = creators;
     return this;
   }
 
@@ -55,7 +55,7 @@ export class Executor {
           this.parameters,
           executionDateTime,
           this.messageListener,
-          this.getDataModelProviders(patientSource)
+          this.getInstanceCreators(patientSource)
         );
         r.recordPatientResults(patient_ctx, { [expression]: await expr.execute(patient_ctx) });
         currentPatient = await patientSource.nextPatient();
@@ -73,7 +73,7 @@ export class Executor {
       this.parameters,
       executionDateTime,
       this.messageListener,
-      this.getDataModelProviders(patientSource)
+      this.getInstanceCreators(patientSource)
     );
     const resultMap: any = {};
     for (const key in this.library.expressions) {
@@ -100,7 +100,7 @@ export class Executor {
         this.parameters,
         executionDateTime,
         this.messageListener,
-        this.getDataModelProviders(patientSource)
+        this.getInstanceCreators(patientSource)
       );
       const resultMap: any = {};
       for (const key in this.library.expressions) {
@@ -115,12 +115,12 @@ export class Executor {
     return r;
   }
 
-  private getDataModelProviders(patientSource: DataProvider) {
-    const dataModelProviders = new Set(this.dataModelProviders);
-    dataModelProviders.add(new SystemDataModelProvider());
-    if (typeof patientSource.getDataModelProvider === 'function') {
-      dataModelProviders.add(patientSource.getDataModelProvider());
+  private getInstanceCreators(patientSource: DataProvider) {
+    const instanceCreators = new Set(this.instanceCreators);
+    instanceCreators.add(new SystemInstanceCreator());
+    if (typeof patientSource.getInstanceCreator === 'function') {
+      instanceCreators.add(patientSource.getInstanceCreator());
     }
-    return Array.from(dataModelProviders);
+    return Array.from(instanceCreators);
   }
 }

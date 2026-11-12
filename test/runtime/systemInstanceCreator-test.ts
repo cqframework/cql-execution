@@ -10,15 +10,15 @@ import {
 import { ExpandValueSet, InValueSet } from '../../src/elm/clinical';
 import { Library } from '../../src/elm/library';
 import { Context } from '../../src/runtime/context';
-import { SystemDataModelProvider } from '../../src/runtime/systemDataModelProvider';
+import { SystemInstanceCreator } from '../../src/runtime/systemInstanceCreator';
 import { ELM_CODESYSTEM_TYPE, ELM_VALUESET_TYPE, ELM_RATIO_TYPE } from '../../src/util/elmTypes';
 const simpleELMWithVersion = require('./fixtures/SimpleLibraryWithVersion.json');
 
-describe('SystemDataModelProvider', () => {
-  const provider = new SystemDataModelProvider();
+describe('SystemInstanceCreator', () => {
+  const creator = new SystemInstanceCreator();
 
   it('should construct a CodeSystem with its metadata', () => {
-    const system = provider.createInstance(ELM_CODESYSTEM_TYPE, {
+    const system = creator.createInstance(ELM_CODESYSTEM_TYPE, {
       id: 'http://loinc.org',
       version: '1',
       name: 'LOINC'
@@ -32,7 +32,7 @@ describe('SystemDataModelProvider', () => {
 
   it('should construct a CQLValueSet and preserve its code systems', () => {
     const codesystems = [new CodeSystem('http://loinc.org')];
-    const valueset = provider.createInstance(ELM_VALUESET_TYPE, {
+    const valueset = creator.createInstance(ELM_VALUESET_TYPE, {
       id: 'urn:test:valueset',
       version: '1',
       name: 'Test value set',
@@ -46,14 +46,16 @@ describe('SystemDataModelProvider', () => {
   });
 
   it('should allow omitted optional metadata for CodeSystem', () => {
-    const instance = provider.createInstance(ELM_CODESYSTEM_TYPE, { id: 'urn:test' });
+    const instance = creator.createInstance(ELM_CODESYSTEM_TYPE, { id: 'urn:test' });
+    should(instance).be.instanceof(CodeSystem);
     should(instance.id).equal('urn:test');
     should(instance.version).be.undefined();
     should(instance.name).be.undefined();
   });
 
   it('should allow omitted optional metadata for ValueSet', () => {
-    const instance = provider.createInstance(ELM_VALUESET_TYPE, { id: 'urn:test' });
+    const instance = creator.createInstance(ELM_VALUESET_TYPE, { id: 'urn:test' });
+    should(instance).be.instanceof(CQLValueSet);
     should(instance.id).equal('urn:test');
     should(instance.version).be.undefined();
     should(instance.name).be.undefined();
@@ -63,7 +65,7 @@ describe('SystemDataModelProvider', () => {
   it('should construct a Ratio with working quantity operations', () => {
     const numerator = new Quantity(1, 'mg');
     const denominator = new Quantity(2, 'mL');
-    const ratio = provider.createInstance(ELM_RATIO_TYPE, { numerator, denominator });
+    const ratio = creator.createInstance(ELM_RATIO_TYPE, { numerator, denominator });
     should(ratio).be.instanceof(Ratio);
     should(ratio.numerator).equal(numerator);
     should(ratio.denominator).equal(denominator);
@@ -71,18 +73,18 @@ describe('SystemDataModelProvider', () => {
   });
 
   it('should reject ratios missing either quantity', () => {
-    should(() => provider.createInstance(ELM_RATIO_TYPE, { denominator: new Quantity(1) })).throw(
+    should(() => creator.createInstance(ELM_RATIO_TYPE, { denominator: new Quantity(1) })).throw(
       'Cannot create a ratio with an undefined numerator'
     );
-    should(() => provider.createInstance(ELM_RATIO_TYPE, { numerator: new Quantity(1) })).throw(
+    should(() => creator.createInstance(ELM_RATIO_TYPE, { numerator: new Quantity(1) })).throw(
       'Cannot create a ratio with an undefined denominator'
     );
   });
 
   it('should decline other namespaces and preserve unknown System types', () => {
     const fields = { id: 'test' };
-    should(provider.createInstance('{urn:test}CodeSystem', fields)).be.null();
-    should(provider.createInstance('{urn:hl7-org:elm-types:r1}Unknown', fields)).equal(fields);
+    should(creator.createInstance('{urn:test}CodeSystem', fields)).be.null();
+    should(creator.createInstance('{urn:hl7-org:elm-types:r1}Unknown', fields)).equal(fields);
   });
 
   it('should support terminology operations on constructed value sets', async () => {
