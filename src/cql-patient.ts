@@ -1,5 +1,12 @@
 import * as DT from './datatypes/datatypes';
-import { DataProvider, NamedTypeSpecifier, PatientObject, RecordObject } from './types';
+import { SystemInstanceCreator } from './runtime/systemInstanceCreator';
+import {
+  InstanceCreator,
+  DataProvider,
+  NamedTypeSpecifier,
+  PatientObject,
+  RecordObject
+} from './types';
 import { ELM_ANY_TYPE, ELM_NAMED_TYPE_SPECIFIER } from './util/elmTypes';
 
 export class Record implements RecordObject {
@@ -158,5 +165,9 @@ export class PatientSource implements DataProvider {
     const currentJSON = this.patients.shift();
     this.current = currentJSON ? new Patient(currentJSON) : undefined;
     return this.current;
+  }
+
+  getInstanceCreator(): InstanceCreator {
+    return new SystemInstanceCreator();
   }
 }

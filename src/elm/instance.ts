@@ -1,9 +1,6 @@
 import { Expression } from './expression';
-import { Quantity } from '../datatypes/quantity';
-import { Code, Concept } from '../datatypes/datatypes';
 import { Context } from '../runtime/context';
 import { build } from './builder';
-import { ELM_QUANTITY_TYPE, ELM_CONCEPT_TYPE } from '../util/elmTypes';
 
 class Element {
   name: string;
@@ -33,15 +30,6 @@ export class Instance extends Expression {
     for (const el of this.element) {
       obj[el.name] = await el.exec(ctx);
     }
-    switch (this.classType) {
-      case ELM_QUANTITY_TYPE:
-        return new Quantity(obj.value, obj.unit);
-      case '{urn:hl7-org:elm-types:r1}Code':
-        return new Code(obj.code, obj.system, obj.version, obj.display);
-      case ELM_CONCEPT_TYPE:
-        return new Concept(obj.codes, obj.display);
-      default:
-        return obj;
-    }
+    return ctx.createInstance(this.classType, obj);
   }
 }

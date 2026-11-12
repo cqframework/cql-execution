@@ -56,6 +56,10 @@ export class CodeSystem extends Vocabulary {
     super(id, version, name);
   }
 
+  get isCodeSystem() {
+    return true;
+  }
+
   hasMatch(_code: any) {
     throw new Error('In CodeSystem operation not yet supported.');
   }

@@ -3,14 +3,16 @@ import { Results } from './results';
 import { UnfilteredContext, PatientContext } from './context';
 import { DateTime } from '../datatypes/datetime';
 import { Parameter } from '../types/runtime.types';
-import { DataProvider, TerminologyProvider } from '../types';
+import { InstanceCreator, DataProvider, TerminologyProvider } from '../types';
+import { SystemInstanceCreator } from './systemInstanceCreator';
 
 export class Executor {
   constructor(
     public library: any,
     public codeService?: TerminologyProvider,
     public parameters?: Parameter,
-    public messageListener: MessageListener = new NullMessageListener()
+    public messageListener: MessageListener = new NullMessageListener(),
+    public instanceCreators: InstanceCreator[] = []
   ) {}
 
   withLibrary(lib: any) {
@@ -33,6 +35,11 @@ export class Executor {
     return this;
   }
 
+  withInstanceCreators(creators: InstanceCreator[]) {
+    this.instanceCreators = creators;
+    return this;
+  }
+
   async exec_expression(expression: any, patientSource: DataProvider, executionDateTime: DateTime) {
     const r = new Results();
     const expr = this.library.expressions[expression];
@@ -47,7 +54,8 @@ export class Executor {
           this.codeService,
           this.parameters,
           executionDateTime,
-          this.messageListener
+          this.messageListener,
+          this.getInstanceCreators(patientSource)
         );
         r.recordPatientResults(patient_ctx, { [expression]: await expr.execute(patient_ctx) });
         currentPatient = await patientSource.nextPatient();
@@ -64,7 +72,8 @@ export class Executor {
       this.codeService,
       this.parameters,
       executionDateTime,
-      this.messageListener
+      this.messageListener,
+      this.getInstanceCreators(patientSource)
     );
     const resultMap: any = {};
     for (const key in this.library.expressions) {
@@ -90,7 +99,8 @@ export class Executor {
         this.codeService,
         this.parameters,
         executionDateTime,
-        this.messageListener
+        this.messageListener,
+        this.getInstanceCreators(patientSource)
       );
       const resultMap: any = {};
       for (const key in this.library.expressions) {
@@ -103,5 +113,14 @@ export class Executor {
       currentPatient = await patientSource.nextPatient();
     }
     return r;
+  }
+
+  private getInstanceCreators(patientSource: DataProvider) {
+    const instanceCreators = new Set(this.instanceCreators);
+    instanceCreators.add(new SystemInstanceCreator());
+    if (typeof patientSource.getInstanceCreator === 'function') {
+      instanceCreators.add(patientSource.getInstanceCreator());
+    }
+    return Array.from(instanceCreators);
   }
 }

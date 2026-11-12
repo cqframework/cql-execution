@@ -44,4 +44,10 @@ describe('Instance', () => {
     (await this.pharyngitis.exec(this.ctx)).status.code.should.eql('active');
     (await this.pharyngitis.exec(this.ctx)).code.display.should.eql('Viral pharyngitis (disorder)');
   });
+
+  it(`should evaluate an instance Is its defined type and Any`, async function () {
+    should(await this.pharyngitisIsCondition.exec(this.ctx)).be.true();
+    should(await this.pharyngitisIsAny.exec(this.ctx)).be.true();
+    should(await this.pharyngitisIsEncounter.exec(this.ctx)).be.false();
+  });
 });

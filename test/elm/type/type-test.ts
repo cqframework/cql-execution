@@ -1,5 +1,6 @@
 import should from 'should';
 import { Interval } from '../../../src/datatypes/interval';
+import { ValueSet } from '../../../src/datatypes/clinical';
 import setup from '../../setup';
 const data = require('./data');
 const { p1 } = require('./patients');
@@ -17,6 +18,144 @@ describe('IsSystemType', () => {
   it('should correctly reject non-matching types', async function () {
     (await this.fiveIsString.exec(this.ctx)).should.be.false();
     (await this.stringFiveIsInteger.exec(this.ctx)).should.be.false();
+  });
+});
+
+describe('IsCodeSystemType', () => {
+  beforeEach(function () {
+    setup(this, data, [], {}, { Expansion: new ValueSet('urn:test:valueset') });
+  });
+
+  it('should accept CodeSystem', async function () {
+    should(await this.codeSystemIsCodeSystem.exec(this.ctx)).be.true();
+  });
+
+  it('should reject CQLValueSet', async function () {
+    should(await this.valueSetIsCodeSystem.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject Ratio', async function () {
+    should(await this.ratioIsCodeSystem.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject a tuple', async function () {
+    should(await this.tupleIsCodeSystem.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject a string', async function () {
+    should(await this.stringIsCodeSystem.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject an integer', async function () {
+    should(await this.integerIsCodeSystem.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject a boolean', async function () {
+    should(await this.booleanIsCodeSystem.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject a value set expansion', async function () {
+    should(await this.expansionIsCodeSystem.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject null', async function () {
+    should(await this.nullIsCodeSystem.exec(this.ctx)).be.false();
+  });
+
+  it('should match CodeSystem as Any', async function () {
+    should(await this.codeSystemIsAny.exec(this.ctx)).be.true();
+  });
+});
+
+describe('IsValueSetType', () => {
+  beforeEach(function () {
+    setup(this, data, [], {}, { Expansion: new ValueSet('urn:test:valueset') });
+  });
+
+  it('should reject CodeSystem', async function () {
+    should(await this.codeSystemIsValueSet.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should accept CQLValueSet', async function () {
+    should(await this.valueSetIsValueSet.exec(this.ctx)).be.true();
+  });
+
+  it('should reject Ratio', async function () {
+    should(await this.ratioIsValueSet.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject a tuple', async function () {
+    should(await this.tupleIsValueSet.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject a string', async function () {
+    should(await this.stringIsValueSet.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject an integer', async function () {
+    should(await this.integerIsValueSet.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject a boolean', async function () {
+    should(await this.booleanIsValueSet.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject a value set expansion', async function () {
+    should(await this.expansionIsValueSet.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject null', async function () {
+    should(await this.nullIsValueSet.exec(this.ctx)).be.false();
+  });
+
+  it('should match ValueSet as Any', async function () {
+    should(await this.valueSetIsAny.exec(this.ctx)).be.true();
+  });
+});
+
+describe('IsRatioType', () => {
+  beforeEach(function () {
+    setup(this, data, [], {}, { Expansion: new ValueSet('urn:test:valueset') });
+  });
+
+  it('should reject CodeSystem', async function () {
+    should(await this.codeSystemIsRatio.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject CQLValueSet', async function () {
+    should(await this.valueSetIsRatio.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should accept Ratio', async function () {
+    should(await this.ratioIsRatio.exec(this.ctx)).be.true();
+  });
+
+  it('should reject a tuple', async function () {
+    should(await this.tupleIsRatio.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject a string', async function () {
+    should(await this.stringIsRatio.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject an integer', async function () {
+    should(await this.integerIsRatio.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject a boolean', async function () {
+    should(await this.booleanIsRatio.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject a value set expansion', async function () {
+    should(await this.expansionIsRatio.exec(this.ctx)).not.be.ok();
+  });
+
+  it('should reject null', async function () {
+    should(await this.nullIsRatio.exec(this.ctx)).be.false();
+  });
+
+  it('should match Ratio as Any', async function () {
+    should(await this.ratioIsAny.exec(this.ctx)).be.true();
   });
 });
 

@@ -4,6 +4,51 @@ define FiveIsString: 5 is String
 define StringFiveIsInteger: '5' is Integer
 define StringFiveIsString: '5' is String
 
+// @Test: IsCodeSystemType
+codesystem "TestCodeSystem": 'urn:test:system'
+valueset "TestValueSet": 'urn:test:valueset'
+parameter Expansion Any
+define CodeSystemIsCodeSystem: "TestCodeSystem" is CodeSystem
+define ValueSetIsCodeSystem: "TestValueSet" is CodeSystem
+define RatioIsCodeSystem: Ratio { numerator: 1 '1', denominator: 2 '1' } is CodeSystem
+define TupleIsCodeSystem: Tuple { : } is CodeSystem
+define StringIsCodeSystem: 'test' is CodeSystem
+define IntegerIsCodeSystem: 1 is CodeSystem
+define BooleanIsCodeSystem: false is CodeSystem
+define ExpansionIsCodeSystem: Expansion is CodeSystem
+define NullIsCodeSystem: null is CodeSystem
+define CodeSystemIsAny: "TestCodeSystem" is Any
+
+// @Test: IsValueSetType
+codesystem "TestCodeSystem": 'urn:test:system'
+valueset "TestValueSet": 'urn:test:valueset'
+parameter Expansion Any
+define CodeSystemIsValueSet: "TestCodeSystem" is ValueSet
+define ValueSetIsValueSet: "TestValueSet" is ValueSet
+define RatioIsValueSet: Ratio { numerator: 1 '1', denominator: 2 '1' } is ValueSet
+define TupleIsValueSet: Tuple { : } is ValueSet
+define StringIsValueSet: 'test' is ValueSet
+define IntegerIsValueSet: 1 is ValueSet
+define BooleanIsValueSet: false is ValueSet
+define ExpansionIsValueSet: Expansion is ValueSet
+define NullIsValueSet: null is ValueSet
+define ValueSetIsAny: "TestValueSet" is Any
+
+// @Test: IsRatioType
+codesystem "TestCodeSystem": 'urn:test:system'
+valueset "TestValueSet": 'urn:test:valueset'
+parameter Expansion Any
+define CodeSystemIsRatio: "TestCodeSystem" is Ratio
+define ValueSetIsRatio: "TestValueSet" is Ratio
+define RatioIsRatio: Ratio { numerator: 1 '1', denominator: 2 '1' } is Ratio
+define TupleIsRatio: Tuple { : } is Ratio
+define StringIsRatio: 'test' is Ratio
+define IntegerIsRatio: 1 is Ratio
+define BooleanIsRatio: false is Ratio
+define ExpansionIsRatio: Expansion is Ratio
+define NullIsRatio: null is Ratio
+define RatioIsAny: Ratio { numerator: 1 '1', denominator: 2 '1' } is Any
+
 // @Test: IsListType
 define ListOfIntegersIsListOfIntegers: {1, 2, 3, 4, 5} is List<Integer>
 define ListOfDecimalsIsListOfIntegers: {1.5, 2.5, 3.5, 4.5, 5.5} is List<Integer>
